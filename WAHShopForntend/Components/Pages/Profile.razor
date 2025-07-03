@@ -1,0 +1,132 @@
+﻿@page "/profile"
+@inject AuthenticationStateProvider AuthStateProvider
+@using System.Security.Claims;
+@inject IStringLocalizer< WAHShopForntend.Resources.Profile> L
+
+@if (!IsRended)
+{
+    <div class="lodingContainer">
+        <p>@L["Loading"]</p>
+    </div>
+}
+else
+{
+    <div class="main">
+        <AuthorizeView>
+            <Authorized Context="authContext">
+                <div class="profileCard">
+                    <h2>@L["MyProfile"]</h2>
+                    <div class="infoProfile">
+                        <p>
+                            <strong>@L["Username"]: @authContext.User.Identity?.Name </strong>
+                        </p>
+                        <p>
+                            <strong>@L["Email"]: @authContext.User.FindFirst(ClaimTypes.Email)?.Value</strong>
+                        </p>
+                        <p>
+                            <strong>@L["Password"]: </strong>
+                            @if (isEditing)
+                            {
+                                <EditForm Model="@updateProfile" OnValidSubmit="@HandleSubmit" FormName="updateProfile">
+                                    <DataAnnotationsValidator />
+                                    <div class="form-group mt-3">
+                                        <InputText type="password" @bind-Value="updateProfile.NewPassword" class="form-control" placeholder="@L["NewPassword"]" />
+                                        <ValidationMessage For="@(() => updateProfile.NewPassword)" />
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <InputText @bind-Value="updateProfile.PasswordAgain" placeholder="@L["ConfirmPassword "]" type="password" class="form-control" />
+                                        <ValidationMessage For="@(() => updateProfile.PasswordAgain)" />
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <InputText @bind-Value="updateProfile.OldPassword" placeholder="@L["OldPassword"]" type="password" class="form-control" />
+                                        <ValidationMessage For="@(() => updateProfile.OldPassword)" />
+                                    </div>
+                                    <div class="btnDivProfile mt-3">
+                                        <button type="submit" class="btn btn-primary" disabled="@IsLoading">
+                                            @if (IsLoading)
+                                            {
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                <span class="ms-2">@L["Loading"]</span>
+                                            }
+                                            else
+                                            {
+                                                <span>@L["ResetPassword"]</span>
+                                            }
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" @onclick="CancelChanges">@L["Cancel"]</button>
+                                    </div>
+                                </EditForm>
+                            }
+                            else
+                            {
+                                <span>********</span>
+                            }
+                        </p>
+                    </div>
+                    <div class="btnDivProfile">
+                        @if (isEditing)
+                        {
+
+                        }
+                        else
+                        {
+                            <button class="btn btnProfile" @onclick="() => isEditing = true">@L["EditProfile"]</button>
+                        }
+                    </div>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+    </div>
+}
+@code {
+
+    private bool IsRended = false;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        string? userIdString = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (int.TryParse(userIdString, out int userId))
+        {
+            updateProfile.UserId = userId; // Assuming UserId is int
+        }
+
+        if (firstRender)
+        {
+            IsRended = true;
+            StateHasChanged();
+        }
+    }
+    private UpdateProfile updateProfile = new UpdateProfile();
+    private bool isEditing = false;
+    private bool IsLoading = false;
+    private async Task HandleSubmit()
+    {
+        IsLoading = true;
+        if (updateProfile.UserId > 0)
+        {
+            var result = await AuthService.UpdateProfileAsync(updateProfile);
+            if (!result.Result)
+            {
+                _ = JS.InvokeVoidAsync("showAlert", result.Message);
+            }
+            else
+            {
+                _ = JS.InvokeVoidAsync("showAlert", result.Message);
+                isEditing = false;
+            }
+        }
+        else
+        {
+            _ = JS.InvokeVoidAsync("showAlert", "Benutzer-ID ist ungültig.");
+        }
+        updateProfile = new UpdateProfile();
+        IsLoading = false;
+        StateHasChanged();
+    }
+    private void CancelChanges()
+    {
+         updateProfile = new UpdateProfile();
+        isEditing = false;
+    }
+}

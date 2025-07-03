@@ -1,0 +1,130 @@
+﻿@page "/cart"
+@inject IStringLocalizer< WAHShopForntend.Resources.Cart> L
+
+@if (!IsLoaded)
+{
+	<div class="lodingContainer">
+		<p>@L["Loading"]</p>
+	</div>
+}
+else
+{
+	 <div class="main">
+	@if (cartService.CartItems.Count == 0)
+	{
+		<div class="emptyCart">
+				<p>@L["CartEmptyMessage"]</p>
+				<button class="btn btn-primary" @onclick="OnBackToShop">@L["BackToShopButton"]</button>
+		</div>
+	}
+	else
+	{
+			<h3>@L["CartTitle"]</h3>
+		<div class="cartContainer">
+		<div class="cart">
+			@for (int i = 0; i < cartService.CartItems.Count; i++)
+			{
+				var item = cartService.CartItems[i];
+				if (item.Product != null)
+				{
+					<div class="cartItem">
+						<img @onclick="() => OnProduct(item.ProductId)" width="160" height="160" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Product.Image ?? Array.Empty<byte>())" alt="@item.Product.Name_de" />
+						<div class="cartItemDetails">
+									<h4>@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+																	? item.Product.Name_ar
+																	:item.Product.Name_de )</h4>
+									<p>
+										@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+																	? item.Product.Description_ar
+																	: item.Product.Description_de)
+									</p>
+									<p>@L["PriceLabel"] @item.Product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))&nbsp;&nbsp;&nbsp;@L["TotalLabel"]<span style="font-weight:bold; ">&nbsp;@((item.Product.SalePrice * item.Quantity).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span> </p>
+							<div class="quantityInput">
+								<input type="number" class="form-control" min="0" @bind-value:event="oninput" @bind-value="item.Quantity" @onchange="e => QuantityChanged(item, e)" />
+							</div>
+						</div>
+					</div>
+				}
+				else
+				{
+					<div class="cartItem">
+								<p>@L["ProductNotFound"] (ID: @item.ProductId)</p>
+					</div>
+				}
+			}
+			<div class="TotalPrice">
+						<p>@L["TotalPrice"] (@cartService.GetTotalQuantity() @L["Article"]): <span style="font-weight:bold; ">@cartService.GetTotalPrice().ToString("C", new System.Globalization.CultureInfo("de-DE"))</span></p>
+			</div>
+		</div>
+		<div class="kasse">
+					<button class="btn btn-primary" @onclick="OnCheckout">@L["CheckoutButton"]</button>
+		</div>
+	</div>
+	}
+	</div>
+}
+@code {
+	private bool IsLoaded = false;
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			var result = await cartService.LoadCartProductsAsync();
+			if (!result.Result)
+			{
+				_ = JS.InvokeVoidAsync("alert", result.Message);
+				return;
+			}
+
+			IsLoaded = true;
+			StateHasChanged();
+		}
+	}
+	// quantity
+	private async Task QuantityChanged(CartItem item, ChangeEventArgs e)
+	{
+		if (e.Value is string stringValue && int.TryParse(stringValue, out int newQuantity))
+		{
+			if (newQuantity > 0)
+			{
+				item.Quantity = newQuantity;
+				cartService.AddToCart(item);
+			}
+			else
+			{
+				bool confirmed = await JS.InvokeAsync<bool>("confirm", "Sind Sie sicher, dass Sie das Produkt aus dem Warenkorb entfernen möchten?");
+				if (confirmed)
+				{
+					cartService.RemoveFromCart(item.ProductId);
+					StateHasChanged();
+				}
+				else
+					item.Quantity = 1;
+			}
+		}
+	}
+	private void OnCheckout()
+	{
+		if (cartService.CartItems.Count > 0)
+		{
+			var fullUri = NavigationManager.Uri;
+			var baseUri = NavigationManager.BaseUri;
+			string currentPath = fullUri.Replace(baseUri, "/");
+			NavigationManager.NavigateTo($"/checkout?returnUrl={currentPath}");
+		}
+		else
+		{
+			_ = JS.InvokeVoidAsync("alert", "Ihr Einkaufswagen ist leer.");
+		}
+	}
+	// emptyCart
+	private void OnBackToShop()
+	{
+		NavigationManager.NavigateTo("/",false);
+	}
+	// On Product Click
+	private void OnProduct(int ProductId)
+	{
+		NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
+	}
+}

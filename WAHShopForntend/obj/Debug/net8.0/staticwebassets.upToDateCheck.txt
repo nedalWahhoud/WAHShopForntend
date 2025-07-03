@@ -1,0 +1,10 @@
+wwwroot\app.css
+wwwroot\bootstrap\bootstrap.min.css
+wwwroot\bootstrap\bootstrap.min.css.map
+wwwroot\favicon.png
+wwwroot\Images\cart.svg
+wwwroot\Images\DPImage.png
+wwwroot\Images\Email.png
+wwwroot\Images\Location.png
+wwwroot\Images\Whatsapp.png
+wwwroot\JS\script.js

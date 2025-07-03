@@ -1,0 +1,62 @@
+﻿@page "/login"
+@inject IStringLocalizer< WAHShopForntend.Resources.Login> L
+
+<div class="main">
+<div class="loginContainer">
+    <div class ="loginForm">
+        <EditForm Model="@loginModel" OnValidSubmit="@HandleSubmit">
+            <DataAnnotationsValidator />
+            <h2 @onclick="OnProjectInfo">@ProjectInfo.Value.Name</h2>
+            <h3>@L["Welcome"]</h3>
+            <div class="form-group mt-3">
+                <InputText @bind-Value="loginModel.UserName"
+                           placeholder="@L["Username"]"
+                class="form-control" />
+                <ValidationMessage For="@(() => loginModel.UserName)" />
+            </div>
+            <div class="form-group mt-3">
+                <InputText @bind-Value="loginModel.Password"
+                type="password"
+                           placeholder="@L["Password"]"
+                class="form-control" />
+                <ValidationMessage For="@(() => loginModel.Password)" />
+            </div>
+                <button type="submit">@L["LoginText"]</button>
+        </EditForm>
+
+        <div>
+            <p class="signup">
+                    @L["NoAccountText"]
+                    <a href="/signup"> @L["Register"]</a>
+            </p>
+        </div>
+        <div>
+            <p class="forgotPassword">
+                <a href="/forgotpassword">@L["ForgotPassword"]</a>
+            </p>
+        </div>
+    </div>
+</div>
+</div>
+
+@code {
+    private LoginModel loginModel = new();
+	// returns to the page where the user was before login
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? returnUrl { get; set; }
+    private async Task HandleSubmit()
+    {
+        bool isLogged = await AuthService!.Login(loginModel, null!);
+        if (isLogged)
+            NavigationManager!.NavigateTo(returnUrl ?? "/",true);
+        else
+        {
+            _ = JS.InvokeVoidAsync("showAlert", "Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.");
+        }
+    }
+    private void OnProjectInfo()
+    {
+        NavigationManager.NavigateTo("/", false);
+    }
+}

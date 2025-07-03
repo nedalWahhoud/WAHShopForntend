@@ -1,0 +1,80 @@
+﻿@page "/signup"
+@using System.ComponentModel.DataAnnotations;
+@using WAHShopForntend.Components.Login;
+@inject IStringLocalizer< WAHShopForntend.Resources.Signup> L
+
+<div class="signupContainer">
+    <div class="signupForm">
+        <h2 @onclick="OnProjectInfo">@ProjectInfo.Value.Name</h2>
+        <h3 class="title">@L["SignupText"]</h3>
+        <EditForm Model="@signupModel" OnValidSubmit="@HandleSubmit" FormName="signup">
+            <DataAnnotationsValidator />
+            <div class="form-group mt-3">
+                <InputText @bind-Value="signupModel.UserName" placeholder="@L["NamePlaceholder"]" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.UserName)" />
+            </div>
+            <div class="form-group mt-3">
+                <InputText @bind-Value="signupModel.Email" placeholder="@L["EmailPlaceholder"]" type="email" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.Email)" />
+            </div>
+            <div class="form-group mt-3">
+                <label>@L["BirthDateLabel"]</label>
+                <InputText @bind-Value="signupModel.BirthDate" type="date" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.BirthDate)" />
+            </div>
+            <div class="form-group mt-3">
+                <InputText @bind-Value="signupModel.Password" placeholder="@L["PasswordPlaceholder"]" type="password" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.Password)" />
+            </div>
+            <div class="form-group mt-3">
+                <InputText @bind-Value="signupModel.PasswordAgain" placeholder="@L["PasswordAgainPlaceholder"]" type="password" class="form-control" />
+                <ValidationMessage For="@(() => signupModel.PasswordAgain)" />
+            </div>
+            <button type="submit">@L["Register"]</button>
+        </EditForm>
+        <div class ="loginLink">
+            @L["AlreadyRegisteredText"]
+            <a href="/login">@L["LoginText"]</a>
+        </div>
+    </div>
+</div>
+
+@code {
+    private SignupModel signupModel = new();
+
+    [Inject]
+    private HttpClient? Http { get; set; }
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            var response = await Http!.PostAsJsonAsync("api/Users/signup", signupModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                bool bo = await AuthService!.Login(null!, response);
+                if (bo)
+                    NavigationManager!.NavigateTo("/");
+                else
+                    _ = JS.InvokeVoidAsync("showAlert", "Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.");
+            }
+            else
+            {
+                var error = await response.Content.ReadFromJsonAsync<Dictionary<string, string>>();
+                string errorMassage = error != null && error.ContainsKey("error") ? error["error"] : "Unbekannter Fehler";
+                if (errorMassage == "Passwords do not match")
+                    signupModel.PasswordAgain = string.Empty; // Reset PasswordAgain field if passwords do not match
+
+                await JS.InvokeVoidAsync("showAlert", "Fehler: " + errorMassage);
+            }
+        }
+        catch(Exception ex)
+        {
+            await JS.InvokeVoidAsync("showAlert", "Fehler beim Senden der Anfrage: " + ex.Message);
+        }
+    }
+    private void OnProjectInfo()
+    {
+        NavigationManager.NavigateTo("/", false);
+    }
+}

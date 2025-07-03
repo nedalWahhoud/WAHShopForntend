@@ -1,0 +1,427 @@
+﻿@page "/checkout"
+@using System.Security.Claims
+@implements IDisposable
+@inject IStringLocalizer< WAHShopForntend.Resources.Checkout> L
+
+@if (!IsLoaded)
+{
+	<div class="lodingContainer">
+		<p>wird geladen... </p>
+	</div>
+}
+else
+{
+	<div class="checkoutMain">
+		@if (cartService.CartItems.Count == 0 || orderStatusEnum == OrderStatusEnum.Processing)
+		{
+			<div class="backToMainPage">
+				@if (orderStatusEnum == OrderStatusEnum.Commpleted)
+				{
+					<p>@L["ThankYouMessage"]</p>
+				}
+				else if (orderStatusEnum == OrderStatusEnum.Processing)
+				{
+					<div class="d-flex align-items-center">
+						<div class="spinner-border text-primary me-2" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+					</div>
+				}
+				@if (orderStatusEnum != OrderStatusEnum.Processing)
+				{
+					<button @onclick="OnMainPage" class="btn">@L["BackToHomeButton"]</button>
+				}
+			</div>
+		}
+		else
+		{
+			<div class="shipping">
+				<h4>@L["DeliveryTitle"]</h4>
+
+				@if (addressService.DownloadedAddresses.Count > 0)
+				{
+					<div class="addressRadioDiv">
+						<InputRadioGroup @bind-Value="selectedAddressId" class="addressRadio">
+							@foreach (var address in addressService.DownloadedAddresses)
+							{
+								<div class="addressOption" @ondblclick="() => OndblclickUpdateAddress(address)">
+
+									<label>
+										<InputRadio Value="@address.Id" />
+										@address.FirstName @address.LastName - @address.Street, @address.ZipCode @address.City
+									</label>
+									<button type="button" class="btn deleteButton" @onclick="() => DeleteAddress(address.Id)">
+										@L["DeleteButton"]
+									</button>
+								</div>
+							}
+						</InputRadioGroup>
+					</div>
+				}
+				<p @onclick="OnAddressForm" class="pShowAddressForm">@L["AddNewAddress"]</p>
+
+			</div>
+			<div class="payment">
+				<h4>@L["PaymentTitle"]</h4>
+				<div class="paymentMethodOption">
+					<EditForm Model="@this">
+						<InputRadioGroup @bind-Value="selectedPaymentId"  >
+							@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
+							{
+								if (orderService.DownloadedPaymentMethods[i].Id > 0 && orderService.DownloadedPaymentMethods[i].Id < 3)
+								{
+									var paymentMethod = orderService.DownloadedPaymentMethods[i];
+									<label>
+										<InputRadio Value="@paymentMethod.Id" />
+										@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? paymentMethod.Description_ar : paymentMethod.Description_de)
+									</label>
+								}
+							}
+							<label>
+								@L["PaymentNote"]
+							</label>
+						</InputRadioGroup>
+					</EditForm>
+				</div>
+			</div>
+			<div class="placeOrder">
+				<h4>@L["TotalPrice"] (@cartService.GetTotalQuantity() @L["Items"]): <span style="font-weight:bold; ">@cartService.GetTotalPrice().ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
+					<br/>
+				<span>@L["Tax"]</span>	
+				</h4>
+				<InputTextArea @bind-Value="order.Notes " placeholder="@L["AddNotePlaceholder"]" class="form-control" />
+
+				<AuthorizeView>
+					<Authorized>
+						<button type="button" @onclick="OnPay" class="btn btnPay">@L["BuyButton"]</button>
+					</Authorized>
+					<NotAuthorized Context="auth">
+
+						<button type="button" @onclick="OnEinloggen" class="btn btnEinloggen">@L["LoginButton"]</button>
+
+						<EditForm Model="@user" OnValidSubmit="OnPay">
+							<DataAnnotationsValidator />
+
+							<div class="form-group mb-1">
+								<InputText @bind-Value="user.UserName" placeholder="@L["inputUsername"]" class="form-control" />
+								<ValidationMessage For="@(() => user.UserName)" />
+							</div>
+
+							<div class="form-group mb-1">
+								<InputText @bind-Value="user.Email" placeholder="@L["InputEmail"]" class="form-control" />
+								<ValidationMessage For="@(() => user.Email)" />
+							</div>
+
+							<button type="submit" class="btn btnPay mt-2">@L["BuyWithoutLoginButton"]</button>
+						</EditForm>
+
+					</NotAuthorized>
+				</AuthorizeView>
+			</div>
+		}
+	</div>
+	@* address *@
+	@if (IsAddAddressMode || IsUpdateAddressMode)
+	{
+
+		Address address = IsAddAddressMode ? newAddress : updateAddress;
+
+		<div class="overlay">
+			<div class="addressForm">
+				<h3>@L["AddressFormTitle"]</h3>
+				<EditForm Model="@address" OnValidSubmit="HandleAddressSubmit">
+					<DataAnnotationsValidator />
+					<div class="form-group">
+						<ValidationMessage style="color:red;" For="@(() => address.FirstName)" />
+						<label>@L["FirstName"]</label>
+						<InputText class="form-control" @bind-Value="address.FirstName" />
+					</div>
+					<div class="form-group">
+						<ValidationMessage style="color:red;" For="@(() => address.LastName)" />
+						<label>@L["LastName"]</label>
+						<InputText class="form-control" @bind-Value="address.LastName" />
+					</div>
+					<div class="form-group">
+						<ValidationMessage style="color:red;" For="@(() => address.Phone)" />
+						<label>@L["Phone"]</label>
+						<InputText class="form-control" @bind-Value="address.Phone" />
+					</div>
+					<div class="form-group">
+						<ValidationMessage style="color:red;" For="@(() => address.Street)" />
+						<label>@L["Street"]</label>
+						<InputText class="form-control" @bind-Value="address.Street" />
+					</div>
+					<div class="form-group">
+						<ValidationMessage style="color:red;" For="@(() => address.ZipCode)" />
+						<label>@L["ZipCode"]</label>
+						<InputText class="form-control" @bind-Value="address.ZipCode" />
+					</div>
+					<div class="form-group">
+						<ValidationMessage style="color:red;" For="@(() => address.City)" />
+						<label>@L["City"]</label>
+						<InputText class="form-control" @bind-Value="address.City" />
+					</div>
+					<div class="form-group">
+						<label>@L["Country"]</label>
+						<InputText class="form-control" @bind-Value="address.Country" readonly />
+					</div>
+					<div class="addressBtn">
+						<button type="submit" class="btn addAddressB"> @(IsAddAddressMode ? L["AddAddressButton"] : L["UpdateAddressButton"])</button>
+						<button type="button" class="btn addProductCancelB" @onclick="CancelAddAddressForm">@L["CancelButton"]</button>
+					</div>
+				</EditForm>
+			</div>
+		</div>
+		if (IsAddAddressMode)
+			newAddress = address;
+		else
+			updateAddress = address;
+	}
+}
+@code {
+	OrderStatusEnum orderStatusEnum = new OrderStatusEnum();
+	private User user = new User();
+	protected override async Task OnInitializedAsync()
+	{
+		// user authentication
+		var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+		var user = authState.User;
+		if (user.Identity?.IsAuthenticated == true)
+		{
+			string userId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value!;
+			int IntuserId = int.Parse(userId);
+			// set user id to user object
+			this.user.Id = IntuserId;
+			// get addresses this user and in center list adding
+			await addressService.GetAddressesByUserIdAsync(IntuserId);
+			// default address
+			if (addressService.DownloadedAddresses.Count > 0)
+				selectedAddressId = addressService.DownloadedAddresses[0].Id;
+		}
+		// get payment methods
+		await orderService.GetPaymentMethodsAsync();
+		// set default order status
+		orderStatusEnum = OrderStatusEnum.Pending;
+	}
+	private bool IsLoaded = false;
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			var result = await cartService.LoadCartProductsAsync();
+			if (!result.Result)
+			{
+				_ = JS.InvokeVoidAsync("alert", result.Message);
+				return;
+			}
+
+			IsLoaded = true;
+			// address default
+			if (addressService.DownloadedAddresses.Count > 0)
+			{
+				selectedAddressId = addressService.DownloadedAddresses[0].Id;
+			}
+			StateHasChanged();
+		}
+	}
+	// einloggen
+	private void OnEinloggen()
+	{
+		var fullUri = NavigationManager.Uri;
+		var baseUri = NavigationManager.BaseUri;
+		string currentPath = fullUri.Replace(baseUri, "/");
+		NavigationManager.NavigateTo($"/login?returnUrl={currentPath}");
+	}
+	// Gust Order
+	private void OnAddressForm()
+	{
+		IsAddAddressMode = !IsAddAddressMode;
+	}
+	// address
+	private async Task HandleAddressSubmit()
+	{
+		if (IsAddAddressMode)
+		{
+			await AddAddress();
+		}
+		else
+		{
+			await UpdateAddress();
+		}
+	}
+	// add address
+	private bool IsAddAddressMode { get; set; } = false;
+	private Address newAddress = new();
+	private int selectedAddressId = 0;
+	private async Task AddAddress()
+	{
+		// add user id, if gust than set it to null
+		if (user.Id > 0)
+			newAddress.UserId = user.Id;
+
+		var result = await addressService.AddAddressAsync(newAddress);
+		if (result.Result)
+		{
+			OnAddressForm(); // Close the form after adding the address
+			newAddress = new Address(); // Reset the newAddress object
+			selectedAddressId = addressService.DownloadedAddresses[0].Id; // Set the selected address ID to the newly added address
+		}
+		else
+		{
+			_ = JS.InvokeVoidAsync("alert", result.Message);
+		}
+	}
+	private void CancelAddAddressForm()
+	{
+		IsAddAddressMode = false;
+		IsUpdateAddressMode = false;
+		newAddress = new Address();
+	}
+	// delete Address
+	private async Task DeleteAddress(int Id)
+	{
+		if (Id == 0)
+			return;
+		var result = await addressService.DeleteAddressAsync(Id);
+		if (result.Result)
+		{
+			if (addressService.DownloadedAddresses.Count > 0)
+				selectedAddressId = addressService.DownloadedAddresses[0].Id;
+			else
+				selectedAddressId = 0;
+		}
+		else
+		{
+			_ = JS.InvokeVoidAsync("alert", result.Message);
+		}
+	}
+	// update address
+	private bool IsUpdateAddressMode { get; set; } = false;
+	private void OndblclickUpdateAddress(Address address)
+	{
+		IsUpdateAddressMode = true;
+		updateAddress = new Address()
+			{
+				Id = address.Id,
+				FirstName = address.FirstName,
+				LastName = address.LastName,
+				Phone = address.Phone,
+				Street = address.Street,
+				City = address.City,
+				ZipCode = address.ZipCode,
+				Country = address.Country,
+				UserId = address.UserId
+			};
+	}
+	private Address updateAddress = new();
+	private async Task UpdateAddress()
+	{
+		if (updateAddress.Id == 0)
+			return;
+		var result = await addressService.UpdateAddressAsync(updateAddress);
+		if (result.Result)
+		{
+			selectedAddressId = updateAddress.Id; // Set the selected address ID to the updated address
+			IsUpdateAddressMode = false; // Close the form after updating the address
+			updateAddress = new (); // Reset the updateAddress object
+		}
+		else
+		{
+			_ = JS.InvokeVoidAsync("alert", result.Message);
+		}
+	}
+	// Payment
+	private int selectedPaymentId = 1; // Default payment method
+	private Order order = new Order();
+	private async Task OnPay()
+	{
+		orderStatusEnum = OrderStatusEnum.Processing;
+		// check address
+		{
+			if (selectedPaymentId == 2 && selectedAddressId == 0)
+			{
+				_ = JS.InvokeVoidAsync("alert", "Bitte wählen Sie eine Lieferadresse aus.");
+				return;
+			}
+		}
+		// check payment method
+		{
+			if (selectedPaymentId == 0)
+			{
+				_ = JS.InvokeVoidAsync("alert", "Bitte wählen Sie eine Zahlungsmethode aus.");
+				return;
+			}
+		}
+		// check user 		{
+		if (user.Id == 0)
+		{
+			user.Password = "gustPawword"; // set password to default value, because gust user not have password
+			var result = await AuthService.AddGuestAsync(user);
+			if (result.Result == false)
+			{
+				_ = JS.InvokeVoidAsync("alert", result.Message);
+
+				return;
+			}
+			else
+			{
+				var getId = result!.Message?.Split(':').LastOrDefault();
+				// get user id from message to user object
+				if (int.TryParse(getId, out int userId))
+				{
+					user.Id = userId;
+
+					await CreateOrder();
+				}
+				else
+				{
+					_ = JS.InvokeVoidAsync("alert", "Ungültige Benutzer-ID erhalten.");
+					return;
+				}
+			}
+		}
+		else
+			await CreateOrder();
+	}
+	private async Task CreateOrder()
+	{
+		Order createOrder = new Order()
+		{
+				DeliveryAddressId = selectedAddressId,
+				PaymentMethodId = selectedPaymentId,
+				StatusId = 1, // in database 1 = Order Pending
+				OrderItems = cartService.CartItems.Select(item => new OrderItems
+				{
+					ProductId = item.ProductId,
+					Quantity = item.Quantity,
+					UnitPrice = item.Product?.SalePrice ?? 0
+				}).ToList(),
+				TotalPrice = cartService.GetTotalPrice(),
+				OrderDate = DateTime.Now,
+				UserId = user.Id
+		};
+		var result = await orderService.AddOrderAsync(createOrder);
+		if (result.Result)
+		{
+			// clear cart
+			cartService.ClearCart();
+			orderStatusEnum = OrderStatusEnum.Commpleted;
+			StateHasChanged();
+		}
+		else
+		{
+			orderStatusEnum = OrderStatusEnum.Pending;
+			_ = JS.InvokeVoidAsync("alert", result.Message);
+		}
+	}
+	// ti main page
+	private void OnMainPage()
+	{
+		NavigationManager.NavigateTo("/",true);
+	}
+
+	public void Dispose()
+	{
+		
+	}
+}

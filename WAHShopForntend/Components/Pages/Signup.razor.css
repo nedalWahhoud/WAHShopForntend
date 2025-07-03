@@ -1,0 +1,52 @@
+﻿.signupContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100vh;
+}
+
+.signupForm {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 70px 70px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    text-align: center;
+}
+
+    .signupForm button:last-child {
+        margin-top: 15px;
+    }
+/* Title */
+.signupContainer .signupForm h2 {
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.2s ease-in-out;
+}
+
+.signupContainer .signupForm h2:hover {
+    color: #0056b3;
+}
+    .signupForm button {
+        width: var(--elementWidth);
+        height: var(--elementHeight);
+        box-sizing: border-box;
+        outline: none;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+    }
+    .signupForm button {
+        background-color: var(--btnBackgroundColor);
+        color: white;
+        cursor: pointer;
+    }
+
+        .signupForm button:hover {
+            background-color: var(--btnBackgroundColorHover);
+        }
+.loginLink a {
+    text-decoration: none;
+}

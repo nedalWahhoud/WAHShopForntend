@@ -1,0 +1,274 @@
+﻿/* ======== MAIN CHECKOUT STYLING ======== */
+.checkoutMain {
+    display: flex;
+    flex-direction: column;
+    gap: 55px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    box-sizing: border-box;
+}
+
+/* ======== BACK TO MAIN PAGE ======== */
+.backToMainPage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+    .backToMainPage button {
+        background-color: var(--btnBackgroundColor);
+        color: white;
+        width: 100%;
+        max-width: 250px;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        transition: 0.3s ease;
+    }
+
+        .backToMainPage button:hover {
+            background-color: var(--btnBackgroundColorHover);
+            transform: scale(1.05);
+        }
+
+    .backToMainPage p {
+        font-size: 1rem;
+        color: #2c3e50;
+        background-color: #f1f1f1;
+        padding: 15px;
+        border-radius: 8px;
+        max-width: 100%;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+    }
+
+/* ======== SHIPPING SECTION ======== */
+.shipping {
+    border-bottom: 2px solid #cccccc;
+    padding-bottom: 10px;
+}
+
+.pShowAddressForm {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+    .pShowAddressForm:hover {
+        color: #0056b3;
+    }
+
+/* ======== ADDRESS RADIO SECTION ======== */
+.addressRadioDiv {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.addressRadio {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.addressOption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+}
+
+    /* حتى لا يتمدد label */
+    .addressOption label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-grow: 1;
+        margin: 0;
+    }
+
+    /* زر الحذف */
+    .addressOption .deleteButton {
+        background-color: var(--btnRed);
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+        .addressOption .deleteButton:hover {
+            background-color: var(--btnRedHover);
+            transform: scale(1.05);
+        }
+
+/* ======== PAYMENT SECTION ======== */
+.paymentMethodOption {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    .paymentMethodOption label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.95rem;
+    }
+
+        .paymentMethodOption label:last-child {
+            color: #198754;
+            margin-top: 10px;
+        }
+
+/* ======== PLACE ORDER SECTION ======== */
+.placeOrder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #cccccc;
+}
+
+    .placeOrder h4 {
+        text-align: center;
+        font-size: 1rem;
+    }
+
+.btnEinloggen, .btnPay {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    color: white;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+.btnEinloggen {
+    background-color: var(--btnBackgroundColor);
+}
+
+    .btnEinloggen:hover {
+        background-color: var(--btnBackgroundColorHover);
+        transform: scale(1.05);
+    }
+
+.btnPay {
+    background-color: var(--btnBackgroundColorProductAdded);
+}
+
+    .btnPay:hover {
+        background-color: var(--btnBackgroundColorProductAddedHover);
+        transform: scale(1.05);
+    }
+
+/* ======== ADDRESS FORM OVERLAY ======== */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.addressForm {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+    .addressForm .addressBtn {
+        padding-top: 15px;
+    }
+
+.addAddressB,
+.addProductCancelB {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-top: 10px;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.addAddressB {
+    background-color: #007bff;
+}
+
+    .addAddressB:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+.addProductCancelB {
+    background-color: #757e84;
+}
+
+    .addProductCancelB:hover {
+        background-color: #5a6268;
+        transform: scale(1.05);
+    }
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 600px) {
+    .checkoutMain {
+        padding: 15px;
+        gap: 30px;
+        min-width: unset;
+    }
+
+    .addressOption {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btnEinloggen, .btnPay, .backToMainPage button {
+        width: 100%;
+        max-width: unset;
+    }
+
+    .backToMainPage p {
+        font-size: 1rem;
+    }
+
+    .placeOrder h4 {
+        font-size: 0.95rem;
+    }
+
+    .addressForm {
+        padding: 1rem;
+    }
+}

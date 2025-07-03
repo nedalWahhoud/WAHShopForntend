@@ -1,0 +1,21 @@
+﻿<div class="categoryNav">
+    @foreach (var category in allCategories)
+    {
+        <a @onclick="() => OnCategory(category.Id)">
+            @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                ? category.Name_ar
+                : category.Name_de)
+        </a>
+    }
+</div>
+@code {
+    private List<Categories> allCategories = new();
+    protected override void OnInitialized()
+    {
+		allCategories = categoryService.GetAllCategoriesLocal();
+    }
+    private void OnCategory(int categoryId)
+    {
+        NavigationManager.NavigateTo($"/ProductsByCategory/{categoryId}", true);
+    }
+}

@@ -1,0 +1,58 @@
+.main[b-mk2l5x682x]{
+    height:100vh;
+}
+.loginContainer[b-mk2l5x682x] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    .loginContainer .loginForm[b-mk2l5x682x] {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align:center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        padding: 50px 50px;
+        border-radius: 8px;
+        background-color: white;
+        gap: 10px;
+        background-color: var(--mainBackgroundColor);
+    }
+    .loginForm button:last-child[b-mk2l5x682x] {
+        margin-top: 25px;
+    }
+/* Title */
+.loginContainer .loginForm h2[b-mk2l5x682x] {
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.2s ease-in-out;
+}
+    .loginContainer .loginForm h2:hover[b-mk2l5x682x] {
+        color: #0056b3;
+    }
+
+/* input, button style */
+.loginContainer .loginForm button[b-mk2l5x682x] {
+    width: var(--elementWidth);
+    height: var(--elementHeight);
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--btnBackgroundColor);
+    color: #ffffff;
+}
+.loginForm button:hover[b-mk2l5x682x] {
+    background-color: var(--btnBackgroundColorHover);
+}
+/* signup */
+.signup a[b-mk2l5x682x] {
+    text-decoration: none;
+}
+/* forgotPassword */
+.forgotPassword a[b-mk2l5x682x]{
+    cursor:pointer;
+}

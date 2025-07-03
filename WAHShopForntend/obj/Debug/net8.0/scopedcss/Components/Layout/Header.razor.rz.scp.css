@@ -1,0 +1,156 @@
+.header[b-x61xa13amk] {
+    background-color: var(--hederBackgroundColoe);
+    color: white;
+    height: 3.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 9999;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/* vermeiden die Header bewegen von rechts nach links*/
+html[dir="rtl"] .header[b-x61xa13amk] {
+    direction: ltr;
+    text-align: left;
+}
+
+    .header .containerLeft[b-x61xa13amk],
+    .header .containerCenter[b-x61xa13amk],
+    .header .containerRight[b-x61xa13amk] {
+        flex: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .header .containerLeft[b-x61xa13amk] {
+        padding-left: 2rem;
+        justify-content: flex-start;
+    }
+
+        .header .containerLeft h2[b-x61xa13amk] {
+            cursor: pointer;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+    .header .containerCenter[b-x61xa13amk] {
+        justify-content: center; /* توسيط أفقي */
+        text-align: center;
+    }
+
+    .header .containerRight[b-x61xa13amk] {
+        justify-content: flex-end;
+        padding-right: 2rem;
+        gap: 1rem;
+    }
+
+
+/* search */
+html[dir="rtl"] .searchBox[b-x61xa13amk] {
+    direction: rtl;
+    text-align: right;
+}
+.searchBox[b-x61xa13amk] {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.searchInput[b-x61xa13amk] {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.searchDropdown[b-x61xa13amk] {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    color: var(--hederBackgroundColoe);
+}
+
+    .searchDropdown li[b-x61xa13amk] {
+        display:flex;
+        align-items:center;
+        color: var(--hederBackgroundColoe);
+        padding: 0.3rem 0;
+        cursor: pointer;
+    }
+
+        .searchDropdown li:hover[b-x61xa13amk] {
+            color:white;
+            background-color: var(--hederBackgroundColoe);
+        }
+        .searchDropdown li > *[b-x61xa13amk] {
+            margin-left: 0.5rem; /* يحرك محتوى العنصر وليس الخلفية */
+        }
+        .searchDropdown li img[b-x61xa13amk] {
+            width: 50px;
+            height: 50px;
+        }
+/**/
+.btn[b-x61xa13amk] {
+    background-color: var(--hederBackgroundColoe);
+    border: none;
+}
+.dropdownMenu[b-x61xa13amk] {
+    background-color: var(--hederBackgroundColoe);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+.dropdownItem[b-x61xa13amk]{
+    color:white;
+    cursor:pointer;
+}
+    .dropdownItem:hover[b-x61xa13amk] {
+        background-color: var(--dropdownBackgroundHover);
+    }
+/* 🌐 ميديا كويري للموبايل */
+@media (max-width: 768px) {
+    .header .containerLeft[b-x61xa13amk] {
+        display: none;
+    }
+
+    .header .containerCenter[b-x61xa13amk] {
+        flex: 1; /* يتمدد حسب المساحة المتوفرة */
+        justify-content: center;
+        padding: 0 1rem;
+    }
+
+    .header .containerRight[b-x61xa13amk] {
+        flex-shrink: 0; /* ما يتقلص */
+        flex-grow: 0; /* ما يتمدد */
+        justify-content: flex-end;
+        padding-right: 1rem;
+    }
+
+    .searchBox[b-x61xa13amk] {
+        width: 100%;
+        max-width: none;
+    }
+    .searchInput[b-x61xa13amk] {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 0.1rem;
+    }
+    .searchDropdown li[b-x61xa13amk] {
+        font-size: 0.8rem;
+    }
+    .searchDropdown li img[b-x61xa13amk] {
+        width:40px;
+        height:40px;
+    }
+}
+

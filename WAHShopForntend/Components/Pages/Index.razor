@@ -1,0 +1,231 @@
+﻿@page "/"
+@inject IStringLocalizer< WAHShopForntend.Resources.Index> L
+
+@if (IsLoading)
+{
+    <div class="lodingContainer">
+        <p>@L["Loading"]</p>
+    </div>
+}
+else
+{
+    @for (int x = 0; x < mainProductByCategory.Count; x++)
+    {
+
+        // category
+        var category = mainProductByCategory[x].Category;
+        <div class="category">
+            <p>
+                @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                    ? category.Name_ar
+                    : category.Name_de)
+            </p>
+        </div>
+        <div class="mainProductsCard">
+
+            @for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
+            {
+                // product
+                var product = mainProductByCategory[x].Products[i];
+                // cart product, bind with productId,quantity and product, the in OnInititalized configured.
+                CartItem cartItem = mainProductByCategory[x].Products[i].CartItem;
+
+                <div class="productsCard">
+                    <img @onclick="() => OnProduct(product.Id)" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
+                    <div @onclick="() => OnProduct(product.Id)" class="textCard">
+                        <a>@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"  
+                            ? product.Name_ar
+                            : product.Name_de)</a>
+                        <p>@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
+                    </div>
+
+                    <div class="productsCart">
+                        <button class="btn @(cartService.IsProductAdded(cartItem.ProductId)  ? "btnProductAdded" : "btnProduct") "
+                        @onclick="() => CartChanged(cartItem)">
+                            @(cartService.IsProductAdded(cartItem.ProductId) ? $"➕({cartService.GetQuantityOfProduct(cartItem.ProductId)})" : "🛒")
+                        </button>
+                        <InputNumber @bind-Value="cartItem.Quantity" Min="0" class="form-control" />
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+}
+@code{
+
+    private List<ProductByCategory> mainProductByCategory = new();
+    private bool IsLoading = true;
+    // to exclude products already loaded in the main product list
+    private List<int> excludeProductsIds = new();
+    // to exclude categories already loaded in the main product list
+    private List<int> excludeCategoriesIds = new();
+    private List<Categories> allCategories = new();
+    // lang
+    private string lang = string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+        IsLoading = true;
+		// get language
+        lang = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+
+        // random products by category
+        allCategories = categoryService.GetAllCategoriesLocal();
+        // 0 index = recommended products, 1 index = random products
+        List<int> counts = new List<int>() { 2, 2 };
+        for (int i = 0; i < counts.Count; i++)
+        {
+            var random = new Random();
+            if (allCategories.Count >= counts[i])
+            {
+                List<Categories> categories = allCategories
+                .Where(c => !excludeCategoriesIds.Contains(c.Id))
+                .GroupBy(c => c.Id)
+                .Select(g => g.First())
+                .OrderBy(c => Guid.NewGuid()) 
+                .Take(counts[i])
+                .ToList();
+
+                if (i == 0)
+                    await LoadProductsRecommended(categories);
+                else
+                    _ = LoadRandomProductsByCategory(categories);
+            }
+        }
+        IsLoading = false;
+    }
+    // recommended
+    public async Task LoadProductsRecommended(List<Categories> categories)
+    {
+        ProductByCategory Recommended = new();
+
+        foreach (var category in categories)
+        {
+
+            // get products local
+            var productsLocal = await productService.GetProductByCategoryIdLocal(category.Id);
+            if (productsLocal != null && productsLocal.Count > 0)
+            {
+                // initialize CartItem for each product
+                foreach (var p in productsLocal)
+                {
+                    p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+                    excludeProductsIds!.Add(p.Id);
+                }
+                Recommended.Products.AddRange(productsLocal);
+            }
+            // get products server
+            var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, 5,false, excludeProductsIds);
+            if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
+            {
+                // initialize CartItem for each product
+                foreach (var p in productsServer.Items)
+                {
+                    p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+                    //
+                    excludeProductsIds!.Add(p.Id);
+                }
+
+                Recommended.Products.AddRange(productsServer.Items);
+
+                // add to local Products list
+                _ = Task.Run(() =>
+                {
+                    productService.AddProductToLocal(productsServer.Items);
+                });
+
+            }
+            else if (productsServer != null && productsServer.AllItemsLoaded)
+            {
+
+            }
+
+            //
+            excludeCategoriesIds.Add(category.Id);
+        }
+        // initialize to mainProductByCategory
+        Categories categoryRecommended = new Categories()
+        {
+            Id=0,
+                Name_de = lang == "de" ? L["RecommendedForYou"]:string.Empty,
+                Name_ar = lang == "ar" ? L["RecommendedForYou"]:string.Empty
+
+        };
+        if (Recommended.Products.Count == 0)
+        {
+            // if no products found, return
+            return;
+        }
+        mainProductByCategory.Insert(0, new ProductByCategory() { Category = categoryRecommended, Products = Recommended.Products });
+    }
+
+    // random products by category
+    public async Task LoadRandomProductsByCategory(List<Categories> Categories)
+    {
+        int currentIndex = 0;
+
+        foreach (var category in Categories)
+        {
+
+            // get products local
+            var productsLocal = await productService.GetProductByCategoryIdLocal(category.Id);
+            if (productsLocal != null && productsLocal.Count > 0)
+            {
+                // initialize CartItem for each product
+                foreach (var p in productsLocal)
+                {
+                    p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+                    // 
+                    excludeProductsIds!.Add(p.Id);
+                }
+                mainProductByCategory.Add(new ProductByCategory() { Category = category, Products = productsLocal });
+                currentIndex = mainProductByCategory.FindIndex(c => c.Category.Id == category.Id);
+            }
+
+            // get products server
+            var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, 5,false, excludeProductsIds);
+            if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
+            {
+                // initialize CartItem for each product
+                foreach (var p in productsServer.Items)
+                {
+                    p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+                    // 
+                    excludeProductsIds!.Add(p.Id);
+                }
+                // if 0 than semply add, otherwise insert to mainProductByCategory at current index
+                if (currentIndex == 0)
+                    mainProductByCategory.Add(new ProductByCategory() { Category = category, Products = productsServer.Items });
+                else
+                    mainProductByCategory.Insert(currentIndex, new ProductByCategory() { Category = category, Products = productsServer.Items });
+
+                // add to local Products list
+                _ = Task.Run(() =>
+                {
+                    productService.AddProductToLocal(productsServer.Items);
+                });
+            }
+            else if (productsServer != null && productsServer.AllItemsLoaded)
+            {
+
+            }
+			// add to exclude categories
+            excludeCategoriesIds.Add(category.Id);
+        }
+
+        StateHasChanged();
+    }
+
+    // On Product Click
+    private void OnProduct(int ProductId)
+    {
+        NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
+    }
+    // Cart
+    private void CartChanged(CartItem cartItem)
+    {
+        if (!cartService.IsQuantityZero(cartItem))
+            cartService.AddToCart(cartItem);
+    }
+    
+}

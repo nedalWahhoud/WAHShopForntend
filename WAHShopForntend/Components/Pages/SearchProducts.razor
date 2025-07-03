@@ -1,0 +1,112 @@
+﻿@page "/searchProducts/{productId:int}"
+@page "/searchProducts/{productId:int}/{searchText}"
+
+@if (Isloading)
+{
+	<div class="lodingContainer">
+		<p>wird geladen... </p>
+	</div>
+}
+else
+{
+		@if (searchedProducts.Count > 0)
+		{
+			<div class="productItems">
+				@for (int i = 0; i < searchedProducts.Count;i++)
+				{
+					// product
+					var product = searchedProducts[i];
+					// cart product, bind with productId,quantity and product, the in OnInititalized configured.
+					var cartItem = searchedProducts[i].CartItem;
+
+					<div class="cardProduct">
+						<img @onclick="() => OnProduct(product.Id)" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
+						<div @onclick="() => OnProduct(product.Id)" class="textCard">
+							<a href="">
+								@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+															? product.Name_ar
+															: product.Name_de)
+							</a>
+							<p>@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
+						</div>
+						<div class="cartItems">
+							<button class="btn @(cartService.IsProductAdded(cartItem.ProductId)  ? "btnProductAdded" : "btnProduct") "
+							@onclick="() => CartChanged(cartItem)">
+								@(cartService.IsProductAdded(cartItem.ProductId) ? $"➕({cartService.GetQuantityOfProduct(cartItem.ProductId)})" : "🛒")
+							</button>
+							<InputNumber @bind-Value="cartItem.Quantity" Min="0" class="QuantityInput" />
+						</div>
+					</div>
+				}
+			</div>
+		}
+		else
+		{
+			<p>Keine Produkte gefunden.</p>
+		}
+	
+}
+
+
+
+@code {
+	[Parameter]
+	public int productId { get; set; }
+	[Parameter]
+	public string? searchText { get; set; } = string.Empty;	
+
+	private List<Product> searchedProducts = new();
+	private List<CartItem> tempCartItems = new();
+	private bool Isloading = true;
+	protected override async Task OnInitializedAsync()
+	{
+		Isloading = true;
+
+		// get on clicked item
+		var product = productService.GetProductByIdLocal(productId)
+					?? await productService.GetProductByIdsServer(productId);
+		// add to mainPage product list
+		if (product != null)
+		{
+			product.InitializeCartItem(cartService.GetQuantityOfProduct(product.Id));
+			searchedProducts.Add(product);
+		}
+
+		// search first local
+		List<Product> searchedResults = new();
+		searchedResults = productService.SearchProductsLocal(searchText!, new() { productId });
+		// if local search returns no results, search from server
+		if (searchedResults != null && searchedResults.Count == 0)
+		{
+			searchedResults = await productService.SearchProductsAsync(searchText!, new() {productId});
+			// add to local product list
+			if (searchedResults != null && searchedResults.Count > 0)
+			{
+				productService.AddProductToLocal(searchedResults);
+			}
+		}
+
+		// add to mainPage product list
+		if (searchedResults != null && searchedResults.Count > 0)
+		{
+			foreach (var p in searchedResults)
+			{
+				p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+			}
+		
+			searchedProducts.InsertRange(searchedProducts.Count,searchedResults);
+		}
+		Isloading = false;
+	}
+	// On Product Click
+	private void OnProduct(int ProductId)
+	{
+		NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
+	}
+	// Cart
+	private void CartChanged(CartItem cartItem)
+	{
+		if (!cartService.IsQuantityZero(cartItem))
+			cartService.AddToCart(cartItem);
+	}
+}
