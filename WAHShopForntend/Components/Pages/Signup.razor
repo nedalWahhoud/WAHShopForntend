@@ -42,37 +42,22 @@
 @code {
     private SignupModel signupModel = new();
 
-    [Inject]
-    private HttpClient? Http { get; set; }
     private async Task HandleSubmit()
     {
-        try
+		signupModel.SignupProvider = "Manual"; // Set the signup provider to Manual
+        var result = await AuthService!.Signup(signupModel);
+        if (result.Result == true)
         {
-            var response = await Http!.PostAsJsonAsync("api/Users/signup", signupModel);
-
-            if (response.IsSuccessStatusCode)
-            {
-                bool bo = await AuthService!.Login(null!, response);
-                if (bo)
-                    NavigationManager!.NavigateTo("/");
-                else
-                    _ = JS.InvokeVoidAsync("showAlert", "Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.");
-            }
-            else
-            {
-                var error = await response.Content.ReadFromJsonAsync<Dictionary<string, string>>();
-                string errorMassage = error != null && error.ContainsKey("error") ? error["error"] : "Unbekannter Fehler";
-                if (errorMassage == "Passwords do not match")
-                    signupModel.PasswordAgain = string.Empty; // Reset PasswordAgain field if passwords do not match
-
-                await JS.InvokeVoidAsync("showAlert", "Fehler: " + errorMassage);
-            }
+            await JS.InvokeVoidAsync("showAlert", result.Message);
+            NavigationManager!.NavigateTo("/login");
         }
-        catch(Exception ex)
+        else
         {
-            await JS.InvokeVoidAsync("showAlert", "Fehler beim Senden der Anfrage: " + ex.Message);
+            _ = JS.InvokeVoidAsync("showAlert", result.Message);
+            signupModel.PasswordAgain = string.Empty; // Clear the password confirmation field
         }
     }
+  
     private void OnProjectInfo()
     {
         NavigationManager.NavigateTo("/", false);

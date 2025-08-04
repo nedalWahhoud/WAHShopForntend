@@ -1,4 +1,5 @@
-﻿
+﻿@inject IStringLocalizer< WAHShopForntend.Resources.Footer> L
+
 <footer class="footer" id="page-footer">
 	<div class="contactDiv">
 		<h3>@ProjectInfo.Value.Name</h3>
@@ -14,6 +15,18 @@
 			<img src="Images/Email.png" alt="WhatsApp Icon" width="28" height="28" style="vertical-align: middle; margin-right: 5px;">
 			@ProjectInfo.Value.Email
 		</p>
+	</div>
+	<div class="socialMedia">
+		
+		<div class="icons">
+			<p>@L["FollowUs"]</p>
+		  <a href="@ProjectInfo.Value.Facebook" target="_blank" rel="noopener noreferrer">
+			<img src="Images/Facebook.png" alt="Facebook Icon" width="36" height="36"/>
+		  </a>
+		  <a href="@ProjectInfo.Value.Instagram" target="_blank" rel="noopener noreferrer">
+			<img src="Images/Instagram.png" alt="Instagram Icon" width="27" height="27"/>
+		  </a>
+		</div>
 	</div>
 </footer>
 

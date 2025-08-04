@@ -153,8 +153,17 @@
   <data name="DeliveryTitle" xml:space="preserve">
     <value>Delivery to:</value>
   </data>
+  <data name="DiscountPercentage" xml:space="preserve">
+    <value>Discount Percentage</value>
+  </data>
+  <data name="EnterCode" xml:space="preserve">
+    <value>Enter the code</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name:</value>
+  </data>
+  <data name="HaveCode" xml:space="preserve">
+    <value>Do you have a discount code?</value>
   </data>
   <data name="InputEmail" xml:space="preserve">
     <value>Enter your E-Mail</value>
@@ -174,6 +183,9 @@
   <data name="LoginButton" xml:space="preserve">
     <value>Log in</value>
   </data>
+  <data name="NoItemsInCategory" xml:space="preserve">
+    <value>The order does not contain any item that has a category matching the discount code category.</value>
+  </data>
   <data name="PaymentNote" xml:space="preserve">
     <value>We're currently working on adding online payment methods like PayPal and SEPA. </value>
   </data>
@@ -182,6 +194,12 @@
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone number:</value>
+  </data>
+  <data name="ShippingCosts" xml:space="preserve">
+    <value>Shipping Costs</value>
+  </data>
+  <data name="ShippingMethod" xml:space="preserve">
+    <value>Shipping method</value>
   </data>
   <data name="Street" xml:space="preserve">
     <value>Street and house number:</value>
@@ -192,11 +210,17 @@
   <data name="ThankYouMessage" xml:space="preserve">
     <value>Thank you for your order. We will process it as soon as possible.</value>
   </data>
+  <data name="ThePrice" xml:space="preserve">
+    <value>The Price</value>
+  </data>
   <data name="TotalPrice" xml:space="preserve">
     <value>Total price</value>
   </data>
   <data name="UpdateAddressButton" xml:space="preserve">
     <value>Update address</value>
+  </data>
+  <data name="YouSave" xml:space="preserve">
+    <value>You save on your purchase</value>
   </data>
   <data name="ZipCode" xml:space="preserve">
     <value>ZIP code:</value>

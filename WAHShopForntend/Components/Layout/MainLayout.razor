@@ -16,18 +16,18 @@ else
 
 
     <div class="page">
-        <main>
+        <main class="main-content">
             <article class="content px-4">
                 @Body
-               
             </article>
-           
         </main>
+
     </div>
-     @if (!HeaderHidden && showFooter)
-        {
-            <Footer />
-        }
+
+    @if (!HeaderHidden && showFooter)
+    {
+        <Footer />
+    }
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -58,14 +58,13 @@ else
             await cartService.InitializeAsync();
 
             // footer
-
-           /* objRef = DotNetObjectReference.Create(this);
+            /*objRef = DotNetObjectReference.Create(this);
             await JS.InvokeVoidAsync("footerVisibility.initScrollWatcher", objRef);*/
             StateHasChanged();
         }
     }
 
-  /*  [JSInvokable]
+    [JSInvokable]
     public void ShowFooter()
     {
         if (!showFooter)
@@ -83,7 +82,7 @@ else
             showFooter = false;
             StateHasChanged();
         }
-    }*/
+    }
 
     public void Dispose()
     {

@@ -26,23 +26,25 @@
     flex-wrap: wrap;
     gap: 10px;
 }
+.statusDropdown[b-57pkjcri4b] {
+    cursor: pointer;
+}
 
-    .orderHeader h3[b-57pkjcri4b] {
-        margin: 0;
-        font-size: 1.2rem;
-        color: #2c3e50;
-    }
+.orderHeader h3[b-57pkjcri4b] {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
 
-    .orderHeader .status[b-57pkjcri4b] {
-        background-color: #e0e0e0;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        white-space: nowrap;
-    }
-
-.order p[b-57pkjcri4b],
-.orderMeta[b-57pkjcri4b] {
+.orderHeader .status[b-57pkjcri4b] {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.order p[b-57pkjcri4b] {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -51,12 +53,29 @@
     font-size: 0.95rem;
     color: #333;
 }
-
-.orderItems[b-57pkjcri4b] {
+.orderMeta[b-57pkjcri4b] {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #E0E0E0;
 }
+    .orderMeta span[b-57pkjcri4b] {
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        align-content:center;
+        justify-content:center;
+        text-align:center;
+    }
+    .orderItems[b-57pkjcri4b] {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 
 .orderItem[b-57pkjcri4b] {
     display: flex;
@@ -110,6 +129,15 @@
     display: block;
     margin: 0 auto;
 }
+/* empty Order */
+.emptyOrder[b-57pkjcri4b] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin-top: 10vh;
+    font-size: 20px;
+}
 /* Phone */
 @media (max-width: 600px) {
     .orderHeader[b-57pkjcri4b] {
@@ -140,4 +168,12 @@
         align-items: flex-start;
         gap: 5px;
     }
+
+        .orderMeta span[b-57pkjcri4b] {
+            padding: 5px;
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            height: 50px;
+        }
 }

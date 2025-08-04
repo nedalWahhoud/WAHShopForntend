@@ -35,7 +35,7 @@ else
 		}
 		else
 		{
-			<div class="shipping">
+			<div class="address">
 				<h4>@L["DeliveryTitle"]</h4>
 
 				@if (addressService.DownloadedAddresses.Count > 0)
@@ -45,7 +45,6 @@ else
 							@foreach (var address in addressService.DownloadedAddresses)
 							{
 								<div class="addressOption" @ondblclick="() => OndblclickUpdateAddress(address)">
-
 									<label>
 										<InputRadio Value="@address.Id" />
 										@address.FirstName @address.LastName - @address.Street, @address.ZipCode @address.City
@@ -65,10 +64,11 @@ else
 				<h4>@L["PaymentTitle"]</h4>
 				<div class="paymentMethodOption">
 					<EditForm Model="@this">
-						<InputRadioGroup @bind-Value="selectedPaymentId"  >
+						<InputRadioGroup Value="@selectedPaymentId" ValueChanged="@((int val) => OnPaymentChanged(val))" ValueExpression="() => selectedPaymentId">
 							@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
 							{
-								if (orderService.DownloadedPaymentMethods[i].Id > 0 && orderService.DownloadedPaymentMethods[i].Id < 3)
+								if (orderService.DownloadedPaymentMethods[i].Id == 1 || orderService.DownloadedPaymentMethods[i].Id == 2 ||
+						orderService.DownloadedPaymentMethods[i].Id == 5)
 								{
 									var paymentMethod = orderService.DownloadedPaymentMethods[i];
 									<label>
@@ -82,42 +82,131 @@ else
 							</label>
 						</InputRadioGroup>
 					</EditForm>
+					@* Discount Code *@
+					<div class="mb-3">
+						<label>@L["HaveCode"] ?</label>
+						<div class="input-group d-flex gap-2 mb-1">
+							<InputText class="form-control" @bind-Value="discountCode.Code" />
+							<button type="button" class="btn btn-primary" @onclick="OnCode">
+								@if(IsDiscountCodeLoading)
+								{
+									<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+								}
+								else
+								{
+									@L["EnterCode"]
+								}
+							</button>
+						</div>
+						@{
+							string message = null!;
+							if (discountCode.Message != null && !string.IsNullOrEmpty(discountCode.Message))
+							{
+								message = discountCode.Message;
+							}
+							else if (discountCategory.Message != null && !string.IsNullOrEmpty(discountCategory.Message))
+							{
+								message = discountCategory.Message;
+							}
+
+							double DiscountPercentageText =
+								discountCode.DiscountPercentage != 0
+							? discountCode.DiscountPercentage
+							: discountCategory.DiscountPercentage != 0
+							? discountCategory.DiscountPercentage
+							: 0;
+
+
+							<label class="mt-2 text-success">@L["DiscountPercentage"]: @DiscountPercentageText %</label>
+							<label class="mt-2 text-danger">@message</label>
+						}
+					</div>
 				</div>
 			</div>
+			@* shipping *@
+			@if (selectedPaymentId == 5)
+			{
+				<div class="shipping">
+					<h4>@L["ShippingMethod"]:</h4>
+					<div class="shippingProvider">
+						<InputRadioGroup @bind-Value="@order.ShippingProviderId">
+							@foreach (ShippingProvider item in orderService.DownloadedShippingProviders)
+							{
+								<label>
+									<InputRadio Value="@item.Id" />
+									@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? item.Name_ar : item.Name_de)
+								</label>
+							}
+						</InputRadioGroup>
+					</div>
+					<label>@L["ShippingCosts"]:<span style="font-weight:bold;">&nbsp;@((order.ShippingProviders?.PublicShippingCost ?? 0).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span></label>
+				</div>
+			}
 			<div class="placeOrder">
-				<h4>@L["TotalPrice"] (@cartService.GetTotalQuantity() @L["Items"]): <span style="font-weight:bold; ">@cartService.GetTotalPrice().ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
-					<br/>
-				<span>@L["Tax"]</span>	
-				</h4>
-				<InputTextArea @bind-Value="order.Notes " placeholder="@L["AddNotePlaceholder"]" class="form-control" />
+				@L["Items"]: @cartService.GetTotalQuantity()
+				<span>
+					@if (discountCode != null && discountCode.Id > 0)
+					{
+						var result = GetFinalPriceWithDiscount();
+						<span class="text-success">@L["YouSave"] @result.discountValue.ToString("C", new System.Globalization.CultureInfo("de-DE")) </span>
+					}
+					else if(discountCategory != null && discountCategory.Id > 0 && discountCategory.CategoriesId > 0)
+					{
+						var result = GetFinalPriceWithDiscountCategory();
+						<span class="text-success">@L["YouSave"] @result.discountValue.ToString("C", new System.Globalization.CultureInfo("de-DE")) </span>
+					}
+					else
+					{
+						GetFinalPrice();
+					}
+				</span>
+				@{
+					double totalPrice = 0;
+					if (order.ShippingProviders != null && order.ShippingProviderId > 0)
+					{
+						GetShippingCost();
 
-				<AuthorizeView>
-					<Authorized>
-						<button type="button" @onclick="OnPay" class="btn btnPay">@L["BuyButton"]</button>
-					</Authorized>
-					<NotAuthorized Context="auth">
+						<span>@L["ShippingCosts"]: @order.ShippingCost.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
+						totalPrice = order.TotalPrice + order.ShippingCost;
+					}
+					else
+						totalPrice = order.TotalPrice;
+				}
+				<span><strong>@L["TotalPrice"]:</strong> @totalPrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
+				<span>@L["Tax"]</span>
 
-						<button type="button" @onclick="OnEinloggen" class="btn btnEinloggen">@L["LoginButton"]</button>
+				<InputTextArea class="form-control" @bind-Value="order.Notes " placeholder="@L["AddNotePlaceholder"]" />
+				<div class="placeOrderB">
 
-						<EditForm Model="@user" OnValidSubmit="OnPay">
-							<DataAnnotationsValidator />
+					<AuthorizeView>
+						<Authorized>
+							<button class="btn btnPay" type="button" @onclick="OnPay">@L["BuyButton"]</button>
+						</Authorized>
+						<NotAuthorized Context="auth">
 
-							<div class="form-group mb-1">
-								<InputText @bind-Value="user.UserName" placeholder="@L["inputUsername"]" class="form-control" />
-								<ValidationMessage For="@(() => user.UserName)" />
-							</div>
+							<button type="button" @onclick="OnEinloggen" class="btn btnEinloggen">@L["LoginButton"]</button>
 
-							<div class="form-group mb-1">
-								<InputText @bind-Value="user.Email" placeholder="@L["InputEmail"]" class="form-control" />
-								<ValidationMessage For="@(() => user.Email)" />
-							</div>
+							<EditForm Model="@user" OnValidSubmit="OnPay">
+								<DataAnnotationsValidator />
 
-							<button type="submit" class="btn btnPay mt-2">@L["BuyWithoutLoginButton"]</button>
-						</EditForm>
+								<div class="form-group mb-1">
+									<InputText @bind-Value="user.UserName" placeholder="@L["inputUsername"]" class="form-control" />
+									<ValidationMessage For="@(() => user.UserName)" />
+								</div>
 
-					</NotAuthorized>
-				</AuthorizeView>
+								<div class="form-group mb-1">
+									<InputText @bind-Value="user.Email" placeholder="@L["InputEmail"]" class="form-control" />
+									<ValidationMessage For="@(() => user.Email)" />
+								</div>
+
+								<button type="submit" class="btn btnPay mt-2">@L["BuyWithoutLoginButton"]</button>
+							</EditForm>
+
+						</NotAuthorized>
+					</AuthorizeView>
+				</div>
 			</div>
+
 		}
 	</div>
 	@* address *@
@@ -179,6 +268,7 @@ else
 	}
 }
 @code {
+
 	OrderStatusEnum orderStatusEnum = new OrderStatusEnum();
 	private User user = new User();
 	protected override async Task OnInitializedAsync()
@@ -197,6 +287,8 @@ else
 			// default address
 			if (addressService.DownloadedAddresses.Count > 0)
 				selectedAddressId = addressService.DownloadedAddresses[0].Id;
+			// get ShippingProvider
+			_ = await orderService.GetShippingProvidersAsync();
 		}
 		// get payment methods
 		await orderService.GetPaymentMethodsAsync();
@@ -332,15 +424,43 @@ else
 	}
 	// Payment
 	private int selectedPaymentId = 1; // Default payment method
+	private async Task OnPaymentChanged(int newPaymentId)
+	{
+		// 5 ist die payment überweisung dass bedeuetet die versandkosten soll verlangt werden
+		if (newPaymentId == 5)
+		{
+			// get ShippingProvider if not loaded
+			if (orderService.DownloadedShippingProviders == null || orderService.DownloadedShippingProviders.Count == 0)
+				await orderService.GetShippingProvidersAsync();
+
+			// set default value
+			if (order.ShippingProviderId == null)
+			{
+				// 1 ist die Standard-ID des Versandanbieters
+				order.ShippingProviderId = 1; 
+				order.ShippingProviders = orderService.DownloadedShippingProviders?.FirstOrDefault(o => order.ShippingProviderId == order.ShippingProviderId) ?? null;
+				// add die versandkosten to cart 
+			}
+		}
+		else
+		{
+			// Versandanbieter zurücksetzen, wenn keine Versandzahlungsmethode verwendet wird
+			order.ShippingProviderId = null; 
+		}
+
+		selectedPaymentId = newPaymentId;
+		StateHasChanged();
+	}
 	private Order order = new Order();
 	private async Task OnPay()
 	{
 		orderStatusEnum = OrderStatusEnum.Processing;
 		// check address
 		{
-			if (selectedPaymentId == 2 && selectedAddressId == 0)
+			if ((selectedPaymentId == 2 || selectedPaymentId == 5) && selectedAddressId == 0)
 			{
 				_ = JS.InvokeVoidAsync("alert", "Bitte wählen Sie eine Lieferadresse aus.");
+				orderStatusEnum = OrderStatusEnum.Pending;
 				return;
 			}
 		}
@@ -349,10 +469,12 @@ else
 			if (selectedPaymentId == 0)
 			{
 				_ = JS.InvokeVoidAsync("alert", "Bitte wählen Sie eine Zahlungsmethode aus.");
+				orderStatusEnum = OrderStatusEnum.Pending;
 				return;
 			}
 		}
-		// check user 		{
+		// check user 		
+		bool resultBool = false;
 		if (user.Id == 0)
 		{
 			user.Password = "gustPawword"; // set password to default value, because gust user not have password
@@ -360,8 +482,7 @@ else
 			if (result.Result == false)
 			{
 				_ = JS.InvokeVoidAsync("alert", result.Message);
-
-				return;
+				resultBool = false;
 			}
 			else
 			{
@@ -371,19 +492,29 @@ else
 				{
 					user.Id = userId;
 
-					await CreateOrder();
+					resultBool = await CreateOrder();
 				}
 				else
 				{
 					_ = JS.InvokeVoidAsync("alert", "Ungültige Benutzer-ID erhalten.");
+					resultBool = false;
 					return;
 				}
 			}
 		}
 		else
-			await CreateOrder();
+			resultBool = await CreateOrder();
+
+		if (resultBool)
+		{
+			orderStatusEnum = OrderStatusEnum.Commpleted;
+		}
+		else
+		{
+			orderStatusEnum = OrderStatusEnum.Pending;
+		}
 	}
-	private async Task CreateOrder()
+	private async Task<bool> CreateOrder()
 	{
 		Order createOrder = new Order()
 		{
@@ -396,22 +527,27 @@ else
 					Quantity = item.Quantity,
 					UnitPrice = item.Product?.SalePrice ?? 0
 				}).ToList(),
-				TotalPrice = cartService.GetTotalPrice(),
+				TotalPrice = order.TotalPrice,
 				OrderDate = DateTime.Now,
-				UserId = user.Id
+				Notes = order.Notes,
+				UserId = user.Id,
+				DiscountCodeId = order.DiscountCodeId ?? null,
+				DiscountCategoryId = order.DiscountCategoryId ?? null,
+				ShippingProviderId = order.ShippingProviderId ?? null,
+				ShippingCost = order.ShippingCost,
 		};
 		var result = await orderService.AddOrderAsync(createOrder);
 		if (result.Result)
 		{
 			// clear cart
 			cartService.ClearCart();
-			orderStatusEnum = OrderStatusEnum.Commpleted;
 			StateHasChanged();
+			return true;
 		}
 		else
 		{
-			orderStatusEnum = OrderStatusEnum.Pending;
 			_ = JS.InvokeVoidAsync("alert", result.Message);
+			return false;
 		}
 	}
 	// ti main page
@@ -419,7 +555,108 @@ else
 	{
 		NavigationManager.NavigateTo("/",true);
 	}
+	// Discount Code and discount Category
+	private DiscountCodes discountCode = new();
+	private DiscountCategory discountCategory = new();
+	private bool IsDiscountCodeLoading = false;
+	private async Task OnCode()
+	{
+		IsDiscountCodeLoading = true;
+		var result = await discountService.CheckDiscountCode(discountCode.Code);
+		if (result.validationResult.Result == true && result.discountCodes != null)
+		{
+			discountCode = result.discountCodes;
+			discountCode.Message = null!;
+			// discountcode category message empty if has content
+			discountCategory.Message = null!;
+		}
+		else
+		{
+			// if discount code not valid, try to discount code of Category
+			discountCategory.Code = discountCode.Code;
+			// reset discount code
+			discountCode = new();
+			// check discount category code
+			var result1 = await discountService.CheckDiscountCategory(discountCategory.Code);
+			if (result1.validationResult.Result == true && result1.discountCategory != null)
+			{
+				discountCategory = result1.discountCategory;
 
+				// check if the order has items in the category of the discount
+				bool hasCategoryItems = cartService.CartItems.Any(item => item.Product.CategoryId == discountCategory.CategoriesId);
+				if (hasCategoryItems)
+					discountCategory.Message = null!;
+				else
+					discountCategory.Message = L["NoItemsInCategory"];
+				// discountcode message empty if has content
+				discountCode.Message = null!;
+			}
+			else
+			{
+				discountCategory = new();
+				discountCategory.Message = result1.validationResult.Message!;
+			}
+		}
+		IsDiscountCodeLoading = false;
+	}
+	// shipping
+	private void GetShippingCost()
+	{
+		if (order.ShippingProviders != null && order.ShippingProviderId > 0)
+		{
+			if (order.TotalPrice > order.ShippingProviders.FreeShippingThreshold)
+			{
+				order.ShippingCost = 0;
+			}
+			else
+			{
+				order.ShippingCost = order.ShippingProviders.PublicShippingCost;
+			}
+		}
+	}
+	private (double discountValue, double finalPrice) GetFinalPriceWithDiscount()
+	{
+		if (discountCode == null || discountCode.Id == 0)
+		{
+			return (0, cartService.GetTotalPrice());
+		}
+		double discountValue = (cartService.GetTotalPrice() * discountCode?.DiscountPercentage / 100.0 ?? 0);
+		double finalPrice = cartService.GetTotalPrice() - discountValue;
+
+		order.DiscountCodeId = discountCode!.Id;
+		order.TotalPrice = finalPrice;
+
+		return (discountValue, finalPrice);
+	}
+	private (double discountValue, double finalPrice) GetFinalPriceWithDiscountCategory()
+	{
+		if (discountCategory == null || discountCategory.Id == 0)
+		{
+			return (0, cartService.GetTotalPrice());
+		}
+		// get total price of category items
+		double categoryitemsPrice = 0;
+		foreach (var item in cartService.CartItems)
+		{
+			if (item.Product.CategoryId == discountCategory.CategoriesId)
+			{
+				categoryitemsPrice += item.Product.SalePrice * item.Quantity;
+			}
+		}
+		// get price with discount of category
+		double categoryDiscountValue = categoryitemsPrice * (discountCategory.DiscountPercentage / 100.0);
+		// final price with discount of category
+		double finalPrice = cartService.GetTotalPrice() - categoryDiscountValue;
+
+		order.DiscountCategoryId = discountCategory.Id;
+		order.TotalPrice = finalPrice;
+
+		return (categoryDiscountValue, finalPrice);
+	}
+	private void GetFinalPrice()
+	{
+		order.TotalPrice = cartService.GetTotalPrice();
+	}
 	public void Dispose()
 	{
 		

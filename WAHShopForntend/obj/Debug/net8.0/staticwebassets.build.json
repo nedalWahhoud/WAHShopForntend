@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FyTXfis2CSifP3niCJ7HQ/LqRrCCb//wjQDfdIU0YDc=",
+  "Hash": "8XgdQlT5ahWTEG4yb4kKpF+O3R3uihYQ8j2Tj2AJMEM=",
   "Source": "WAHShopForntend",
   "BasePath": "_content/WAHShopForntend",
   "Mode": "Default",
@@ -17,6 +17,48 @@
   ],
   "Assets": [
     {
+      "Identity": "C:\\Users\\nedal\\.nuget\\packages\\blazored.modal\\7.3.1\\staticwebassets\\Blazored.Modal.bundle.scp.css",
+      "SourceId": "Blazored.Modal",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\nedal\\.nuget\\packages\\blazored.modal\\7.3.1\\staticwebassets\\",
+      "BasePath": "_content/Blazored.Modal",
+      "RelativePath": "Blazored.Modal.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "Fingerprint": "xineniuf5l",
+      "Integrity": "Z/I1339InDuOPqcxuznblrUyBaYIXu9HFBq2z/gXq8A=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\nedal\\.nuget\\packages\\blazored.modal\\7.3.1\\staticwebassets\\Blazored.Modal.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\nedal\\.nuget\\packages\\blazored.modal\\7.3.1\\staticwebassets\\BlazoredModal.razor.js",
+      "SourceId": "Blazored.Modal",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\nedal\\.nuget\\packages\\blazored.modal\\7.3.1\\staticwebassets\\",
+      "BasePath": "_content/Blazored.Modal",
+      "RelativePath": "BlazoredModal.razor.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8qij0y2dsa",
+      "Integrity": "kA2z2nG9FrUdWS/uJrfB+pfqUujsR3MLSrJeQKsao/Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\nedal\\.nuget\\packages\\blazored.modal\\7.3.1\\staticwebassets\\BlazoredModal.razor.js"
+    },
+    {
       "Identity": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WAHShopForntend.styles.css",
       "SourceId": "WAHShopForntend",
       "SourceType": "Computed",
@@ -31,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "n8fssc7kr9",
-      "Integrity": "2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8=",
+      "Fingerprint": "2bxo05kx2h",
+      "Integrity": "nnLA8T9TIih/EYOArq5cZZXgPYa6gpQPLHEqVIxwlMk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WAHShopForntend.styles.css"
@@ -52,8 +94,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "n8fssc7kr9",
-      "Integrity": "2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8=",
+      "Fingerprint": "g4xknj4shi",
+      "Integrity": "UDgFkTPTEce7l1v7vM6Vri5fH7GF4GCPafCe+BxPfgE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WAHShopForntend.bundle.scp.css"
@@ -73,8 +115,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "smfj8db7hn",
-      "Integrity": "5KHL3vWmh3577txncrCMkIDtrtE6YTGUUTjdI2JyO70=",
+      "Fingerprint": "p7tp6hfqed",
+      "Integrity": "24Voj8H9oCi9eWoVD1OG+W+o38gVdTe6Uk/Tpj39D8g=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\app.css"
@@ -206,6 +248,48 @@
       "OriginalItemSpec": "wwwroot\\Images\\Email.png"
     },
     {
+      "Identity": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Facebook.png",
+      "SourceId": "WAHShopForntend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\",
+      "BasePath": "_content/WAHShopForntend",
+      "RelativePath": "Images/Facebook#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "w2t7qcd7tp",
+      "Integrity": "+Cho6Ww0zeoIHSQOcAVcftp3C62cG5nOuxGiXH+TW2A=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Facebook.png"
+    },
+    {
+      "Identity": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Instagram.png",
+      "SourceId": "WAHShopForntend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\",
+      "BasePath": "_content/WAHShopForntend",
+      "RelativePath": "Images/Instagram#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6s0h4aabjb",
+      "Integrity": "Nmp/SqQohmMPqmbYfFmc/YnYJR0qdqfS2hhwfUOTPFM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Instagram.png"
+    },
+    {
       "Identity": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Location.png",
       "SourceId": "WAHShopForntend",
       "SourceType": "Discovered",
@@ -262,14 +346,88 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "9wu2w8scy2",
-      "Integrity": "6QiG2/dkSjs/YhKfMI5uefvJK2pKDXweoddDFQfOQII=",
+      "Fingerprint": "2b2qsx7j51",
+      "Integrity": "Ln5gLSNbUMwdYVRd4PRXEtKm1b5ktIzAKg23hVapeaU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\JS\\script.js"
     }
   ],
   "Endpoints": [
+    {
+      "Route": "_content/Blazored.Modal/Blazored.Modal.bundle.scp.css",
+      "AssetFile": "C:\\Users\\nedal\\.nuget\\packages\\blazored.modal\\7.3.1\\staticwebassets\\Blazored.Modal.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3088"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Z/I1339InDuOPqcxuznblrUyBaYIXu9HFBq2z/gXq8A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 20 Feb 2024 22:12:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Z/I1339InDuOPqcxuznblrUyBaYIXu9HFBq2z/gXq8A="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Blazored.Modal/BlazoredModal.razor.js",
+      "AssetFile": "C:\\Users\\nedal\\.nuget\\packages\\blazored.modal\\7.3.1\\staticwebassets\\BlazoredModal.razor.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1162"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kA2z2nG9FrUdWS/uJrfB+pfqUujsR3MLSrJeQKsao/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 20 Feb 2024 22:12:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kA2z2nG9FrUdWS/uJrfB+pfqUujsR3MLSrJeQKsao/Q="
+        }
+      ]
+    },
     {
       "Route": "app.css",
       "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\app.css",
@@ -281,7 +439,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6875"
+          "Value": "6898"
         },
         {
           "Name": "Content-Type",
@@ -289,11 +447,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5KHL3vWmh3577txncrCMkIDtrtE6YTGUUTjdI2JyO70=\""
+          "Value": "\"24Voj8H9oCi9eWoVD1OG+W+o38gVdTe6Uk/Tpj39D8g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 02 Jul 2025 20:46:21 GMT"
+          "Value": "Wed, 02 Jul 2025 21:09:31 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -303,12 +461,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-5KHL3vWmh3577txncrCMkIDtrtE6YTGUUTjdI2JyO70="
+          "Value": "sha256-24Voj8H9oCi9eWoVD1OG+W+o38gVdTe6Uk/Tpj39D8g="
         }
       ]
     },
     {
-      "Route": "app.smfj8db7hn.css",
+      "Route": "app.p7tp6hfqed.css",
       "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -318,7 +476,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6875"
+          "Value": "6898"
         },
         {
           "Name": "Content-Type",
@@ -326,11 +484,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5KHL3vWmh3577txncrCMkIDtrtE6YTGUUTjdI2JyO70=\""
+          "Value": "\"24Voj8H9oCi9eWoVD1OG+W+o38gVdTe6Uk/Tpj39D8g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 02 Jul 2025 20:46:21 GMT"
+          "Value": "Wed, 02 Jul 2025 21:09:31 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -340,7 +498,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "smfj8db7hn"
+          "Value": "p7tp6hfqed"
         },
         {
           "Name": "label",
@@ -348,7 +506,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-5KHL3vWmh3577txncrCMkIDtrtE6YTGUUTjdI2JyO70="
+          "Value": "sha256-24Voj8H9oCi9eWoVD1OG+W+o38gVdTe6Uk/Tpj39D8g="
         }
       ]
     },
@@ -845,6 +1003,170 @@
       ]
     },
     {
+      "Route": "Images/Facebook.png",
+      "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Facebook.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "12831"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+Cho6Ww0zeoIHSQOcAVcftp3C62cG5nOuxGiXH+TW2A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 04 Jul 2025 21:35:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+Cho6Ww0zeoIHSQOcAVcftp3C62cG5nOuxGiXH+TW2A="
+        }
+      ]
+    },
+    {
+      "Route": "Images/Facebook.w2t7qcd7tp.png",
+      "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Facebook.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "12831"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+Cho6Ww0zeoIHSQOcAVcftp3C62cG5nOuxGiXH+TW2A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 04 Jul 2025 21:35:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "w2t7qcd7tp"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/Facebook.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+Cho6Ww0zeoIHSQOcAVcftp3C62cG5nOuxGiXH+TW2A="
+        }
+      ]
+    },
+    {
+      "Route": "Images/Instagram.6s0h4aabjb.png",
+      "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Instagram.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "146883"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Nmp/SqQohmMPqmbYfFmc/YnYJR0qdqfS2hhwfUOTPFM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 04 Jul 2025 21:14:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6s0h4aabjb"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/Instagram.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Nmp/SqQohmMPqmbYfFmc/YnYJR0qdqfS2hhwfUOTPFM="
+        }
+      ]
+    },
+    {
+      "Route": "Images/Instagram.png",
+      "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Instagram.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "146883"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Nmp/SqQohmMPqmbYfFmc/YnYJR0qdqfS2hhwfUOTPFM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 04 Jul 2025 21:14:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Nmp/SqQohmMPqmbYfFmc/YnYJR0qdqfS2hhwfUOTPFM="
+        }
+      ]
+    },
+    {
       "Route": "Images/Location.d80r41em2a.png",
       "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Location.png",
       "Selectors": [],
@@ -1009,7 +1331,7 @@
       ]
     },
     {
-      "Route": "JS/script.9wu2w8scy2.js",
+      "Route": "JS/script.2b2qsx7j51.js",
       "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\JS\\script.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1019,7 +1341,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "75"
+          "Value": "77"
         },
         {
           "Name": "Content-Type",
@@ -1027,11 +1349,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6QiG2/dkSjs/YhKfMI5uefvJK2pKDXweoddDFQfOQII=\""
+          "Value": "\"Ln5gLSNbUMwdYVRd4PRXEtKm1b5ktIzAKg23hVapeaU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Jul 2025 20:34:27 GMT"
+          "Value": "Sun, 20 Jul 2025 21:43:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1041,7 +1363,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "9wu2w8scy2"
+          "Value": "2b2qsx7j51"
         },
         {
           "Name": "label",
@@ -1049,7 +1371,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-6QiG2/dkSjs/YhKfMI5uefvJK2pKDXweoddDFQfOQII="
+          "Value": "sha256-Ln5gLSNbUMwdYVRd4PRXEtKm1b5ktIzAKg23hVapeaU="
         }
       ]
     },
@@ -1064,7 +1386,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "75"
+          "Value": "77"
         },
         {
           "Name": "Content-Type",
@@ -1072,11 +1394,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6QiG2/dkSjs/YhKfMI5uefvJK2pKDXweoddDFQfOQII=\""
+          "Value": "\"Ln5gLSNbUMwdYVRd4PRXEtKm1b5ktIzAKg23hVapeaU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Jul 2025 20:34:27 GMT"
+          "Value": "Sun, 20 Jul 2025 21:43:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1086,7 +1408,56 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-6QiG2/dkSjs/YhKfMI5uefvJK2pKDXweoddDFQfOQII="
+          "Value": "sha256-Ln5gLSNbUMwdYVRd4PRXEtKm1b5ktIzAKg23hVapeaU="
+        }
+      ]
+    },
+    {
+      "Route": "WAHShopForntend.2bxo05kx2h.styles.css",
+      "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WAHShopForntend.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "33047"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nnLA8T9TIih/EYOArq5cZZXgPYa6gpQPLHEqVIxwlMk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 04 Aug 2025 11:14:17 GMT"
+        },
+        {
+          "Name": "Link",
+          "Value": "<_content/Blazored.Modal/Blazored.Modal.bundle.scp.css>; rel=\"preload\"; as=\"style\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2bxo05kx2h"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nnLA8T9TIih/EYOArq5cZZXgPYa6gpQPLHEqVIxwlMk="
+        },
+        {
+          "Name": "label",
+          "Value": "WAHShopForntend.styles.css"
         }
       ]
     },
@@ -1101,7 +1472,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "30074"
+          "Value": "32979"
         },
         {
           "Name": "Content-Type",
@@ -1109,11 +1480,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8=\""
+          "Value": "\"UDgFkTPTEce7l1v7vM6Vri5fH7GF4GCPafCe+BxPfgE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 02 Jul 2025 21:06:03 GMT"
+          "Value": "Mon, 04 Aug 2025 11:14:17 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1123,12 +1494,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8="
+          "Value": "sha256-UDgFkTPTEce7l1v7vM6Vri5fH7GF4GCPafCe+BxPfgE="
         }
       ]
     },
     {
-      "Route": "WAHShopForntend.n8fssc7kr9.bundle.scp.css",
+      "Route": "WAHShopForntend.g4xknj4shi.bundle.scp.css",
       "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WAHShopForntend.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1138,7 +1509,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "30074"
+          "Value": "32979"
         },
         {
           "Name": "Content-Type",
@@ -1146,11 +1517,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8=\""
+          "Value": "\"UDgFkTPTEce7l1v7vM6Vri5fH7GF4GCPafCe+BxPfgE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 02 Jul 2025 21:06:03 GMT"
+          "Value": "Mon, 04 Aug 2025 11:14:17 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1160,7 +1531,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "n8fssc7kr9"
+          "Value": "g4xknj4shi"
         },
         {
           "Name": "label",
@@ -1168,52 +1539,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8="
-        }
-      ]
-    },
-    {
-      "Route": "WAHShopForntend.n8fssc7kr9.styles.css",
-      "AssetFile": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WAHShopForntend.styles.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "30074"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 02 Jul 2025 21:06:03 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "n8fssc7kr9"
-        },
-        {
-          "Name": "label",
-          "Value": "WAHShopForntend.styles.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8="
+          "Value": "sha256-UDgFkTPTEce7l1v7vM6Vri5fH7GF4GCPafCe+BxPfgE="
         }
       ]
     },
@@ -1227,8 +1553,12 @@
           "Value": "bytes"
         },
         {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
           "Name": "Content-Length",
-          "Value": "30074"
+          "Value": "33047"
         },
         {
           "Name": "Content-Type",
@@ -1236,21 +1566,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8=\""
+          "Value": "\"nnLA8T9TIih/EYOArq5cZZXgPYa6gpQPLHEqVIxwlMk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 02 Jul 2025 21:06:03 GMT"
+          "Value": "Mon, 04 Aug 2025 11:14:17 GMT"
         },
         {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Name": "Link",
+          "Value": "<_content/Blazored.Modal/Blazored.Modal.bundle.scp.css>; rel=\"preload\"; as=\"style\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8="
+          "Value": "sha256-nnLA8T9TIih/EYOArq5cZZXgPYa6gpQPLHEqVIxwlMk="
         }
       ]
     }

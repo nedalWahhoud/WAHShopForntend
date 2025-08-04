@@ -121,7 +121,7 @@
     <value>Article</value>
   </data>
   <data name="BackToShopButton" xml:space="preserve">
-    <value>Back to shop</value>
+    <value>Back to Shop</value>
   </data>
   <data name="CartEmptyMessage" xml:space="preserve">
     <value>Your shopping cart is empty.</value>

@@ -70,11 +70,29 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Back to Shop  ähnelt.
+        /// </summary>
+        public static string BackToShopButton {
+            get {
+                return ResourceManager.GetString("BackToShopButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delivery Address ähnelt.
         /// </summary>
         public static string DeliveryAddress {
             get {
                 return ResourceManager.GetString("DeliveryAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Discount ähnelt.
+        /// </summary>
+        public static string Discount {
+            get {
+                return ResourceManager.GetString("Discount", resourceCulture);
             }
         }
         
@@ -93,6 +111,15 @@ namespace WAHShopForntend.Resources {
         public static string LoadMore {
             get {
                 return ResourceManager.GetString("LoadMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Saved ähnelt.
+        /// </summary>
+        public static string MoneySaved {
+            get {
+                return ResourceManager.GetString("MoneySaved", resourceCulture);
             }
         }
         
@@ -120,6 +147,15 @@ namespace WAHShopForntend.Resources {
         public static string OrderDate {
             get {
                 return ResourceManager.GetString("OrderDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die There are no Orders. ähnelt.
+        /// </summary>
+        public static string OrderEmptyMessage {
+            get {
+                return ResourceManager.GetString("OrderEmptyMessage", resourceCulture);
             }
         }
         
@@ -160,6 +196,33 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shipping Cost ähnelt.
+        /// </summary>
+        public static string ShippingCost {
+            get {
+                return ResourceManager.GetString("ShippingCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure? ähnelt.
+        /// </summary>
+        public static string StatusChangeConfirm {
+            get {
+                return ResourceManager.GetString("StatusChangeConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Status updated ähnelt.
+        /// </summary>
+        public static string StatusUpdated {
+            get {
+                return ResourceManager.GetString("StatusUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Total ähnelt.
         /// </summary>
         public static string Total {
@@ -174,6 +237,15 @@ namespace WAHShopForntend.Resources {
         public static string TotalPrice {
             get {
                 return ResourceManager.GetString("TotalPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tracking Number ähnelt.
+        /// </summary>
+        public static string TrackingNumber {
+            get {
+                return ResourceManager.GetString("TrackingNumber", resourceCulture);
             }
         }
         

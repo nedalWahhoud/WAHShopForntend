@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>smfj8db7hn</Fingerprint>
-      <Integrity>5KHL3vWmh3577txncrCMkIDtrtE6YTGUUTjdI2JyO70=</Integrity>
+      <Fingerprint>p7tp6hfqed</Fingerprint>
+      <Integrity>24Voj8H9oCi9eWoVD1OG+W+o38gVdTe6Uk/Tpj39D8g=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\app.css'))</OriginalItemSpec>
@@ -126,6 +126,42 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\Email.png'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\Facebook.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WAHShopForntend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WAHShopForntend</BasePath>
+      <RelativePath>Images/Facebook.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>w2t7qcd7tp</Fingerprint>
+      <Integrity>+Cho6Ww0zeoIHSQOcAVcftp3C62cG5nOuxGiXH+TW2A=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\Facebook.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\Instagram.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WAHShopForntend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WAHShopForntend</BasePath>
+      <RelativePath>Images/Instagram.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>6s0h4aabjb</Fingerprint>
+      <Integrity>Nmp/SqQohmMPqmbYfFmc/YnYJR0qdqfS2hhwfUOTPFM=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\Instagram.png'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\Location.png'))">
       <SourceType>Package</SourceType>
       <SourceId>WAHShopForntend</SourceId>
@@ -174,29 +210,29 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>9wu2w8scy2</Fingerprint>
-      <Integrity>6QiG2/dkSjs/YhKfMI5uefvJK2pKDXweoddDFQfOQII=</Integrity>
+      <Fingerprint>2b2qsx7j51</Fingerprint>
+      <Integrity>Ln5gLSNbUMwdYVRd4PRXEtKm1b5ktIzAKg23hVapeaU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\JS\script.js'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\WAHShopForntend.n8fssc7kr9.bundle.scp.css'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\WAHShopForntend.g4xknj4shi.bundle.scp.css'))">
       <SourceType>Package</SourceType>
       <SourceId>WAHShopForntend</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WAHShopForntend</BasePath>
-      <RelativePath>WAHShopForntend.n8fssc7kr9.bundle.scp.css</RelativePath>
+      <RelativePath>WAHShopForntend.g4xknj4shi.bundle.scp.css</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>Reference</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ProjectBundle</AssetTraitValue>
-      <Fingerprint>n8fssc7kr9</Fingerprint>
-      <Integrity>2QdpGostlh3EGNO4xuzYRPcHn5vumSuxHOiwZUGK9u8=</Integrity>
+      <Fingerprint>g4xknj4shi</Fingerprint>
+      <Integrity>UDgFkTPTEce7l1v7vM6Vri5fH7GF4GCPafCe+BxPfgE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\WAHShopForntend.n8fssc7kr9.bundle.scp.css'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\WAHShopForntend.g4xknj4shi.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

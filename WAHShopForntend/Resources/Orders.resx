@@ -120,14 +120,23 @@
   <data name="AllLoaded" xml:space="preserve">
     <value>All loaded</value>
   </data>
+  <data name="BackToShopButton" xml:space="preserve">
+    <value>Back to Shop </value>
+  </data>
   <data name="DeliveryAddress" xml:space="preserve">
     <value>Delivery Address</value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>Discount</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Loading</value>
   </data>
   <data name="LoadMore" xml:space="preserve">
     <value>Load more</value>
+  </data>
+  <data name="MoneySaved" xml:space="preserve">
+    <value>Saved</value>
   </data>
   <data name="MyOrders" xml:space="preserve">
     <value>MyOrders</value>
@@ -137,6 +146,9 @@
   </data>
   <data name="OrderDate" xml:space="preserve">
     <value>Order Date</value>
+  </data>
+  <data name="OrderEmptyMessage" xml:space="preserve">
+    <value>There are no Orders.</value>
   </data>
   <data name="OrderNo" xml:space="preserve">
     <value>Order No.</value>
@@ -150,11 +162,23 @@
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
   </data>
+  <data name="ShippingCost" xml:space="preserve">
+    <value>Shipping Cost</value>
+  </data>
+  <data name="StatusChangeConfirm" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="StatusUpdated" xml:space="preserve">
+    <value>Status updated</value>
+  </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
   <data name="TotalPrice" xml:space="preserve">
     <value>Total Price</value>
+  </data>
+  <data name="TrackingNumber" xml:space="preserve">
+    <value>Tracking Number</value>
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>

@@ -2,23 +2,34 @@
 {
     using System.Net.Http;
     using System.Net.Http.Json;
-    using System.Security.Claims;
     using Microsoft.AspNetCore.Components.Authorization;
-    using Microsoft.JSInterop;
     using WAHShopForntend.Components.Models;
 
-
-    public class AuthService
+    public class AuthService(HttpClient http, AuthenticationStateProvider authStateProvider)
     {
-        private readonly HttpClient? _http;
-        private readonly AuthenticationStateProvider _authStateProvider;
-        public AuthService(HttpClient http, AuthenticationStateProvider authStateProvider)
+        private readonly HttpClient _http = http;
+        private readonly AuthenticationStateProvider _authStateProvider = authStateProvider;
+
+        public async Task<ValidationResult> Signup(SignupModel signupModel)
         {
-            _http = http;
-            _authStateProvider = authStateProvider;
+            try
+            {
+                var response = await _http.PostAsJsonAsync("api/Users/signup", signupModel);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Registrierung fehlgeschlagen" };
+                }
+
+                return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Registrierung fehlgeschlagen" };
+            }
+            catch (Exception ex)
+            {
+                return new ValidationResult { Result = false, Message = ex.Message };
+            }
         }
 
-        public async Task<bool> Login(LoginModel loginModel, HttpResponseMessage signupResponse)
+        public async Task<ValidationResult> Login(LoginModel loginModel, HttpResponseMessage signupResponse)
         {
             try
             {
@@ -30,20 +41,20 @@
                     response = signupResponse;
 
                 if (!response.IsSuccessStatusCode)
-                    return false;
+                    return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Einloggen fehlgeschlagen" };
                 // get result
                 var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
 
                 if (result == null || string.IsNullOrEmpty(result.Token))
-                    return false;
+                    return new ValidationResult { Result = false, Message = "Einloggen fehlgeschlagen" };
 
                 (_authStateProvider as CustomAuthStateProvider)?.NotifyUserAuthentication(result.Token);
 
-                return true;
+                return new ValidationResult { Result = true, Message = "erfolgreich eingeloggt" };
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                return new ValidationResult { Result = false, Message = ex.Message };
             }
         }
         public async Task Logout()
@@ -87,12 +98,31 @@
                 var result = await response.Content.ReadFromJsonAsync<ValidationResult>();
                 if (result == null)
                     return new ValidationResult { Result = false, Message = "Unknown error." };
-                
+
                 return result;
             }
             catch
             {
                 return null!;
+            }
+        }
+        public async Task<ValidationResult> UserActivate(ActivateRequest activateRequest)
+        {
+            try
+            {
+                var response = await _http.PutAsJsonAsync($"api/Users/userActivate", activateRequest);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Unbekannt fehler." };
+                }
+                var result = await response.Content.ReadFromJsonAsync<ValidationResult>();
+                if (result == null)
+                    return new ValidationResult { Result = false, Message = "Unbekannt fehler." };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new ValidationResult { Result = false, Message = ex.Message };
             }
         }
     }

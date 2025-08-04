@@ -1,0 +1,41 @@
+﻿@page "/confirmemail"
+@inject IStringLocalizer< WAHShopForntend.Resources.ConfirmEmail> L
+@inject NavigationManager NavManager
+
+<h3>@statusMessage</h3>
+
+
+@code {
+    private string? statusMessage;
+    protected override async void OnInitialized()
+    {
+        var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+
+        var userId = query["userId"];
+        var token = query["token"];
+
+        if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+        {
+            statusMessage = L["MissingData"];
+            return;
+        }
+
+		ActivateRequest activateRequest = new ActivateRequest
+			{
+				UserId = userId,
+				Token = token
+			};
+
+        var result = await AuthService.UserActivate(activateRequest);
+        if (result.Result)
+        {
+            statusMessage = L["ConfirmationSuccessful"];
+        }
+        else
+        {
+            statusMessage = result.Message;
+        }
+        StateHasChanged();
+    }
+}

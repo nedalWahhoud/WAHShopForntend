@@ -1,14 +1,21 @@
+html[b-vdq4mvcqnr], body[b-vdq4mvcqnr] {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
 .page[b-vdq4mvcqnr] {
-    position: relative;
     display: flex;
     flex-direction: column;
     background-color: var(--mainBackgroundColor);
+    min-height: 100vh;
 }
 
-main[b-vdq4mvcqnr] {
-    flex: 1;
-    overflow-x: hidden; /* يمنع التمدد الأفقي */
-    overflow-y: auto; /* يسمح بالتمرير العمودي */
+.main-content[b-vdq4mvcqnr] {
+    flex: 1; 
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: var(--mainBackgroundColor);
 }
 

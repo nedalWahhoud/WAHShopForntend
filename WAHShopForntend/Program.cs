@@ -9,7 +9,7 @@ using WAHShopForntend.Components.ProductsF;
 using WAHShopForntend.Components.EmailF;
 using WAHShopForntend.Components.CategoriesF;
 using WAHShopForntend.Components.ProductGroupF;
-using System.Globalization;
+using WAHShopForntend.Components.DiscountF;
 using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,6 +46,8 @@ builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<CategoryService>();
 // GroupProducts
 builder.Services.AddScoped<ProductGroupService>();
+// GroupProducts
+builder.Services.AddScoped<DiscountService>();
 
 var app = builder.Build();
 // language aktivation

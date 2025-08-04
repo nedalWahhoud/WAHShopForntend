@@ -9,7 +9,7 @@
 }
 else
 {
-	 <div class="main">
+	
 	@if (cartService.CartItems.Count == 0)
 	{
 		<div class="emptyCart">
@@ -19,7 +19,7 @@ else
 	}
 	else
 	{
-			<h3>@L["CartTitle"]</h3>
+		<h3>@L["CartTitle"]</h3>
 		<div class="cartContainer">
 		<div class="cart">
 			@for (int i = 0; i < cartService.CartItems.Count; i++)
@@ -61,7 +61,6 @@ else
 		</div>
 	</div>
 	}
-	</div>
 }
 @code {
 	private bool IsLoaded = false;

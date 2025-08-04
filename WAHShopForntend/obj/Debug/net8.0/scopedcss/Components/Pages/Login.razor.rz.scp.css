@@ -32,7 +32,7 @@
     }
 
 /* input, button style */
-.loginContainer .loginForm button[b-mk2l5x682x] {
+.loginContainer .loginForm .loginBtn[b-mk2l5x682x] {
     width: var(--elementWidth);
     height: var(--elementHeight);
     box-sizing: border-box;
@@ -45,7 +45,7 @@
     background-color: var(--btnBackgroundColor);
     color: #ffffff;
 }
-.loginForm button:hover[b-mk2l5x682x] {
+.loginForm .loginBtn:hover[b-mk2l5x682x] {
     background-color: var(--btnBackgroundColorHover);
 }
 /* signup */
@@ -56,3 +56,30 @@
 .forgotPassword a[b-mk2l5x682x]{
     cursor:pointer;
 }
+/* google button */
+.googleBtn[b-mk2l5x682x] {
+    width: var(--elementWidth);
+    height: var(--elementHeight);
+    background-color: white;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    padding: 10px 20px; /* زدت التباعد قليلاً */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* ✅ مركز أفقي */
+    gap: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    height: 48px; /* 🔁 ارتفاع ثابت لتوسيط عمودي أسهل */
+}
+    .googleBtn:hover[b-mk2l5x682x] {
+        background-color: #f1f1f1;
+    }
+    .googleBtn img[b-mk2l5x682x] {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+    }
+

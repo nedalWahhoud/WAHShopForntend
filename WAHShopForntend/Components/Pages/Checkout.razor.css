@@ -2,7 +2,7 @@
 .checkoutMain {
     display: flex;
     flex-direction: column;
-    gap: 55px;
+    gap: 15px;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -51,6 +51,14 @@
 
 /* ======== SHIPPING SECTION ======== */
 .shipping {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    border-top: 2px solid #cccccc;
+    padding-top: 10px;
+}
+/* ======== ADDRESS RADIO SECTION ======== */
+.address {
     border-bottom: 2px solid #cccccc;
     padding-bottom: 10px;
 }
@@ -66,8 +74,6 @@
     .pShowAddressForm:hover {
         color: #0056b3;
     }
-
-/* ======== ADDRESS RADIO SECTION ======== */
 .addressRadioDiv {
     width: 100%;
     padding: 10px;
@@ -122,10 +128,13 @@
         }
 
 /* ======== PAYMENT SECTION ======== */
+.payment {
+    padding: 0px;
+    margin: 0px;
+}
 .paymentMethodOption {
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
     .paymentMethodOption label {
@@ -144,16 +153,16 @@
 .placeOrder {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 15px;
+    gap:1px;
     padding-top: 15px;
     border-top: 2px solid #cccccc;
 }
-
-    .placeOrder h4 {
-        text-align: center;
-        font-size: 1rem;
-    }
+.placeOrderB {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:15px;
+}
 
 .btnEinloggen, .btnPay {
     width: 100%;

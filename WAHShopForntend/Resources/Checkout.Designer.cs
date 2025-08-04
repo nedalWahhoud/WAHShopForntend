@@ -169,11 +169,38 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Discount Percentage ähnelt.
+        /// </summary>
+        public static string DiscountPercentage {
+            get {
+                return ResourceManager.GetString("DiscountPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter the code ähnelt.
+        /// </summary>
+        public static string EnterCode {
+            get {
+                return ResourceManager.GetString("EnterCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die First name: ähnelt.
         /// </summary>
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Do you have a discount code? ähnelt.
+        /// </summary>
+        public static string HaveCode {
+            get {
+                return ResourceManager.GetString("HaveCode", resourceCulture);
             }
         }
         
@@ -232,6 +259,15 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The order does not contain any item that has a category matching the discount code category. ähnelt.
+        /// </summary>
+        public static string NoItemsInCategory {
+            get {
+                return ResourceManager.GetString("NoItemsInCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die We&apos;re currently working on adding online payment methods like PayPal and SEPA.  ähnelt.
         /// </summary>
         public static string PaymentNote {
@@ -255,6 +291,24 @@ namespace WAHShopForntend.Resources {
         public static string Phone {
             get {
                 return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shipping Costs ähnelt.
+        /// </summary>
+        public static string ShippingCosts {
+            get {
+                return ResourceManager.GetString("ShippingCosts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shipping method ähnelt.
+        /// </summary>
+        public static string ShippingMethod {
+            get {
+                return ResourceManager.GetString("ShippingMethod", resourceCulture);
             }
         }
         
@@ -286,6 +340,15 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The Price ähnelt.
+        /// </summary>
+        public static string ThePrice {
+            get {
+                return ResourceManager.GetString("ThePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Total price ähnelt.
         /// </summary>
         public static string TotalPrice {
@@ -300,6 +363,15 @@ namespace WAHShopForntend.Resources {
         public static string UpdateAddressButton {
             get {
                 return ResourceManager.GetString("UpdateAddressButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You save on your purchase ähnelt.
+        /// </summary>
+        public static string YouSave {
+            get {
+                return ResourceManager.GetString("YouSave", resourceCulture);
             }
         }
         

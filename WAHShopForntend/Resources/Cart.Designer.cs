@@ -70,7 +70,7 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Back to shop ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Back to Shop ähnelt.
         /// </summary>
         public static string BackToShopButton {
             get {

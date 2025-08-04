@@ -18,8 +18,52 @@
 
 <body>
     <Routes />
+    <script src="JS/script.js"></script>
     <script src="_framework/blazor.web.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    @* confirm *@
+	<script>
+        window.showConfirm = function (message) {
+          return confirm(message);
+        }
+	</script>
+    @* Firebase *@
+    <script type="module">
+        // استيراد مكتبة Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+        // إعداد Firebase
+        const firebaseConfig = {
+           apiKey: "AIzaSyDlKCI4GMUd9C6CYpVX53rMeAyV_NmcrI4",
+           authDomain: "onlinestore-aa38e.firebaseapp.com",
+           projectId: "onlinestore-aa38e",
+           storageBucket: "onlinestore-aa38e.firebasestorage.app",
+           messagingSenderId: "169699830284",
+           appId: "1:169699830284:web:a87f8e73c3cd916d60dc29"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Google einloggen
+        window.loginWithGoogle = async function () {
+          try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            return {
+              UserName: user.displayName,
+              Email: user.email,
+              SignupProvider: "Google"
+            };
+          } catch (error) {
+            return { Error: error.message };
+          }
+        };
+    </script>
 
     @* javscript import *@
     <script src="JS/script.js"></script>

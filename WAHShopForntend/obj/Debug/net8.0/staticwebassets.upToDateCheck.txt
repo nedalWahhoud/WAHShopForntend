@@ -5,6 +5,8 @@ wwwroot\favicon.png
 wwwroot\Images\cart.svg
 wwwroot\Images\DPImage.png
 wwwroot\Images\Email.png
+wwwroot\Images\Facebook.png
+wwwroot\Images\Instagram.png
 wwwroot\Images\Location.png
 wwwroot\Images\Whatsapp.png
 wwwroot\JS\script.js

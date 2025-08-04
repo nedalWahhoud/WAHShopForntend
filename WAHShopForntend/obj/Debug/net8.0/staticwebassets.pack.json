@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WAHShopForntend.bundle.scp.css",
-      "PackagePath": "staticwebassets\\WAHShopForntend.n8fssc7kr9.bundle.scp.css"
+      "PackagePath": "staticwebassets\\WAHShopForntend.g4xknj4shi.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\DPImage.png",
@@ -11,6 +11,14 @@
     {
       "Id": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Email.png",
       "PackagePath": "staticwebassets\\Images\\Email.png"
+    },
+    {
+      "Id": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Facebook.png",
+      "PackagePath": "staticwebassets\\Images\\Facebook.png"
+    },
+    {
+      "Id": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Instagram.png",
+      "PackagePath": "staticwebassets\\Images\\Instagram.png"
     },
     {
       "Id": "C:\\Users\\nedal\\source\\repos\\WAHShopForntend\\WAHShopForntend\\wwwroot\\Images\\Location.png",

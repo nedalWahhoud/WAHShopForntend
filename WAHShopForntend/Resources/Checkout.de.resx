@@ -153,8 +153,17 @@
   <data name="DeliveryTitle" xml:space="preserve">
     <value>Lieferung an:</value>
   </data>
+  <data name="DiscountPercentage" xml:space="preserve">
+    <value>Rabattprozentsatz</value>
+  </data>
+  <data name="EnterCode" xml:space="preserve">
+    <value>Code eingeben</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>Vorname:</value>
+  </data>
+  <data name="HaveCode" xml:space="preserve">
+    <value>Hast du Rabatt Code</value>
   </data>
   <data name="InputEmail" xml:space="preserve">
     <value>Geben Sie Ihre E-Mail ein</value>
@@ -174,6 +183,9 @@
   <data name="LoginButton" xml:space="preserve">
     <value>Einloggen</value>
   </data>
+  <data name="NoItemsInCategory" xml:space="preserve">
+    <value>Die Bestellung enthält keinen Artikel, dessen Kategorie mit der Rabattcode-Kategorie übereinstimmt.</value>
+  </data>
   <data name="PaymentNote" xml:space="preserve">
     <value>Wir arbeiten derzeit daran, Online-Zahlungsmethoden wie PayPal und Lastschrift einzuführen.</value>
   </data>
@@ -182,6 +194,12 @@
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Telefonnummer:</value>
+  </data>
+  <data name="ShippingCosts" xml:space="preserve">
+    <value>Versandkosten</value>
+  </data>
+  <data name="ShippingMethod" xml:space="preserve">
+    <value>Versandmethode</value>
   </data>
   <data name="Street" xml:space="preserve">
     <value>Straße and Hausnummer:</value>
@@ -192,11 +210,17 @@
   <data name="ThankYouMessage" xml:space="preserve">
     <value>Vielen Dank für Ihre Bestellung. Wir werden sie so schnell wie möglich bearbeiten.</value>
   </data>
+  <data name="ThePrice" xml:space="preserve">
+    <value>Der Preis</value>
+  </data>
   <data name="TotalPrice" xml:space="preserve">
     <value>Gesamtpreis</value>
   </data>
   <data name="UpdateAddressButton" xml:space="preserve">
     <value>Addresse Updaten</value>
+  </data>
+  <data name="YouSave" xml:space="preserve">
+    <value>du sparst bei deinem Einkauf</value>
   </data>
   <data name="ZipCode" xml:space="preserve">
     <value>PLZ:</value>

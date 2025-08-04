@@ -153,8 +153,17 @@
   <data name="DeliveryTitle" xml:space="preserve">
     <value>التوصيل إلى:</value>
   </data>
+  <data name="DiscountPercentage" xml:space="preserve">
+    <value>نسبة الخصم</value>
+  </data>
+  <data name="EnterCode" xml:space="preserve">
+    <value>ادخل الرمز</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>الاسم الأول:</value>
+  </data>
+  <data name="HaveCode" xml:space="preserve">
+    <value>هل لديك رمز خصم</value>
   </data>
   <data name="InputEmail" xml:space="preserve">
     <value>ادخل بريدك الاكتروني</value>
@@ -174,6 +183,9 @@
   <data name="LoginButton" xml:space="preserve">
     <value>تسجيل الدخول</value>
   </data>
+  <data name="NoItemsInCategory" xml:space="preserve">
+    <value>الطلبية لا تحتوي على اي عنصر لديه فئة متطابقة مع فئة كود الخصم</value>
+  </data>
   <data name="PaymentNote" xml:space="preserve">
     <value>نحن نعمل حاليًا على دعم طرق الدفع مثل PayPal.</value>
   </data>
@@ -182,6 +194,12 @@
   </data>
   <data name="Phone" xml:space="preserve">
     <value>رقم الهاتف:</value>
+  </data>
+  <data name="ShippingCosts" xml:space="preserve">
+    <value>تكاليف الشحن</value>
+  </data>
+  <data name="ShippingMethod" xml:space="preserve">
+    <value>طريقة الشحن</value>
   </data>
   <data name="Street" xml:space="preserve">
     <value>الشارع ورقم المنزل:</value>
@@ -192,11 +210,17 @@
   <data name="ThankYouMessage" xml:space="preserve">
     <value>شكرًا لطلبك. سيتم معالجته في أقرب وقت.</value>
   </data>
+  <data name="ThePrice" xml:space="preserve">
+    <value>السعر</value>
+  </data>
   <data name="TotalPrice" xml:space="preserve">
     <value>السعر الإجمالي</value>
   </data>
   <data name="UpdateAddressButton" xml:space="preserve">
     <value>تحديث العنوان</value>
+  </data>
+  <data name="YouSave" xml:space="preserve">
+    <value>انت توفر في عملية الشراء</value>
   </data>
   <data name="ZipCode" xml:space="preserve">
     <value>الرمز البريدي:</value>

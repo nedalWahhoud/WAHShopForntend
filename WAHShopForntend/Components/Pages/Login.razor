@@ -21,9 +21,11 @@
                 class="form-control" />
                 <ValidationMessage For="@(() => loginModel.Password)" />
             </div>
-                <button type="submit">@L["LoginText"]</button>
+                <button class="loginBtn" type="submit">@L["LoginText"]</button>
         </EditForm>
-
+            <button @onclick="GoogleSingup" class="googleBtn">
+                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
+            </button>
         <div>
             <p class="signup">
                     @L["NoAccountText"]
@@ -47,16 +49,37 @@
     public string? returnUrl { get; set; }
     private async Task HandleSubmit()
     {
-        bool isLogged = await AuthService!.Login(loginModel, null!);
-        if (isLogged)
+        loginModel.SignupProvider = "Manual";
+        var isLogged = await AuthService!.Login(loginModel, null!);
+        if (isLogged.Result == true)
             NavigationManager!.NavigateTo(returnUrl ?? "/",true);
         else
         {
-            _ = JS.InvokeVoidAsync("showAlert", "Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.");
+            _ = JS.InvokeVoidAsync("showAlert", isLogged.Message);
         }
     }
     private void OnProjectInfo()
     {
         NavigationManager.NavigateTo("/", false);
+    }
+	// login or signup with google 
+    private async Task GoogleSingup()
+    {
+        var result = await JS.InvokeAsync<LoginModel>("loginWithGoogle");
+        if (string.IsNullOrEmpty(result.Error))
+        {
+            loginModel = result;
+            var isLogged = await AuthService!.Login(loginModel, null!);
+            if (isLogged.Result == true)
+                NavigationManager!.NavigateTo(returnUrl ?? "/", true);
+            else
+            {
+                _ = JS.InvokeVoidAsync("showAlert", isLogged.Message);
+            }
+        }
+        else
+        {
+            _ = JS.InvokeVoidAsync("showAlert", result.Error);
+        }
     }
 }

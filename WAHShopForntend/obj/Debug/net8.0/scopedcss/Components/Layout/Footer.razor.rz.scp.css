@@ -1,15 +1,59 @@
 .footer[b-86u363gz2c] {
     background-color: var(--hederBackgroundColoe);
     color: white;
-    height: 14rem;
     width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-height: 400px;
+}
+
+.contactDiv[b-86u363gz2c] {
+    padding: 10px;
+    flex: 1 1 auto;
+}
+
+.socialMedia[b-86u363gz2c] {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start; /* توسيط أفقي */
-    align-items: flex-start; /* توسيط عمودي */
-    z-index: 9999;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: flex-start;
+    text-align: left;
+    padding: 20px;
+    gap:10px;
 }
-.contactDiv[b-86u363gz2c] {
-    padding: 20px 20px;
+    .socialMedia .icons[b-86u363gz2c] {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+    .icons p:first-child[b-86u363gz2c]
+    {
+        padding-top:3px;
+    }
+.icons a:last-child[b-86u363gz2c] {
+    display: flex;
+    align-items: start; 
+    justify-content: center; 
+    padding-top:3px;
+}
+/* دعم الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .footer[b-86u363gz2c] {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .contactDiv[b-86u363gz2c],
+    .socialMedia[b-86u363gz2c] {
+        flex: 1 1 100%;
+        padding: 10px 0;
+        align-items: center !important;
+        text-align: center !important;
+    }
+        .socialMedia a img[b-86u363gz2c] {
+            margin: 0 5px;
+        }
 }

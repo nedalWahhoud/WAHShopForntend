@@ -2,7 +2,7 @@
 .checkoutMain[b-9uay29fwyj] {
     display: flex;
     flex-direction: column;
-    gap: 55px;
+    gap: 15px;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -51,6 +51,14 @@
 
 /* ======== SHIPPING SECTION ======== */
 .shipping[b-9uay29fwyj] {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    border-top: 2px solid #cccccc;
+    padding-top: 10px;
+}
+/* ======== ADDRESS RADIO SECTION ======== */
+.address[b-9uay29fwyj] {
     border-bottom: 2px solid #cccccc;
     padding-bottom: 10px;
 }
@@ -66,8 +74,6 @@
     .pShowAddressForm:hover[b-9uay29fwyj] {
         color: #0056b3;
     }
-
-/* ======== ADDRESS RADIO SECTION ======== */
 .addressRadioDiv[b-9uay29fwyj] {
     width: 100%;
     padding: 10px;
@@ -122,10 +128,13 @@
         }
 
 /* ======== PAYMENT SECTION ======== */
+.payment[b-9uay29fwyj] {
+    padding: 0px;
+    margin: 0px;
+}
 .paymentMethodOption[b-9uay29fwyj] {
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
     .paymentMethodOption label[b-9uay29fwyj] {
@@ -144,16 +153,16 @@
 .placeOrder[b-9uay29fwyj] {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 15px;
+    gap:1px;
     padding-top: 15px;
     border-top: 2px solid #cccccc;
 }
-
-    .placeOrder h4[b-9uay29fwyj] {
-        text-align: center;
-        font-size: 1rem;
-    }
+.placeOrderB[b-9uay29fwyj] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:15px;
+}
 
 .btnEinloggen[b-9uay29fwyj], .btnPay[b-9uay29fwyj] {
     width: 100%;

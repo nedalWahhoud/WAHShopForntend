@@ -16,10 +16,22 @@ namespace WAHShopForntend.Components.Models
         public double TotalPrice { get; set; }
         public int StatusId { get; set; }
         public OrderStatus? Status { get; set; }
-
+        [JsonIgnore]
+        public bool ShowStatusDropdown { get; set; } = false;
+        [JsonIgnore]
+        public bool IsUpdatingStatus { get; set; } = false;
         public string Notes { get; set; } = string.Empty;
         public int? UserId { get; set; }
         public List<OrderItems> OrderItems { get; set; } = [];
+        public int? DiscountCodeId { get; set; }
+        public DiscountCodes? DiscountCode { get; set; }
+        public int? DiscountCategoryId { get; set; }
+        public DiscountCategory? DiscountCategory { get; set; }
+        public int? ShippingProviderId { get; set; }
+        public ShippingProvider? ShippingProviders { get; set; }
+        public double ShippingCost { get; set; }
+        public string? TrackingNumber { get; set; }
+
         [Required(ErrorMessage = "Bitte geben Sie eine Lieferadresse an.")]
         public string DeliveryAddress1 { get; set; } = string.Empty;
     }

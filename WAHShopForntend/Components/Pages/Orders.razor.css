@@ -26,23 +26,25 @@
     flex-wrap: wrap;
     gap: 10px;
 }
+.statusDropdown {
+    cursor: pointer;
+}
 
-    .orderHeader h3 {
-        margin: 0;
-        font-size: 1.2rem;
-        color: #2c3e50;
-    }
+.orderHeader h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
 
-    .orderHeader .status {
-        background-color: #e0e0e0;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        white-space: nowrap;
-    }
-
-.order p,
-.orderMeta {
+.orderHeader .status {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.order p {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -51,12 +53,29 @@
     font-size: 0.95rem;
     color: #333;
 }
-
-.orderItems {
+.orderMeta {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #E0E0E0;
 }
+    .orderMeta span {
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        align-content:center;
+        justify-content:center;
+        text-align:center;
+    }
+    .orderItems {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 
 .orderItem {
     display: flex;
@@ -110,6 +129,15 @@
     display: block;
     margin: 0 auto;
 }
+/* empty Order */
+.emptyOrder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin-top: 10vh;
+    font-size: 20px;
+}
 /* Phone */
 @media (max-width: 600px) {
     .orderHeader {
@@ -140,4 +168,12 @@
         align-items: flex-start;
         gap: 5px;
     }
+
+        .orderMeta span {
+            padding: 5px;
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            height: 50px;
+        }
 }

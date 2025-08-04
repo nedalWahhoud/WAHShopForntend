@@ -10,16 +10,57 @@
 }
 else
 {
-        <h3>@L["MyOrders"]</h3>
+    <h3>@L["MyOrders"]</h3>
+    @if (@orderService.DownloadedOrders.Count <= 0)
+    {
+        <div class="emptyOrder">
+            <p>@L["OrderEmptyMessage"]</p>
+            <button class="btn btn-primary" @onclick="OnBackToShop">@L["BackToShopButton"]</button>
+        </div>
+    }
+    else
+    {
         <div class="orderContainer">
             @foreach (var order in orderService.DownloadedOrders)
             {
                 <div class="order">
                     <div class="orderHeader">
                         <h3>@L["OrderNo"] @order.Id</h3>
-                        <span class="status">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                            ? order.Status?.Status_ar 
-                            : order.Status?.Status_de ?? L["Unknown"])</span>
+
+                        <div class="statusDropdown" @onclick="() => ToggleDropdown(order)">
+                            @if (order.ShowStatusDropdown)
+                            {
+
+                                <InputSelect Value="@order.StatusId"
+                                ValueChanged="@((int val) => OnStatusChangedItem(order, val.ToString()))"
+                                ValueExpression="() => order.StatusId"
+                                class="form-select"
+                                @onblur="() => OnDropdownBlur(order)"
+                                disabled="@order.IsUpdatingStatus">
+                                    @foreach (var status in PossibleStatuses)
+                                    {
+                                        <option value="@status.Id">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" 
+                                    ? status.Status_ar
+                                    : status.Status_de)</option>
+                                    }
+                                </InputSelect>
+
+                                @if (order.IsUpdatingStatus)
+                                {
+                                    <div class="spinner-border spinner-border-sm text-primary ms-2" role="status">
+                                        <span class="visually-hidden">Laden...</span>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <span class="status">
+                                    @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                                                                        ? order.Status?.Status_ar
+                                                                                                        : order.Status?.Status_de ?? L["Unknown"])
+                                </span>
+                            }
+                        </div>
                     </div>
                     <p>
                         <span><strong>@L["PaymentMethod"]:</strong> @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" 
@@ -31,15 +72,62 @@ else
                     </p>
 
                     <p class="orderMeta">
-                        <span><strong>@L["OrderDate"]:</strong> @order.OrderDate.ToString("dd.MM.yyyy HH:mm")</span>
-                        <span><strong>@L["TotalPrice"]:</strong> @order.TotalPrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
+                        <span><strong>@L["OrderDate"]</strong> @order.OrderDate.ToString("dd.MM.yyyy HH:mm")</span>
+                        @* Discount category *@
+                        @if (order.DiscountCategory != null)
+                        {
+                            <span>
+                                <strong>@L["Discount"]</strong>
+                                @order.DiscountCategory.DiscountPercentage%
+                            </span>
+                            <span>
+                                <strong>@L["MoneySaved"] @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar"
+                                    ? order.DiscountCategory.Category.Name_ar : order.DiscountCategory.Category.Name_de ?? "Keine Angabe")</strong>
+                                @GetDiscountedValue(order).ToString("C", new System.Globalization.CultureInfo("de-DE"))
+                            </span>
+                        }
+                        @* Discount code *@
+                        @if (order.DiscountCode != null)
+                        {
+                            <span>
+                                <strong>@L["Discount"]</strong>
+                                @order.DiscountCode.DiscountPercentage%
+
+                            </span>
+                            <span>
+                                <strong>@L["MoneySaved"]</strong>
+                                @GetDiscountedValue(order).ToString("C", new System.Globalization.CultureInfo("de-DE"))
+                            </span>
+                        }
+                        @* TrackingNumber *@
+                        @if (order.PaymentMethod?.Id == 5 && order.ShippingProviders != null && order.TrackingNumber != null)
+                        {
+                            <span>
+                                <strong> @L["TrackingNumber"]</strong> <a style="text-decoration:none;" target="_blank" href="@($"{order.ShippingProviders.Website}sendungsinformation#{order.TrackingNumber}")">@order.TrackingNumber</a>
+                            </span>
+                        }
+                        @* Endkosten *@
+                        @{
+                         double totalPrice = 0;
+                         if(order.ShippingProviderId != null && order.ShippingProviderId > 0)
+                         {
+                            <span>
+                                <strong>@L["ShippingCost"]</strong>
+                                @order.ShippingCost.ToString("C", new System.Globalization.CultureInfo("de-DE"))
+                            </span>
+                                totalPrice = order.TotalPrice + order.ShippingCost;
+                         }
+                         else
+								totalPrice = order.TotalPrice;
+
+                            <span><strong>@L["TotalPrice"]</strong> @totalPrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
+                        }
                     </p>
 
                     @if (!string.IsNullOrWhiteSpace(order.Notes))
                     {
                         <span><strong>@L["Notes"]:</strong> @order.Notes</span>
                     }
-
                     @if (order.OrderItems?.Count > 0)
                     {
                         <div class="orderItems">
@@ -50,12 +138,12 @@ else
                                     <div class="orderItemsDetails">
                                         <h4>
                                             @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                                ? item.Product?.Name_ar
-                                                : @item.Product?.Name_de)
+                                                                   ? item.Product?.Name_ar
+                                                                   : @item.Product?.Name_de)
                                         </h4>
                                         <p>@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" 
-                                            ?item.Product?.Description_ar
-                                                : item.Product?.Description_de)</p>
+                                                                      ?item.Product?.Description_ar
+                                                                      : item.Product?.Description_de)</p>
                                         <p>
                                             @L["Price"]: @item.Product?.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
                                             &nbsp; | &nbsp;
@@ -86,25 +174,26 @@ else
                 }
             </button>
         </div>
+    }
 }
 @code {
     private bool IsRended = false;
     private int UserId = 0;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        if (user.Identity?.IsAuthenticated == true)
-        {
-            string userIdString = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value!;
-            if (!string.IsNullOrEmpty(userIdString))
-            {
-                UserId = int.Parse(userIdString);
-            }
-        }
-
         if (firstRender == true)
         {
+            var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity?.IsAuthenticated == true)
+            {
+                string userIdString = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value!;
+                if (!string.IsNullOrEmpty(userIdString))
+                {
+                    UserId = int.Parse(userIdString);
+                }
+            }
+            // load orders
             if (UserId > 0)
                 await orderService.GetOrdersAsync(UserId);
 
@@ -114,18 +203,18 @@ else
     }
     // more load
     private bool IsOrdersLoading { get; set; } = false;
-	private bool AllItemsLoaded { get; set; } = false;
+    private bool AllItemsLoaded { get; set; } = false;
     private async Task OnMoreLoad()
     {
         IsOrdersLoading = true;
-		StateHasChanged();
+        StateHasChanged();
         if (UserId > 0)
         {
             var result = await orderService.GetOrdersAsync(UserId);
 
             if (result.Result && result.Message == "AllItemsLoaded")
             {
-				AllItemsLoaded = true;
+                AllItemsLoaded = true;
             }
         }
         IsOrdersLoading = false;
@@ -136,4 +225,116 @@ else
     {
         NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
     }
-}
+    // empty orders
+    private void OnBackToShop()
+    {
+        NavigationManager.NavigateTo("/",false);
+    }
+    // status
+    private async Task ToggleDropdown(Order order)
+    {
+        await GetPossibleStatuses(order.StatusId);
+        order.ShowStatusDropdown = true;
+    }
+    private List<OrderStatus> PossibleStatuses = new();
+    private async Task GetPossibleStatuses(int statusId)
+    {
+        PossibleStatuses = new();
+        // load orderStatusList
+        var result = await orderService.GetOrderStatusAsync();
+        if (result.Result)
+        {
+
+            foreach (var item in orderService.DownloadedOrderStatus)
+            {
+                // add aktuelle status
+                if (item.Id == statusId)
+                {
+                    PossibleStatuses.Insert(0, item);
+                }
+                // der benutzer darf stornieren wenn die nicht versendet ist
+                if (statusId > 0 && statusId <= 3)
+                {
+                    if (item.Id == 8)
+                    {
+                        PossibleStatuses.Add(item);
+                    }
+                }
+                // der benutzer darf zurücksetzen wenn die versendet ist
+                else if (statusId >= 4 && statusId <= 6)
+                {
+                    if (item.Id == 9)
+                    {
+                        PossibleStatuses.Add(item);
+                    }
+                }
+            }
+        }
+        else
+        {
+            _ = JS.InvokeVoidAsync("alert", result.Message);
+        }
+    }
+    void OnDropdownBlur(Order order)
+    {
+        order.ShowStatusDropdown = false;
+        StateHasChanged();
+    }
+    private async Task OnStatusChangedItem(Order order, string newStatusIdString)
+    {
+        bool confirmed = await JS.InvokeAsync<bool>("showConfirm", L["StatusChangeConfirm"].ToString());
+        if (confirmed)
+        {
+            order.IsUpdatingStatus = true;
+            StateHasChanged();
+            if (int.TryParse(newStatusIdString, out int newStatusId))
+            {
+                var result = await orderService.UpdateStatusOrder(order.Id, newStatusId);
+                if (result.Result)
+                {
+                    // update order status
+                    order.StatusId = newStatusId;
+                    order.Status = PossibleStatuses.FirstOrDefault(s => s.Id == newStatusId);
+                    // hide dropdown
+                    order.ShowStatusDropdown = false; 
+                }
+                else
+                {
+                    _ = JS.InvokeVoidAsync("alert", result.Message);
+                }
+            }
+            else
+            {
+                _ = JS.InvokeVoidAsync("alert", "InvalidStatus");
+            }
+
+        }
+        order.IsUpdatingStatus = false;
+    }
+    // discount
+    private double GetDiscountedValue(Order order)
+    {
+        if (order.DiscountCategory != null)
+        {
+            double categoryitemsPrice = 0;
+            foreach (var item in order.OrderItems)
+            {
+                if (item.Product!.CategoryId == order.DiscountCategory.CategoriesId)
+                {
+                    categoryitemsPrice += (int)(item.Product.SalePrice * item.Quantity);
+                }
+            }
+            double originalCateoryPrice = categoryitemsPrice / (1 - (order.DiscountCategory.DiscountPercentage / 100.0));
+            double categoryDiscountValue = categoryitemsPrice * (order.DiscountCategory.DiscountPercentage / 100.0);
+            var categoryName = order.DiscountCategory.Category.Name_de;
+
+            return categoryDiscountValue;
+        }
+        else if (order.DiscountCode != null)
+        {
+            return order.TotalPrice / (1 - (order.DiscountCode.DiscountPercentage / 100.0)) - order.TotalPrice;
+        }
+        return order.TotalPrice;
+    }
+ }
+
