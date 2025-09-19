@@ -2,48 +2,91 @@
 @inject IStringLocalizer< WAHShopForntend.Resources.Login> L
 
 <div class="main">
-<div class="loginContainer">
-    <div class ="loginForm">
-        <EditForm Model="@loginModel" OnValidSubmit="@HandleSubmit">
-            <DataAnnotationsValidator />
-            <h2 @onclick="OnProjectInfo">@ProjectInfo.Value.Name</h2>
-            <h3>@L["Welcome"]</h3>
-            <div class="form-group mt-3">
-                <InputText @bind-Value="loginModel.UserName"
-                           placeholder="@L["Username"]"
-                class="form-control" />
-                <ValidationMessage For="@(() => loginModel.UserName)" />
-            </div>
-            <div class="form-group mt-3">
-                <InputText @bind-Value="loginModel.Password"
-                type="password"
-                           placeholder="@L["Password"]"
-                class="form-control" />
-                <ValidationMessage For="@(() => loginModel.Password)" />
-            </div>
+    <div class="loginContainer">
+        <div class ="loginForm">
+            <EditForm Model="@loginModel" OnValidSubmit="@HandleSubmit">
+                <DataAnnotationsValidator />
+                <h2 @onclick="OnProjectInfo">@ProjectInfo.Value.Name</h2>
+                <h3>@L["Welcome"]</h3>
+                <div class="form-group mt-3">
+                    <InputText @bind-Value="loginModel.UserName"
+                    placeholder="@L["Username"]"
+                    class="form-control" />
+                    <ValidationMessage For="@(() => loginModel.UserName)" />
+                </div>
+                <div class="form-group mt-3 position-relative">
+                    <div class="input-group">
+                        <InputText @bind-Value="loginModel.Password"
+                        type="@passwordInputType"
+                        placeholder="@L["Password"]"
+                        class="form-control pe-5" />
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3"
+                        style="cursor:pointer; z-index: 10;"
+                        @onclick="TogglePasswordVisibility">
+                            <i class="bi @(showPassword ? "bi-eye-slash" : "bi-eye")"></i>
+                        </span>
+                    </div>
+                    <ValidationMessage For="@(() => loginModel.Password)" />
+                </div>
                 <button class="loginBtn" type="submit">@L["LoginText"]</button>
-        </EditForm>
-            <button @onclick="GoogleSingup" class="googleBtn">
+            </EditForm>
+            @*<button @onclick="GoogleSingup" class="googleBtn">
                 <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
-            </button>
-        <div>
-            <p class="signup">
+            </button>*@
+            <div>
+                <p class="signup">
                     @L["NoAccountText"]
                     <a href="/signup"> @L["Register"]</a>
-            </p>
-        </div>
-        <div>
-            <p class="forgotPassword">
-                <a href="/forgotpassword">@L["ForgotPassword"]</a>
-            </p>
+                </p>
+            </div>
+            <div>
+                <p class="forgotPassword">
+                    <a href="/forgotpassword">@L["ForgotPassword"]</a>
+                </p>
+            </div>
         </div>
     </div>
 </div>
-</div>
 
 @code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                // استدعاء دالة JS للحصول على نتيجة تسجيل الدخول بعد Redirect
+                var result = await JS.InvokeAsync<LoginModel>("getRedirectResult");
+
+                if (result != null)
+                {
+                    if (string.IsNullOrEmpty(result.Error))
+                    {
+                        loginModel = result;
+                        var isLogged = await AuthService!.Login(loginModel, null!);
+                        if (isLogged.Result == true)
+                            NavigationManager!.NavigateTo(returnUrl ?? "/", true);
+                        else
+                            _ = JS.InvokeVoidAsync("showAlert", isLogged.Message);
+                    }
+                    else
+                        _ = JS.InvokeVoidAsync("showAlert", result.Error);
+                }
+                else
+                {
+                    Console.WriteLine("لم يتم تسجيل الدخول بعد");
+                }
+            }
+            catch
+            {
+
+            }
+        }
+    }
+
     private LoginModel loginModel = new();
-	// returns to the page where the user was before login
+    // returns to the page where the user was before login
     [Parameter]
     [SupplyParameterFromQuery]
     public string? returnUrl { get; set; }
@@ -62,24 +105,41 @@
     {
         NavigationManager.NavigateTo("/", false);
     }
-	// login or signup with google 
+   
     private async Task GoogleSingup()
     {
-        var result = await JS.InvokeAsync<LoginModel>("loginWithGoogle");
-        if (string.IsNullOrEmpty(result.Error))
+        try
         {
-            loginModel = result;
-            var isLogged = await AuthService!.Login(loginModel, null!);
-            if (isLogged.Result == true)
-                NavigationManager!.NavigateTo(returnUrl ?? "/", true);
-            else
+            await JS.InvokeVoidAsync("loginWithGoogle");
+           /* if (result != null)
             {
-                _ = JS.InvokeVoidAsync("showAlert", isLogged.Message);
+                if (string.IsNullOrEmpty(result.Error))
+                {
+                    loginModel = result;
+                    var isLogged = await AuthService!.Login(loginModel, null!);
+                    if (isLogged.Result == true)
+                        NavigationManager!.NavigateTo(returnUrl ?? "/", true);
+                    else
+                        _ = JS.InvokeVoidAsync("showAlert", isLogged.Message);
+                }
+                else
+                    _ = JS.InvokeVoidAsync("showAlert", result.Error);
             }
+            else
+                _ = JS.InvokeVoidAsync("showAlert", "Null zurückgesendet");*/
         }
-        else
+        catch (Exception ex)
         {
-            _ = JS.InvokeVoidAsync("showAlert", result.Error);
+
         }
+    }
+ 
+    //
+    private bool showPassword = false;
+    private string passwordInputType => showPassword ? "text" : "password";
+
+    private void TogglePasswordVisibility()
+    {
+        showPassword = !showPassword;
     }
 }

@@ -1,10 +1,15 @@
-﻿using WAHShopForntend.Components.Models;
+﻿using WAHShopForntend.Components.Cart;
+using WAHShopForntend.Components.CategoriesF;
+using WAHShopForntend.Components.Models;
+using WAHShopForntend.Components.ProductsF;
 using static System.Net.WebRequestMethods;
 namespace WAHShopForntend.Components.OrderF
 {
-    public class OrderService(HttpClient http)
+    public class OrderService(HttpClient http, ProductService productService, CategoryService categoryService)
     {
         private readonly HttpClient _http = http;
+        private readonly ProductService _productService = productService;
+        private readonly CategoryService _categoryService = categoryService;
         public List<PaymentMethod> DownloadedPaymentMethods { get; private set; } = [];
         public List<Order> DownloadedOrders { get; private set; } = [];
         public List<OrderStatus> DownloadedOrderStatus { get; private set; } = [];
@@ -60,6 +65,10 @@ namespace WAHShopForntend.Components.OrderF
         }
         public async Task<ValidationResult> GetPaymentMethodsAsync()
         {
+            if (DownloadedPaymentMethods.Count > 0)
+            {
+                return new ValidationResult { Result = true, Message = "Payment methods already loaded." };
+            }
             try
             {
                 var response = await _http.GetAsync("api/Orders/getPaymentMethods");
@@ -105,9 +114,9 @@ namespace WAHShopForntend.Components.OrderF
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Unknown error." };
+                    return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Unknown Error." };
                 }
-                return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Unknown error." };
+                return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Unknown Error." };
             }
             catch (Exception ex)
             {
@@ -139,6 +148,147 @@ namespace WAHShopForntend.Components.OrderF
             catch (Exception ex)
             {
                 return new ValidationResult { Result = false, Message = ex.Message };
+            }
+        }
+        // producte ab 18 jahre alt
+        public async Task<ValidationResult> CheckAge(List<CartItem> cartItems, User user)
+        {
+            try
+            {
+                for (int i = 0; i < cartItems.Count; i++)
+                {
+                    var item = cartItems[i];
+                    if (item == null)
+                        continue;
+                    var product = item.Product
+                                ?? _productService.GetProductByIdLocal(item.ProductId)
+                    ?? await _productService.GetProductByIdServer(item.ProductId);
+
+                    var category = product.Category
+                                ?? _categoryService.GetCategoryByIdLocal(product.CategoryId)
+                                ?? await _categoryService.getCategoryById(product.CategoryId);
+
+                    if (category == null || user == null)
+                        return new ValidationResult { Result = false, Message = "Unbekannte Fehler" };
+
+                    if (category.Requires18Plus)
+                    {
+                        try
+                        {
+                            bool result = DateTime.TryParse(user.BirthDate, out _);
+                            if (result)
+                            {
+                                int age = (int)((DateTime.Now - DateTime.Parse(user.BirthDate)).TotalDays / 365.25);
+                                if (age >= 18)
+                                    return new ValidationResult { Result = true, Message = null };
+                                else
+                                    return new ValidationResult { Result = false, Message = "AgeError" };
+                            }
+                            else
+                            {
+                                return new ValidationResult { Result = false, Message = "ValidBirthDate" };
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            return new ValidationResult { Result = false, Message = ex.Message };
+                        }
+                    }
+                }
+                return new ValidationResult { Result = true, Message = null! };
+            }
+            catch
+            {
+                return new ValidationResult { Result = false, Message = "UnknownError" };
+            }
+        }
+        public async Task<(bool result, string errorMessage, string productsName)> CanShipByPost(List<CartItem> cartItems, int selectedPaymentId, string languageCode)
+        {
+            bool if18Plus = false;
+            (bool, string) IsShippable = (true, null!);
+            for (int i = 0; i < cartItems.Count; i++)
+            {
+                var item = cartItems[i];
+                if (item == null)
+                    continue;
+
+                var product = item.Product
+                            ?? productService.GetProductByIdLocal(item.ProductId)
+                            ?? await productService.GetProductByIdServer(item.ProductId);
+
+                var category = product.Category
+                            ?? categoryService.GetCategoryByIdLocal(product.CategoryId)
+                            ?? await categoryService.getCategoryById(product.CategoryId);
+                // if 18 plus required
+                if (category.Requires18Plus)
+                {
+                    if18Plus = true;
+                    break;
+                }
+                // if not shippable
+                if (!product.IsShippable)
+                {
+                    // Fix for CS8600: Ensure that nullable values are handled properly in the switch statement.  
+                    string productName = languageCode switch
+                    {
+                        "de" => product.Name_de ?? string.Empty, // Use null-coalescing operator to provide a default value.  
+                        "ar" => product.Name_ar ?? string.Empty,
+                        _ => product.Name_de ?? string.Empty // Fallback to a non-nullable default value.  
+                    };
+                    IsShippable.Item1 = false;
+                    IsShippable.Item2 = IsShippable.Item2 == null! ? productName! : IsShippable.Item2 + $", {productName}";
+                }
+            }
+            if (IsShippable.Item1 == false)
+            {
+                if (selectedPaymentId == 5) // 5 id is pay by transfer and shipping by post
+                {
+                    return (false, $"ShippingProductNotPossible", IsShippable.Item2);
+                }
+                else
+                {
+                    return (true, null!, null!);
+                }
+            }
+            else if (if18Plus)
+            {
+                if (selectedPaymentId == 5) // 5 id is pay by transfer and shipping by post
+                {
+                    return (false, "ShippingNotPossibleCannotVerify", null!);
+                }
+                else
+                {
+                    return (true, "VerifyIdentity", null!);
+                }
+            }
+            return (true, null!, null!);
+        }
+        public async Task<(ValidationResult, OurDeliveryServiceArea)> CheckIfWithinDeliveryRange(string postalCode)
+        {
+            try
+            {
+                var response = await _http.GetAsync($"api/Orders/CheckIfWithinDeliveryRange/{postalCode}");
+                if (response == null || !response.IsSuccessStatusCode)
+                {
+                    if (response == null)
+                    {
+                        return (new ValidationResult { Result = false, Message = "No response received from Server." }, null!);
+                    }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        return (await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Unknown Error." }, null!);
+                    }
+                    else
+                    {
+                        return (new ValidationResult { Result = false, Message = "Unknown Error." }, null!);
+                    }
+                }
+
+                return (new ValidationResult { Result = true, Message = "Diese Gebiet ist in user Lieferbereich" }, await response.Content.ReadFromJsonAsync<OurDeliveryServiceArea>() ?? null!);
+            }
+            catch (Exception ex)
+            {
+                return (new ValidationResult { Result = false, Message = ex.Message }, null!);
             }
         }
     }

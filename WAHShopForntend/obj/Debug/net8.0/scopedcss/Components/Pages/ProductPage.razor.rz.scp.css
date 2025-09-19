@@ -141,13 +141,5 @@
         gap:10px;
     }
 
-    .btnProduct[b-uot7vzi1qy],
-    .btnProductAdded[b-uot7vzi1qy] {
-        width: 100%;
-        padding: 0.5rem;
-    }
-
-    QuantityInput[b-uot7vzi1qy] {
-        width: 100%;
-    }
+    
 }

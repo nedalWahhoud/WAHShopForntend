@@ -40,8 +40,8 @@ else
                                     @foreach (var status in PossibleStatuses)
                                     {
                                         <option value="@status.Id">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" 
-                                    ? status.Status_ar
-                                    : status.Status_de)</option>
+                                    ? status.StatusPresent_ar
+                                    : status.StatusPresent_de)</option>
                                     }
                                 </InputSelect>
 

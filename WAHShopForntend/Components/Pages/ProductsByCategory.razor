@@ -1,5 +1,8 @@
 ﻿@page "/ProductsByCategory/{CategoryId:int}"
+@using System.Security.Claims
 @inject IStringLocalizer< WAHShopForntend.Resources.ProductsByCategory> L
+
+
 @if (!IsLoading)
 {
 	<div class="lodingContainer">
@@ -8,59 +11,48 @@
 }
 else
 {
-		<h3>
-			@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-					? allCategories.Find(s => s.Id == CategoryId)?.Name_ar ?? ""
-					: allCategories.Find(s => s.Id == CategoryId)?.Name_de ?? "")
-		</h3>
-		<div class="productItems">
-			@foreach (var product in products)
+	<h3>
+		@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+			? allCategories.Find(s => s.Id == CategoryId)?.Name_ar ?? ""
+			: allCategories.Find(s => s.Id == CategoryId)?.Name_de ?? "")
+	</h3>
+	<div class="productItems">
+		@foreach (var product in products)
+		{
+			// cart product, bind with productId,quantity and product, the in OnInititalized configured.
+			/*var cartItem = product.CartItem;
+			cartItem.Product = cartItem.Product ?? product;*/
+
+			<div class="cardProduct">
+				<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+				<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+			</div>
+		}
+	</div>
+	<div class="moreLoadContainer">
+		<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || AllItemsLoaded)">
+			@if (IsOrdersLoading)
 			{
-				// cart product, bind with productId,quantity and product, the in OnInititalized configured.
-				var cartItem = product.CartItem;
-				<div class="cardProduct">
-					<img @onclick="() => OnProduct(product.Id)" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
-					<div @onclick="() => OnProduct(product.Id)" class="textCard">
-						<a>
-							@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-														? product.Name_ar
-														: product.Name_de)
-						</a>
-						<p>@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
-					</div>
-					<div class="cartItems">
-						<button class="btn @(cartService.IsProductAdded(cartItem.ProductId) ? "btnProductAdded" : "btnProduct")"
-						@onclick="() => CartChanged(cartItem)">
-							@(cartService.IsProductAdded(cartItem.ProductId) ? $"➕({cartService.GetQuantityOfProduct(cartItem.ProductId)})" : "🛒")
-						</button>
-						<InputNumber @bind-Value="cartItem.Quantity" Min="0" class="QuantityInput" />
-					</div>
-				</div>
+				<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+				<span class="ms-2">@L["LoadingButton"]</span>
 			}
-		</div>
-		<div class="moreLoadContainer">
-			<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || AllItemsLoaded)">
-				@if (IsOrdersLoading)
-				{
-					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-					<span class="ms-2">@L["LoadingButton"]</span>
-				}
-				else if (!AllItemsLoaded)
-				{
-					<span>@L["LoadMore"]</span>
-				}
-				@if (AllItemsLoaded)
-				{
-					<span>@L["AllItemsLoaded"]</span>
-				}
-			</button>
-		</div>
+			else if (!AllItemsLoaded)
+			{
+				<span>@L["LoadMore"]</span>
+			}
+			@if (AllItemsLoaded)
+			{
+				<span>@L["AllItemsLoaded"]</span>
+			}
+		</button>
+	</div>
 }
 @code {
 	[Parameter] public int CategoryId { get; set; }
 	private bool IsLoading = true;
 	private List<Product> products = new();
 	private List<Categories> allCategories = new();
+
 	protected override async Task OnInitializedAsync()
 	{
 		IsLoading = false;
@@ -126,11 +118,5 @@ else
 	private void OnProduct(int ProductId)
 	{
 		NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
-	}
-	// Cart
-	private void CartChanged(CartItem cartItem)
-	{
-		if (!cartService.IsQuantityZero(cartItem))
-			cartService.AddToCart(cartItem);
 	}
 }

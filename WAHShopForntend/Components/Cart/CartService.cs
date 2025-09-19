@@ -3,6 +3,7 @@ using Microsoft.JSInterop;
 using System.Text.Json;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using WAHShopForntend.Components.ProductsF;
+using WAHShopForntend.Components.CategoriesF;
 
 namespace WAHShopForntend.Components.Cart
 {
@@ -34,25 +35,75 @@ namespace WAHShopForntend.Components.Cart
                 CartItems = [];
             }
         }
-        public void AddToCart(CartItem cartItem)
+        public async Task<string> AddToCart(int productId)
         {
-            var item = CartItems.FirstOrDefault(ci => ci.ProductId == cartItem.ProductId);
+            Product product = _productService.GetProductByIdLocal(productId) ?? await _productService.GetProductByIdServer(productId);
+            
+            //
+            var item = CartItems.FirstOrDefault(ci => ci.ProductId == productId);
             if (item != null)
             {
-                item.Quantity = cartItem.Quantity;
+                // Update the existing item quantity
+                item.Quantity++;
+
+                // check if has stock
+                if (!HasStock(item.Quantity, product.Quantity))
+                {
+                    item.Quantity--; // revert the quantity increase
+                    return "NoStock";
+                }
+
+                
+                if (item.Quantity > 5)
+                {
+                    item.Quantity = 5;
+                    return "MaxQuantity";
+                }
             }
+            // hier wird die quantität nicht überprüft, da es sich um ein neues produkt handelt und die quantität sollte mindestens 1 sein, um zu benutzer zu zeigen
             else
             {
+                // add the new item to the genrall cart
                 CartItems.Add(new CartItem
                 {
-                    ProductId = cartItem.ProductId,
-                    Quantity = cartItem.Quantity,
-                    Product = cartItem.Product
+                    ProductId = productId,
+                    Quantity = 1, // add first item with quantity 1
+                    Product = _productService.GetProductByIdLocal(productId) ?? await _productService.GetProductByIdServer(productId),
+                    TextMessage = null
                 });
             }
             SaveCart(); // Save the updated cart to local storage
             NotifyStateChanged();
+            return null!;
         }
+        public string DecreaseFromCart(int productId)
+        {
+            if (IsQuantityZero(productId))
+            {
+                return null!; // Cannot decrease below zero
+            }
+
+            else
+            {
+                var item = CartItems.FirstOrDefault(ci => ci.ProductId == productId);
+                if (item != null)
+                {
+
+                    item.Quantity--;
+
+                    if (item.Quantity == 0)
+                    {
+                        RemoveFromCart(productId);
+                    }
+
+                    SaveCart();
+                    NotifyStateChanged();
+                    return null!;
+                }
+                return "ProductNotFound"; // Product not found in the cart
+            }
+        }
+
         public void RemoveFromCart(int ProductId)
         {
             var item = CartItems.FirstOrDefault(ci => ci.ProductId == ProductId);
@@ -63,17 +114,25 @@ namespace WAHShopForntend.Components.Cart
                 NotifyStateChanged();
             }
         }
-        public bool IsQuantityZero(CartItem cartItem)
+        public bool IsQuantityZero(int productId)
         {
-            if (cartItem.Quantity <= 0)
+            var item = CartItems.FirstOrDefault(ci => ci.ProductId == productId);
+            if(item == null)
+                return true; // Item not found, treat as zero quantity
+
+            if (item.Quantity <= 0)
             {
-                bool isProductAdded = IsProductAdded(cartItem.ProductId);
+                bool isProductAdded = IsProductAdded(item.ProductId);
                 if (isProductAdded)
-                    RemoveFromCart(cartItem.ProductId);
+                    RemoveFromCart(item.ProductId);
 
                 return true; // Do not add to cart if quantity is zero
             }
             return false; // Quantity is greater than zero, proceed with adding to cart
+        }
+        public bool HasStock(int requestedQuantity, int minimumStock)
+        {
+            return minimumStock >= requestedQuantity;
         }
         public void ClearCart()
         {
@@ -103,6 +162,10 @@ namespace WAHShopForntend.Components.Cart
         public bool IsProductAdded(int productId)
         {
             return CartItems.Any(ci => ci.ProductId == productId);
+        }
+        public CartItem GetCartItemByProductId(int productId)
+        {
+            return CartItems.Find(ci => ci.ProductId == productId) ?? null!;
         }
         public async Task<ValidationResult> LoadCartProductsAsync()
         {

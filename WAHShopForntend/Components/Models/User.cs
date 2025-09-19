@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace WAHShopForntend.Components.Models
@@ -13,7 +14,9 @@ namespace WAHShopForntend.Components.Models
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
-        public string BirthDate { get; set; } = DateTime.Now.ToString("yyyy.MM.dd");
+        [Required(ErrorMessage = "Bitte Geburtsdatum eingeben")]
+        public string BirthDate { get; set; } =string.Empty;
         public bool IsGuest { get; set; }
+        public string SignupProvider { get; set; } = string.Empty;
     }
 }

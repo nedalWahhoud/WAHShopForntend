@@ -2,6 +2,7 @@
 using Microsoft.JSInterop;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using WAHShopForntend.Components.Models;
 
 namespace WAHShopForntend.Components.Login
 {
@@ -66,22 +67,11 @@ namespace WAHShopForntend.Components.Login
         {
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
+            var claims = jwtToken.Claims
+        .Select(c => new Claim(c.Type, c.Value))
+        .ToList();
 
-            // get claims from jwtToken
-            var wantedClaims = new[] {
-             ClaimTypes.NameIdentifier,
-             ClaimTypes.Name,
-             ClaimTypes.Email,
-             ClaimTypes.Role,
-             ClaimTypes.DateOfBirth
-            };
-
-            var filteredClaims = jwtToken.Claims
-                .Where(c => wantedClaims.Contains(c.Type))
-                .Select(c => new Claim(c.Type, c.Value))
-                .ToList();
-
-            var identity = new ClaimsIdentity(filteredClaims, "claim");
+            var identity = new ClaimsIdentity(claims, "claim");
 
             return identity;
         }

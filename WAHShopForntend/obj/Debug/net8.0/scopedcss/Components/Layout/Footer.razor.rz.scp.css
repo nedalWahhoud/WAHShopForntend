@@ -9,7 +9,10 @@
     text-align: left;
     max-height: 400px;
 }
-
+html[dir="rtl"] .footer[b-86u363gz2c] {
+    direction: ltr;
+    text-align: left;
+}
 .contactDiv[b-86u363gz2c] {
     padding: 10px;
     flex: 1 1 auto;

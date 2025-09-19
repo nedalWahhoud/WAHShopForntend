@@ -129,8 +129,14 @@
   <data name="AddressFormTitle" xml:space="preserve">
     <value>Shipping Address</value>
   </data>
+  <data name="AgeError" xml:space="preserve">
+    <value>⚠️ Your purchase was not completed. There is a product in your cart that is intended for people over 18 years old.</value>
+  </data>
   <data name="BackToHomeButton" xml:space="preserve">
     <value>Back to Home</value>
+  </data>
+  <data name="BirthdateUpdate" xml:space="preserve">
+    <value>The date of birth is incorrect, please update</value>
   </data>
   <data name="BuyButton" xml:space="preserve">
     <value>Buy</value>
@@ -159,11 +165,17 @@
   <data name="EnterCode" xml:space="preserve">
     <value>Enter the code</value>
   </data>
+  <data name="ErrorAddressOurDelivery" xml:space="preserve">
+    <value>Error fetching address to check delivery availability by our delivery service</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name:</value>
   </data>
   <data name="HaveCode" xml:space="preserve">
-    <value>Do you have a discount code?</value>
+    <value>Do you have a discount Code?</value>
+  </data>
+  <data name="InputBirthdate" xml:space="preserve">
+    <value>Input Birthdate</value>
   </data>
   <data name="InputEmail" xml:space="preserve">
     <value>Enter your E-Mail</value>
@@ -183,8 +195,17 @@
   <data name="LoginButton" xml:space="preserve">
     <value>Log in</value>
   </data>
+  <data name="MinimumPurchaseAmountMessage" xml:space="preserve">
+    <value>The order value is less than the minimum delivery amount</value>
+  </data>
   <data name="NoItemsInCategory" xml:space="preserve">
     <value>The order does not contain any item that has a category matching the discount code category.</value>
+  </data>
+  <data name="NotOurDelivery" xml:space="preserve">
+    <value>This area is not within our delivery service range. Please choose delivery by Post.</value>
+  </data>
+  <data name="OurDeliveryServiceWaringMessage" xml:space="preserve">
+    <value>Our delivery service delivers orders on a specific day of the week depending on your region. If you don't know the exact day for your area, please contact us for more information.</value>
   </data>
   <data name="PaymentNote" xml:space="preserve">
     <value>We're currently working on adding online payment methods like PayPal and SEPA. </value>
@@ -195,11 +216,23 @@
   <data name="Phone" xml:space="preserve">
     <value>Phone number:</value>
   </data>
+  <data name="SelectDeliveryAddress" xml:space="preserve">
+    <value>Please select a delivery address.</value>
+  </data>
+  <data name="SelectPaymentMethod" xml:space="preserve">
+    <value>Please select a payment method.</value>
+  </data>
   <data name="ShippingCosts" xml:space="preserve">
     <value>Shipping Costs</value>
   </data>
   <data name="ShippingMethod" xml:space="preserve">
     <value>Shipping method</value>
+  </data>
+  <data name="ShippingNotPossibleCannotVerify" xml:space="preserve">
+    <value>Your order contains products intended only for persons 18 years of age and older.</value>
+  </data>
+  <data name="ShippingProductNotPossible" xml:space="preserve">
+    <value>this Products cannot be shipped.</value>
   </data>
   <data name="Street" xml:space="preserve">
     <value>Street and house number:</value>
@@ -216,8 +249,20 @@
   <data name="TotalPrice" xml:space="preserve">
     <value>Total price</value>
   </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
   <data name="UpdateAddressButton" xml:space="preserve">
     <value>Update address</value>
+  </data>
+  <data name="UserUpdateB" xml:space="preserve">
+    <value>User update</value>
+  </data>
+  <data name="ValidBirthDate" xml:space="preserve">
+    <value>Your order contains products intended only for persons 18 years of age and older. Please enter a valid date of birth to verify your age.</value>
+  </data>
+  <data name="VerifyIdentity" xml:space="preserve">
+    <value>Your order contains products intended only for persons 18 years of age and older.</value>
   </data>
   <data name="YouSave" xml:space="preserve">
     <value>You save on your purchase</value>

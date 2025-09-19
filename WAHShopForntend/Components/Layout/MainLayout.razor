@@ -39,16 +39,11 @@ else
 @code{
     private bool HeaderHidden => NavigationManager.Uri.Contains("login") || 
     NavigationManager.Uri.Contains("signup") || 
-    NavigationManager.Uri.Contains("forgotpassword");
+    NavigationManager.Uri.Contains("forgotpassword") ||
+    NavigationManager.Uri.Contains("confirmemail");
     private bool isRended = false;
 
-    protected override async Task OnInitializedAsync()
-    {
-        await categoryService.GetCategories();
-    }
-
     private bool showFooter = true;
-    private DotNetObjectReference<MainLayout>? objRef;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -57,35 +52,7 @@ else
             // Initialize the cartService to get the saved cart
             await cartService.InitializeAsync();
 
-            // footer
-            /*objRef = DotNetObjectReference.Create(this);
-            await JS.InvokeVoidAsync("footerVisibility.initScrollWatcher", objRef);*/
             StateHasChanged();
         }
-    }
-
-    [JSInvokable]
-    public void ShowFooter()
-    {
-        if (!showFooter)
-        {
-            showFooter = true;
-            StateHasChanged();
-        }
-    }
-
-    [JSInvokable]
-    public void HideFooter()
-    {
-        if (showFooter)
-        {
-            showFooter = false;
-            StateHasChanged();
-        }
-    }
-
-    public void Dispose()
-    {
-        objRef?.Dispose();
     }
 }

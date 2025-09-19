@@ -31,6 +31,7 @@ namespace WAHShopForntend.Components.Models
         public ShippingProvider? ShippingProviders { get; set; }
         public double ShippingCost { get; set; }
         public string? TrackingNumber { get; set; }
+        public bool IsUserCreated { get; set; }
 
         [Required(ErrorMessage = "Bitte geben Sie eine Lieferadresse an.")]
         public string DeliveryAddress1 { get; set; } = string.Empty;

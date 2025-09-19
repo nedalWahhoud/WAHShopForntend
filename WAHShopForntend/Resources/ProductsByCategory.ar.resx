@@ -126,4 +126,10 @@
   <data name="LoadMore" xml:space="preserve">
     <value>تحميل المزيد</value>
   </data>
+  <data name="MaxQuantity" xml:space="preserve">
+    <value>لايمكنك  طلب اكثر من 5 قطع</value>
+  </data>
+  <data name="NoStock" xml:space="preserve">
+    <value>المخزون غير كافي</value>
+  </data>
 </root>

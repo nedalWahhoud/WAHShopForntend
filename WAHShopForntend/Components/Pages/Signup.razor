@@ -30,7 +30,17 @@
                 <InputText @bind-Value="signupModel.PasswordAgain" placeholder="@L["PasswordAgainPlaceholder"]" type="password" class="form-control" />
                 <ValidationMessage For="@(() => signupModel.PasswordAgain)" />
             </div>
-            <button type="submit">@L["Register"]</button>
+            <button type="submit" disabled="@IsLoading">
+                @if (IsLoading)
+                {
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="ms-2">@L["Loading"]</span>
+                }
+                else
+                {
+                    <span>@L["Register"]</span>
+                }
+            </button>
         </EditForm>
         <div class ="loginLink">
             @L["AlreadyRegisteredText"]
@@ -41,10 +51,11 @@
 
 @code {
     private SignupModel signupModel = new();
-
+    private bool IsLoading = false;
     private async Task HandleSubmit()
     {
-		signupModel.SignupProvider = "Manual"; // Set the signup provider to Manual
+        IsLoading = true;
+        signupModel.SignupProvider = "Manual"; // Set the signup provider to Manual
         var result = await AuthService!.Signup(signupModel);
         if (result.Result == true)
         {
@@ -56,6 +67,7 @@
             _ = JS.InvokeVoidAsync("showAlert", result.Message);
             signupModel.PasswordAgain = string.Empty; // Clear the password confirmation field
         }
+        IsLoading = false;
     }
   
     private void OnProjectInfo()

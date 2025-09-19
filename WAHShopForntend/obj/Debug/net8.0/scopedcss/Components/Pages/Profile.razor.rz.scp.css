@@ -25,8 +25,22 @@
     }
 .btnDivProfile[b-yswkj056zt] {
     display: flex;
+    flex-direction:column;
     justify-content: center;
     margin-top: 1rem;
+    gap: 13px;
+}
+.deleteConfirm[b-yswkj056zt]{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:13px;
+}
+.deleteConfirmB[b-yswkj056zt] {
+    margin-top:10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 13px;
 }
 .btnProfile[b-yswkj056zt] {

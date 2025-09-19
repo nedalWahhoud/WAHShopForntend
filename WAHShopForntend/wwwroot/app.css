@@ -98,102 +98,34 @@ html, body {
 }
 
     .productsCard img {
-        width: 80%;
-        height: auto;
+        width: 90%; 
+        height: 300px; 
         object-fit: contain;
         margin-bottom: 10px;
         transition: transform 0.2s ease;
+        object-fit: cover;
     }
 
         .productsCard img:hover {
             transform: scale(1.05);
             cursor: pointer;
         }
-
-.textCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* ⬅️ يدفع المحتوى لأسفل */
-    text-align: center;
-    align-items: center;
-    flex-grow: 1;
-}
-
-    .textCard:hover {
-        transform: scale(1.05);
-        cursor: pointer;
+    /* Show all individually */
+    .main {
+        padding: 1rem;
+        height: 100vh;
     }
-
-    .textCard a {
-        display: block;
-        font-weight: bold;
-        font-size: 1rem;
-        color: #333;
-        text-decoration: none;
-    }
-
-    .textCard p {
-        color: #007BFF;
-        font-weight: bold;
-        margin-top: 0.25rem;
-    }
-
-.productsCart {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-    .productsCart input {
-        width: 60px;
-        text-align: center;
-    }
-
-/* button */
-.btnProduct,
-.btnProductAdded {
-    height: 35px;
-    padding: 0 10px;
-    border-radius: 6px;
-    border: none;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.btnProduct {
-    background-color: var(--btnBackgroundColor);
-}
-
-    .btnProduct:hover {
-        background-color: var(--btnBackgroundColorHover);
-    }
-
-.btnProductAdded {
-    background-color: var(--btnBackgroundColorProductAdded);
-}
-
-    .btnProductAdded:hover {
-        background-color: var(--btnBackgroundColorProductAddedHover);
-    }
-
-
-/* Show all individually */
-.main {
-    padding: 1rem;
-    height: 100vh;
-}
 
 .productItems {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1rem;
-    margin:20px 20px;
 }
 
 .cardProduct {
     display: flex;
     flex-direction: column;
+    align-items: center;
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 1rem;
@@ -213,36 +145,6 @@ html, body {
         border-radius: 8px;
         cursor:pointer;
     }
-
-.textCard {
-    margin-top: 0.5rem;
-    text-align: center;
-    flex-grow: 1; /* يعطي مساحة للمنتج ليدفع cartItems للأسفل */
-
-    cursor: pointer;
-}
-
-    .textCard a {
-        display: block;
-        font-weight: bold;
-        font-size: 1rem;
-        color: #333;
-        text-decoration: none;
-    }
-
-    .textCard p {
-        color: #007BFF;
-        font-weight: bold;
-        margin-top: 0.25rem;
-    }
-
-.cartItems {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.75rem;
-    gap: 1rem;
-}
 
 .btnProduct1, .btnProductAdded1 {
     flex: 1;
@@ -281,7 +183,6 @@ html, body {
 }
 
 
-
 @media (max-width: 768px) {
     /* product card */
     .mainProductsCard {
@@ -289,10 +190,14 @@ html, body {
         grid-template-columns: repeat(2, 1fr); /* منتجين لكل صف */
         gap: 16px;
         padding: 16px;
-        margin-bottom:30px;
+        margin-bottom: 30px;
         overflow: unset; /* لا حاجة للتمرير الأفقي */
     }
-
+    .productsCard img {
+        width: 100%; 
+        height: 150px; 
+        object-fit: contain; 
+    }
     .productsCard {
         width: 100%;
         margin: 0;
@@ -300,7 +205,9 @@ html, body {
 
     .productsCart {
         justify-content: center;
+        
     }
+
     /* Show all individually */
     .productItems {
         grid-template-columns: repeat(2, 1fr); /* منتجين في كل صف */
@@ -308,18 +215,28 @@ html, body {
 }
 
 @media (max-width: 480px) {
-    /* product card */
     .mainProductsCard {
-        grid-template-columns: 1fr; /* منتج واحد في كل صف للهواتف الصغيرة */
-    }
-    /* Show all individually */
-    .productItems {
-        grid-template-columns: 1fr; /* منتج واحد في كل صف للهواتف الصغيرة */
+        display: grid; /* بدلاً من flex */
+        grid-template-columns: repeat(2, 1fr); /* صفين في كل صف */
+        gap: 10px;
+        padding: 10px;
+        overflow: unset; /* إزالة التمرير الأفقي */
     }
 
-    /* ----- */
-    .hidden {
-        display: none;
+    .productsCard {
+        width: 100%; /* يملأ العمود */
+        margin: 0;
+    }
+
+        .productsCard img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+    .productItems {
+        grid-template-columns: repeat(2, 1fr); /* صفين لكل صف */
+        gap: 10px;
     }
 }
 

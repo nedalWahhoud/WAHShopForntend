@@ -9,6 +9,5 @@
         public string Website { get; set; } = string.Empty;
         public double PublicShippingCost { get; set; }
         public double FreeShippingThreshold { get; set; }
-
     }
 }

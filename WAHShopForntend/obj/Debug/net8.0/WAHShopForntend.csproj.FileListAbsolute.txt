@@ -112,3 +112,14 @@ C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\bin\Debug\net8.0\Mic
 C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
 C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\bin\Debug\net8.0\Microsoft.JSInterop.dll
 C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\bin\Debug\net8.0\Microsoft.JSInterop.WebAssembly.dll
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\WAHShopForntend.Resources.SearchProducts.resources
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\WAHShopForntend.Resources.SearchProducts.ar.resources
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\WAHShopForntend.Resources.SearchProducts.de.resources
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\WAHShopForntend.Resources.CategoryNav.resources
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\WAHShopForntend.Resources.CategoryNav.ar.resources
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\WAHShopForntend.Resources.CategoryNav.de.resources
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\scopedcss\Components\Layout\AddDecresaseCard.razor.rz.scp.css
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\WAHShopForntend.Resources.AddDecresaseCard.resources
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\WAHShopForntend.Resources.AddDecresaseCard.ar.resources
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\WAHShopForntend.Resources.AddDecresaseCard.de.resources
+C:\Users\nedal\source\repos\WAHShopForntend\WAHShopForntend\obj\Debug\net8.0\scopedcss\Components\Layout\ProductInfo.razor.rz.scp.css

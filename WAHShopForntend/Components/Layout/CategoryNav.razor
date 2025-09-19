@@ -1,21 +1,220 @@
-﻿<div class="categoryNav">
-    @foreach (var category in allCategories)
+﻿@inject IStringLocalizer< WAHShopForntend.Resources.CategoryNav> L
+
+<div class="categoryNav">
+    @if (categoryService.DownloadedCategories!= null && categoryService.DownloadedCategories.Count > 0)
     {
-        <a @onclick="() => OnCategory(category.Id)">
-            @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                ? category.Name_ar
-                : category.Name_de)
-        </a>
+        @* foodstuffs *@
+        <div class="dropdown">
+            <button class="dropdownButton">▼ @L["foodstuffs"]</button>
+            <div class="dropdownMenu">
+
+                @{
+                    var foodstuffsArray = GetFoodstuffs();
+                    if (foodstuffsArray != null)
+                    {
+                        for (int i = 0; i < foodstuffsArray.Count; i += 5)
+                        {
+                            <ul class="column">
+                                @for (int j = i; j < i + 5 && j < foodstuffsArray.Count; j++)
+                                {
+                                    var category = foodstuffsArray[j];
+
+                                    <li @onclick="() => OnCategory(category.Id)"
+                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                        @(
+                                    System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                                                ? category.Name_ar
+                                                                                : category.Name_de)
+                                    </li>
+                                }
+                            </ul>
+                        }
+
+                    }
+                }
+            </div>
+        </div>
+        @* drinks *@
+        <div class="dropdown">
+            <button class="dropdownButton">▼ @L["drinks"]</button>
+            <div class="dropdownMenu">
+
+                @{
+                    var drinksArray = GetDrinks();
+                    if (drinksArray != null)
+                    {
+                        for (int i = 0; i < drinksArray.Count; i += 5)
+                        {
+                            <ul class="column">
+                                @for (int j = i; j < i + 5 && j < drinksArray.Count; j++)
+                                {
+                                    var category = drinksArray[j];
+                                    <li @onclick="() => OnCategory(category.Id)"
+                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                        @(
+                                    System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                                ? category.Name_ar
+                                                                : category.Name_de
+                                                                )
+                                    </li>
+                                }
+                            </ul>
+                        }
+
+                    }
+                }
+            </div>
+        </div>
+        @* SweetsSnacks *@
+        <div class="dropdown">
+            <button class="dropdownButton">▼ @L["SweetsSnacks"]</button>
+            <div class="dropdownMenu">
+                @{
+                    var SweetsSnacksArray = GetSweetsSnacks();
+					if (SweetsSnacksArray != null)
+					{
+                     for (int i = 0; i < SweetsSnacksArray.Count; i += 5)
+                     {
+                        <ul class="column">
+                            @for (int j = i; j < i + 5 && j < SweetsSnacksArray.Count; j++)
+                            {
+                                var category = SweetsSnacksArray[j];
+                                <li @onclick="() => OnCategory(category.Id)"
+                                class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                    @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                    ? category.Name_ar
+                                                    : category.Name_de)
+                                </li>
+                            }
+                        </ul>
+                        }
+                     }
+                }
+            </div>
+        </div>
+        @* Fleische *@
+        <div class="dropdown">
+            <button class="dropdownButton">▼ @L["Meats"]</button>
+            <div class="dropdownMenu">
+                @{
+                    var Mates = GetMeats();
+                    if (Mates != null)
+                    {
+                        for (int i = 0; i < Mates.Count; i += 5)
+                        {
+                            <ul class="column">
+                                @for (int j = i; j < i + 5 && j < Mates.Count; j++)
+                                {
+                                    var category = Mates[j];
+                                    <li @onclick="() => OnCategory(category.Id)"
+                                        class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                        @(
+                                        System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                        ? category.Name_ar
+                                        : category.Name_de
+                                            )
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    }
+                }
+            </div>
+        </div>
+        @* Vape *@
+        var vapeCategory = GetVape();
+        if (vapeCategory != null)
+        {
+            <a @onclick="() => OnCategory(vapeCategory.Id)"
+               class="categoryLink @(vapeCategory.Id == currentCategoryId ? "selected" : "")">
+                @(
+                             System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                    ? vapeCategory.Name_ar
+                    : vapeCategory.Name_de
+                            )
+            </a>
+        }
+        @* Other *@
+        var otherCategory = GetOther();
+        if (otherCategory != null)
+        {
+            <a @onclick="() => OnCategory(otherCategory.Id)"
+               class="categoryLink @(otherCategory.Id == currentCategoryId ? "selected" : "")">
+                @(
+                System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                    ? otherCategory.Name_ar
+                    : otherCategory.Name_de
+                                            )
+            </a>
+        }
     }
 </div>
 @code {
-    private List<Categories> allCategories = new();
-    protected override void OnInitialized()
+
+    private int currentCategoryId = 0;
+    protected override async Task OnInitializedAsync()
     {
-		allCategories = categoryService.GetAllCategoriesLocal();
+        await categoryService.GetCategories();
+
+        // get the current category id from the URL
+        var uri = new Uri(NavigationManager.Uri);
+        var segments = uri.Segments;
+
+        if (segments.Length > 2 && segments[1].TrimEnd('/') == "ProductsByCategory")
+        {
+            int.TryParse(segments[2].TrimEnd('/'), out currentCategoryId);
+        }
+        else
+            currentCategoryId = 0;
     }
+
     private void OnCategory(int categoryId)
     {
         NavigationManager.NavigateTo($"/ProductsByCategory/{categoryId}", true);
+    }
+    // 
+    private List<Categories> GetFoodstuffs()
+    {
+        return categoryService.DownloadedCategories?
+                    .Where(c =>
+                    (c.Id >= 9 && c.Id <= 13) ||
+                    (c.Id >= 15 && c.Id <= 19) ||
+                    (c.Id == 21) ||
+                    (c.Id >= 24 && c.Id <= 29))
+                    .ToList() ?? null!;
+    }
+    private List<Categories> GetDrinks()
+    {
+        return categoryService.DownloadedCategories?
+                    .Where(c =>
+                    (c.Id >= 6 && c.Id <= 7) ||
+                    (c.Id == 14) ||
+                    (c.Id == 23))
+                    .ToList() ?? null!;
+    }
+    private List<Categories> GetSweetsSnacks()
+    {
+        return categoryService.DownloadedCategories?
+                    .Where(c =>
+                    (c.Id == 8) ||
+                    (c.Id >= 30 && c.Id <= 31) ||
+                    (c.Id == 33))
+                    .ToList() ?? null!;
+    }
+	private List<Categories> GetMeats()
+	{
+		return categoryService.DownloadedCategories?
+					.Where(c => c.Id == 34)
+					.ToList() ?? null!;
+	}
+    private Categories GetVape()
+    {
+        return categoryService?.DownloadedCategories?
+            .FirstOrDefault(c => c.Id == 5) ?? null! ;
+    }
+    private Categories GetOther()
+    {
+        return categoryService.DownloadedCategories?
+                    .FirstOrDefault(c => c.Id == 32) ?? null!;
     }
 }

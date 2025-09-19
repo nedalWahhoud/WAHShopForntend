@@ -1,0 +1,23 @@
+﻿.textCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* ⬅️ يدفع المحتوى لأسفل */
+    text-align: center;
+    align-items: center;
+    flex-grow: 1;
+    gap:5px;
+}
+
+    .textCard:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+
+    .textCard a {
+        display: block;
+        font-weight: bold;
+        font-size: 1rem;
+        color: #333;
+        text-decoration: none;
+    }
+    

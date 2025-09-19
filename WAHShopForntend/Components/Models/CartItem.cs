@@ -9,5 +9,7 @@ namespace WAHShopForntend.Components.Models
         // Ignore the products if they will convert to json
         [JsonIgnore]
         public Product Product { get; set; } = null!;
+        [JsonIgnore]
+        public string? TextMessage { get; set; }
     }
 }

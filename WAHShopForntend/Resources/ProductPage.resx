@@ -120,4 +120,10 @@
   <data name="Loading" xml:space="preserve">
     <value>loading...</value>
   </data>
+  <data name="MaxQuantity" xml:space="preserve">
+    <value>You cannot order more than 5 piece.</value>
+  </data>
+  <data name="NoStock" xml:space="preserve">
+    <value>Insufficient stock</value>
+  </data>
 </root>

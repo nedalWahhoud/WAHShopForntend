@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountDeleteB" xml:space="preserve">
+    <value>حذف الحساب</value>
+  </data>
+  <data name="BirthDate" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>إلغاء</value>
   </data>
   <data name="ConfirmPassword " xml:space="preserve">
     <value>أعد إدخال كلمة المرور</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteAccountConfirm" xml:space="preserve">
+    <value>هل تريد حذف حسابك?</value>
   </data>
   <data name="EditProfile" xml:space="preserve">
     <value>تعديل البيانات</value>

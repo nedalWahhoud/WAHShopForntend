@@ -13,10 +13,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\AddDecresaseCard.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddDecresaseCard.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Cart.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Cart.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\CategoryNav.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CategoryNav.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Checkout.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -73,6 +83,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Profile.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\SearchProducts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SearchProducts.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Signup.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -81,9 +96,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\AddDecresaseCard.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddDecresaseCard.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Cart.ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Cart.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Cart.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\CategoryNav.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CategoryNav.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Checkout.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -128,6 +154,10 @@
     <EmbeddedResource Update="Resources\Profile.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Profile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SearchProducts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SearchProducts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Signup.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

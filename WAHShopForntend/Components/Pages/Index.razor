@@ -1,6 +1,6 @@
 ﻿@page "/"
 @inject IStringLocalizer< WAHShopForntend.Resources.Index> L
-
+@inherits LayoutComponentBase
 @if (IsLoading)
 {
     <div class="lodingContainer">
@@ -17,8 +17,8 @@ else
         <div class="category">
             <p>
                 @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                    ? category.Name_ar
-                    : category.Name_de)
+                                                        ? category.Name_ar
+                                                        : category.Name_de)
             </p>
         </div>
         <div class="mainProductsCard">
@@ -27,25 +27,13 @@ else
             {
                 // product
                 var product = mainProductByCategory[x].Products[i];
-                // cart product, bind with productId,quantity and product, the in OnInititalized configured.
+               /* // cart product, bind with productId,quantity and product, the in OnInititalized configured.
                 CartItem cartItem = mainProductByCategory[x].Products[i].CartItem;
+                cartItem.Product = cartItem.Product ?? product;*/
 
                 <div class="productsCard">
-                    <img @onclick="() => OnProduct(product.Id)" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
-                    <div @onclick="() => OnProduct(product.Id)" class="textCard">
-                        <a>@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"  
-                            ? product.Name_ar
-                            : product.Name_de)</a>
-                        <p>@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
-                    </div>
-
-                    <div class="productsCart">
-                        <button class="btn @(cartService.IsProductAdded(cartItem.ProductId)  ? "btnProductAdded" : "btnProduct") "
-                        @onclick="() => CartChanged(cartItem)">
-                            @(cartService.IsProductAdded(cartItem.ProductId) ? $"➕({cartService.GetQuantityOfProduct(cartItem.ProductId)})" : "🛒")
-                        </button>
-                        <InputNumber @bind-Value="cartItem.Quantity" Min="0" class="form-control" />
-                    </div>
+                    <WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />                 
                 </div>
             }
 
@@ -65,8 +53,11 @@ else
     private string lang = string.Empty;
     protected override async Task OnInitializedAsync()
     {
+
         IsLoading = true;
-		// get language
+        // get all categories
+        await categoryService.GetCategories();
+        // get language
         lang = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
         // random products by category
@@ -158,7 +149,6 @@ else
         }
         mainProductByCategory.Insert(0, new ProductByCategory() { Category = categoryRecommended, Products = Recommended.Products });
     }
-
     // random products by category
     public async Task LoadRandomProductsByCategory(List<Categories> Categories)
     {
@@ -209,23 +199,12 @@ else
             {
 
             }
-			// add to exclude categories
+            // add to exclude categories
             excludeCategoriesIds.Add(category.Id);
         }
 
         StateHasChanged();
     }
 
-    // On Product Click
-    private void OnProduct(int ProductId)
-    {
-        NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
-    }
-    // Cart
-    private void CartChanged(CartItem cartItem)
-    {
-        if (!cartService.IsQuantityZero(cartItem))
-            cartService.AddToCart(cartItem);
-    }
     
 }

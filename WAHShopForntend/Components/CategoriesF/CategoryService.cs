@@ -5,9 +5,14 @@ namespace WAHShopForntend.Components.CategoriesF
     public class CategoryService(HttpClient http)
     {
         private readonly HttpClient _http = http;
-        private static List<Categories> DownloadedCategories { get; set; } = [];
+        public  List<Categories> DownloadedCategories { get; private set; } = [];
+
         public async Task<List<Categories>> GetCategories()
         {
+            if(DownloadedCategories.Count > 0)
+            {
+                return DownloadedCategories;
+            }
             try
             {
                 var response = await _http.GetAsync($"api/Categories/getCategories");
@@ -15,10 +20,13 @@ namespace WAHShopForntend.Components.CategoriesF
                     return [];
 
                 var getItems = await response.Content.ReadFromJsonAsync<GetItems<Categories>>();
-                // add the categories to the local list
-                AddCategoriesToLocal(getItems?.Items ?? [] );
+                // get now only the active categories
+                var categories = FilterIsAktiv(getItems?.Items ?? []);
 
-                return getItems?.Items ?? [];
+                // add the categories to the local list
+                AddCategoriesToLocal(categories);
+
+                return categories;
             }
             catch
             {
@@ -34,7 +42,7 @@ namespace WAHShopForntend.Components.CategoriesF
                     return null!;
                 var category = await response.Content.ReadFromJsonAsync<Categories>();
                 // add the categories to the local list
-                AddCategoriesToLocal(category ?? new());
+                AddCategoriesToLocal(category!);
                 return category ?? null!;
             }
             catch
@@ -53,20 +61,23 @@ namespace WAHShopForntend.Components.CategoriesF
                 if (!response.IsSuccessStatusCode)
                     return [];
                 var Categories = await response.Content.ReadFromJsonAsync<List<Categories>>();
-
+                // get now only the active categories
+                var categories = FilterIsAktiv(Categories ?? []);
                 // add the categories to the local list
-                AddCategoriesToLocal(Categories ?? []);
+                AddCategoriesToLocal(categories);
 
-                return Categories ?? [];
+                return categories;
             }
             catch
             {
                 return [];
             }
         }
-        public GetItems<Product> _getItems = new GetItems<Product>() { PageSize = 10 };
+        public GetItems<Product> _getItems = new() { PageSize = 10 };
         public async Task<GetItems<Product>> GetProductsByCategoryIdAsync(int categoryId, int? pageSize = null,bool? AllItemsLoaded = null, List<int>? excludeProductsIds = null)
         {
+            /* die Ausschluss von category if inaktiv wird in der getCategories gemacht */
+
             // define the page size
             if (pageSize.HasValue && pageSize.Value > 0)
             {
@@ -108,9 +119,7 @@ namespace WAHShopForntend.Components.CategoriesF
                 else
                 {
                     _getItems.CurrentPage++;
-
                     return _getItems;
-
                 }
             }
             catch
@@ -133,8 +142,24 @@ namespace WAHShopForntend.Components.CategoriesF
                 return null!;
             }
         }
+        public Categories GetCategoryByIdLocal(int categoryId)
+        {
+            var category = DownloadedCategories.Find(p => p.Id == categoryId);
+            if (category != null)
+                return category;
+            else
+            {
+                return null!;
+            }
+        }
         public void AddCategoriesToLocal(List<Categories> categories)
         {
+            if (categories.Count > 0 && DownloadedCategories.Count == 0)
+            {
+                DownloadedCategories.AddRange(categories);
+                return;
+            }
+
             foreach (var category in categories)
             {
                 if (!DownloadedCategories.Any(p => p.Id == category.Id))
@@ -145,11 +170,21 @@ namespace WAHShopForntend.Components.CategoriesF
         }
         public void AddCategoriesToLocal(Categories category)
         {
-            if (!DownloadedCategories.Any(p => p.Id == category.Id))
+            if (category != null && !DownloadedCategories.Any(p => p.Id == category.Id))
             {
                 DownloadedCategories.Add(category);
             }
         }
-       
+        public List<Categories> FilterIsAktiv(List<Categories> categories)
+        {
+            return categories.Where(c => c.IsAktiv == true).ToList();
+        }
+        public Categories FilterIsAktiv(Categories category)
+        {
+            if (category.IsAktiv == true)
+                return category;
+            else
+                return null!;
+        }
     }
 }

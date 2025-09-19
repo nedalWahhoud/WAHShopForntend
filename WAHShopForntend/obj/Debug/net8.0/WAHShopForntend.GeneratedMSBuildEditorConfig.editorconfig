@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/nedal/source/repos/WAHShopForntend/WAHShopForntend/Components/Layout/AddDecresaseCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRkRGVjcmVzYXNlQ2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-artto1w5n8
+
 [C:/Users/nedal/source/repos/WAHShopForntend/WAHShopForntend/Components/Layout/CategoryNav.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQ2F0ZWdvcnlOYXYucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-m0it68jiko
@@ -51,6 +55,10 @@ build_metadata.AdditionalFiles.CssScope = b-x61xa13amk
 [C:/Users/nedal/source/repos/WAHShopForntend/WAHShopForntend/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-vdq4mvcqnr
+
+[C:/Users/nedal/source/repos/WAHShopForntend/WAHShopForntend/Components/Layout/ProductInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUHJvZHVjdEluZm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-en5pcfsxjj
 
 [C:/Users/nedal/source/repos/WAHShopForntend/WAHShopForntend/Components/Pages/Cart.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDYXJ0LnJhem9y

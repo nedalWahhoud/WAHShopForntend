@@ -97,11 +97,29 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ⚠️ Your purchase was not completed. There is a product in your cart that is intended for people over 18 years old. ähnelt.
+        /// </summary>
+        public static string AgeError {
+            get {
+                return ResourceManager.GetString("AgeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Back to Home ähnelt.
         /// </summary>
         public static string BackToHomeButton {
             get {
                 return ResourceManager.GetString("BackToHomeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The date of birth is incorrect, please update ähnelt.
+        /// </summary>
+        public static string BirthdateUpdate {
+            get {
+                return ResourceManager.GetString("BirthdateUpdate", resourceCulture);
             }
         }
         
@@ -187,6 +205,15 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error fetching address to check delivery availability by our delivery service ähnelt.
+        /// </summary>
+        public static string ErrorAddressOurDelivery {
+            get {
+                return ResourceManager.GetString("ErrorAddressOurDelivery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die First name: ähnelt.
         /// </summary>
         public static string FirstName {
@@ -196,11 +223,20 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Do you have a discount code? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Do you have a discount Code? ähnelt.
         /// </summary>
         public static string HaveCode {
             get {
                 return ResourceManager.GetString("HaveCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Input Birthdate ähnelt.
+        /// </summary>
+        public static string InputBirthdate {
+            get {
+                return ResourceManager.GetString("InputBirthdate", resourceCulture);
             }
         }
         
@@ -259,11 +295,38 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The order value is less than the minimum delivery amount ähnelt.
+        /// </summary>
+        public static string MinimumPurchaseAmountMessage {
+            get {
+                return ResourceManager.GetString("MinimumPurchaseAmountMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The order does not contain any item that has a category matching the discount code category. ähnelt.
         /// </summary>
         public static string NoItemsInCategory {
             get {
                 return ResourceManager.GetString("NoItemsInCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This area is not within our delivery service range. Please choose delivery by Post. ähnelt.
+        /// </summary>
+        public static string NotOurDelivery {
+            get {
+                return ResourceManager.GetString("NotOurDelivery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Our delivery service delivers orders on a specific day of the week depending on your region. If you don&apos;t know the exact day for your area, please contact us for more information. ähnelt.
+        /// </summary>
+        public static string OurDeliveryServiceWaringMessage {
+            get {
+                return ResourceManager.GetString("OurDeliveryServiceWaringMessage", resourceCulture);
             }
         }
         
@@ -295,6 +358,24 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please select a delivery address. ähnelt.
+        /// </summary>
+        public static string SelectDeliveryAddress {
+            get {
+                return ResourceManager.GetString("SelectDeliveryAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please select a payment method. ähnelt.
+        /// </summary>
+        public static string SelectPaymentMethod {
+            get {
+                return ResourceManager.GetString("SelectPaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Shipping Costs ähnelt.
         /// </summary>
         public static string ShippingCosts {
@@ -309,6 +390,24 @@ namespace WAHShopForntend.Resources {
         public static string ShippingMethod {
             get {
                 return ResourceManager.GetString("ShippingMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your order contains products intended only for persons 18 years of age and older. ähnelt.
+        /// </summary>
+        public static string ShippingNotPossibleCannotVerify {
+            get {
+                return ResourceManager.GetString("ShippingNotPossibleCannotVerify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die this Products cannot be shipped. ähnelt.
+        /// </summary>
+        public static string ShippingProductNotPossible {
+            get {
+                return ResourceManager.GetString("ShippingProductNotPossible", resourceCulture);
             }
         }
         
@@ -358,11 +457,47 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unknown error ähnelt.
+        /// </summary>
+        public static string UnknownError {
+            get {
+                return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Update address ähnelt.
         /// </summary>
         public static string UpdateAddressButton {
             get {
                 return ResourceManager.GetString("UpdateAddressButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die User update ähnelt.
+        /// </summary>
+        public static string UserUpdateB {
+            get {
+                return ResourceManager.GetString("UserUpdateB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your order contains products intended only for persons 18 years of age and older. Please enter a valid date of birth to verify your age. ähnelt.
+        /// </summary>
+        public static string ValidBirthDate {
+            get {
+                return ResourceManager.GetString("ValidBirthDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your order contains products intended only for persons 18 years of age and older. ähnelt.
+        /// </summary>
+        public static string VerifyIdentity {
+            get {
+                return ResourceManager.GetString("VerifyIdentity", resourceCulture);
             }
         }
         

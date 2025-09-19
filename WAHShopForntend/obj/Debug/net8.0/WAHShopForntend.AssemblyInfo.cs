@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WAHShopForntend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ec9fb7089f372768c5a8257e0587c6db20b7379")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b9111a73791ad87c78f8c35b66dcf508668bf79d")]
 [assembly: System.Reflection.AssemblyProductAttribute("WAHShopForntend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WAHShopForntend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -129,8 +129,14 @@
   <data name="AddressFormTitle" xml:space="preserve">
     <value>Lieferadresse</value>
   </data>
+  <data name="AgeError" xml:space="preserve">
+    <value>⚠️ Ihr Kauf wurde nicht abgeschlossen. Der Warenkorb enthält ein Produkt, das nur für Personen ab 18 Jahren zugelassen ist.</value>
+  </data>
   <data name="BackToHomeButton" xml:space="preserve">
     <value>Zurück zur Startseite</value>
+  </data>
+  <data name="BirthdateUpdate" xml:space="preserve">
+    <value>das Geburtsdatum stimmt nicht, bitte aktualisieren</value>
   </data>
   <data name="BuyButton" xml:space="preserve">
     <value>Kaufen</value>
@@ -159,11 +165,17 @@
   <data name="EnterCode" xml:space="preserve">
     <value>Code eingeben</value>
   </data>
+  <data name="ErrorAddressOurDelivery" xml:space="preserve">
+    <value>Fehler beim Abrufen der Adresse zur Überprüfung der Lieferverfügbarkeit durch unseren Lieferservice</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>Vorname:</value>
   </data>
   <data name="HaveCode" xml:space="preserve">
-    <value>Hast du Rabatt Code</value>
+    <value>Hast du Rabatt Code?</value>
+  </data>
+  <data name="InputBirthdate" xml:space="preserve">
+    <value>Geburtsdatum eingeben</value>
   </data>
   <data name="InputEmail" xml:space="preserve">
     <value>Geben Sie Ihre E-Mail ein</value>
@@ -183,8 +195,17 @@
   <data name="LoginButton" xml:space="preserve">
     <value>Einloggen</value>
   </data>
+  <data name="MinimumPurchaseAmountMessage" xml:space="preserve">
+    <value>Der Bestellwert liegt unter der Mindestlieferwert</value>
+  </data>
   <data name="NoItemsInCategory" xml:space="preserve">
     <value>Die Bestellung enthält keinen Artikel, dessen Kategorie mit der Rabattcode-Kategorie übereinstimmt.</value>
+  </data>
+  <data name="NotOurDelivery" xml:space="preserve">
+    <value>Dieses Gebiet liegt nicht in unserem Lieferdienstbereich. Bitte wählen Sie die Lieferung per Post.</value>
+  </data>
+  <data name="OurDeliveryServiceWaringMessage" xml:space="preserve">
+    <value>Unser Lieferservice liefert Bestellungen je nach Region an einem bestimmten Wochentag aus. Wenn Sie den genauen Tag für Ihre Region nicht kennen, nehmen Sie bitte Kontakt mit uns auf, um weitere Informationen zu erhalten.</value>
   </data>
   <data name="PaymentNote" xml:space="preserve">
     <value>Wir arbeiten derzeit daran, Online-Zahlungsmethoden wie PayPal und Lastschrift einzuführen.</value>
@@ -195,11 +216,24 @@
   <data name="Phone" xml:space="preserve">
     <value>Telefonnummer:</value>
   </data>
+  <data name="SelectDeliveryAddress" xml:space="preserve">
+    <value>Bitte wählen Sie eine Lieferadresse aus.</value>
+  </data>
+  <data name="SelectPaymentMethod" xml:space="preserve">
+    <value>Bitte wählen Sie eine Zahlungsmethode aus.</value>
+  </data>
   <data name="ShippingCosts" xml:space="preserve">
     <value>Versandkosten</value>
   </data>
   <data name="ShippingMethod" xml:space="preserve">
     <value>Versandmethode</value>
+  </data>
+  <data name="ShippingNotPossibleCannotVerify" xml:space="preserve">
+    <value>Ihre Bestellung enthält Produkte, die nur für Personen ab 18 Jahren bestimmt sind.
+Ein Versand ist leider nicht möglich, da wir Ihre Identität nicht überprüfen können.</value>
+  </data>
+  <data name="ShippingProductNotPossible" xml:space="preserve">
+    <value>diese Produkte können nicht versendet werden.</value>
   </data>
   <data name="Street" xml:space="preserve">
     <value>Straße and Hausnummer:</value>
@@ -216,8 +250,21 @@
   <data name="TotalPrice" xml:space="preserve">
     <value>Gesamtpreis</value>
   </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Unbekannter Fehler</value>
+  </data>
   <data name="UpdateAddressButton" xml:space="preserve">
     <value>Addresse Updaten</value>
+  </data>
+  <data name="UserUpdateB" xml:space="preserve">
+    <value>Benutzerdata updaten</value>
+  </data>
+  <data name="ValidBirthDate" xml:space="preserve">
+    <value>Ihre Bestellung enthält Produkte nur für Personen ab 18 Jahren. Bitte geben Sie ein gültiges Geburtsdatum ein, um das Alter zu überprüfen.</value>
+  </data>
+  <data name="VerifyIdentity" xml:space="preserve">
+    <value>Ihre Bestellung enthält Produkte, die nur für Personen ab 18 Jahren bestimmt sind.
+Bitte bringen Sie Ihren Ausweis mit, um die Identität zu überprüfen.</value>
   </data>
   <data name="YouSave" xml:space="preserve">
     <value>du sparst bei deinem Einkauf</value>

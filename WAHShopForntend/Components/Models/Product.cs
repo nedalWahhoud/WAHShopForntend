@@ -8,9 +8,8 @@ namespace WAHShopForntend.Components.Models
         public string? Name_de { get; set; }
         public string? Description_de { get; set; }
         public int CategoryId { get; set; }
-        
         public Categories? Category { get; set; }
-        public string? Barcode { get; set; } = "BarcodeNull";
+        public string Barcode { get; set; } = string.Empty;
         public int Quantity { get; set; }
         public double PurchasePrice { get; set; }
         public double SalePrice { get; set; }
@@ -24,12 +23,16 @@ namespace WAHShopForntend.Components.Models
         public string? Description_ar { get; set; }
         public int? ProductGroupID { get; set; }
         public GroupProducts? ProductGroup { get; set; }
+        public bool IsShippable { get; set; }
+        //
         public CartItem CartItem { get; set; } = null!;
         public Product()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "DPImage.png");
             if (File.Exists(path))
                 Image = File.ReadAllBytes(path);
+
+
         }
         public void InitializeCartItem(int quantity)
         {

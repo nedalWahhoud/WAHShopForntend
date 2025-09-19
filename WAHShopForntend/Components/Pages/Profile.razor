@@ -3,7 +3,7 @@
 @using System.Security.Claims;
 @inject IStringLocalizer< WAHShopForntend.Resources.Profile> L
 
-@if (!IsRended)
+@if (!IsRending)
 {
     <div class="lodingContainer">
         <p>@L["Loading"]</p>
@@ -24,21 +24,24 @@ else
                             <strong>@L["Email"]: @authContext.User.FindFirst(ClaimTypes.Email)?.Value</strong>
                         </p>
                         <p>
+                            <strong>@L["BirthDate"]: @authContext.User.FindFirst(ClaimTypes.DateOfBirth)?.Value</strong>
+                        </p>
+                        <p>
                             <strong>@L["Password"]: </strong>
                             @if (isEditing)
                             {
                                 <EditForm Model="@updateProfile" OnValidSubmit="@HandleSubmit" FormName="updateProfile">
                                     <DataAnnotationsValidator />
                                     <div class="form-group mt-3">
-                                        <InputText type="password" @bind-Value="updateProfile.NewPassword" class="form-control" placeholder="@L["NewPassword"]" />
+                                        <InputText type="password" @bind-Value="updateProfile.NewPassword" class="form-control" placeholder="@L["NewPassword"]" disabled="@updateProfile.IsProviderLogin" />
                                         <ValidationMessage For="@(() => updateProfile.NewPassword)" />
                                     </div>
                                     <div class="form-group mt-3">
-                                        <InputText @bind-Value="updateProfile.PasswordAgain" placeholder="@L["ConfirmPassword "]" type="password" class="form-control" />
+                                        <InputText @bind-Value="updateProfile.PasswordAgain" placeholder="@L["ConfirmPassword "]" type="password" class="form-control" disabled="@updateProfile.IsProviderLogin" />
                                         <ValidationMessage For="@(() => updateProfile.PasswordAgain)" />
                                     </div>
                                     <div class="form-group mt-3">
-                                        <InputText @bind-Value="updateProfile.OldPassword" placeholder="@L["OldPassword"]" type="password" class="form-control" />
+                                        <InputText @bind-Value="updateProfile.OldPassword" placeholder="@L["OldPassword"]" type="password" class="form-control" disabled="@updateProfile.IsProviderLogin" />
                                         <ValidationMessage For="@(() => updateProfile.OldPassword)" />
                                     </div>
                                     <div class="btnDivProfile mt-3">
@@ -72,6 +75,36 @@ else
                         {
                             <button class="btn btnProfile" @onclick="() => isEditing = true">@L["EditProfile"]</button>
                         }
+
+                        @if(IsDeleteing)
+                        {
+                            <div class="deleteConfirm">
+                                <EditForm Model="@updateProfile" OnValidSubmit="@DeleteConfirmed">
+                                    <DataAnnotationsValidator />
+                                    <p>@L["DeleteAccountConfirm"]</p>
+                                    <InputText @bind-Value="updateProfile.OldPassword" class="form-control" type="password" placeholder=@L["Password"] />
+                                    <div class="deleteConfirmB">
+                                      <button type="submit" class="btn btn-danger">
+                                            @if (IsLoading)
+                                            {
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                <span class="ms-2">@L["Loading"]</span>
+                                            }
+                                            else
+											{
+                                                <span> @L["Delete"]</span>
+											}
+                                      </button>
+                                      <button class="btn btn-secondary" @onclick="CancelChanges">@L["Cancel"]</button>
+                                    </div>
+                                </EditForm>
+                            </div>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger" @onclick="DeleteAccount">@L["AccountDeleteB"]</button>
+                        }
+
                     </div>
                 </div>
             </Authorized>
@@ -80,9 +113,10 @@ else
 }
 @code {
 
-    private bool IsRended = false;
+    private bool IsRending = false;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        //
         var authState = await AuthStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         string? userIdString = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -91,9 +125,19 @@ else
             updateProfile.UserId = userId; // Assuming UserId is int
         }
 
+        string SignupProvider = user.FindFirst(c => c.Type == "SignupProvider")?.Value!;
+        if (SignupProvider == "Google")
+        {
+            updateProfile.IsProviderLogin = true;
+        }
+        else
+        {
+            updateProfile.IsProviderLogin = false;
+        }
+
         if (firstRender)
         {
-            IsRended = true;
+            IsRending = true;
             StateHasChanged();
         }
     }
@@ -104,7 +148,8 @@ else
     {
         IsLoading = true;
         if (updateProfile.UserId > 0)
-        {
+        { 
+            updateProfile.UpdateType = UpdateTypeEnum.Password; // Assuming 1 is for password update
             var result = await AuthService.UpdateProfileAsync(updateProfile);
             if (!result.Result)
             {
@@ -126,7 +171,31 @@ else
     }
     private void CancelChanges()
     {
-         updateProfile = new UpdateProfile();
+        updateProfile = new UpdateProfile();
         isEditing = false;
+        IsDeleteing = false;
+    }
+    // delete 
+    private bool IsDeleteing = false;
+    private void DeleteAccount()
+    {
+		updateProfile.UpdateType = UpdateTypeEnum.AccountDelete; // Assuming 3 is for account deletion
+        IsDeleteing = true;
+	}
+    private async Task DeleteConfirmed()
+    {
+		IsLoading = true;
+        var result = await AuthService.AccountDeleteAsync(updateProfile);
+        if (result.Result)
+        {
+            _ = JS.InvokeVoidAsync("showAlert", result.Message);
+            await AuthService!.Logout();
+            NavigationManager.NavigateTo("/", true);
+        }
+        else
+        {
+            _ = JS.InvokeVoidAsync("showAlert", result.Message);
+        }
+		IsLoading = false;
     }
 }

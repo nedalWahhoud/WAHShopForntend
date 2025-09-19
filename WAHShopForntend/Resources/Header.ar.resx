@@ -120,6 +120,9 @@
   <data name="Account" xml:space="preserve">
     <value>الحساب</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>الصفحة الرئيسية</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>تسجيل الدخول</value>
   </data>

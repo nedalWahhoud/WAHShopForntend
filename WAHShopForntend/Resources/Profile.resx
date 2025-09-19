@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountDeleteB" xml:space="preserve">
+    <value>Delete Account</value>
+  </data>
+  <data name="BirthDate" xml:space="preserve">
+    <value>birth date</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="ConfirmPassword " xml:space="preserve">
     <value>Confirm Password </value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteAccountConfirm" xml:space="preserve">
+    <value>Want you  to delete your account?</value>
   </data>
   <data name="EditProfile" xml:space="preserve">
     <value>Edit Profile</value>

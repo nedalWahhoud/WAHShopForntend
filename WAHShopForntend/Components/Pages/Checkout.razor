@@ -17,7 +17,7 @@ else
 			<div class="backToMainPage">
 				@if (orderStatusEnum == OrderStatusEnum.Commpleted)
 				{
-					<p>@L["ThankYouMessage"]</p>
+					<p>@backToMainPageMessage</p>
 				}
 				else if (orderStatusEnum == OrderStatusEnum.Processing)
 				{
@@ -68,7 +68,7 @@ else
 							@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
 							{
 								if (orderService.DownloadedPaymentMethods[i].Id == 1 || orderService.DownloadedPaymentMethods[i].Id == 2 ||
-						orderService.DownloadedPaymentMethods[i].Id == 5)
+						            orderService.DownloadedPaymentMethods[i].Id == 5)
 								{
 									var paymentMethod = orderService.DownloadedPaymentMethods[i];
 									<label>
@@ -84,7 +84,7 @@ else
 					</EditForm>
 					@* Discount Code *@
 					<div class="mb-3">
-						<label>@L["HaveCode"] ?</label>
+						<label>@L["HaveCode"]</label>
 						<div class="input-group d-flex gap-2 mb-1">
 							<InputText class="form-control" @bind-Value="discountCode.Code" />
 							<button type="button" class="btn btn-primary" @onclick="OnCode">
@@ -132,16 +132,20 @@ else
 						<InputRadioGroup @bind-Value="@order.ShippingProviderId">
 							@foreach (ShippingProvider item in orderService.DownloadedShippingProviders)
 							{
-								<label>
-									<InputRadio Value="@item.Id" />
-									@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? item.Name_ar : item.Name_de)
-								</label>
+								if (item.Id == 1)
+								{
+									<label>
+										<InputRadio Value="@item.Id" />
+										@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? item.Name_ar : item.Name_de)
+									</label>
+								}
 							}
 						</InputRadioGroup>
 					</div>
 					<label>@L["ShippingCosts"]:<span style="font-weight:bold;">&nbsp;@((order.ShippingProviders?.PublicShippingCost ?? 0).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span></label>
 				</div>
 			}
+			@* placeOrder *@
 			<div class="placeOrder">
 				@L["Items"]: @cartService.GetTotalQuantity()
 				<span>
@@ -177,9 +181,33 @@ else
 
 				<InputTextArea class="form-control" @bind-Value="order.Notes " placeholder="@L["AddNotePlaceholder"]" />
 				<div class="placeOrderB">
-
 					<AuthorizeView>
-						<Authorized>
+						<Authorized Context="auth">
+
+							@if (!IsBirthDateValid(user.BirthDate))
+							{
+								<EditForm Model="@updateProfile" OnValidSubmit="OnUserUpdate">
+									<DataAnnotationsValidator />
+									<label>@L["BirthdateUpdate"]</label>
+									<div class="form-group mb-1">
+										<InputText @bind-Value="updateProfile.BirthDate" type="date" class="form-control" />
+										<ValidationMessage For="@(() => updateProfile.BirthDate)" />
+									</div>
+									<div class="d-flex justify-content-center mt-2">
+										<button type="submit" class="btn btnEinloggen" disabled="@IsUpdateAddressMode">
+											@if (IsUpdateAddressMode)
+											{
+												<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+												<span class="ms-2">@L["Loading"]</span>
+											}
+											else
+											{
+												<span>@L["UserUpdateB"]</span>
+											}
+										</button>
+									</div>
+								</EditForm>
+							}
 							<button class="btn btnPay" type="button" @onclick="OnPay">@L["BuyButton"]</button>
 						</Authorized>
 						<NotAuthorized Context="auth">
@@ -188,7 +216,6 @@ else
 
 							<EditForm Model="@user" OnValidSubmit="OnPay">
 								<DataAnnotationsValidator />
-
 								<div class="form-group mb-1">
 									<InputText @bind-Value="user.UserName" placeholder="@L["inputUsername"]" class="form-control" />
 									<ValidationMessage For="@(() => user.UserName)" />
@@ -198,7 +225,10 @@ else
 									<InputText @bind-Value="user.Email" placeholder="@L["InputEmail"]" class="form-control" />
 									<ValidationMessage For="@(() => user.Email)" />
 								</div>
-
+								<div class="form-group mb-1">
+									<InputText @bind-Value="user.BirthDate" type="date" class="form-control" />
+									<ValidationMessage For="@(() => user.BirthDate)" />
+								</div>
 								<button type="submit" class="btn btnPay mt-2">@L["BuyWithoutLoginButton"]</button>
 							</EditForm>
 
@@ -282,6 +312,9 @@ else
 			int IntuserId = int.Parse(userId);
 			// set user id to user object
 			this.user.Id = IntuserId;
+			this.user.BirthDate = user.FindFirst(c => c.Type == ClaimTypes.DateOfBirth)?.Value!;
+			this.user.SignupProvider = user.FindFirst(c => c.Type == "SignupProvider")?.Value!;
+
 			// get addresses this user and in center list adding
 			await addressService.GetAddressesByUserIdAsync(IntuserId);
 			// default address
@@ -423,6 +456,7 @@ else
 		}
 	}
 	// Payment
+	private MarkupString backToMainPageMessage;
 	private int selectedPaymentId = 1; // Default payment method
 	private async Task OnPaymentChanged(int newPaymentId)
 	{
@@ -455,24 +489,82 @@ else
 	private async Task OnPay()
 	{
 		orderStatusEnum = OrderStatusEnum.Processing;
+		string backToMainPageAlertMessage = null!;
 		// check address
+		if ((selectedPaymentId == 2 || selectedPaymentId == 5) && selectedAddressId == 0)
 		{
-			if ((selectedPaymentId == 2 || selectedPaymentId == 5) && selectedAddressId == 0)
-			{
-				_ = JS.InvokeVoidAsync("alert", "Bitte wählen Sie eine Lieferadresse aus.");
-				orderStatusEnum = OrderStatusEnum.Pending;
-				return;
-			}
+			_ = JS.InvokeVoidAsync("alert", L["SelectDeliveryAddress"].ToString());
+			orderStatusEnum = OrderStatusEnum.Pending;
+			return;
 		}
 		// check payment method
+		if (selectedPaymentId == 0)
 		{
-			if (selectedPaymentId == 0)
+			_ = JS.InvokeVoidAsync("alert", L["SelectPaymentMethod"].ToString());
+			orderStatusEnum = OrderStatusEnum.Pending;
+			return;
+		}
+		// check MinimumPurchaseAmount
+		if (selectedPaymentId == 2) // wenn 2 Lieferung durch unsere Liefserivce
+		{
+			// if in unsere Lieferbereich
+			Address address = addressService.DownloadedAddresses.Find(a => a.Id == selectedAddressId) ?? null!;
+			if (address != null)
 			{
-				_ = JS.InvokeVoidAsync("alert", "Bitte wählen Sie eine Zahlungsmethode aus.");
+				var result = await orderService.CheckIfWithinDeliveryRange(address.ZipCode!);
+				if (result.Item1.Result == false)
+				{
+					_ = JS.InvokeVoidAsync("alert", $"{address.ZipCode} " + L[result.Item1.Message!].ToString());
+					orderStatusEnum = OrderStatusEnum.Pending;
+					return;
+				}
+				else if (result.Item1.Result == true)
+				{
+					var area = result.Item2;
+					if (cartService.GetTotalPrice() < area.MinimumPurchaseAmount)
+					{
+						_ = JS.InvokeVoidAsync("alert", L["MinimumPurchaseAmountMessage"].ToString() + $" {area.MinimumPurchaseAmount}€");
+						orderStatusEnum = OrderStatusEnum.Pending;
+						return;
+					}
+				}
+				else
+				{
+					_ = JS.InvokeVoidAsync("alert", "Unknown Error.");
+					orderStatusEnum = OrderStatusEnum.Pending;
+					return;
+				}
+				backToMainPageAlertMessage += $"<span style='color:#1E88E5; font-weight:bold;'>{L["OurDeliveryServiceWaringMessage"].ToString()}</span><br/>";
+			}
+			else
+			{
+				_ = JS.InvokeVoidAsync("alert", L["ErrorAddressOurDelivery"].ToString());
 				orderStatusEnum = OrderStatusEnum.Pending;
 				return;
 			}
 		}
+		// check Age
+		var resultAge = await orderService.CheckAge(cartService.CartItems, user);
+		if (!resultAge.Result)
+		{
+			_ = JS.InvokeVoidAsync("alert", L[resultAge.Message ?? ""].ToString());
+			orderStatusEnum = OrderStatusEnum.Pending;
+			return;
+		}
+		// check if shipping by post
+		var resultShipping = await orderService.CanShipByPost(cartService.CartItems, selectedPaymentId, System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
+		if (!resultShipping.result)
+		{
+			_ = JS.InvokeVoidAsync("alert", $"{resultShipping.productsName}, " + L[resultShipping.errorMessage].ToString());
+			orderStatusEnum = OrderStatusEnum.Pending;
+			return;
+		}
+		else
+		{
+			if (resultShipping.errorMessage != null)
+				backToMainPageAlertMessage += $"<span style='color:#FF4500; font-weight:bold;'>{L[resultShipping.errorMessage].ToString()}</span><br/>";
+		}
+
 		// check user 		
 		bool resultBool = false;
 		if (user.Id == 0)
@@ -507,6 +599,10 @@ else
 
 		if (resultBool)
 		{
+			backToMainPageMessage = new MarkupString($"{L["ThankYouMessage"]}" +
+			"<br/>" +
+			backToMainPageAlertMessage);
+
 			orderStatusEnum = OrderStatusEnum.Commpleted;
 		}
 		else
@@ -514,8 +610,10 @@ else
 			orderStatusEnum = OrderStatusEnum.Pending;
 		}
 	}
+
 	private async Task<bool> CreateOrder()
 	{
+
 		Order createOrder = new Order()
 		{
 				DeliveryAddressId = selectedAddressId,
@@ -535,6 +633,7 @@ else
 				DiscountCategoryId = order.DiscountCategoryId ?? null,
 				ShippingProviderId = order.ShippingProviderId ?? null,
 				ShippingCost = order.ShippingCost,
+				IsUserCreated = true 
 		};
 		var result = await orderService.AddOrderAsync(createOrder);
 		if (result.Result)
@@ -657,8 +756,41 @@ else
 	{
 		order.TotalPrice = cartService.GetTotalPrice();
 	}
+	// user data update
+	private UpdateProfile updateProfile = new UpdateProfile();
+	private bool isUpdateProfileEditing = false;
+	private async Task OnUserUpdate()
+	{
+		isUpdateProfileEditing = true;
+		updateProfile.UpdateType = UpdateTypeEnum.Birthday; // Assuming 3 is for birth date update
+		var result = await AuthService.UpdateProfileAsync(updateProfile);
+		if (!result.Result)
+		{
+			_ = JS.InvokeVoidAsync("showAlert", result.Message);
+		}
+		else
+		{
+			user.BirthDate = updateProfile.BirthDate;
+			_ = JS.InvokeVoidAsync("showAlert", result.Message);
+		}
+		updateProfile = new UpdateProfile();
+
+		isUpdateProfileEditing = false;
+	}
+	private bool IsBirthDateValid(string birthDate)
+	{
+		bool result = DateTime.TryParse(birthDate, out _);
+		if (!result)
+		{
+			if (string.IsNullOrEmpty(updateProfile.BirthDate))
+				updateProfile.BirthDate = "2015-01-01"; // set default value if empty)
+			updateProfile.UserId = user.Id;
+			updateProfile.UpdateType = UpdateTypeEnum.Birthday; // set birthday mode, weil in profile page wird password model gesetzt
+		}
+		return result;
+	}
 	public void Dispose()
 	{
-		
+
 	}
 }

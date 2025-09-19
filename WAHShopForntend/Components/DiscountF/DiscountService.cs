@@ -51,7 +51,6 @@ namespace WAHShopForntend.Components.DiscountF
             {
                 return (new ValidationResult { Result = false, Message = $"Fehler: {ex.Message}" }, null!);
             }
-
         }
     }
 }

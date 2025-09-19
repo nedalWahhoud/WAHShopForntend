@@ -141,13 +141,5 @@
         gap:10px;
     }
 
-    .btnProduct,
-    .btnProductAdded {
-        width: 100%;
-        padding: 0.5rem;
-    }
-
-    QuantityInput {
-        width: 100%;
-    }
+    
 }

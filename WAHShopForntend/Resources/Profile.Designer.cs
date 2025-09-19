@@ -61,6 +61,24 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete Account ähnelt.
+        /// </summary>
+        public static string AccountDeleteB {
+            get {
+                return ResourceManager.GetString("AccountDeleteB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die birth date ähnelt.
+        /// </summary>
+        public static string BirthDate {
+            get {
+                return ResourceManager.GetString("BirthDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cancel ähnelt.
         /// </summary>
         public static string Cancel {
@@ -75,6 +93,24 @@ namespace WAHShopForntend.Resources {
         public static string ConfirmPassword_ {
             get {
                 return ResourceManager.GetString("ConfirmPassword ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete ähnelt.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Want you  to delete your account? ähnelt.
+        /// </summary>
+        public static string DeleteAccountConfirm {
+            get {
+                return ResourceManager.GetString("DeleteAccountConfirm", resourceCulture);
             }
         }
         

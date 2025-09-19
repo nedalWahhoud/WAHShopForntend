@@ -86,5 +86,23 @@ namespace WAHShopForntend.Resources {
                 return ResourceManager.GetString("LoadMore", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You cannot order more than 5 piece. ähnelt.
+        /// </summary>
+        public static string MaxQuantity {
+            get {
+                return ResourceManager.GetString("MaxQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Insufficient stock ähnelt.
+        /// </summary>
+        public static string NoStock {
+            get {
+                return ResourceManager.GetString("NoStock", resourceCulture);
+            }
+        }
     }
 }

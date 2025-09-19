@@ -10,6 +10,7 @@ using WAHShopForntend.Components.EmailF;
 using WAHShopForntend.Components.CategoriesF;
 using WAHShopForntend.Components.ProductGroupF;
 using WAHShopForntend.Components.DiscountF;
+using WAHShopForntend.Components.SearchF;
 using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,8 +28,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 // Authorization
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddAuthorizationCore();
-
-
 
 // auth AuthService
 builder.Services.AddScoped<AuthService>();
@@ -48,7 +47,13 @@ builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<ProductGroupService>();
 // GroupProducts
 builder.Services.AddScoped<DiscountService>();
-
+// Search
+builder.Services.AddScoped<SearchService>();
+//
+/*builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(7078); 
+});*/
 var app = builder.Build();
 // language aktivation
 var supportedCultures = new[] { "ar", "de" };
@@ -62,13 +67,13 @@ localizationOptions.RequestCultureProviders.Insert(0, new CookieRequestCulturePr
 app.UseRequestLocalization(localizationOptions);
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+/*if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-}
-
+}*/
+// for https
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();

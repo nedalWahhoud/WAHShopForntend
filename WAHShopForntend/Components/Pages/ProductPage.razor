@@ -9,107 +9,93 @@
 }
 else
 {
-	
-		@if (product == null)
-		{
-			<p>Product not found.</p>
-		}
-		else
-		{
-			<div class="productDetails">
-				<div class="ImageSection">
-					<img class="zoomableImage" @onclick="() => ShowFullImage = true" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
-					@if (ShowFullImage)
-					{
-						<div class="modalOverlay" @onclick="() => ShowFullImage = false">
-							<img src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())"
-							alt="Image of Product"
-							class="modalImage" />
-						</div>
-					}
-				</div>
-				<div class="InfoSection">
-					<h2 class="productTitle">
-						@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-																								? product.Name_ar
-																								: product.Name_de)
-					</h2>
-					<p class="productDescription">
-						@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-																								? product.Description_ar
-																								: product.Description_de)
-					</p>
-					<p class="productPrice">@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
-					@if (product.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
-					{
-						<select class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
-							<option value="0">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-								? product.ProductGroup.GroupName_ar
-							    : product.ProductGroup.GroupName_de)</option>
-							@foreach (var groupProduct in groupProducts)
-							{
-								<option value="@groupProduct.Id">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+
+	@if (product == null)
+	{
+		<p>Product not found.</p>
+	}
+	else
+	{
+		<div class="productDetails">
+			<div class="ImageSection">
+				<img class="zoomableImage" @onclick="() => ShowFullImage = true" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
+				@if (ShowFullImage)
+				{
+					<div class="modalOverlay" @onclick="() => ShowFullImage = false">
+						<img src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())"
+						alt="Image of Product"
+						class="modalImage" />
+					</div>
+				}
+			</div>
+			<div class="InfoSection">
+				<h2 class="productTitle">
+					@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+										? product.Name_ar
+										: product.Name_de)
+				</h2>
+				<p class="productDescription">
+					@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+																	? product.Description_ar
+																	: product.Description_de)
+				</p>
+				<p class="productPrice">@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
+				@if (product.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
+				{
+					<select class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
+						<option value="0">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+														? product.ProductGroup.GroupName_ar
+														: product.ProductGroup.GroupName_de)</option>
+						@foreach (var groupProduct in groupProducts)
+						{
+							<option value="@groupProduct.Id">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
 								? groupProduct.Name_ar
 								: groupProduct.Name_de
 								)</option>
-							}
-						</select>
-					}
-					<div class="DivQuantity">
-						<button class="btn @(cartService.IsProductAdded(product.CartItem.ProductId)  ? "btnProductAdded2" : "btnProduc2") "
-						@onclick="() => CartChanged(product.CartItem)">
-							@(cartService.IsProductAdded(product.CartItem.ProductId) ? $"➕({cartService.GetQuantityOfProduct(product.CartItem.ProductId)})" : "🛒")
-						</button>
-						<InputNumber class="QuantityInput" type="number" @bind-Value="product.CartItem.Quantity" Min="0" />
-					</div>
-				</div>
-			</div>
-		}
-		@for (int x = 0; x < mainProductByCategory.Count; x++)
-		{
-
-			// category
-			var category = mainProductByCategory[x].Category;
-			<div class="category">
-				<p>
-					@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-								? category.Name_ar
-								: category.Name_de)
-				</p>
-			</div>
-			<div class="mainProductsCard">
-
-				@for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
-				{
-					// product
-					var product = mainProductByCategory[x].Products[i];
-					// cart product, bind with productId,quantity and product, the in OnInititalized configured.
-					CartItem cartItem = mainProductByCategory[x].Products[i].CartItem;
-
-					<div class="productsCard">
-						<img @onclick="() => OnProduct(product.Id)" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
-						<div @onclick="() => OnProduct(product.Id)" class="textCard">
-							<a>
-								@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-															? product.Name_ar
-															: product.Name_de)
-							</a>
-							<p>@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
-						</div>
-
-						<div class="productsCart">
-							<button class="btn @(cartService.IsProductAdded(cartItem.ProductId)  ? "btnProductAdded" : "btnProduct") "
-							@onclick="() => CartChanged(cartItem)">
-								@(cartService.IsProductAdded(cartItem.ProductId) ? $"➕({cartService.GetQuantityOfProduct(cartItem.ProductId)})" : "🛒")
-							</button>
-							<InputNumber @bind-Value="cartItem.Quantity" Min="0" class="form-control" />
-						</div>
-					</div>
+						}
+					</select>
 				}
+				<div class="DivQuantity">
+					@*{ product.CartItem.Product = product.CartItem.Product ?? product; }*@
+					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+				</div>
 
 			</div>
-		}
-	
+
+		</div>
+	}
+	@* random categorys *@
+	@for (int x = 0; x < mainProductByCategory.Count; x++)
+	{
+
+		// category
+		var category = mainProductByCategory[x].Category;
+		<div class="category">
+			<p>
+				@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+														? category.Name_ar
+														: category.Name_de)
+			</p>
+		</div>
+		<div class="mainProductsCard">
+
+			@for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
+			{
+				// product
+				var product = mainProductByCategory[x].Products[i];
+				/*// cart product, bind with productId,quantity and product, the in OnInititalized configured.
+				CartItem cartItem = mainProductByCategory[x].Products[i].CartItem;
+				cartItem.Product = cartItem.Product ?? product;*/
+
+				<div class="productsCard">
+					<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+				</div>
+			}
+
+		</div>
+	}
+
 }
 @code {
 	[Parameter]
@@ -130,7 +116,7 @@ else
 		isLoading = true;
 		// get product by id
 		product = productService.GetProductByIdLocal(ProductId)
-			?? await productService.GetProductByIdsServer(ProductId);
+					?? await productService.GetProductByIdServer(ProductId);
 		if (product != null)
 		{
 			product.InitializeCartItem(cartService.GetQuantityOfProduct(product.Id));
@@ -142,11 +128,11 @@ else
 			excludeCategoriesIds.Add(product?.CategoryId ?? 0);
 		}
 		// get product by categoryId
-		_ = MoreProductsOfSameCategory(product?.CategoryId ?? 0, product?.Category ?? null);
+		_ =  MoreProductsOfSameCategory(product?.CategoryId ?? 0, product?.Category ?? null);
 		// get random products by categoryId
 		int count = 2;
 		var random = new Random();
-		allCategories = categoryService.GetAllCategoriesLocal();
+		allCategories = await categoryService.GetCategories();
 		if (allCategories.Count >= count)
 		{
 			List<Categories> categories = allCategories
@@ -170,59 +156,58 @@ else
 	}
 	private async Task MoreProductsOfSameCategory(int categoryId,Categories? category = null)
 	{
-		int? currentIndex = 0;
-		if (category == null)
+		try
 		{
-			category = await categoryService.getCategoryById(categoryId);
 			if (category == null)
-				return; // category not found
-		}
+			{
+				category = await categoryService.getCategoryById(categoryId);
+				if (category == null)
+					return; // category not found
+			}
 
-		// get products local
-		var productsLocal = await productService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
-		if (productsLocal != null && productsLocal.Count > 0)
+			// get products local
+			var productsLocal = await productService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
+			if (productsLocal != null && productsLocal.Count > 0)
+			{
+				// initialize CartItem for each product
+				foreach (var p in productsLocal)
+				{
+					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+					excludeProductsIds!.Add(p.Id);
+				}
+				mainProductByCategory.Add(new ProductByCategory() { Category = category, Products = productsLocal });
+				
+			}
+			// get products server
+			var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, 10, false, excludeProductsIds);
+			if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
+			{
+				// initialize CartItem for each product
+				foreach (var p in productsServer.Items)
+				{
+					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+					excludeProductsIds!.Add(p.Id);
+				}
+
+				mainProductByCategory.Insert(0,new ProductByCategory() { Category = category, Products = productsServer.Items });
+
+				// add to local Products list
+				_ = Task.Run(() =>
+				{
+					productService.AddProductToLocal(productsServer.Items);
+				});
+			}
+			else if (productsServer != null && productsServer.AllItemsLoaded)
+			{
+
+			}
+
+			StateHasChanged();
+		}
+		catch
 		{
-			// initialize CartItem for each product
-			foreach (var p in productsLocal)
-			{
-				p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
-				excludeProductsIds!.Add(p.Id);
-			}
-			mainProductByCategory.Add(new ProductByCategory() { Category = category, Products = productsLocal });
-			currentIndex = mainProductByCategory.FindIndex(c => c.Category.Id == category.Id);
-		}
-		// get products server
-		var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id,10,false, excludeProductsIds);
-		if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
-		{
-			// initialize CartItem for each product
-			foreach (var p in productsServer.Items)
-			{
-				p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
-				excludeProductsIds!.Add(p.Id);
-			}
-
-			if (currentIndex.HasValue)
-			{
-				mainProductByCategory[currentIndex.Value].Products.AddRange(productsServer.Items);
-			}
-			else
-			{
-				mainProductByCategory.Add(new ProductByCategory() { Category = category, Products = productsServer.Items });
-			}
-
-			// add to local Products list
-			_ = Task.Run(() =>
-			{
-				productService.AddProductToLocal(productsServer.Items);
-			});
-		}
-		else if (productsServer != null && productsServer.AllItemsLoaded)
-		{
 
 		}
-
-		StateHasChanged();
 	}
 	// random products by category
 	public async Task LoadRandomProductsByCategory(List<Categories> Categories)
@@ -280,12 +265,6 @@ else
 		}
 		
 		StateHasChanged();
-	}
-	// Cart
-	private void CartChanged(CartItem cartItem)
-	{
-		if (!cartService.IsQuantityZero(cartItem))
-			cartService.AddToCart(cartItem);
 	}
 	// Image zoom 
 	bool ShowFullImage = false;

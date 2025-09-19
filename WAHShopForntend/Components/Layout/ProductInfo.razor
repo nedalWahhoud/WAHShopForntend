@@ -1,0 +1,28 @@
+﻿@if (product != null)
+{
+   <img @onclick="() => OnProduct(product.Id)" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
+   <div @onclick="() => OnProduct(product.Id)" class="textCard">
+     <a>
+        @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                    ? product.Name_ar
+                    : product.Name_de)
+     </a>
+     <p>@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
+   </div>
+}
+@code {
+    [Parameter]
+    public int ProductId { get; set; }
+
+    private Product product = null!;
+    protected override async Task OnInitializedAsync()
+    {
+        product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdServer(ProductId);
+    }
+
+    // On Product Click
+    private void OnProduct(int ProductId)
+    {
+        NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
+    }
+}

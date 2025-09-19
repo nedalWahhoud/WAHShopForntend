@@ -1,6 +1,6 @@
 ﻿@page "/searchProducts/{productId:int}"
 @page "/searchProducts/{productId:int}/{searchText}"
-
+@inject IStringLocalizer< WAHShopForntend.Resources.SearchProducts> L
 @if (Isloading)
 {
 	<div class="lodingContainer">
@@ -17,25 +17,12 @@ else
 					// product
 					var product = searchedProducts[i];
 					// cart product, bind with productId,quantity and product, the in OnInititalized configured.
-					var cartItem = searchedProducts[i].CartItem;
+					/*var cartItem = searchedProducts[i].CartItem;
+				    cartItem.Product = cartItem.Product ?? product;*/
 
 					<div class="cardProduct">
-						<img @onclick="() => OnProduct(product.Id)" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
-						<div @onclick="() => OnProduct(product.Id)" class="textCard">
-							<a href="">
-								@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-															? product.Name_ar
-															: product.Name_de)
-							</a>
-							<p>@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
-						</div>
-						<div class="cartItems">
-							<button class="btn @(cartService.IsProductAdded(cartItem.ProductId)  ? "btnProductAdded" : "btnProduct") "
-							@onclick="() => CartChanged(cartItem)">
-								@(cartService.IsProductAdded(cartItem.ProductId) ? $"➕({cartService.GetQuantityOfProduct(cartItem.ProductId)})" : "🛒")
-							</button>
-							<InputNumber @bind-Value="cartItem.Quantity" Min="0" class="QuantityInput" />
-						</div>
+				     	<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 					</div>
 				}
 			</div>
@@ -46,9 +33,6 @@ else
 		}
 	
 }
-
-
-
 @code {
 	[Parameter]
 	public int productId { get; set; }
@@ -64,7 +48,7 @@ else
 
 		// get on clicked item
 		var product = productService.GetProductByIdLocal(productId)
-					?? await productService.GetProductByIdsServer(productId);
+					?? await productService.GetProductByIdServer(productId);
 		// add to mainPage product list
 		if (product != null)
 		{
@@ -74,11 +58,11 @@ else
 
 		// search first local
 		List<Product> searchedResults = new();
-		searchedResults = productService.SearchProductsLocal(searchText!, new() { productId });
+		searchedResults = searchService.SearchProductsLocal(searchText!, new() { productId });
 		// if local search returns no results, search from server
 		if (searchedResults != null && searchedResults.Count == 0)
 		{
-			searchedResults = await productService.SearchProductsAsync(searchText!, new() {productId});
+			searchedResults = await searchService.SearchProductsAsync(searchText!, new() {productId});
 			// add to local product list
 			if (searchedResults != null && searchedResults.Count > 0)
 			{
@@ -102,11 +86,5 @@ else
 	private void OnProduct(int ProductId)
 	{
 		NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
-	}
-	// Cart
-	private void CartChanged(CartItem cartItem)
-	{
-		if (!cartService.IsQuantityZero(cartItem))
-			cartService.AddToCart(cartItem);
 	}
 }
