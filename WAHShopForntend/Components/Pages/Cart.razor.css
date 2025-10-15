@@ -78,7 +78,10 @@
     padding: 5px;
     font-size: 1rem;
 }
-
+.PriceDiv{
+    display:flex;
+    flex-direction:row;
+}
 /* Total Price */
 .TotalPrice {
     text-align: right;

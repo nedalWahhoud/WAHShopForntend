@@ -56,7 +56,6 @@ html, body {
     height: 50px; /* حدد ارتفاع */
     align-items: flex-end; /* يحرك النص لأسفل */
     padding-left: 0.4rem;
- 
 }
 
     .category p {

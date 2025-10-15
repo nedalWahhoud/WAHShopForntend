@@ -38,7 +38,7 @@ else
 										    ? item.Product.Description_ar
 											: item.Product.Description_de)
 								</p>
-								<p>@L["PriceLabel"] @item.Product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))&nbsp;&nbsp;&nbsp;@L["TotalLabel"]<span style="font-weight:bold; ">&nbsp;@((item.Product.SalePrice * item.Quantity).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span> </p>
+								<div class="PriceDiv">@L["PriceLabel"] <WAHShopForntend.Components.Layout.PriceLayout ProductId="@item.ProductId" />&nbsp;&nbsp;&nbsp;@L["TotalLabel"]<span style="font-weight:bold; ">&nbsp;@(cartService.GetTotalPriceOfProduct(item.ProductId).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span> </div>
 								<div class="quantityInput">
 									<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@item.ProductId" IsCartLayout="true" OnQuantityChanged="HandleQuantityChanged" />
 								</div>

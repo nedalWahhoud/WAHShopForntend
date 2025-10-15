@@ -39,7 +39,7 @@ else
 																	? product.Description_ar
 																	: product.Description_de)
 				</p>
-				<p class="productPrice">@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
+				<div class="productPrice"> <WAHShopForntend.Components.Layout.PriceLayout ProductId="product.Id" /> </div>
 				@if (product.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
 				{
 					<select class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
@@ -50,8 +50,8 @@ else
 						{
 							<option value="@groupProduct.Id">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
 								? groupProduct.Name_ar
-								: groupProduct.Name_de
-								)</option>
+								: groupProduct.Name_de)
+							</option>
 						}
 					</select>
 				}
@@ -116,7 +116,7 @@ else
 		isLoading = true;
 		// get product by id
 		product = productService.GetProductByIdLocal(ProductId)
-					?? await productService.GetProductByIdServer(ProductId);
+					?? await productService.GetProductByIdAsync(ProductId);
 		if (product != null)
 		{
 			product.InitializeCartItem(cartService.GetQuantityOfProduct(product.Id));
@@ -132,7 +132,7 @@ else
 		// get random products by categoryId
 		int count = 2;
 		var random = new Random();
-		allCategories = await categoryService.GetCategories();
+		allCategories = await categoryService.GetCategoriesAsync();
 		if (allCategories.Count >= count)
 		{
 			List<Categories> categories = allCategories
@@ -160,13 +160,13 @@ else
 		{
 			if (category == null)
 			{
-				category = await categoryService.getCategoryById(categoryId);
+				category = await categoryService.getCategoryByIdAsync(categoryId);
 				if (category == null)
 					return; // category not found
 			}
 
 			// get products local
-			var productsLocal = await productService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
+			var productsLocal = await categoryService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
 			if (productsLocal != null && productsLocal.Count > 0)
 			{
 				// initialize CartItem for each product
@@ -218,7 +218,7 @@ else
 		{
 
 			// get products local
-			var productsLocal = await productService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
+			var productsLocal = await categoryService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
 			if (productsLocal != null && productsLocal.Count > 0)
 			{
 				// initialize CartItem for each product

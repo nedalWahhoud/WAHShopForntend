@@ -1,7 +1,7 @@
 ﻿.header {
     background-color: var(--hederBackgroundColoe);
     color: white;
-    height: 3.5rem;
+    height: 6rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -28,16 +28,11 @@ html[dir="rtl"] .header {
         justify-content: flex-start;
     }
 
-        .header .containerLeft h2 {
-            cursor: pointer;
-            margin: 0;
-            font-size: 1.5rem;
-        }
-
-    .header .containerCenter {
-        justify-content: center; /* توسيط أفقي */
-        text-align: center;
-    }
+.header .containerCenter {
+    justify-content: center; 
+    text-align: center;
+    height: 100%;
+}
 
     .header .containerRight {
         justify-content: flex-end;
@@ -55,14 +50,8 @@ html[dir="rtl"] .searchBox {
     position: relative;
     width: 100%;
     max-width: 400px;
-}
-
-.searchInput {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    height:100px;
+    align-content:center;
 }
 
 .searchDropdown {
@@ -94,7 +83,7 @@ html[dir="rtl"] .searchBox {
             background-color: var(--hederBackgroundColoe);
         }
         .searchDropdown li > * {
-            margin-left: 0.5rem; /* يحرك محتوى العنصر وليس الخلفية */
+            margin-left: 0.5rem; 
         }
         .searchDropdown li img {
             width: 50px;
@@ -104,6 +93,9 @@ html[dir="rtl"] .searchBox {
 .btn {
     background-color: var(--hederBackgroundColoe);
     border: none;
+}
+.dropdown {
+    
 }
 .dropdownMenu {
     background-color: var(--hederBackgroundColoe);
@@ -117,7 +109,7 @@ html[dir="rtl"] .searchBox {
     .dropdownItem:hover {
         background-color: var(--dropdownBackgroundHover);
     }
-/* 🌐 ميديا كويري للموبايل */
+
 @media (max-width: 768px) {
     .header .containerLeft {
         display: none;

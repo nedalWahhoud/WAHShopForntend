@@ -1,0 +1,25 @@
+﻿.PriceDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+    .PriceDiv .oldPrice {
+        text-decoration: line-through;
+        color: red;
+        margin: 0;
+    } 
+
+    .PriceDiv .newPrice {
+        color: green;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .PriceDiv .normalPrice {
+        color: black;
+        font-weight: bold;
+        margin: 0;
+    }

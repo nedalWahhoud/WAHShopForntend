@@ -9,7 +9,7 @@ namespace WAHShopForntend.Components.ProductsF
     {
         private readonly HttpClient _http = http;
         public  List<Product> DownloadedProduct { get;  set; } = [];
-        public async Task<List<Product>> GetProductByIdsServer(List<int> productIds)
+        public async Task<List<Product>> GetProductByIdsAsync(List<int> productIds)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace WAHShopForntend.Components.ProductsF
                 return null!;
             }
         }
-        public async Task<Product> GetProductByIdServer(int productId)
+        public async Task<Product> GetProductByIdAsync(int productId)
         {
             try
             {
@@ -87,26 +87,6 @@ namespace WAHShopForntend.Components.ProductsF
                 return null!;
             }
         }
-        public Task<List<Product>> GetProductByCategoryIdLocal(int categoryId, List<int>? excludeProductsIds = null, int? excludeProductsId = null)
-        {
-            try
-            {
-                // initialize the excludeProductsIds and excludeProductsId if they are null
-                excludeProductsIds ??= [];
-                excludeProductsId ??= 0;
-
-                return Task.FromResult(DownloadedProduct
-                    .Where(p => p.CategoryId == categoryId
-                    && !excludeProductsIds.Contains(p.Id)
-                    && p.Id != excludeProductsId)
-                    .ToList());
-            }
-            catch
-            {
-                return null!;
-            }
-        }
-        
         public List<Product> GetProductByGroupIdLocal(int groubProductId, List<int>? excludeProductsIds = null)
         {
             excludeProductsIds ??= [];

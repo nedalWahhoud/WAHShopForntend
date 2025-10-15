@@ -1,0 +1,28 @@
+﻿<div class="PriceDiv">
+    @if (product.DiscountedPrice > 0)
+    {
+        <p class="oldPrice">
+            @product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
+        </p>
+        <p class="newPrice">
+            @product.DiscountedPrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
+        </p>
+    }
+    else
+    {
+        <p class="normalPrice">
+            @product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
+        </p>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int ProductId { get; set; }
+
+    private Product product = null!;
+    protected override async Task OnInitializedAsync()
+    {
+        product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdAsync(ProductId);
+    }
+}

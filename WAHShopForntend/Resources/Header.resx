@@ -135,6 +135,9 @@
   <data name="MyProfile" xml:space="preserve">
     <value>My Profile</value>
   </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
   <data name="ProductSearch" xml:space="preserve">
     <value>Search product...</value>
   </data>

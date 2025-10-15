@@ -117,28 +117,80 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>الحساب</value>
+  <data name="ContactUs" xml:space="preserve">
+    <value>7. Kontakt uns</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>الصفحة الرئيسية</value>
+  <data name="ContactUsDescription" xml:space="preserve">
+    <value>Wenn Sie Fragen zu dieser Datenschutzerklärung oder zur Verarbeitung Ihrer Daten haben, können Sie uns per E-Mail kontaktieren: &lt;strong&gt;Syriana.lebensmittel@gmail.com&lt;/strong&gt;</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>تسجيل الدخول</value>
+  <data name="Cookies" xml:space="preserve">
+    <value>6. Cookies</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>تسجيل الخروج</value>
+  <data name="CookiesDescription" xml:space="preserve">
+    <value>Wir verwenden Cookies, um Sitzungen und Spracheinstellungen zu speichern. 
+Diese Cookies sind für die korrekte Funktion der Website notwendig. 
+Sie können Ihren Browser so einstellen, dass Cookies abgelehnt werden, allerdings können dadurch einige Funktionen eingeschränkt werden.</value>
   </data>
-  <data name="MyOrders" xml:space="preserve">
-    <value>الطلبات</value>
+  <data name="DataCollection" xml:space="preserve">
+    <value>1. Welche Daten wir erheben</value>
   </data>
-  <data name="MyProfile" xml:space="preserve">
-    <value>الملف الشخصي</value>
+  <data name="DataCollectionDescription1" xml:space="preserve">
+    <value>Anmeldedaten (z. B. Benutzername und Passwort).</value>
   </data>
-  <data name="PrivacyPolicy" xml:space="preserve">
-    <value>سياسة الخصوية</value>
+  <data name="DataCollectionDescription2" xml:space="preserve">
+    <value>Cookies zur Speicherung der Sitzung und der bevorzugten Sprache.</value>
   </data>
-  <data name="ProductSearch" xml:space="preserve">
-    <value>البحث عن منتج...</value>
+  <data name="DataCollectionDescription3" xml:space="preserve">
+    <value>Allgemeine Informationen, die Ihr Browser bereitgestellt (zB. Sprach).</value>
+  </data>
+  <data name="DataSecurity" xml:space="preserve">
+    <value>5. Datensicherheit</value>
+  </data>
+  <data name="DataSecurityDescription1" xml:space="preserve">
+    <value>Wir treffen geeignete technische und organisatorische Maßnahmen, 
+um Ihre Daten vor unbefugtem Zugriff, Verlust oder Veränderung zu schützen.</value>
+  </data>
+  <data name="LastUpdate" xml:space="preserve">
+    <value>Letzte Aktualisierung:</value>
+  </data>
+  <data name="PrivacyPolicy1" xml:space="preserve">
+    <value>Datenschutzrichtlinie</value>
+  </data>
+  <data name="PrivacyPolicyDescription" xml:space="preserve">
+    <value> Wir respektieren Ihre Privatsphäre und verpflichten uns, Ihre personenbezogenen Daten zu schützen. 
+        Diese Seite erläutert, welche Daten wir erheben, wie wir sie verwenden und wie wir sie speichern, 
+        wenn Sie unsere Website oder Anwendung nutzen.</value>
+  </data>
+  <data name="ShareData" xml:space="preserve">
+    <value>3. Weitergabe von Daten</value>
+  </data>
+  <data name="ShareDataDescription" xml:space="preserve">
+    <value>Wir geben Ihre personenbezogenen Daten nicht an Dritte weiter, 
+außer wenn dies gesetzlich vorgeschrieben ist oder für die Bereitstellung 
+wesentlicher Dienste erforderlich ist (z. B. Einloggen oder Zahlungsabwicklung).</value>
+  </data>
+  <data name="UseData" xml:space="preserve">
+    <value>2. Wie wir die Daten verwenden</value>
+  </data>
+  <data name="UseDataDescription1" xml:space="preserve">
+    <value>Um eine sichere und personalisierte Nutzungserfahrung zu bieten.</value>
+  </data>
+  <data name="UseDataDescription2" xml:space="preserve">
+    <value>Um Ihre Einstellungen wie die bevorzugte Sprache zu speichern.</value>
+  </data>
+  <data name="UseDataDescription3" xml:space="preserve">
+    <value>Zur Verbesserung der Leistung unserer Website und unserer Dienste.</value>
+  </data>
+  <data name="YourRights" xml:space="preserve">
+    <value>4. Ihre Rechte</value>
+  </data>
+  <data name="YourRightsDescription1" xml:space="preserve">
+    <value>Zugriff auf Ihre personenbezogenen Daten oder Anforderung einer Kopie.</value>
+  </data>
+  <data name="YourRightsDescription2" xml:space="preserve">
+    <value>Berichtigung oder Löschung Ihrer Daten anfordern.</value>
+  </data>
+  <data name="YourRightsDescription3" xml:space="preserve">
+    <value>Widerspruch gegen bestimmte Verarbeitungsmethoden einlegen.</value>
   </data>
 </root>

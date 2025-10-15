@@ -7,7 +7,8 @@
                     ? product.Name_ar
                     : product.Name_de)
      </a>
-     <p>@product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</p>
+	<PriceLayout ProductId="ProductId" />
+
    </div>
 }
 @code {
@@ -17,7 +18,7 @@
     private Product product = null!;
     protected override async Task OnInitializedAsync()
     {
-        product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdServer(ProductId);
+        product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdAsync(ProductId);
     }
 
     // On Product Click

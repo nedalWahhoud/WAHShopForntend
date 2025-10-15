@@ -63,10 +63,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Login.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\MainLayout.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainLayout.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Orders.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Orders.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\PrivacyPolicy.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PrivacyPolicy.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\ProductPage.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -139,9 +149,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Login.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MainLayout.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainLayout.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Orders.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Orders.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PrivacyPolicy.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrivacyPolicy.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ProductPage.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -117,28 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>الحساب</value>
+  <data name="ContactUs" xml:space="preserve">
+    <value>7. Contact us</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>الصفحة الرئيسية</value>
+  <data name="ContactUsDescription" xml:space="preserve">
+    <value>If you have any questions about this privacy policy or the processing of your data, you can contact us by email: &lt;strong&gt;Syriana.lebensmittel@gmail.com&lt;/strong&gt;</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>تسجيل الدخول</value>
+  <data name="Cookies" xml:space="preserve">
+    <value>6. Cookies</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>تسجيل الخروج</value>
+  <data name="CookiesDescription" xml:space="preserve">
+    <value>We use cookies to save sessions and language preferences. These cookies are necessary for the website to function properly. You can set your browser to refuse cookies, but this may limit some features.</value>
   </data>
-  <data name="MyOrders" xml:space="preserve">
-    <value>الطلبات</value>
+  <data name="DataCollection" xml:space="preserve">
+    <value>1. What data we collect</value>
   </data>
-  <data name="MyProfile" xml:space="preserve">
-    <value>الملف الشخصي</value>
+  <data name="DataCollectionDescription1" xml:space="preserve">
+    <value>Login information (such as username and password).</value>
   </data>
-  <data name="PrivacyPolicy" xml:space="preserve">
-    <value>سياسة الخصوية</value>
+  <data name="DataCollectionDescription2" xml:space="preserve">
+    <value>Cookies to save your login session and language preference.</value>
   </data>
-  <data name="ProductSearch" xml:space="preserve">
-    <value>البحث عن منتج...</value>
+  <data name="DataCollectionDescription3" xml:space="preserve">
+    <value>General information provided by your browser (e.g. language or device type).</value>
+  </data>
+  <data name="DataSecurity" xml:space="preserve">
+    <value>5. Data security</value>
+  </data>
+  <data name="DataSecurityDescription1" xml:space="preserve">
+    <value>We take appropriate technical and organizational measures to protect your data from unauthorized access, loss, or alteration.</value>
+  </data>
+  <data name="LastUpdate" xml:space="preserve">
+    <value>Last update:</value>
+  </data>
+  <data name="PrivacyPolicy1" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="PrivacyPolicyDescription" xml:space="preserve">
+    <value>We respect your privacy and are committed to protecting your personal information.</value>
+  </data>
+  <data name="ShareData" xml:space="preserve">
+    <value>3. Sharing of data</value>
+  </data>
+  <data name="ShareDataDescription" xml:space="preserve">
+    <value>We do not share your personal information with third parties, except when required by law or necessary to provide essential services (e.g., logging in or processing payments).</value>
+  </data>
+  <data name="UseData" xml:space="preserve">
+    <value>2. How we use the data</value>
+  </data>
+  <data name="UseDataDescription1" xml:space="preserve">
+    <value>To provide a secure and personalized user experience.</value>
+  </data>
+  <data name="UseDataDescription2" xml:space="preserve">
+    <value>To save your settings such as preferred language.</value>
+  </data>
+  <data name="UseDataDescription3" xml:space="preserve">
+    <value>To improve the performance of our website and services.</value>
+  </data>
+  <data name="YourRights" xml:space="preserve">
+    <value>4. Your rights</value>
+  </data>
+  <data name="YourRightsDescription1" xml:space="preserve">
+    <value>Access your personal data or request a copy.</value>
+  </data>
+  <data name="YourRightsDescription2" xml:space="preserve">
+    <value>Request correction or deletion of your data.</value>
+  </data>
+  <data name="YourRightsDescription3" xml:space="preserve">
+    <value>Object to certain processing methods.</value>
   </data>
 </root>

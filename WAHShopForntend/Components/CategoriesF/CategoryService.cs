@@ -1,13 +1,16 @@
-﻿using WAHShopForntend.Components.Models;
+﻿using System.Globalization;
+using WAHShopForntend.Components.Models;
+using WAHShopForntend.Components.ProductsF;
 
 namespace WAHShopForntend.Components.CategoriesF
 {
-    public class CategoryService(HttpClient http)
+    public class CategoryService(HttpClient http, ProductService productService)
     {
         private readonly HttpClient _http = http;
+        private readonly ProductService _productService = productService;
+       
         public  List<Categories> DownloadedCategories { get; private set; } = [];
-
-        public async Task<List<Categories>> GetCategories()
+        public async Task<List<Categories>> GetCategoriesAsync()
         {
             if(DownloadedCategories.Count > 0)
             {
@@ -33,7 +36,7 @@ namespace WAHShopForntend.Components.CategoriesF
                 return [];
             }
         }
-        public async Task<Categories> getCategoryById(int categoryId)
+        public async Task<Categories> getCategoryByIdAsync(int categoryId)
         {
             try
             {
@@ -50,7 +53,7 @@ namespace WAHShopForntend.Components.CategoriesF
                 return null!;
             }
         }
-        public async Task<List<Categories>> getCategoriesByIds(List<int> categoryIds)
+        public async Task<List<Categories>> getCategoriesByIdsAsync(List<int> categoryIds)
         {
             try
             {
@@ -76,6 +79,8 @@ namespace WAHShopForntend.Components.CategoriesF
         public GetItems<Product> _getItems = new() { PageSize = 10 };
         public async Task<GetItems<Product>> GetProductsByCategoryIdAsync(int categoryId, int? pageSize = null,bool? AllItemsLoaded = null, List<int>? excludeProductsIds = null)
         {
+            // -1 is for OnOffer
+
             /* die Ausschluss von category if inaktiv wird in der getCategories gemacht */
 
             // define the page size
@@ -104,7 +109,7 @@ namespace WAHShopForntend.Components.CategoriesF
                 }
                 queryString = $"?PageSize={_getItems.PageSize}" + queryString;
 
-                var response = await _http.GetAsync($"api/Categories/getProductsByCategoryId/{categoryId}{queryString}");
+                var response = await _http.GetAsync($"api/Categories/getProductsByCategoryId/{categoryId.ToString(CultureInfo.InvariantCulture)}{queryString}");
 
 
                 if (!response.IsSuccessStatusCode)
@@ -132,7 +137,7 @@ namespace WAHShopForntend.Components.CategoriesF
         {
             return DownloadedCategories;
         }
-        public Categories GetProductByIdLocal(int categoryId)
+        public Categories GetCategoryByIdLocal(int categoryId)
         {
             var category = DownloadedCategories.Find(p => p.Id == categoryId);
             if (category != null)
@@ -142,12 +147,22 @@ namespace WAHShopForntend.Components.CategoriesF
                 return null!;
             }
         }
-        public Categories GetCategoryByIdLocal(int categoryId)
+        public Task<List<Product>> GetProductByCategoryIdLocal(int categoryId, List<int>? excludeProductsIds = null, int? excludeProductsId = null)
         {
-            var category = DownloadedCategories.Find(p => p.Id == categoryId);
-            if (category != null)
-                return category;
-            else
+            // -1 is for OnOffer
+            try
+            {
+                // initialize the excludeProductsIds and excludeProductsId if they are null
+                excludeProductsIds ??= [];
+                excludeProductsId ??= 0;
+
+                return Task.FromResult(_productService.DownloadedProduct
+                    .Where(p => (categoryId != -1 ? p.CategoryId == categoryId : p.DiscountedPrice > 0)
+                    && !excludeProductsIds.Contains(p.Id)
+                    && p.Id != excludeProductsId)
+                    .ToList());
+            }
+            catch
             {
                 return null!;
             }

@@ -7,17 +7,13 @@ using WAHShopForntend.Components.CategoriesF;
 
 namespace WAHShopForntend.Components.Cart
 {
-    public class CartService
+    public class CartService(IJSRuntime js, ProductService productService)
     {
         public List<CartItem> CartItems { get; private set; } = [];
         public event Action? OnChange;
-        private readonly IJSRuntime _js;
-        private readonly ProductService _productService;
-        public CartService(IJSRuntime js, ProductService productService)
-        {
-            _js = js;
-            _productService = productService;
-        }
+        private readonly IJSRuntime _js = js;
+        private readonly ProductService _productService = productService;
+        
         // event to change the cart state
         private void NotifyStateChanged() => OnChange?.Invoke();
         public async Task InitializeAsync()
@@ -37,7 +33,7 @@ namespace WAHShopForntend.Components.Cart
         }
         public async Task<string> AddToCart(int productId)
         {
-            Product product = _productService.GetProductByIdLocal(productId) ?? await _productService.GetProductByIdServer(productId);
+            Product product = _productService.GetProductByIdLocal(productId) ?? await _productService.GetProductByIdAsync(productId);
             
             //
             var item = CartItems.FirstOrDefault(ci => ci.ProductId == productId);
@@ -68,7 +64,7 @@ namespace WAHShopForntend.Components.Cart
                 {
                     ProductId = productId,
                     Quantity = 1, // add first item with quantity 1
-                    Product = _productService.GetProductByIdLocal(productId) ?? await _productService.GetProductByIdServer(productId),
+                    Product = _productService.GetProductByIdLocal(productId) ?? await _productService.GetProductByIdAsync(productId),
                     TextMessage = null
                 });
             }
@@ -155,9 +151,26 @@ namespace WAHShopForntend.Components.Cart
         {
             return CartItems.FirstOrDefault(c => c.ProductId == productId)?.Quantity ?? 0;
         }
+        public double GetPriceOfProduct(int id)
+        {
+            var item = CartItems.FirstOrDefault(ci => ci.ProductId == id && ci.Product != null);
+
+            return (double)(item != null
+                ? (item.Product.DiscountedPrice > 0 ? item.Product.DiscountedPrice : item.Product.SalePrice)
+                : 0);
+
+        }
         public double GetTotalPrice()
         {
-            return (double)(CartItems.Sum(ci => ci.Product?.SalePrice * ci.Quantity) ?? 0);
+            return (double)(CartItems
+                .Sum(ci => (ci.Product?.DiscountedPrice > 0 ? ci.Product?.DiscountedPrice : ci.Product?.SalePrice) * ci.Quantity) ?? 0);
+        }
+        public double GetTotalPriceOfProduct(int id)
+        {
+            return (double)CartItems
+           .Where(ci => ci.ProductId == id && ci.Product != null)
+           .Sum(ci => ((ci.Product?.DiscountedPrice > 0 ? ci.Product?.DiscountedPrice : ci.Product?.SalePrice ) * ci.Quantity) ?? 0);
+
         }
         public bool IsProductAdded(int productId)
         {
@@ -185,7 +198,7 @@ namespace WAHShopForntend.Components.Cart
             // Fetch products from server for those not found locally and update cart items
             if (idsUnlocalProducts.Count > 0)
             {
-                var products = await _productService.GetProductByIdsServer(idsUnlocalProducts);
+                var products = await _productService.GetProductByIdsAsync(idsUnlocalProducts);
                 if (products != null && products.Count > 0)
                 {
                     foreach (var product in products)

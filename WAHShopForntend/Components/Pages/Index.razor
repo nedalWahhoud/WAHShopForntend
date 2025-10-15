@@ -15,10 +15,10 @@ else
         // category
         var category = mainProductByCategory[x].Category;
         <div class="category">
-            <p>
+            <p class="@(category.Id == -1 ? "categoryOnOffer" : "")">
                 @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                                        ? category.Name_ar
-                                                        : category.Name_de)
+                                                                        ? category.Name_ar
+                                                                        : category.Name_de)
             </p>
         </div>
         <div class="mainProductsCard">
@@ -27,13 +27,10 @@ else
             {
                 // product
                 var product = mainProductByCategory[x].Products[i];
-               /* // cart product, bind with productId,quantity and product, the in OnInititalized configured.
-                CartItem cartItem = mainProductByCategory[x].Products[i].CartItem;
-                cartItem.Product = cartItem.Product ?? product;*/
 
                 <div class="productsCard">
                     <WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
-					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />                 
+                    <WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />                 
                 </div>
             }
 
@@ -55,14 +52,15 @@ else
     {
 
         IsLoading = true;
-        // get all categories
-        await categoryService.GetCategories();
+        // get on offer products
+        await LoadOnOfferProducts(-1);
         // get language
         lang = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-
-        // random products by category
+        // get all categories
+        await categoryService.GetCategoriesAsync();
         allCategories = categoryService.GetAllCategoriesLocal();
         // 0 index = recommended products, 1 index = random products
+        // random products by category
         List<int> counts = new List<int>() { 2, 2 };
         for (int i = 0; i < counts.Count; i++)
         {
@@ -73,7 +71,7 @@ else
                 .Where(c => !excludeCategoriesIds.Contains(c.Id))
                 .GroupBy(c => c.Id)
                 .Select(g => g.First())
-                .OrderBy(c => Guid.NewGuid()) 
+                .OrderBy(c => Guid.NewGuid())
                 .Take(counts[i])
                 .ToList();
 
@@ -94,7 +92,7 @@ else
         {
 
             // get products local
-            var productsLocal = await productService.GetProductByCategoryIdLocal(category.Id);
+            var productsLocal = await categoryService.GetProductByCategoryIdLocal(category.Id);
             if (productsLocal != null && productsLocal.Count > 0)
             {
                 // initialize CartItem for each product
@@ -147,7 +145,7 @@ else
             // if no products found, return
             return;
         }
-        mainProductByCategory.Insert(0, new ProductByCategory() { Category = categoryRecommended, Products = Recommended.Products });
+        mainProductByCategory.Add(new ProductByCategory() { Category = categoryRecommended, Products = Recommended.Products });
     }
     // random products by category
     public async Task LoadRandomProductsByCategory(List<Categories> Categories)
@@ -158,7 +156,7 @@ else
         {
 
             // get products local
-            var productsLocal = await productService.GetProductByCategoryIdLocal(category.Id);
+            var productsLocal = await categoryService.GetProductByCategoryIdLocal(category.Id);
             if (productsLocal != null && productsLocal.Count > 0)
             {
                 // initialize CartItem for each product
@@ -205,6 +203,50 @@ else
 
         StateHasChanged();
     }
+	// on offer products
+    public async Task LoadOnOfferProducts(int categoryId)
+    {
+        List<Product> allProducts = new();
+        // get products local
+        var productsLocal = await categoryService.GetProductByCategoryIdLocal(categoryId);
+        if (productsLocal != null && productsLocal.Count > 0)
+        {
+            // initialize CartItem for each product
+            foreach (var p in productsLocal)
+            {
+                p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+                //
+                excludeProductsIds!.Add(p.Id);
+            }
+            allProducts.AddRange(productsLocal);
+        }
+        // get products server
+        var productsServer = await categoryService.GetProductsByCategoryIdAsync(categoryId, 10, false, excludeProductsIds);
+        if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
+        {
+            // initialize CartItem for each product
+            foreach (var p in productsServer.Items)
+            {
+                p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+                //
+                excludeProductsIds!.Add(p.Id);
+            }
+            allProducts.AddRange(productsServer.Items);
 
-    
+            // add to local Products list
+            _ = Task.Run(() =>
+            {
+                productService.AddProductToLocal(productsServer.Items);
+            });
+        }
+
+        // add to mainProductByCategory
+        if (allProducts.Count > 0)
+            mainProductByCategory.Add(new ProductByCategory() { Category = new Categories() { Id = -1, Name_de = "Produkte im Angebot", Name_ar = "العروض", IsAktiv = true }, Products = allProducts });
+
+        // add to exclude categories
+        excludeCategoriesIds.Add(categoryId);
+        StateHasChanged();
+    }
+
 }

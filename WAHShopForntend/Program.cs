@@ -50,10 +50,7 @@ builder.Services.AddScoped<DiscountService>();
 // Search
 builder.Services.AddScoped<SearchService>();
 //
-/*builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(7078); 
-});*/
+
 var app = builder.Build();
 // language aktivation
 var supportedCultures = new[] { "ar", "de" };
@@ -61,7 +58,7 @@ var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture("de")
     .AddSupportedCultures(supportedCultures)
     .AddSupportedUICultures(supportedCultures);
-// المهم: الكوكي أول مزود للثقافة
+// lesen der Cookies für die Sprache
 localizationOptions.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 
 app.UseRequestLocalization(localizationOptions);
@@ -72,7 +69,11 @@ app.UseRequestLocalization(localizationOptions);
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-}*/
+}
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(7078); 
+});*/
 // for https
 app.UseHttpsRedirection();
 

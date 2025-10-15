@@ -6,7 +6,7 @@
 @if (!IsLoaded)
 {
 	<div class="lodingContainer">
-		<p>wird geladen... </p>
+		<p>@L["Loading"]</p>
 	</div>
 }
 else
@@ -168,10 +168,8 @@ else
 					double totalPrice = 0;
 					if (order.ShippingProviders != null && order.ShippingProviderId > 0)
 					{
-						GetShippingCost();
-
-						<span>@L["ShippingCosts"]: @order.ShippingCost.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
-						totalPrice = order.TotalPrice + order.ShippingCost;
+						<span>@L["ShippingCosts"]: @order.ShippingProviders?.PublicShippingCost.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
+						totalPrice = order.TotalPrice + order.ShippingProviders?.PublicShippingCost ?? 0;
 					}
 					else
 						totalPrice = order.TotalPrice;
@@ -511,7 +509,7 @@ else
 			Address address = addressService.DownloadedAddresses.Find(a => a.Id == selectedAddressId) ?? null!;
 			if (address != null)
 			{
-				var result = await orderService.CheckIfWithinDeliveryRange(address.ZipCode!);
+				var result = await orderService.CheckIfWithinDeliveryRangeAsync(address.ZipCode!);
 				if (result.Item1.Result == false)
 				{
 					_ = JS.InvokeVoidAsync("alert", $"{address.ZipCode} " + L[result.Item1.Message!].ToString());
@@ -552,7 +550,7 @@ else
 			return;
 		}
 		// check if shipping by post
-		var resultShipping = await orderService.CanShipByPost(cartService.CartItems, selectedPaymentId, System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
+		var resultShipping = await orderService.CanShipByPostAsync(cartService.CartItems, selectedPaymentId, System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
 		if (!resultShipping.result)
 		{
 			_ = JS.InvokeVoidAsync("alert", $"{resultShipping.productsName}, " + L[resultShipping.errorMessage].ToString());
@@ -623,7 +621,7 @@ else
 				{
 					ProductId = item.ProductId,
 					Quantity = item.Quantity,
-					UnitPrice = item.Product?.SalePrice ?? 0
+					UnitPrice = cartService.GetPriceOfProduct(item.ProductId)
 				}).ToList(),
 				TotalPrice = order.TotalPrice,
 				OrderDate = DateTime.Now,
@@ -632,7 +630,6 @@ else
 				DiscountCodeId = order.DiscountCodeId ?? null,
 				DiscountCategoryId = order.DiscountCategoryId ?? null,
 				ShippingProviderId = order.ShippingProviderId ?? null,
-				ShippingCost = order.ShippingCost,
 				IsUserCreated = true 
 		};
 		var result = await orderService.AddOrderAsync(createOrder);
@@ -661,7 +658,7 @@ else
 	private async Task OnCode()
 	{
 		IsDiscountCodeLoading = true;
-		var result = await discountService.CheckDiscountCode(discountCode.Code);
+		var result = await discountService.CheckDiscountCodeAsync(discountCode.Code);
 		if (result.validationResult.Result == true && result.discountCodes != null)
 		{
 			discountCode = result.discountCodes;
@@ -676,7 +673,7 @@ else
 			// reset discount code
 			discountCode = new();
 			// check discount category code
-			var result1 = await discountService.CheckDiscountCategory(discountCategory.Code);
+			var result1 = await discountService.CheckDiscountCategoryAsync(discountCategory.Code);
 			if (result1.validationResult.Result == true && result1.discountCategory != null)
 			{
 				discountCategory = result1.discountCategory;
@@ -697,21 +694,6 @@ else
 			}
 		}
 		IsDiscountCodeLoading = false;
-	}
-	// shipping
-	private void GetShippingCost()
-	{
-		if (order.ShippingProviders != null && order.ShippingProviderId > 0)
-		{
-			if (order.TotalPrice > order.ShippingProviders.FreeShippingThreshold)
-			{
-				order.ShippingCost = 0;
-			}
-			else
-			{
-				order.ShippingCost = order.ShippingProviders.PublicShippingCost;
-			}
-		}
 	}
 	private (double discountValue, double finalPrice) GetFinalPriceWithDiscount()
 	{
@@ -739,7 +721,7 @@ else
 		{
 			if (item.Product.CategoryId == discountCategory.CategoriesId)
 			{
-				categoryitemsPrice += item.Product.SalePrice * item.Quantity;
+				categoryitemsPrice += cartService.GetTotalPriceOfProduct(item.ProductId);
 			}
 		}
 		// get price with discount of category

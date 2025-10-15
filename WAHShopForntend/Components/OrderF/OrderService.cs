@@ -106,7 +106,7 @@ namespace WAHShopForntend.Components.OrderF
                 return new ValidationResult { Result = false, Message = ex.Message };
             }
         }
-        public async Task<ValidationResult> UpdateStatusOrder(int orderId, int newStatusId)
+        public async Task<ValidationResult> UpdateStatusOrderAsync(int orderId, int newStatusId)
         {
             try
             {
@@ -162,11 +162,11 @@ namespace WAHShopForntend.Components.OrderF
                         continue;
                     var product = item.Product
                                 ?? _productService.GetProductByIdLocal(item.ProductId)
-                    ?? await _productService.GetProductByIdServer(item.ProductId);
+                    ?? await _productService.GetProductByIdAsync(item.ProductId);
 
                     var category = product.Category
                                 ?? _categoryService.GetCategoryByIdLocal(product.CategoryId)
-                                ?? await _categoryService.getCategoryById(product.CategoryId);
+                                ?? await _categoryService.getCategoryByIdAsync(product.CategoryId);
 
                     if (category == null || user == null)
                         return new ValidationResult { Result = false, Message = "Unbekannte Fehler" };
@@ -202,7 +202,7 @@ namespace WAHShopForntend.Components.OrderF
                 return new ValidationResult { Result = false, Message = "UnknownError" };
             }
         }
-        public async Task<(bool result, string errorMessage, string productsName)> CanShipByPost(List<CartItem> cartItems, int selectedPaymentId, string languageCode)
+        public async Task<(bool result, string errorMessage, string productsName)> CanShipByPostAsync(List<CartItem> cartItems, int selectedPaymentId, string languageCode)
         {
             bool if18Plus = false;
             (bool, string) IsShippable = (true, null!);
@@ -213,12 +213,12 @@ namespace WAHShopForntend.Components.OrderF
                     continue;
 
                 var product = item.Product
-                            ?? productService.GetProductByIdLocal(item.ProductId)
-                            ?? await productService.GetProductByIdServer(item.ProductId);
+                            ?? _productService.GetProductByIdLocal(item.ProductId)
+                            ?? await _productService.GetProductByIdAsync(item.ProductId);
 
                 var category = product.Category
-                            ?? categoryService.GetCategoryByIdLocal(product.CategoryId)
-                            ?? await categoryService.getCategoryById(product.CategoryId);
+                            ?? _categoryService.GetCategoryByIdLocal(product.CategoryId)
+                            ?? await _categoryService.getCategoryByIdAsync(product.CategoryId);
                 // if 18 plus required
                 if (category.Requires18Plus)
                 {
@@ -263,7 +263,7 @@ namespace WAHShopForntend.Components.OrderF
             }
             return (true, null!, null!);
         }
-        public async Task<(ValidationResult, OurDeliveryServiceArea)> CheckIfWithinDeliveryRange(string postalCode)
+        public async Task<(ValidationResult, OurDeliveryServiceArea)> CheckIfWithinDeliveryRangeAsync(string postalCode)
         {
             try
             {

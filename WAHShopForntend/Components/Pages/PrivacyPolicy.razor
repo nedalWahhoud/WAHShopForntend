@@ -1,0 +1,40 @@
+﻿@page "/privacyPolicy"
+@inject IStringLocalizer< WAHShopForntend.Resources.PrivacyPolicy> L
+<div class="MainDiv">
+    <h2 class="mb-3">@L["PrivacyPolicy1"]</h2>
+    <p> @L["PrivacyPolicyDescription"] </p>
+    <h3 class="mt-4">@L["DataCollection"]</h3>
+    <ul>
+        <li>@L["DataCollectionDescription1"]</li>
+        <li>@L["DataCollectionDescription2"]</li>
+        <li>@L["DataCollectionDescription3"]</li>
+    </ul>
+    <h3 class="mt-4">@L["UseData"]</h3>
+    <ul>
+        <li>@L["UseDataDescription1"]</li>
+        <li>@L["UseDataDescription2"]</li>
+        <li>@L["UseDataDescription3"]</li>
+    </ul>
+    <h3 class="mt-4">@L["ShareData"]</h3>
+    <p>@L["ShareDataDescription"]</p>
+    <h3 class="mt-4">@L["YourRights"]</h3>
+    <ul>
+        <li>@L["YourRightsDescription1"]</li>
+        <li>@L["YourRightsDescription2"]</li>
+        <li>@L["YourRightsDescription3"]</li>
+    </ul>
+    <h3 class="mt-4">@L["DataSecurity"]</h3>
+    <p>@L["DataSecurityDescription1"]</p>
+    <h3 class="mt-4">@L["Cookies"]</h3>
+    <p>@L["CookiesDescription"]</p>
+    <h3 class="mt-4">@L["ContactUs"]</h3>
+    <p>@((MarkupString)L["ContactUsDescription"].Value)</p>
+
+    <p class="mt-5">
+        <em>@L["LastUpdate"] @DateTime.Now.ToString("dd.MM.yyyy")</em>
+    </p>
+</div>
+
+@code {
+
+}

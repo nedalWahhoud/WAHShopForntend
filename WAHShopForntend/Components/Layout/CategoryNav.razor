@@ -147,6 +147,11 @@
                                             )
             </a>
         }
+        @* Im Angebot *@
+        <a @onclick="() => OnCategory(-1)"
+           class="categoryLinkOnOffer @(currentCategoryId == -1 ? "selected" : "")">
+            @L["OnOffer"]
+        </a>
     }
 </div>
 @code {
@@ -154,7 +159,7 @@
     private int currentCategoryId = 0;
     protected override async Task OnInitializedAsync()
     {
-        await categoryService.GetCategories();
+        await categoryService.GetCategoriesAsync();
 
         // get the current category id from the URL
         var uri = new Uri(NavigationManager.Uri);
@@ -162,15 +167,24 @@
 
         if (segments.Length > 2 && segments[1].TrimEnd('/') == "ProductsByCategory")
         {
-            int.TryParse(segments[2].TrimEnd('/'), out currentCategoryId);
+            //Holen Sie sich das Teil vom Link
+            var rawId = segments[2].Trim('/');
+            // Entfernen Sie alle versteckten Symbole (wie U+200F oder U+202B)
+            rawId = new string(rawId.Where(ch => char.IsDigit(ch) || ch == '-').ToArray());
+
+            if (!int.TryParse(rawId, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out currentCategoryId))
+                currentCategoryId = 0;
         }
         else
+        {
             currentCategoryId = 0;
+        }
+
     }
 
     private void OnCategory(int categoryId)
     {
-        NavigationManager.NavigateTo($"/ProductsByCategory/{categoryId}", true);
+        NavigationManager.NavigateTo($"/ProductsByCategory/{categoryId.ToString(System.Globalization.CultureInfo.InvariantCulture)}", true);
     }
     // 
     private List<Categories> GetFoodstuffs()
@@ -203,8 +217,9 @@
     }
 	private List<Categories> GetMeats()
 	{
+        var ids = new List<int> { 34, 35, 36 };
 		return categoryService.DownloadedCategories?
-					.Where(c => c.Id == 34)
+					.Where(c => ids.Contains(c.Id))
 					.ToList() ?? null!;
 	}
     private Categories GetVape()
@@ -217,4 +232,5 @@
         return categoryService.DownloadedCategories?
                     .FirstOrDefault(c => c.Id == 32) ?? null!;
     }
+    
 }

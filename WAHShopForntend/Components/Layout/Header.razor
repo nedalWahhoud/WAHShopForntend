@@ -6,12 +6,12 @@
 
 <header class="header ltr-section">
     <div class="containerLeft">
-        <h2 @onclick="OnProjectName">@ProjectInfo.Value.Name</h2>
+       <ProjektLogo />
     </div>
     <div class="containerCenter">
         @* Search *@
         <div class="searchBox">
-            <InputText @onfocus="OnSearchInputFocus" @onblur="OnSearchInputBlur" @bind-Value="searchText" placeholder="@L["ProductSearch"]" class="form-control searchInput rtl-right" @oninput="SearchProducts" />
+            <InputText class="form-control rtl-right" style="height: 60px; font-size: 1rem;" @onfocus="OnSearchInputFocus" @onblur="OnSearchInputBlur" @bind-Value="searchText" placeholder="@L["ProductSearch"]" @oninput="SearchProducts" />
             @if (IsSearching)
             {
                 <p class="searchDropdown">Suche läuft...</p>
@@ -40,7 +40,7 @@
             }
         </div>
     </div>
-    <div class="containerRight d-flex align-items-center gap-3">
+    <div class="containerRight d-flex align-items-center gap-1">
         @*cart*@
         <div class="cart-icon position-relative" @onclick="NavigateToCart" style="cursor:pointer;">
             <img src="Images/cart.svg" alt="Cart" width="30" />
@@ -51,7 +51,24 @@
                 </span>
             }
         </div>
-        @*dropdown*@
+        @* Sprache *@
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                @{
+                    var flagClass = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de" ? "fi fi-de" : "fi fi-sy";
+                }
+                <span class="@flagClass" style="border-radius:2px;"></span>
+            </button>
+            <ul class="dropdown-menu dropdownMenu rtl-right" aria-labelledby="dropdownMenuButton">
+                <li>
+                    <a class="dropdown-item dropdownItem" @onclick="@(() => SetLanguage("de"))"><span class="fi fi-de"></span> Deutsch</a>
+                </li>
+                <li>
+                    <a class="dropdown-item dropdownItem" @onclick="@(() => SetLanguage("ar"))"><span class="fi fi-sy"></span> عربي</a>
+                </li>
+            </ul>
+        </div>
+        @* Konto *@
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 @L["Account"]
@@ -70,15 +87,11 @@
                     </NotAuthorized>
                 </AuthorizeView>
                 <li><hr class="dropdown-divider" /></li>
-                <li class="dropdown-header">🌐</li>
-                <li>
-                    <a class="dropdown-item dropdownItem" @onclick="@(() => SetLanguage("de"))">Deutsch</a>
-                </li>
-                <li>
-                    <a class="dropdown-item dropdownItem" @onclick="@(() => SetLanguage("ar"))">عربي</a>
-                </li>
+                <li><a class="dropdown-item dropdownItem" href="/privacyPolicy">@L["PrivacyPolicy"]</a></li>
+             
             </ul>
         </div>
+      
     </div>
 </header>
 
@@ -95,10 +108,7 @@
         InvokeAsync(StateHasChanged);
     }
 
-    private void OnProjectName()
-    {
-        NavigationManager.NavigateTo("/", true);
-    }
+ 
 
     private async Task Logout()
     {
@@ -155,7 +165,6 @@
         IsSearching = false;
         StateHasChanged();
     }
-
     private bool isDropdownOpen = false;
     private async Task OnSearchInputFocus()
     {

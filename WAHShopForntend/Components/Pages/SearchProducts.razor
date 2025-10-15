@@ -48,7 +48,7 @@ else
 
 		// get on clicked item
 		var product = productService.GetProductByIdLocal(productId)
-					?? await productService.GetProductByIdServer(productId);
+					?? await productService.GetProductByIdAsync(productId);
 		// add to mainPage product list
 		if (product != null)
 		{

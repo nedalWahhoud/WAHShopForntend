@@ -4,7 +4,7 @@ namespace WAHShopForntend.Components.DiscountF
     public class DiscountService(HttpClient http)
     {
         private readonly HttpClient _http = http;
-        public async Task<(ValidationResult validationResult, DiscountCodes discountCodes)> CheckDiscountCode(string code)
+        public async Task<(ValidationResult validationResult, DiscountCodes discountCodes)> CheckDiscountCodeAsync(string code)
         {
             if (string.IsNullOrWhiteSpace(code) || code.Length < 8)
             {
@@ -29,7 +29,7 @@ namespace WAHShopForntend.Components.DiscountF
                 return (new ValidationResult { Result = false, Message = $"Fehler: {ex.Message}" }, null!);
             }
         }
-        public async Task<(ValidationResult validationResult, DiscountCategory discountCategory)> CheckDiscountCategory(string code)
+        public async Task<(ValidationResult validationResult, DiscountCategory discountCategory)> CheckDiscountCategoryAsync(string code)
         {
             if (string.IsNullOrWhiteSpace(code) || code.Length < 8)
             {

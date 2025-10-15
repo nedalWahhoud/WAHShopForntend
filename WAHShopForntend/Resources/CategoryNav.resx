@@ -126,7 +126,10 @@
   <data name="Meats" xml:space="preserve">
     <value>Meats</value>
   </data>
+  <data name="OnOffer" xml:space="preserve">
+    <value>On Offer</value>
+  </data>
   <data name="SweetsSnacks" xml:space="preserve">
-    <value>Sweets and Snacks</value>
+    <value />
   </data>
 </root>

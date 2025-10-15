@@ -113,9 +113,9 @@ else
                          {
                             <span>
                                 <strong>@L["ShippingCost"]</strong>
-                                @order.ShippingCost.ToString("C", new System.Globalization.CultureInfo("de-DE"))
+                                    @order.ShippingProviders?.PublicShippingCost.ToString("C", new System.Globalization.CultureInfo("de-DE"))
                             </span>
-                                totalPrice = order.TotalPrice + order.ShippingCost;
+                                totalPrice = order.TotalPrice + order.ShippingProviders?.PublicShippingCost ?? 0;
                          }
                          else
 								totalPrice = order.TotalPrice;
@@ -233,11 +233,11 @@ else
     // status
     private async Task ToggleDropdown(Order order)
     {
-        await GetPossibleStatuses(order.StatusId);
+        await GetPossibleStatuses(order);
         order.ShowStatusDropdown = true;
     }
     private List<OrderStatus> PossibleStatuses = new();
-    private async Task GetPossibleStatuses(int statusId)
+    private async Task GetPossibleStatuses(Order order)
     {
         PossibleStatuses = new();
         // load orderStatusList
@@ -248,22 +248,38 @@ else
             foreach (var item in orderService.DownloadedOrderStatus)
             {
                 // add aktuelle status
-                if (item.Id == statusId)
+                if (item.Id == order.StatusId)
                 {
                     PossibleStatuses.Insert(0, item);
                 }
-                // der benutzer darf stornieren wenn die nicht versendet ist
-                if (statusId > 0 && statusId <= 3)
+                // der Benutzer darf es stornieren oder abschlißen wenn die Bestellung von das Laden abgeholt werden muss
+                if ((order.StatusId > 0 && order.StatusId <= 3) && order.PaymentMethodId == 1)
                 {
-                    if (item.Id == 8)
+                    if (item.Id == 7 || item.Id == 8)
                     {
                         PossibleStatuses.Add(item);
                     }
                 }
-                // der benutzer darf zurücksetzen wenn die versendet ist
-                else if (statusId >= 4 && statusId <= 6)
+				// der benutzer darf es abschlißen oder stornieren wenn die bestellung durch unsere Liefservice zugestellt wird
+                else if((order.StatusId > 0 && order.StatusId <= 3) && order.PaymentMethodId == 2)
+				{
+					if (item.Id == 7 || item.Id == 8)
+					{
+						PossibleStatuses.Add(item);
+					}
+				}
+                // der benutzer darf stornieren, abschlißen oder zugestellt wenn die nicht versendet ist
+                else if (order.StatusId > 0 && order.StatusId <= 3)
                 {
-                    if (item.Id == 9)
+                    if (item.Id == 8 || item.Id == 6 || item.Id == 7)
+                    {
+                        PossibleStatuses.Add(item);
+                    }
+                }
+                // der benutzer darf zurücksetzen oder abschließen wenn die versendet ist
+                else if (order.StatusId >= 4 && order.StatusId <= 6)
+                {
+                    if (item.Id == 9 || item.Id == 7)
                     {
                         PossibleStatuses.Add(item);
                     }
@@ -289,7 +305,7 @@ else
             StateHasChanged();
             if (int.TryParse(newStatusIdString, out int newStatusId))
             {
-                var result = await orderService.UpdateStatusOrder(order.Id, newStatusId);
+                var result = await orderService.UpdateStatusOrderAsync(order.Id, newStatusId);
                 if (result.Result)
                 {
                     // update order status

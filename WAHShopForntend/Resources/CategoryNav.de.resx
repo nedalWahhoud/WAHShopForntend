@@ -126,6 +126,9 @@
   <data name="Meats" xml:space="preserve">
     <value>Fleische</value>
   </data>
+  <data name="OnOffer" xml:space="preserve">
+    <value>Im Angebot</value>
+  </data>
   <data name="SweetsSnacks" xml:space="preserve">
     <value>Süßigkeiten und Snacks</value>
   </data>

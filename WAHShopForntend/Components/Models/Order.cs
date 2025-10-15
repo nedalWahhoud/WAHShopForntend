@@ -29,7 +29,6 @@ namespace WAHShopForntend.Components.Models
         public DiscountCategory? DiscountCategory { get; set; }
         public int? ShippingProviderId { get; set; }
         public ShippingProvider? ShippingProviders { get; set; }
-        public double ShippingCost { get; set; }
         public string? TrackingNumber { get; set; }
         public bool IsUserCreated { get; set; }
 

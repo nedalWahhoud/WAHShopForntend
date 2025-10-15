@@ -1,0 +1,10 @@
+﻿.div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+h2 {
+    cursor: pointer;
+    margin: 0;
+    font-size: 30px;
+}

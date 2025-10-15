@@ -126,6 +126,9 @@
   <data name="Meats" xml:space="preserve">
     <value>اللحوم</value>
   </data>
+  <data name="OnOffer" xml:space="preserve">
+    <value>العروض</value>
+  </data>
   <data name="SweetsSnacks" xml:space="preserve">
     <value>الحلويات والتسالي</value>
   </data>

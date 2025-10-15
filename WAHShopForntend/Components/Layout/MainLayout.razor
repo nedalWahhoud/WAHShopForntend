@@ -1,9 +1,10 @@
-﻿@inherits LayoutComponentBase
+﻿@inject IStringLocalizer< WAHShopForntend.Resources.MainLayout> L
+@inherits LayoutComponentBase
 
 @if (!isRended)
 {
     <div class="lodingContainer">
-        <p>wird geladen... </p>
+        <p>@L["Loading"]</p>
     </div>
 }
 else
@@ -14,7 +15,6 @@ else
         <CategoryNav />
     }
 
-
     <div class="page">
         <main class="main-content">
             <article class="content px-4">
@@ -24,7 +24,7 @@ else
 
     </div>
 
-    @if (!HeaderHidden && showFooter)
+    @if (!HeaderHidden)
     {
         <Footer />
     }
@@ -43,15 +43,13 @@ else
     NavigationManager.Uri.Contains("confirmemail");
     private bool isRended = false;
 
-    private bool showFooter = true;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            isRended = true;
             // Initialize the cartService to get the saved cart
             await cartService.InitializeAsync();
-
+            isRended = true;
             StateHasChanged();
         }
     }

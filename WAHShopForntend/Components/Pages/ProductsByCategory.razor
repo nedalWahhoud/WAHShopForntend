@@ -5,24 +5,18 @@
 
 @if (!IsLoading)
 {
-	<div class="lodingContainer">
-		<p>@L["Loading"]</p>
-	</div>
+	
 }
 else
 {
 	<h3>
 		@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-			? allCategories.Find(s => s.Id == CategoryId)?.Name_ar ?? ""
-			: allCategories.Find(s => s.Id == CategoryId)?.Name_de ?? "")
+															? allCategories.Find(s => s.Id == CategoryId)?.Name_ar ?? ""
+															: allCategories.Find(s => s.Id == CategoryId)?.Name_de ?? "")
 	</h3>
 	<div class="productItems">
 		@foreach (var product in products)
 		{
-			// cart product, bind with productId,quantity and product, the in OnInititalized configured.
-			/*var cartItem = product.CartItem;
-			cartItem.Product = cartItem.Product ?? product;*/
-
 			<div class="cardProduct">
 				<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
 				<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
@@ -64,10 +58,11 @@ else
 	private List<int>? excludeProductsIds = new();
 	private async Task MoreProductsload(bool IfOnMoreProductsLoad)
 	{
+		// -1 is for OnOffer
 		if (!IfOnMoreProductsLoad)
 		{
 			// check if product local exist To relieve pressure on the server
-			var productsLocal = await productService.GetProductByCategoryIdLocal(CategoryId);
+			var productsLocal = await categoryService.GetProductByCategoryIdLocal(CategoryId);
 
 			if (productsLocal != null && productsLocal.Count > 0)
 			{
@@ -81,8 +76,8 @@ else
 			}
 		}
 		// from Server
-		var productsServer = await categoryService.GetProductsByCategoryIdAsync(CategoryId,10,null, excludeProductsIds);
-		if (productsServer!= null && productsServer.Items != null && productsServer.Items.Count > 0)
+		var productsServer = await categoryService.GetProductsByCategoryIdAsync(CategoryId, 10, null, excludeProductsIds);
+		if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
 		{
 			// initialize CartItem for each product
 			foreach (var p in productsServer.Items)
@@ -101,9 +96,7 @@ else
 			});
 		}
 		else if (productsServer != null && productsServer.AllItemsLoaded)
-		{
 			AllItemsLoaded = true;
-		}
 	}
 	// OnMoreLoad
 	private bool IsOrdersLoading = false;
