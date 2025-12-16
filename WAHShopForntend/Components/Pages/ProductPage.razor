@@ -1,5 +1,6 @@
 ﻿@page "/ProductPage/{ProductId:int}"
 @inject IStringLocalizer< WAHShopForntend.Resources.ProductPage> L
+@implements IDisposable
 
 @if (isLoading)
 {
@@ -18,11 +19,11 @@ else
 	{
 		<div class="productDetails">
 			<div class="ImageSection">
-				<img class="zoomableImage" @onclick="() => ShowFullImage = true" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" alt="@product.Name_de" />
+				<img class="zoomableImage" @onclick="() => ShowFullImage = true" src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" alt="@product.Name_de" />
 				@if (ShowFullImage)
 				{
-					<div class="modalOverlay" @onclick="() => ShowFullImage = false">
-						<img src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())"
+					<div loading="lazy" class="modalOverlay" @onclick="() => ShowFullImage = false">
+						<img src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)"
 						alt="Image of Product"
 						class="modalImage" />
 					</div>
@@ -31,32 +32,32 @@ else
 			<div class="InfoSection">
 				<h2 class="productTitle">
 					@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-										? product.Name_ar
-										: product.Name_de)
+					? product.Name_ar
+					: product.Name_de)
 				</h2>
 				<p class="productDescription">
 					@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-																	? product.Description_ar
-																	: product.Description_de)
+					? product.Description_ar
+					: product.Description_de)
 				</p>
 				<div class="productPrice"> <WAHShopForntend.Components.Layout.PriceLayout ProductId="product.Id" /> </div>
 				@if (product.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
 				{
 					<select class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
 						<option value="0">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-														? product.ProductGroup.GroupName_ar
-														: product.ProductGroup.GroupName_de)</option>
+							? product.ProductGroup.GroupName_ar
+							: product.ProductGroup.GroupName_de)
+						</option>
 						@foreach (var groupProduct in groupProducts)
 						{
 							<option value="@groupProduct.Id">@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-								? groupProduct.Name_ar
-								: groupProduct.Name_de)
+					        ? groupProduct.Name_ar
+					        : groupProduct.Name_de)
 							</option>
 						}
 					</select>
 				}
 				<div class="DivQuantity">
-					@*{ product.CartItem.Product = product.CartItem.Product ?? product; }*@
 					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 				</div>
 
@@ -73,8 +74,8 @@ else
 		<div class="category">
 			<p>
 				@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-														? category.Name_ar
-														: category.Name_de)
+				? category.Name_ar
+				: category.Name_de)
 			</p>
 		</div>
 		<div class="mainProductsCard">
@@ -83,9 +84,6 @@ else
 			{
 				// product
 				var product = mainProductByCategory[x].Products[i];
-				/*// cart product, bind with productId,quantity and product, the in OnInititalized configured.
-				CartItem cartItem = mainProductByCategory[x].Products[i].CartItem;
-				cartItem.Product = cartItem.Product ?? product;*/
 
 				<div class="productsCard">
 					<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
@@ -103,18 +101,18 @@ else
 	private Product? product;
 	private List<Product>? groupProducts = new ();
 	private bool isLoading = true;
-	// to exclude products already loaded in the main product list
-	private List<int> excludeProductsIds = new(); 
 	// to exclude categories already loaded in the main product list
 	private List<int> excludeCategoriesIds = new();
 	//
 	private List<Categories> allCategories = new();
+	private Random random = new();
 	// product by caegory for products card
 	private List<ProductByCategory> mainProductByCategory = new();
 	protected override async Task OnInitializedAsync()
 	{
 		isLoading = true;
 		// get product by id
+		List<Task> tasks = new();
 		product = productService.GetProductByIdLocal(ProductId)
 					?? await productService.GetProductByIdAsync(ProductId);
 		if (product != null)
@@ -122,51 +120,57 @@ else
 			product.InitializeCartItem(cartService.GetQuantityOfProduct(product.Id));
 			// add to local product list if not already present
 			productService.AddProductToLocal(product);
-			// add product id to exclude list
-			excludeProductsIds.Add(product.Id);
 			// add category id to exclude list
 			excludeCategoriesIds.Add(product?.CategoryId ?? 0);
+
+			// get group products if exists
+			if (product != null && product.ProductGroupID.HasValue && product.ProductGroupID.Value > 0)
+			{
+				tasks.Add(LoadGroupProducts(product.ProductGroupID.Value));
+			}
 		}
 		// get product by categoryId
-		_ =  MoreProductsOfSameCategory(product?.CategoryId ?? 0, product?.Category ?? null);
-		// get random products by categoryId
-		int count = 2;
-		var random = new Random();
-		allCategories = await categoryService.GetCategoriesAsync();
-		if (allCategories.Count >= count)
-		{
-			List<Categories> categories = allCategories
-					.Where(c => !excludeCategoriesIds.Contains(c.Id))
-					.GroupBy(c => c.Id)
-					.Select(g => g.First())
-					.OrderBy(c => Guid.NewGuid())
-					.Take(count)
-					.ToList();
+		tasks.Add(MoreProductsOfSameCategory(product?.CategoryId ?? 0, product?.Category ?? null));
+		// get all categories
+		allCategories = categoryService.GetAllCategoriesLocal()
+							?? await categoryService.GetAllCategoriesAsync();
+		// die Tasks ausführen
+		await Task.WhenAll(tasks);
 
-			_ = LoadRandomProductsByCategory(categories);
-		}
-
-		// get group products if exists
-		if (product != null && product.ProductGroupID.HasValue && product.ProductGroupID.Value > 0)
-		{
-			await LoadGroupProducts(product.ProductGroupID.Value);
-		}
 
 		isLoading = false;
 	}
+	private DotNetObjectReference<ProductPage>? objRef;
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			// Das Donnet-Objekt für die Verwendung in JavaScript abrufen
+			objRef = DotNetObjectReference.Create(this);
+			// Eine kurze Verzögerung, um sicherzustellen, dass das ScrollContainer-Element vollständig im DOM gezeichnet wird.
+			await Task.Delay(100);
+			// Setzen Sie das Objekt von donNet in JavaScript und die ID:checkScrollEnd und rufen Sie die Funktion checkScrollEnd aus JavaScript ab.
+			await JS.InvokeVoidAsync("scrollHelper.onScrollEnd", objRef);
+		}
+	}
 	private async Task MoreProductsOfSameCategory(int categoryId,Categories? category = null)
 	{
+		List<Product> allProducts = new();
+		List<int> excludeProductsIds = new();
+		// add current product id to exclude list
+		excludeProductsIds.Add(ProductId);
 		try
 		{
 			if (category == null)
 			{
-				category = await categoryService.getCategoryByIdAsync(categoryId);
+				category = categoryService.GetCategoryByIdLocal(categoryId)
+						??await categoryService.GetCategoryByIdAsync(categoryId);
 				if (category == null)
 					return; // category not found
 			}
 
 			// get products local
-			var productsLocal = await categoryService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
+			var productsLocal =  categoryService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
 			if (productsLocal != null && productsLocal.Count > 0)
 			{
 				// initialize CartItem for each product
@@ -175,11 +179,12 @@ else
 					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
 					excludeProductsIds!.Add(p.Id);
 				}
-				mainProductByCategory.Add(new ProductByCategory() { Category = category, Products = productsLocal });
-				
+
+				allProducts.AddRange(productsLocal);
+
 			}
 			// get products server
-			var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, 10, false, excludeProductsIds);
+			var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, 5, false, excludeProductsIds);
 			if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
 			{
 				// initialize CartItem for each product
@@ -189,24 +194,24 @@ else
 					excludeProductsIds!.Add(p.Id);
 				}
 
-				mainProductByCategory.Insert(0,new ProductByCategory() { Category = category, Products = productsServer.Items });
+				allProducts.AddRange(productsServer.Items);
 
 				// add to local Products list
-				_ = Task.Run(() =>
-				{
-					productService.AddProductToLocal(productsServer.Items);
-				});
+				productService.AddProductToLocal(productsServer.Items);
 			}
 			else if (productsServer != null && productsServer.AllItemsLoaded)
 			{
 
 			}
-
-			StateHasChanged();
+			// add to main list
+			if (allProducts.Count > 0)
+			{
+				mainProductByCategory.Add(new ProductByCategory() { Category = category, Products = allProducts });
+			}
 		}
-		catch
+		catch (Exception ex)
 		{
-
+			Console.WriteLine($"Error in MoreProductsOfSameCategory: {ex.Message}");
 		}
 	}
 	// random products by category
@@ -216,9 +221,9 @@ else
 
 		foreach (var category in Categories)
 		{
-
+			List<int> excludeProductsIds = new();
 			// get products local
-			var productsLocal = await categoryService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
+			var productsLocal =  categoryService.GetProductByCategoryIdLocal(category.Id, excludeProductsIds);
 			if (productsLocal != null && productsLocal.Count > 0)
 			{
 				// initialize CartItem for each product
@@ -242,7 +247,7 @@ else
 					excludeProductsIds!.Add(p.Id);
 				}
 
-				
+
 				// if 0 than semply add, otherwise insert to mainProductByCategory at current index
 				if (currentIndex == 0)
 					mainProductByCategory.Add(new ProductByCategory() { Category = category, Products = productsServer.Items });
@@ -250,10 +255,7 @@ else
 					mainProductByCategory.Insert(currentIndex, new ProductByCategory() { Category = category, Products = productsServer.Items });
 
 				// add to local Products list
-				_ = Task.Run(() =>
-				{
-					productService.AddProductToLocal(productsServer.Items);
-				});
+				productService.AddProductToLocal(productsServer.Items);
 			}
 			else if (productsServer != null && productsServer.AllItemsLoaded)
 			{
@@ -263,8 +265,6 @@ else
 			// add category id to exclude list
 			excludeCategoriesIds.Add(category.Id);
 		}
-		
-		StateHasChanged();
 	}
 	// Image zoom 
 	bool ShowFullImage = false;
@@ -315,5 +315,42 @@ else
 		{
 			NavigationManager.NavigateTo($"/ProductPage/{selectedGroupId}", true);
 		}
+	}
+	// Scroll
+	private bool IsScrollLoading = false;
+	private static readonly SemaphoreSlim _scrollLock = new(1, 1);
+	[JSInvokable]
+	public async Task OnScrollEndReached()
+	{
+		if (!_scrollLock.Wait(0))
+			return;
+		try
+		{
+			if (IsScrollLoading == true)
+				return;
+
+			IsScrollLoading = true;
+			if (allCategories.Count >= 1)
+			{
+				// get recommended products
+				List<Categories> categories = await categoryService.GetRandomCategories(1, excludeCategoriesIds, random);
+				// Diese Kategorien beim nächsten Ladevorgang ausschließen
+				excludeCategoriesIds.AddRange(categories.Select(s => s.Id));
+				// load random products
+				await LoadRandomProductsByCategory(categories);
+			}
+
+			StateHasChanged();
+		}
+		finally
+		{
+			IsScrollLoading = false;
+			_scrollLock.Release();
+		}
+	}
+	public void Dispose()
+	{
+		objRef?.Dispose();
+		objRef = null;
 	}
 }

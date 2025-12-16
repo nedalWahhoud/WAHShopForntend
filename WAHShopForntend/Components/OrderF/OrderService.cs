@@ -166,7 +166,7 @@ namespace WAHShopForntend.Components.OrderF
 
                     var category = product.Category
                                 ?? _categoryService.GetCategoryByIdLocal(product.CategoryId)
-                                ?? await _categoryService.getCategoryByIdAsync(product.CategoryId);
+                                ?? await _categoryService.GetCategoryByIdAsync(product.CategoryId);
 
                     if (category == null || user == null)
                         return new ValidationResult { Result = false, Message = "Unbekannte Fehler" };
@@ -218,7 +218,7 @@ namespace WAHShopForntend.Components.OrderF
 
                 var category = product.Category
                             ?? _categoryService.GetCategoryByIdLocal(product.CategoryId)
-                            ?? await _categoryService.getCategoryByIdAsync(product.CategoryId);
+                            ?? await _categoryService.GetCategoryByIdAsync(product.CategoryId);
                 // if 18 plus required
                 if (category.Requires18Plus)
                 {

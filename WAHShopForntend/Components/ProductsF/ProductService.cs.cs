@@ -1,13 +1,15 @@
 ﻿using WAHShopForntend.Components.Cart;
 using WAHShopForntend.Components.Models;
 using WAHShopForntend.Components.Pages;
+using WAHShopForntend.Components.ProductImagesF;
 using static System.Net.WebRequestMethods;
 
 namespace WAHShopForntend.Components.ProductsF
 {
-    public class ProductService(HttpClient http)
+    public class ProductService(HttpClient http,ProductImagesService productImagesService)
     {
         private readonly HttpClient _http = http;
+        private readonly ProductImagesService _productImagesService = productImagesService;
         public  List<Product> DownloadedProduct { get;  set; } = [];
         public async Task<List<Product>> GetProductByIdsAsync(List<int> productIds)
         {
@@ -44,6 +46,7 @@ namespace WAHShopForntend.Components.ProductsF
                 {
                     // add the product to the local list
                     AddProductToLocal(product!);
+                   
                     return product!;
                 }
                 return null!;

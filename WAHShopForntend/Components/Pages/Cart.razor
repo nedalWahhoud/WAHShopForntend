@@ -28,7 +28,7 @@ else
 					if (item.Product != null)
 					{
 						<div class="cartItem">
-							<img @onclick="() => OnProduct(item.ProductId)" width="160" height="160" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Product.Image ?? Array.Empty<byte>())" alt="@item.Product.Name_de" />
+							<img @onclick="() => OnProduct(item.ProductId)" width="160" height="160" src="@productImagesService.GetProductImageUrl(item.Product.ProductImages.FirstOrDefault(i => i.IsMain)!)" alt="@item.Product.Name_de" />
 							<div class="cartItemDetails">
 								<h4>@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
 											? item.Product.Name_ar

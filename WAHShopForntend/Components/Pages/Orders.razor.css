@@ -1,9 +1,12 @@
-﻿.orderContainer {
+﻿.mainContainer {
+    margin-top: 70px;
+}
+.orderContainer {
     max-width: 900px;
     margin: 20px auto;
     display: flex;
-    align-content:center;
-    justify-items:center;
+    align-content: center;
+    justify-items: center;
     flex-direction: column;
     gap: 25px;
 }

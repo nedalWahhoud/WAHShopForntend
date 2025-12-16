@@ -106,6 +106,15 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Okay ähnelt.
+        /// </summary>
+        public static string Okay {
+            get {
+                return ResourceManager.GetString("Okay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Re-enter Password ähnelt.
         /// </summary>
         public static string PasswordAgainPlaceholder {
@@ -129,6 +138,24 @@ namespace WAHShopForntend.Resources {
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die User created successfully. Please check your email to confirm your account. ähnelt.
+        /// </summary>
+        public static string SignupSuccessMessage {
+            get {
+                return ResourceManager.GetString("SignupSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please check your email to confirm your account. ähnelt.
+        /// </summary>
+        public static string SignupSuccessMessageAgain {
+            get {
+                return ResourceManager.GetString("SignupSuccessMessageAgain", resourceCulture);
             }
         }
         

@@ -1,14 +1,17 @@
 ﻿using WAHShopForntend.Components.Models;
 using WAHShopForntend.Components.ProductsF;
-using static System.Net.WebRequestMethods;
 
 namespace WAHShopForntend.Components.SearchF
 {
-    public class SearchService(HttpClient http, ProductService productService)
+    public class SearchService
     {
-        private readonly HttpClient _http = http;
-        private readonly ProductService _productService = productService ?? new ProductService(http);
-
+        private readonly HttpClient _http ;
+        private readonly ProductService _productService;
+        public SearchService(HttpClient http, ProductService productService)
+        {
+            _http = http;
+            _productService = productService;
+        }
         public async Task<List<Product>> SearchProductsAsync(string searchText, List<int> excludeIds)
         {
             if (string.IsNullOrWhiteSpace(searchText))
@@ -38,7 +41,7 @@ namespace WAHShopForntend.Components.SearchF
                     // not active exclusion
                     products = products.Where(p => p.Category != null && p.Category.IsAktiv).ToList();
                     // add the product to the local list
-                    productService.AddProductToLocal(products);
+                    _productService.AddProductToLocal(products);
                     return products;
                 }
                 return [];

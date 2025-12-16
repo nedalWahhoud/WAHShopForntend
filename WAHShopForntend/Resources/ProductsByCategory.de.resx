@@ -129,6 +129,13 @@
   <data name="MaxQuantity" xml:space="preserve">
     <value>Sie können nicht mehr als 5 Stück bestellen.</value>
   </data>
+  <data name="NoItemsFound" xml:space="preserve">
+    <value>Keine Produkte gefunden</value>
+  </data>
+  <data name="NoOffersFound" xml:space="preserve">
+    <value>Zurzeit gibt es keine Angebote. Wir haben jedoch regelmäßig neue Angebote – besuchen Sie unsere Website später wieder, und Sie werden sicher etwas finden.
+</value>
+  </data>
   <data name="NoStock" xml:space="preserve">
     <value>Nicht genügend Lagerbestand</value>
   </data>

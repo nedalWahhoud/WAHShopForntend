@@ -129,6 +129,12 @@
   <data name="MaxQuantity" xml:space="preserve">
     <value>You cannot order more than 5 piece.</value>
   </data>
+  <data name="NoItemsFound" xml:space="preserve">
+    <value>No Products Found</value>
+  </data>
+  <data name="NoOffersFound" xml:space="preserve">
+    <value>There are currently no offers. However, we regularly add new offers—check back later and you're sure to find something.</value>
+  </data>
   <data name="NoStock" xml:space="preserve">
     <value>Insufficient stock</value>
   </data>

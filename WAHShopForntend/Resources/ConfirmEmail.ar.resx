@@ -123,6 +123,12 @@
   <data name="ConfirmationSuccessful" xml:space="preserve">
     <value>تم تأكيد البريد الإلكتروني بنجاح، يرجى تسجيل الدخول.</value>
   </data>
+  <data name="GoToLogin" xml:space="preserve">
+    <value>انتقل إلى تسجيل الدخول</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>يتم التحميل...</value>
+  </data>
   <data name="MissingData" xml:space="preserve">
     <value>بينات التاكيد مفقودة</value>
   </data>

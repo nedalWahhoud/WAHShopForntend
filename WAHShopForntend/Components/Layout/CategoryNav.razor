@@ -159,7 +159,7 @@
     private int currentCategoryId = 0;
     protected override async Task OnInitializedAsync()
     {
-        await categoryService.GetCategoriesAsync();
+        await categoryService.GetAllCategoriesAsync();
 
         // get the current category id from the URL
         var uri = new Uri(NavigationManager.Uri);
@@ -181,7 +181,6 @@
         }
 
     }
-
     private void OnCategory(int categoryId)
     {
         NavigationManager.NavigateTo($"/ProductsByCategory/{categoryId.ToString(System.Globalization.CultureInfo.InvariantCulture)}", true);

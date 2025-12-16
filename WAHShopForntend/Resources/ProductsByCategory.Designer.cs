@@ -97,6 +97,24 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No Products Found ähnelt.
+        /// </summary>
+        public static string NoItemsFound {
+            get {
+                return ResourceManager.GetString("NoItemsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die There are currently no offers. However, we regularly add new offers—check back later and you&apos;re sure to find something. ähnelt.
+        /// </summary>
+        public static string NoOffersFound {
+            get {
+                return ResourceManager.GetString("NoOffersFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Insufficient stock ähnelt.
         /// </summary>
         public static string NoStock {

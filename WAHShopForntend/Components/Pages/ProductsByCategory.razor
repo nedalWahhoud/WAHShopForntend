@@ -5,16 +5,17 @@
 
 @if (!IsLoading)
 {
-	
+
 }
 else
 {
-	<h3>
+	<div class="mainContainer">
+    	<h3>
 		@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-															? allCategories.Find(s => s.Id == CategoryId)?.Name_ar ?? ""
-															: allCategories.Find(s => s.Id == CategoryId)?.Name_de ?? "")
-	</h3>
-	<div class="productItems">
+																	? allCategories.Find(s => s.Id == CategoryId)?.Name_ar ?? ""
+																	: allCategories.Find(s => s.Id == CategoryId)?.Name_de ?? "")
+	   </h3>
+       <div class="productItems">
 		@foreach (var product in products)
 		{
 			<div class="cardProduct">
@@ -22,23 +23,39 @@ else
 				<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 			</div>
 		}
-	</div>
-	<div class="moreLoadContainer">
-		<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || AllItemsLoaded)">
-			@if (IsOrdersLoading)
+    	</div>
+	    <div class="moreLoadContainer">
+		@if (products.Count > 0)
+		{
+			<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || AllItemsLoaded)">
+				@if (IsOrdersLoading)
+				{
+					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+					<span class="ms-2">@L["LoadingButton"]</span>
+				}
+				else if (!AllItemsLoaded)
+				{
+					<span>@L["LoadMore"]</span>
+				}
+				@if (AllItemsLoaded)
+				{
+					<span>@L["AllItemsLoaded"]</span>
+				}
+			</button>
+		}
+		else
+		{
+			@if (CategoryId != -1)
 			{
-				<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-				<span class="ms-2">@L["LoadingButton"]</span>
+				<span class="NoItemsFound">@L["NoItemsFound"]</span>
 			}
-			else if (!AllItemsLoaded)
+			else
 			{
-				<span>@L["LoadMore"]</span>
+				<span class="NoOffersFound">@L["NoOffersFound"]</span>
 			}
-			@if (AllItemsLoaded)
-			{
-				<span>@L["AllItemsLoaded"]</span>
-			}
-		</button>
+		}
+
+	    </div>
 	</div>
 }
 @code {
@@ -62,7 +79,7 @@ else
 		if (!IfOnMoreProductsLoad)
 		{
 			// check if product local exist To relieve pressure on the server
-			var productsLocal = await categoryService.GetProductByCategoryIdLocal(CategoryId);
+			var productsLocal =  categoryService.GetProductByCategoryIdLocal(CategoryId);
 
 			if (productsLocal != null && productsLocal.Count > 0)
 			{
@@ -76,7 +93,7 @@ else
 			}
 		}
 		// from Server
-		var productsServer = await categoryService.GetProductsByCategoryIdAsync(CategoryId, 10, null, excludeProductsIds);
+		var productsServer = await categoryService.GetProductsByCategoryIdAsync(CategoryId, 7, null, excludeProductsIds);
 		if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
 		{
 			// initialize CartItem for each product
@@ -103,6 +120,9 @@ else
 	private bool AllItemsLoaded = false;
 	private async Task OnMoreLoad()
 	{
+		if (IsOrdersLoading)
+			return;
+
 		IsOrdersLoading = true;
 		await MoreProductsload(true);
 		IsOrdersLoading = false;

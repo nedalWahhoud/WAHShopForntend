@@ -129,6 +129,12 @@
   <data name="MaxQuantity" xml:space="preserve">
     <value>لايمكنك  طلب اكثر من 5 قطع</value>
   </data>
+  <data name="NoItemsFound" xml:space="preserve">
+    <value>لم يتم العثور على أي منتجات</value>
+  </data>
+  <data name="NoOffersFound" xml:space="preserve">
+    <value>لا توجد عروض حاليًا. مع ذلك، نضيف عروضًا جديدة بانتظام. تابعنا لاحقًا وستجد بالتأكيد ما يناسبك.</value>
+  </data>
   <data name="NoStock" xml:space="preserve">
     <value>المخزون غير كافي</value>
   </data>

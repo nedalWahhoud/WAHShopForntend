@@ -1,4 +1,7 @@
 ﻿.header {
+    position: fixed; 
+    top: 0;
+    left: 0;
     background-color: var(--hederBackgroundColoe);
     color: white;
     height: 6rem;

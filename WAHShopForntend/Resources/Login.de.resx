@@ -132,10 +132,13 @@
   <data name="Register" xml:space="preserve">
     <value>Registrieren</value>
   </data>
-  <data name="Username" xml:space="preserve">
-    <value>Benutzername/Email</value>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Herzlich willkommen</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>An mich erinneren</value>
   </data>
 </root>

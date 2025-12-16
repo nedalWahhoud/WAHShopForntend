@@ -9,6 +9,7 @@
 }
 else
 {
+	<div class="mainContainer">
 		@if (searchedProducts.Count > 0)
 		{
 			<div class="productItems">
@@ -31,7 +32,7 @@ else
 		{
 			<p>Keine Produkte gefunden.</p>
 		}
-	
+	</div>
 }
 @code {
 	[Parameter]

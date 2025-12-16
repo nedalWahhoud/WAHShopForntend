@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Tracing;
+using System.Runtime.InteropServices.JavaScript;
+using System.Text.Json.Serialization;
 
 namespace WAHShopForntend.Components.Models
 {
@@ -21,6 +24,8 @@ namespace WAHShopForntend.Components.Models
         [Required(ErrorMessage = "Rolle ist erforderlich.")]
         public string BirthDate { get; set; } = string.Empty;
         public bool IsGuest { get; set; } = false;
-        public string SignupProvider { get; set; } = string.Empty; 
+        public string SignupProvider { get; set; } = string.Empty;
+        [JsonIgnore]
+        public ValidationResult ValidationResult { get; set; } = new ();
     }
 }

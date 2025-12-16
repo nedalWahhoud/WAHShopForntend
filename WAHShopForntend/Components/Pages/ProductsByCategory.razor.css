@@ -1,4 +1,7 @@
-﻿
+﻿.mainContainer {
+    margin-top: 70px;
+    width: 100%;
+}
 .moreLoadContainer {
     text-align: center;
     margin: 20px 20px;
@@ -8,3 +11,19 @@
         padding: 10px 20px;
         font-weight: 500;
     }
+.NoItemsFound,
+.NoOffersFound {
+    display: inline-block;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 500;
+    color: #222222;
+    background: linear-gradient(135deg, #ffffff, #f3f3f3);
+    padding: 16px 28px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: 1px solid #ddd;
+}

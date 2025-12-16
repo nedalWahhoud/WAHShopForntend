@@ -11,7 +11,8 @@ else
 {
     @if (!HeaderHidden)
     {
-        <Header />
+		<Header />
+
         <CategoryNav />
     }
 
@@ -21,7 +22,6 @@ else
                 @Body
             </article>
         </main>
-
     </div>
 
     @if (!HeaderHidden)
@@ -47,6 +47,8 @@ else
     {
         if (firstRender)
         {
+            
+
             // Initialize the cartService to get the saved cart
             await cartService.InitializeAsync();
             isRended = true;

@@ -132,6 +132,9 @@
   <data name="NamePlaceholder" xml:space="preserve">
     <value>Dein Name</value>
   </data>
+  <data name="Okay" xml:space="preserve">
+    <value>Ok</value>
+  </data>
   <data name="PasswordAgainPlaceholder" xml:space="preserve">
     <value>Password nochmal eingeben</value>
   </data>
@@ -140,6 +143,12 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>Registrieren</value>
+  </data>
+  <data name="SignupSuccessMessage" xml:space="preserve">
+    <value>Benutzer erfolgreich erstellt. Bitte prüf mal Ihre E Mail um Ihre Konto zu bestätigen.</value>
+  </data>
+  <data name="SignupSuccessMessageAgain" xml:space="preserve">
+    <value>Bitte prüf mal Ihre E Mail um Ihre Konto zu bestätigen.</value>
   </data>
   <data name="SignupText" xml:space="preserve">
     <value>Konto erstellen</value>

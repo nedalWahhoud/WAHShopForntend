@@ -5,47 +5,64 @@
 
 <div class="signupContainer">
     <div class="signupForm">
-        <h2 @onclick="OnProjectInfo">@ProjectInfo.Value.Name</h2>
-        <h3 class="title">@L["SignupText"]</h3>
-        <EditForm Model="@signupModel" OnValidSubmit="@HandleSubmit" FormName="signup">
-            <DataAnnotationsValidator />
-            <div class="form-group mt-3">
-                <InputText @bind-Value="signupModel.UserName" placeholder="@L["NamePlaceholder"]" class="form-control" />
-                <ValidationMessage For="@(() => signupModel.UserName)" />
+        @if(signupModel.ValidationResult.Result == false)
+        {
+            if (signupModel.ValidationResult.Message != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @L[signupModel.ValidationResult.Message]
+                </div>
+            }
+
+            <h2 @onclick="OnProjectInfo">@ProjectInfo.Value.Name</h2>
+            <h3 class="title">@L["SignupText"]</h3>
+            <EditForm Model="@signupModel" OnValidSubmit="@HandleSubmit" FormName="signup">
+                <DataAnnotationsValidator />
+                <div class="form-group mt-3">
+                    <InputText @bind-Value="signupModel.UserName" placeholder="@L["NamePlaceholder"]" class="form-control" />
+                    <ValidationMessage For="@(() => signupModel.UserName)" />
+                </div>
+                <div class="form-group mt-3">
+                    <InputText @bind-Value="signupModel.Email" placeholder="@L["EmailPlaceholder"]" type="email" class="form-control" />
+                    <ValidationMessage For="@(() => signupModel.Email)" />
+                </div>
+                <div class="form-group mt-3">
+                    <label>@L["BirthDateLabel"]</label>
+                    <InputText @bind-Value="signupModel.BirthDate" type="date" class="form-control" />
+                    <ValidationMessage For="@(() => signupModel.BirthDate)" />
+                </div>
+                <div class="form-group mt-3">
+                    <InputText @bind-Value="signupModel.Password" placeholder="@L["PasswordPlaceholder"]" type="password" class="form-control" />
+                    <ValidationMessage For="@(() => signupModel.Password)" />
+                </div>
+                <div class="form-group mt-3">
+                    <InputText @bind-Value="signupModel.PasswordAgain" placeholder="@L["PasswordAgainPlaceholder"]" type="password" class="form-control" />
+                    <ValidationMessage For="@(() => signupModel.PasswordAgain)" />
+                </div>
+                <button type="submit" disabled="@IsLoading">
+                    @if (IsLoading)
+                    {
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="ms-2">@L["Loading"]</span>
+                    }
+                    else
+                    {
+                        <span>@L["Register"]</span>
+                    }
+                </button>
+            </EditForm>
+            <div class ="loginLink">
+                @L["AlreadyRegisteredText"]
+                <a href="/login">@L["LoginText"]</a>
             </div>
-            <div class="form-group mt-3">
-                <InputText @bind-Value="signupModel.Email" placeholder="@L["EmailPlaceholder"]" type="email" class="form-control" />
-                <ValidationMessage For="@(() => signupModel.Email)" />
+        }
+        else
+        {
+            <div class="alert alert-success" role="alert">
+                @L[signupModel.ValidationResult.Message ?? "Okay"]
             </div>
-            <div class="form-group mt-3">
-                <label>@L["BirthDateLabel"]</label>
-                <InputText @bind-Value="signupModel.BirthDate" type="date" class="form-control" />
-                <ValidationMessage For="@(() => signupModel.BirthDate)" />
-            </div>
-            <div class="form-group mt-3">
-                <InputText @bind-Value="signupModel.Password" placeholder="@L["PasswordPlaceholder"]" type="password" class="form-control" />
-                <ValidationMessage For="@(() => signupModel.Password)" />
-            </div>
-            <div class="form-group mt-3">
-                <InputText @bind-Value="signupModel.PasswordAgain" placeholder="@L["PasswordAgainPlaceholder"]" type="password" class="form-control" />
-                <ValidationMessage For="@(() => signupModel.PasswordAgain)" />
-            </div>
-            <button type="submit" disabled="@IsLoading">
-                @if (IsLoading)
-                {
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <span class="ms-2">@L["Loading"]</span>
-                }
-                else
-                {
-                    <span>@L["Register"]</span>
-                }
-            </button>
-        </EditForm>
-        <div class ="loginLink">
-            @L["AlreadyRegisteredText"]
-            <a href="/login">@L["LoginText"]</a>
-        </div>
+            <button @onclick="Ok">@L["Okay"]</button>
+        }
     </div>
 </div>
 
@@ -59,17 +76,20 @@
         var result = await AuthService!.Signup(signupModel);
         if (result.Result == true)
         {
-            await JS.InvokeVoidAsync("showAlert", result.Message);
-            NavigationManager!.NavigateTo("/login");
+            signupModel.ValidationResult = result;
         }
         else
         {
-            _ = JS.InvokeVoidAsync("showAlert", result.Message);
+			signupModel.ValidationResult = result;
             signupModel.PasswordAgain = string.Empty; // Clear the password confirmation field
         }
         IsLoading = false;
     }
   
+	private void Ok()
+	{
+		NavigationManager.NavigateTo("/login", false);
+	}
     private void OnProjectInfo()
     {
         NavigationManager.NavigateTo("/", false);

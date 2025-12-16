@@ -1,4 +1,8 @@
 ﻿.categoryNav {
+    position: fixed;
+    top: 6rem; /* header height */
+    z-index: 9980; /* weinger als Header um immer unter Header zu bleiben */
+    width:100%;
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -59,7 +63,7 @@
     }
     .categoryLinkOnOffer.selected {
         background: linear-gradient(135deg, #ff7a00, #ff3b3b); 
-        color: #fff;
+        color: #ffffff;
         box-shadow: 0 0 10px rgba(255, 59, 59, 0.5);
     }
 

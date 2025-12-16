@@ -1,6 +1,6 @@
-﻿.main{
-    width:100%;
-    height:100vh;
+﻿.mainContainer {
+    margin-top: 70px;
+    width: 100%;
 }
 .profileCard {
     display:flex;

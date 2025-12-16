@@ -2,13 +2,30 @@
 @inject IStringLocalizer< WAHShopForntend.Resources.ConfirmEmail> L
 @inject NavigationManager NavManager
 
-<h3>@statusMessage</h3>
+@if (activateRequest.IsLoading)
+{
+    <div class="d-flex justify-content-center align-items-center" style="height:100px;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">@L["Loading"]</span>
+        </div>
+    </div>
+}
+else
+{
+   <h3>@activateRequest.StatusMessage</h3>
 
+   @if (activateRequest.IsActivated)
+   {
+    <button class="btn btn-primary" @onclick="GoToLogin">@L["GoToLogin"]</button>
+   }
+}
 
 @code {
-    private string? statusMessage;
-    protected override async void OnInitialized()
+	private ActivateRequest activateRequest { get; set; } = new ActivateRequest();
+
+    protected override async Task OnInitializedAsync()
     {
+		activateRequest.IsLoading = true;
         var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
         var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
 
@@ -17,11 +34,12 @@
 
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
         {
-            statusMessage = L["MissingData"];
+            activateRequest.StatusMessage = L["MissingData"];
+            activateRequest.IsActivated = false;
             return;
         }
 
-		ActivateRequest activateRequest = new ActivateRequest
+		 activateRequest = new ActivateRequest
 			{
 				UserId = userId,
 				Token = token
@@ -30,12 +48,18 @@
         var result = await AuthService.UserActivate(activateRequest);
         if (result.Result)
         {
-            statusMessage = L["ConfirmationSuccessful"];
+            activateRequest.StatusMessage = L["ConfirmationSuccessful"];
+            activateRequest.IsActivated = true;
         }
         else
         {
-            statusMessage = result.Message;
+            activateRequest.StatusMessage = result.Message!;
+            activateRequest.IsActivated = false;
         }
-        StateHasChanged();
+		activateRequest.IsLoading = false;
     }
+	private void GoToLogin()
+	{
+		NavManager.NavigateTo("/login");
+	}
 }

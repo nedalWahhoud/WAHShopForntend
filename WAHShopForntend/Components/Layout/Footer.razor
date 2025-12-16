@@ -1,113 +1,42 @@
 ﻿@inject IStringLocalizer< WAHShopForntend.Resources.Footer> L
 
 <footer class="footer" id="page-footer">
+	<ProjektLogo />
 	<div class="contactDiv">
-		<ProjektLogo />
-		<p>
-			<button @onclick="OnOpenMap" style="background-color:transparent; border:none; color: inherit">
-			    <img src="Images/Location.png" alt="WhatsApp Icon" width="28" height="28" style="vertical-align: middle; margin-right: 5px;">
-			    @ProjectInfo.Value.Address
-			</button>
-		</p>
-		<p>
-			<button @onclick="OnOpenWhatsApp" style="background-color:transparent; border:none; color: inherit">
-				<img src="Images/Whatsapp.png" alt="WhatsApp Icon" width="28" height="28" style="vertical-align: middle; margin-right: 5px;">
-				@ProjectInfo.Value.Whatsapp
-			</button>
-		</p>
-		
-		<p>
-			<img src="Images/Email.png" alt="WhatsApp Icon" width="28" height="28" style="vertical-align: middle; margin-right: 5px;">
-			@ProjectInfo.Value.Email
-		</p>
+		<h2>Kontakt</h2>
+		<p @onclick="OnOpenMap"><i class="bi bi-geo-alt" /><span>@ProjectInfo.Value.Address</span></p>
+		<p><i class="bi bi-envelope" /><span>@ProjectInfo.Value.Email</span></p>
+		<p @onclick="OnOpenWhatsApp"><i class="bi bi-telephone" /><span>@ProjectInfo.Value.Whatsapp</span></p>
 	</div>
 	<div class="socialMedia">
-		
+		<h2>@L["FollowUs"]</h2>
 		<div class="icons">
-		  <p>@L["FollowUs"]</p>
 		  <a href="@ProjectInfo.Value.Facebook" target="_blank" rel="noopener noreferrer">
-			<img src="Images/Facebook.png" alt="Facebook Icon" width="36" height="36"/>
+				<i class="bi bi-facebook" style="color:#1877F2" alt="Facebook Icon"></i>
 		  </a>
 		  <a href="@ProjectInfo.Value.Instagram" target="_blank" rel="noopener noreferrer">
-			<img src="Images/Instagram.png" alt="Instagram Icon" width="27" height="27"/>
+				<i class="bi bi-instagram" style="color:#E4405F" alt="Instagram Icon"></i>
 		  </a>
 		</div>
 	</div>
+	<div class="linksDiv">
+		<h2>Links</h2>
+		<a href="/">Startseite</a>
+		<a href="/privacypolicy">Datenschutz</a>
+	</div>
+	<div class="mapDiv">
+		<h2>Standort</h2>
+		<a href="https://www.google.com/maps?q=@ProjectInfo.Value.Latitude,@ProjectInfo.Value.Longitude"
+		   target="_blank"
+		   title="In Google Maps öffnen">
+			<iframe class="iframe" src="https://www.google.com/maps?q=@ProjectInfo.Value.Latitude,@ProjectInfo.Value.Longitude&output=embed"
+					style="border:0; border-radius:8px;"
+					allowfullscreen
+					loading="lazy">
+			</iframe>
+		</a>
+	</div>
 </footer>
-
-@* script wenn Handy dann wird Whatsapp geöffent sonst wird webseite von Whatsapp geöffenet*@
-<script>
-	window.whatsappRedirect = {
-	  openWhatsApp: function(phone, message) {
-		const number = String(phone).replace(/\D/g,'');
-		const text = message ? encodeURIComponent(message) : '';
-
-		// الروابط
-		const appUrl = text
-		  ? `whatsapp://send?phone=${number}&text=${text}`
-		  : `whatsapp://send?phone=${number}`;
-		const webUrl = text
-		  ? `https://api.whatsapp.com/send?phone=${number}&text=${text}`
-		  : `https://wa.me/${number}`;
-
-		// فحص نوع الجهاز
-		const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
-
-		if (isMobile) {
-		  // على الموبايل: حاول فتح التطبيق أولًا
-		  const now = Date.now();
-		  window.location = appUrl;
-		} else {
-		  // على الكمبيوتر: افتح الرابط مباشرة على الويب
-		   window.open(webUrl, '_blank');
-		}
-	  }
-	};
-</script>
-@* script wenn Handy wird MapApp geöffent sonst wird die Webseite von Google Map geöffenet *@
-<script>
-	window.mapRedirect = {
-	  openMap: function(latitude, longitude, label = '') {
-
-		latitude = String(latitude).trim();
-	    longitude = String(longitude).trim();
-	    label = String(label || '').trim();
-		// إذا تم تمرير اسم موقع فقط بدون إحداثيات
-		const query = label
-		  ? encodeURIComponent(label)
-		  : `${latitude},${longitude}`;
-
-		const appleUrl = label
-	    ? `maps://?ll=${latitude},${longitude}&q=${encodeURIComponent(label)}`
-	    : `maps://?ll=${latitude},${longitude}`;
-		// apple
-		const appUrl = `geo:${latitude},${longitude}?q=${query}`;
-		// android
-		const androidUrl = `geo:${latitude},${longitude}?q=${encodeURIComponent(label || `${latitude},${longitude}`)}`;
-		// رابط الويب (fallback)
-		const webUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
-
-
-		// تحديد النظام من الـ user agent
-	    const ua = navigator.userAgent || navigator.vendor || window.opera;
-	    const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-	    const isAndroid = /Android/.test(ua);
-
-	  if (isIOS) {
-	    // iPhone → افتح Apple Maps
-	    window.location = appleUrl;
-	   
-	   } else if (isAndroid) {
-	    // Android → افتح Google Maps App
-	    window.location = androidUrl;
-	   } else {
-	    // كمبيوتر → افتح Google Maps في تبويب جديد
-	    window.open(webUrl, '_blank');
-	   }
-	  }
-	};
-</script>
-
 
 @code {
 	private async Task OnOpenWhatsApp()
@@ -117,6 +46,5 @@
 	private async Task OnOpenMap()
 	{
 		await JS.InvokeVoidAsync("mapRedirect.openMap", ProjectInfo.Value.Latitude, ProjectInfo.Value.Longitude, ProjectInfo.Value.Name);
-
 	}
 }

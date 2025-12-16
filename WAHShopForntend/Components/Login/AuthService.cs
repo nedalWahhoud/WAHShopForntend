@@ -51,6 +51,12 @@
 
                 (_authStateProvider as CustomAuthStateProvider)?.NotifyUserAuthentication(result.Token);
 
+                // Save token to localStorage
+                if (loginModel.RememberMe)
+                    (_authStateProvider as CustomAuthStateProvider)?.LocalstorageSet("authToken", result.Token);
+                else
+                    (_authStateProvider as CustomAuthStateProvider)?.SessionStorageSet("authToken", result.Token);  
+
                 return new ValidationResult { Result = true, Message = "erfolgreich eingeloggt" };
             }
             catch (Exception ex)
@@ -62,7 +68,6 @@
         {
             if (_authStateProvider is CustomAuthStateProvider customAuthStateProvider)
             {
-               
                 await customAuthStateProvider.NotifyUserLogout();
             }
             _http!.DefaultRequestHeaders.Authorization = null;

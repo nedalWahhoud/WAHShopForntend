@@ -2,18 +2,47 @@
 @using Microsoft.AspNetCore.Localization;
 <!DOCTYPE html>
 <html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName"
-      dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "ltr")">
+dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow">
+    @* hreflang   *@
+    <link rel="alternate" href="https://syriana-supermarkt.de/lang/ar" hreflang="ar">
+    <link rel="alternate" href="https://syriana-supermarkt.de/lang/de" hreflang="de">
+    <link rel="alternate" href="https://syriana-supermarkt.de" hreflang="x-default" />
+
+    @*  *@
+    <meta name="description" content=@(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? " اكتشف أفضل المنتجات العربية والسورية عبر الإنترنت. مواد غذائية، توابل، حلويات ومشروبات من سوريا والعالم العربي مع توصيل سريع." 
+    : "Entdecken Sie die besten arabischen und syrischen Produkte online. Lebensmittel, Gewürze, Süßigkeiten und Getränke aus Syrien und der arabischen Welt mit schneller Lieferung.")>
+    <meta name="keywords" content=@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "منتجات عربية, منتجات سورية, سوريا, توابل, حلويات, متجر إلكتروني, تسوق أونلاين"
+    :"arabische Produkte, syrische Lebensmittel, Syrien, Gewürze, Süßigkeiten, Online-Shop, Lebensmittel online")>
+    <meta name="author" content=@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "نضال وحود" : "Nedal Wahhoud")>
+    @* Open Graph für Soziale Medien *@
+    @{
+        string currentLang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+        string canonicalUrl = $"https://syriana-supermarkt.de/lang/{currentLang}";
+		if (currentLang != "ar")
+		{
+			canonicalUrl = "https://syriana-supermarkt.de";
+		}
+    }
+    <meta property="og:title" content="@(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? "سيريانا سوبر ماركت" : "Syriana Supermarkt")" />
+    <meta property="og:description" content="@(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? " اكتشف أفضل المنتجات العربية والسورية..." : "Entdecken Sie die besten arabischen und syrischen Produkte...")" />
+    <meta property="og:url" content="@canonicalUrl" />
+	<meta property="og:type" content="website" />
+    <meta property="og:locale" content="@(CultureInfo.CurrentCulture.Name.Replace('-', '_'))" />
+    <meta property="og:image" content="https://syriana-supermarkt.de/ProjectImages/SyrianaSupermarktLogoOhneText.png" />
+
     <base href="/" />
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="WAHShopForntend.styles.css" />
-    <link rel="icon" type="image/png" href="Images/Syriana Supermarkt Logo Ohne Text.png" />
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/app.css" />
+    <link rel="stylesheet" href="/WAHShopForntend.styles.css" />
+    <link rel="icon" type="image/png" href="/ProjectImages/SyrianaSupermarktLogoOhneText.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
 
+    <title>@(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? "سيريانا سوبر ماركت" : "Syriana Supermarkt")</title>
     <HeadOutlet/>
 </head>
 
@@ -24,6 +53,44 @@
     <script src="_framework/blazor.web.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    @* scroll *@
+	<script>
+            window.scrollHelper = {
+            onScrollEnd: function (dotnetObj) {
+                let isLoading = false; // 🚫 Verhindert Wiederholung
+                window.addEventListener("scroll", function () {
+                    
+                    const scrollPosition = window.innerHeight + window.scrollY;
+                    let pageHeight = document.body.scrollHeight;
+                     
+                      // Die Footer sollte nicht zur Seitenlänge gezählt werden.
+                      const footer = document.getElementById("page-footer") ;
+                      if(footer)
+                      {
+                          pageHeight -= footer.offsetHeight;
+                      } 
+
+                      if (scrollPosition >= pageHeight - 2 && !isLoading) {
+                          isLoading = true;
+                          try
+                          {
+                           dotnetObj.invokeMethodAsync("OnScrollEndReached");
+                          }
+                          catch(err)
+                          {
+							  console.error("Fehler beim Aufrufen der .NET-Methode:", err);
+                          }
+                          finally
+                          {
+                            setTimeout(() => {
+                             isLoading = false;
+                            }, 500);
+                          }
+                      }
+                });
+            }
+        };
+    </script>
     @* confirm *@
 	<script>
         window.showConfirm = function (message) {
@@ -32,84 +99,122 @@
 	</script>
     @* Firebase *@
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
         import {
             getAuth,
             GoogleAuthProvider,
             signInWithRedirect,
             getRedirectResult,
-            signOut
-        } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+            signInWithPopup,
+            signOut,
+            onAuthStateChanged,
+            setPersistence,
+            browserLocalPersistence
+        } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-        // ✅ تهيئة Firebase باستخدام config الخاص بك
-          const firebaseConfig = {
-          apiKey: "AIzaSyDlKCI4GMUd9C6CYpVX53rMeAyV_NmcrI4",
-          authDomain: "onlinestore-aa38e.firebaseapp.com",
-          projectId: "onlinestore-aa38e",
-          storageBucket: "onlinestore-aa38e.firebasestorage.app",
-          messagingSenderId: "169699830284",
-          appId: "1:169699830284:web:a87f8e73c3cd916d60dc29"
+        
+        const firebaseConfig = {
+        apiKey: "AIzaSyDlKCI4GMUd9C6CYpVX53rMeAyV_NmcrI4",
+        authDomain: "onlinestore-aa38e.firebaseapp.com",
+        projectId: "onlinestore-aa38e",
+        storageBucket: "onlinestore-aa38e.firebasestorage.app",
+        messagingSenderId: "169699830284",
+        appId: "1:169699830284:web:a87f8e73c3cd916d60dc29"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // ✅ دالة تسجيل الدخول بـ Redirect
-        window.loginWithGoogle = async function () {
-                   try {
-                   alert("okay");
-         await signInWithRedirect(auth, provider);
-           
-        } catch (error) {
-          alert("Redirect error:", error.code, error.message);
+        async function initFirebase() {
+          try {
+            await setPersistence(auth, browserLocalPersistence);
+          } catch (errAwait) {
+            console.warn("await setPersistence failed or not supported, trying .then():", errAwait);
+            setPersistence(auth, browserLocalPersistence)
+              .then(() => {
+                console.log("✅ Persistence set (then)");
+              })
+              .catch(errThen => {
+                console.error("❌ setPersistence failed:", errThen);
+              });
+          }
         }
 
+        initFirebase();
+
+        window.loginWithGoogleRedirect = async function () {
+            try {
+                await signInWithRedirect(auth, provider);
+            } catch (error) {
+                alert("Login failed: " + error.message);
+            }
         };
 
-        // ✅ دالة لجلب نتيجة تسجيل الدخول بعد العودة من Google
-        async function getRedirectResultFromFirebase() {
-            try {
-                const result = await getRedirectResult(auth);
-                if (result && result.user) {
-                    const user = result.user;
-                    return {
-                        Username: user.displayName,
-                        Email: user.email,
-                        Uid: user.uid
-                    };
+          window.getRedirectResult = async function () {
+          try {
+            console.log("🔄 Checking redirect result...");
+            const result = await getRedirectResult(auth);
+            if (result && result.user) {
+              console.log("✅ Redirect result found user:", result.user.email);
+              return {
+                UserName: result.user.displayName,
+                Email: result.user.email,
+                SignupProvider: "Google",
+              };
+            }
+
+            return new Promise((resolve) => {
+              onAuthStateChanged(auth, (user) => {
+                if (user) {
+                  console.log("✅ User loaded from onAuthStateChanged:", user.email);
+                  resolve({
+                    UserName: user.displayName,
+                    Email: user.email,
+                    SignupProvider: "Google",
+                  });
+                } else {
+                  console.log("🚪 No user found (signed out)");
+                  resolve(null);
                 }
-                return null;
-            } catch (error) {
-                console.error("Redirect login failed:", error);
-                return null;
-            }
-        }
-        window.getRedirectResult = getRedirectResultFromFirebase;
-
-        // ✅ تسجيل خروج
-        window.googleSignOut = async function () {
-            try {
-                await signOut(auth);
-                return true;
-            } catch (error) {
-                return false;
-            }
+              });
+            });
+          } catch (error) {
+            console.error("❌ Error getting redirect result:", error);
+            return null;
+          }
         };
 
 
-        // تسجيل خروج
+
+        /*
+        // login mit Popup
+        window.loginWithGooglePopup = async function () {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                return {
+                    UserName: user.displayName,
+                    Email: user.email,
+					SignupProvider: "Google",
+                };
+            } catch (error) {
+                console.error("Popup login failed:", error);
+                return null;
+            }
+        };*/
+
+        // log out
         window.googleSignOut = async function () {
             try {
                 await signOut(auth);
                 return true;
             } catch (error) {
+                console.error("Sign out failed:", error);
                 return false;
             }
         };
     </script>
-
-
     @* javscript import *@
     <script src="JS/script.js"></script>
     @* langauge cocikes *@
@@ -140,7 +245,84 @@
             }
         };
     </script>
+    @* script wenn Handy dann wird Whatsapp geöffent sonst wird webseite von Whatsapp geöffenet*@
+    <script>
+        window.whatsappRedirect = {
+          openWhatsApp: function(phone, message) {
+            const number = String(phone).replace(/\D/g,'');
+            const text = message ? encodeURIComponent(message) : '';
 
+            // الروابط
+            const appUrl = text
+              ? `whatsapp://send?phone=${number}&text=${text}`
+              : `whatsapp://send?phone=${number}`;
+            const webUrl = text
+              ? `https://api.whatsapp.com/send?phone=${number}&text=${text}`
+              : `https://wa.me/${number}`;
+
+            // فحص نوع الجهاز
+            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+
+            if (isMobile) {
+              // على الموبايل: حاول فتح التطبيق أولًا
+              const now = Date.now();
+              window.location = appUrl;
+            } else {
+              // على الكمبيوتر: افتح الرابط مباشرة على الويب
+               window.open(webUrl, '_blank');
+            }
+          }
+        };
+    </script>
+    @* script wenn Handy wird MapApp geöffent sonst wird die Webseite von Google Map geöffenet *@
+    <script>
+              window.mapRedirect = {
+          openMap: function(latitude, longitude, label = '') {
+            latitude = String(latitude).trim();
+            longitude = String(longitude).trim();
+            label = String(label || '').trim();
+
+            // إذا كان هناك اسم، نستخدمه فقط كـ query، وإلا نستخدم الإحداثيات
+            const query = label ? encodeURIComponent(label) : `${latitude},${longitude}`;
+
+            // روابط تعتمد على الاسم أو الإحداثيات
+            const appleUrl = `maps://?ll=${latitude},${longitude}`;
+            const googleAppUrl = `comgooglemaps://?q=${query}`;
+            const webUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
+            const androidUrl = `geo:${latitude},${longitude}?q=${query}`;
+
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+            const isAndroid = /Android/.test(ua);
+
+            const openWebFallback = () => window.open(webUrl, '_blank');
+
+            if (isIOS) {
+              // iOS: حاول Apple Maps أولاً
+              window.location = appleUrl;
+
+              // بعد ثانية: جرب Google Maps App
+              setTimeout(() => {
+                window.location = googleAppUrl;
+
+                // بعد ثانية: افتح Web كخيار أخير
+                setTimeout(() => openWebFallback(), 1000);
+              }, 1000);
+
+            } else if (isAndroid) {
+              // Android: استخدم geo URI
+              window.location = androidUrl;
+
+              // fallback للويب بعد ثانية
+              setTimeout(() => openWebFallback(), 1000);
+
+            } else {
+              // أي جهاز آخر → افتح Web مباشرة
+              openWebFallback();
+            }
+          }
+        };
+    </script>
 </body>
 
 </html>

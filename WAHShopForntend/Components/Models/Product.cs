@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using Microsoft.Extensions.Options;
+using System.Net.Http;
+using System;
+using System.Text.Json.Serialization;
 
 namespace WAHShopForntend.Components.Models
 {
@@ -18,7 +21,7 @@ namespace WAHShopForntend.Components.Models
         public int ManufacturerId { get; set; }
         public Manufacturers? Manufacturer { get; set; }
         public int UserId { get; set; }
-        public byte[]? Image { get; set; }
+        public ICollection<ProductImages> ProductImages { get; set; } = [];
         public string? Name_ar { get; set; }
         public string? Description_ar { get; set; }
         public int? ProductGroupID { get; set; }
@@ -27,21 +30,13 @@ namespace WAHShopForntend.Components.Models
         public double DiscountedPrice { get; set; }
         //
         public CartItem CartItem { get; set; } = null!;
-        public Product()
-        {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "DPImage.png");
-            if (File.Exists(path))
-                Image = File.ReadAllBytes(path);
-
-
-        }
         public void InitializeCartItem(int quantity)
         {
             CartItem = new CartItem
             {
-                ProductId = this.Id, // تأكد أن Id معروف
+                ProductId = this.Id,
                 Quantity = quantity,
-                Product = null! // سيتم تعيين المنتج لاحقًا عند إضافة CartItem إلى السلة
+                Product = null! 
             };
         }
     }

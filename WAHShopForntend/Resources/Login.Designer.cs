@@ -61,6 +61,15 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email  ähnelt.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Forgot password? ähnelt.
         /// </summary>
         public static string ForgotPassword {
@@ -106,11 +115,11 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Username/Email  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remember me ähnelt.
         /// </summary>
-        public static string Username {
+        public static string RememberMe {
             get {
-                return ResourceManager.GetString("Username", resourceCulture);
+                return ResourceManager.GetString("RememberMe", resourceCulture);
             }
         }
         

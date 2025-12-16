@@ -79,6 +79,24 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Go To Login ähnelt.
+        /// </summary>
+        public static string GoToLogin {
+            get {
+                return ResourceManager.GetString("GoToLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Loading... ähnelt.
+        /// </summary>
+        public static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Missing confirmation data. ähnelt.
         /// </summary>
         public static string MissingData {

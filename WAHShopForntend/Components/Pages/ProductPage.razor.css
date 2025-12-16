@@ -7,6 +7,7 @@
     background-color: #fdfdfd;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 70px;
 }
         .InfoSection {
             flex: 1 1 300px;
@@ -41,6 +42,7 @@
     justify-content: center;
     align-items: center;
     cursor: zoom-in;
+    z-index:10000;
 }
 .zoomableImage {
     max-width: 100%;

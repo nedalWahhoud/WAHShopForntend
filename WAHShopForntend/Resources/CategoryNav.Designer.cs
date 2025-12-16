@@ -97,7 +97,7 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sweets and snacks ähnelt.
         /// </summary>
         public static string SweetsSnacks {
             get {

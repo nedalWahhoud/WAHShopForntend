@@ -1,9 +1,4 @@
-﻿.main {
-    width: 100%;
-    min-height: 100vh;
-    padding: 2rem 1rem;
-}
-/* cart leer */
+﻿/* cart leer */
 .emptyCart {
     display: flex;
     flex-direction: column;
@@ -19,6 +14,7 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
+    margin-top:70px;
     margin-bottom:20px;
 }
 

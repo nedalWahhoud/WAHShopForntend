@@ -24,7 +24,7 @@
                         @foreach (var product in searchProducts)
                         {
                             <li @onclick="() => OnSelectedProduct(product.Id,searchText)">
-                                <img src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image ?? Array.Empty<byte>())" />
+                                <img src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" loading="lazy" />
                                 <strong>
                                     @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" 
                                         ?product.Name_ar
@@ -40,10 +40,10 @@
             }
         </div>
     </div>
-    <div class="containerRight d-flex align-items-center gap-1">
+    <div class="containerRight">
         @*cart*@
         <div class="cart-icon position-relative" @onclick="NavigateToCart" style="cursor:pointer;">
-            <img src="Images/cart.svg" alt="Cart" width="30" />
+            <img src="ProjectImages/cart.svg" alt="Cart" width="30" />
             @if (cartService.GetTotalQuantity() > 0)
             {
                 <span class="badge bg-danger text-white position-absolute top-0 start-100 translate-middle rounded-pill">
@@ -54,10 +54,7 @@
         @* Sprache *@
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                @{
-                    var flagClass = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de" ? "fi fi-de" : "fi fi-sy";
-                }
-                <span class="@flagClass" style="border-radius:2px;"></span>
+                <span class="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de" ? "fi fi-de" : "fi fi-sy")" style="border-radius:2px;"></span>
             </button>
             <ul class="dropdown-menu dropdownMenu rtl-right" aria-labelledby="dropdownMenuButton">
                 <li>
@@ -97,7 +94,6 @@
 
 @code
 {
-
     protected override void OnInitialized()
     {
         // event handler for cart changes
@@ -107,9 +103,7 @@
     {
         InvokeAsync(StateHasChanged);
     }
-
  
-
     private async Task Logout()
     {
         var authState = await AuthStateProvider.GetAuthenticationStateAsync();
@@ -189,7 +183,23 @@
 		// set culture in cookie
         await JS.InvokeVoidAsync("blazorCulture.set", culture);
         // page reload
-        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+        var uri = NavigationManager.Uri;
+        var baseUri = NavigationManager.BaseUri; 
+        var relativeUri = uri.Replace(baseUri, "");
+
+        var segments = relativeUri.Split('/', StringSplitOptions.RemoveEmptyEntries);
+
+        if (segments.Length > 0 && ((segments[0] == "lang" && segments[1] == "ar") || (segments[0] == "lang" && segments[1] == "de")))
+        {
+            segments = segments.Skip(1)
+            .Skip(1)
+            .ToArray();
+        }
+
+        var newRelativeUri = string.Join('/', segments);
+        var newUri = NavigationManager.BaseUri + newRelativeUri;
+
+        NavigationManager.NavigateTo(newUri, forceLoad: true);
     }
     public void Dispose()
     {

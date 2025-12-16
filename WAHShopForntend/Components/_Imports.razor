@@ -20,6 +20,7 @@
 @using WAHShopForntend.Components.ProductGroupF
 @using WAHShopForntend.Components.DiscountF
 @using WAHShopForntend.Components.SearchF
+@using WAHShopForntend.Components.ProductImagesF
 @using Microsoft.Extensions.Localization
 @* --- *@
 @inject IJSRuntime JS
@@ -27,6 +28,7 @@
 @inject AuthenticationStateProvider AuthStateProvider
 @inject NavigationManager NavigationManager
 @inject IOptions<ProjectInfo> ProjectInfo
+@inject IOptions<AppConfig> AppConfig
 @inject ProductService productService
 @inject CartService cartService
 @inject AddressService addressService
@@ -36,3 +38,4 @@
 @inject ProductGroupService productGroupService
 @inject DiscountService discountService
 @inject SearchService searchService
+@inject ProductImagesService productImagesService

@@ -10,6 +10,7 @@
 }
 else
 {
+    <div class="mainContainer">
     <h3>@L["MyOrders"]</h3>
     @if (@orderService.DownloadedOrders.Count <= 0)
     {
@@ -134,7 +135,7 @@ else
                             @foreach (var item in order.OrderItems)
                             {
                                 <div class="orderItem">
-                                    <img @onclick="() => OnProduct(item.ProductId)" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Product?.Image ?? Array.Empty<byte>())" alt="@item.Product?.Name_de" />
+                                    <img @onclick="() => OnProduct(item.ProductId)" src="@productImagesService.GetProductImageUrl(item.Product!.ProductImages.FirstOrDefault(i => i.IsMain)!)" loading="lazy" alt="@item.Product?.Name_de" />
                                     <div class="orderItemsDetails">
                                         <h4>
                                             @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
@@ -175,6 +176,7 @@ else
             </button>
         </div>
     }
+    </div>
 }
 @code {
     private bool IsRended = false;
