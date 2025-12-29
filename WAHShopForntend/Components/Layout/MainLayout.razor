@@ -11,7 +11,7 @@ else
 {
     @if (!HeaderHidden)
     {
-		<Header />
+        <Header />
 
         <CategoryNav />
     }
@@ -34,7 +34,7 @@ else
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-  
+
 }
 @code{
     private bool HeaderHidden => NavigationManager.Uri.Contains("login") || 
@@ -42,13 +42,10 @@ else
     NavigationManager.Uri.Contains("forgotpassword") ||
     NavigationManager.Uri.Contains("confirmemail");
     private bool isRended = false;
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            
-
             // Initialize the cartService to get the saved cart
             await cartService.InitializeAsync();
             isRended = true;

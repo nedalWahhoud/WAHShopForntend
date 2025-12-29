@@ -98,6 +98,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SearchProducts.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\ShareLayout.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShareLayout.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Signup.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -176,6 +181,10 @@
     <EmbeddedResource Update="Resources\SearchProducts.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SearchProducts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ShareLayout.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShareLayout.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Signup.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

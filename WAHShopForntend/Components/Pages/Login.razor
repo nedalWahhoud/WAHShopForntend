@@ -16,16 +16,16 @@
                 </div>
                 <div class="form-group">
                     <div class="passwordDiv">
-                    <InputText @bind-Value="loginModel.Password"
-                    type="@passwordInputType"
-                    placeholder="@L["Password"]"
-                    class="form-control passwordInput" />
+                        <InputText @bind-Value="loginModel.Password"
+                        type="@passwordInputType"
+                        placeholder="@L["Password"]"
+                        class="form-control passwordInput" />
 
-                    <button type="button"
-                    class="eyeButton"
-                    @onclick="TogglePasswordVisibility">
-                        <i class="bi @(loginModel.PasswordVisibility ? "bi-eye-slash" : "bi-eye")"></i>
-                    </button>
+                        <button type="button"
+                        class="eyeButton"
+                        @onclick="TogglePasswordVisibility">
+                            <i class="bi @(loginModel.PasswordVisibility ? "bi-eye-slash" : "bi-eye")"></i>
+                        </button>
                     </div>
                     <ValidationMessage For="@(() => loginModel.Password)" />
                 </div>
@@ -33,11 +33,28 @@
                     <InputCheckbox @bind-Value="loginModel.RememberMe" />
                     <span>@L["RememberMe"]</span>
                 </div>
-                <button class="loginBtn" type="submit">@L["LoginText"]</button>
+                <button class="loginBtn" type="submit" disabled="@(isSingInLoading || isSingInLoading)">
+                    @if (isSingInLoading)
+                    {
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    }
+                    else
+                    {
+                      @L["LoginText"]
+                    }
+                </button>
             </EditForm>
-           @* <button @onclick="GoogleSingup" class="googleBtn">
-                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
-            </button>*@
+            <button type="submit" @onclick="GoogleSingup" class="googleBtn" disabled="@(isGoogleLoading || isSingInLoading)">
+                @if (isGoogleLoading)
+				{
+					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+				}
+				else
+				{
+                    <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
+				}
+                
+            </button>
             <div>
                 <p class="signup">
                     @L["NoAccountText"]
@@ -54,30 +71,8 @@
 </div>
 
 @code {
-    /* protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-              try
-       {
-           var user = await JS.InvokeAsync<LoginModel>("getRedirectResult");
-           if (user != null)
-           {
-               // سجل الدخول في النظام الخاص بك
-               _ = JS.InvokeVoidAsync("showAlert", $"User: {user.UserName}, Provider: {user.SignupProvider}");
-           }
-           else
-           {
-               _ = JS.InvokeVoidAsync("showAlert", "No user returned from redirect.");
-           }
-       }
-       catch (Exception ex)
-       {
-           _ = JS.InvokeVoidAsync("showAlert", ex.Message);
-
-        }
-    }}*/
-
+    private bool isSingInLoading = false;
+	private bool isGoogleLoading = false;
     private LoginModel loginModel = new();
     // returns to the page where the user was before login
     [Parameter]
@@ -85,6 +80,7 @@
     public string? returnUrl { get; set; }
     private async Task HandleSubmit()
     {
+        isSingInLoading = true;
         loginModel.SignupProvider = "Manual";
         var isLogged = await AuthService!.Login(loginModel, null!);
         if (isLogged.Result == true)
@@ -93,30 +89,22 @@
         {
             _ = JS.InvokeVoidAsync("showAlert", isLogged.Message);
         }
+        isSingInLoading = false;
     }
     private void OnProjectInfo()
     {
         NavigationManager.NavigateTo("/", false);
     }
-
-    private async Task GoogleSingup()
+    private void GoogleSingup()
     {
-        await JS.InvokeVoidAsync("loginWithGoogleRedirect");
+        isGoogleLoading = true;
+        string currenApiUrl = AppConfig.Value.ApiBaseUrl;
+       // NavigationManager.NavigateTo($"{currenApiUrl}/api/users/google-login?rememberMe={loginModel.RememberMe}", true);
+       // NavigationManager.NavigateTo($"/users/google-login?rememberMe={loginModel.RememberMe}", true);
 
+        NavigationManager.NavigateTo($"{AppConfig.Value.GoogleApiUrl}?rememberMe={loginModel.RememberMe}", true);
 
-        /*  var result = await JS.InvokeAsync<LoginModel>("loginWithGooglePopup");
-
-          if (result != null)
-          {
-                  loginModel = result;
-                  var isLogged = await AuthService!.Login(loginModel, null!);
-                  if (isLogged.Result == true)
-                      NavigationManager!.NavigateTo(returnUrl ?? "/", true);
-                  else
-                      _ = JS.InvokeVoidAsync("showAlert", isLogged.Message);
-          }
-          else
-              _ = JS.InvokeVoidAsync("showAlert", "Null zurückgesendet");*/
+        isGoogleLoading = false;
     }
 
     //

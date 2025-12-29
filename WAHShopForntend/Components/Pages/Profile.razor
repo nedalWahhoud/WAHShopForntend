@@ -24,7 +24,10 @@ else
                             <strong>@L["Email"]: @authContext.User.FindFirst(ClaimTypes.Email)?.Value</strong>
                         </p>
                         <p>
-                            <strong>@L["BirthDate"]: @authContext.User.FindFirst(ClaimTypes.DateOfBirth)?.Value</strong>
+                            <strong>@L["BirthDate"]: @(authContext.User.FindFirst(ClaimTypes.DateOfBirth)?.Value == "0" 
+                                ? "--- ---" 
+                                : authContext.User.FindFirst(ClaimTypes.DateOfBirth)?.Value 
+                                ?? "--- ---")</strong>
                         </p>
                         <p>
                             <strong>@L["Password"]: </strong>

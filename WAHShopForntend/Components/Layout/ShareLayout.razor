@@ -1,0 +1,19 @@
+﻿@inject IStringLocalizer< WAHShopForntend.Resources.ShareLayout> L
+
+<div class="shareDiv">
+    <button class="shareBtn" @onclick="() => ShareProduct(product)">
+        <i class="bi bi-box-arrow-up"></i>
+    </button>
+</div>
+
+@code {
+    [Parameter]
+    public Product product { get; set; } = new Product();
+   
+    private async Task ShareProduct(Product product)
+    {
+        var productUrl = $"{NavigationManager.BaseUri}ProductPage/{product.Id}";
+
+        await JS.InvokeVoidAsync("shareProduct", product.Name_de, productUrl);
+    }
+}

@@ -45,7 +45,7 @@ namespace WAHShopForntend.Components.Login
         public void NotifyUserAuthentication(string token)
         {
             var identity = GetIdentity(token);
-
+       
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
         public async Task NotifyUserLogout()
@@ -61,7 +61,7 @@ namespace WAHShopForntend.Components.Login
         {
             _ = _js.InvokeVoidAsync("localStorage.setItem", key, value);
         }
-        private async Task<string> LocalstorageGet(string key)
+        public async Task<string> LocalstorageGet(string key)
         {
             string value = await _js.InvokeAsync<string>("localStorage.getItem", key);
             return value;
@@ -75,12 +75,12 @@ namespace WAHShopForntend.Components.Login
             await _js.InvokeVoidAsync("sessionStorage.setItem", key, value);
         }
 
-        private async Task<string> SessionStorageGet(string key)
+        public async Task<string> SessionStorageGet(string key)
         {
             return await _js.InvokeAsync<string>("sessionStorage.getItem", key);
         }
 
-        private async Task SessionStorageRemove(string key)
+        public async Task SessionStorageRemove(string key)
         {
             await _js.InvokeVoidAsync("sessionStorage.removeItem", key);
         }
@@ -89,12 +89,13 @@ namespace WAHShopForntend.Components.Login
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
             var claims = jwtToken.Claims
-        .Select(c => new Claim(c.Type, c.Value))
-        .ToList();
+                         .Select(c => new Claim(c.Type, c.Value))
+                         .ToList();
 
             var identity = new ClaimsIdentity(claims, "claim");
 
             return identity;
         }
+        
     }
 }

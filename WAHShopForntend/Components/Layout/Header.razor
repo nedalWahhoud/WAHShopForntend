@@ -110,18 +110,6 @@
         var user = authState.User;
         if (user.Identity?.IsAuthenticated == true)
         {
-            string SignupProvider = user.FindFirst(c => c.Type == "SignupProvider")?.Value!;
-            if (SignupProvider == "Google")
-            {
-                // call google sign out
-                var result = await JS.InvokeAsync<bool>("googleSignOut");
-                if (result == false)
-                {
-                    _ = JS.InvokeVoidAsync("showAlert", "Fehler bei ausloggen");
-					return;
-                }
-            }
-
             await AuthService!.Logout();
             NavigationManager.NavigateTo("/", true);
         }

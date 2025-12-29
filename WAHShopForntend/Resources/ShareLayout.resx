@@ -117,22 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Contact" xml:space="preserve">
-    <value>Kontakt</value>
-  </data>
-  <data name="FollowUs" xml:space="preserve">
-    <value>Folge uns auf</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Startseite</value>
-  </data>
-  <data name="Links" xml:space="preserve">
-    <value>Links</value>
-  </data>
-  <data name="Location" xml:space="preserve">
-    <value>Standort</value>
-  </data>
-  <data name="PrivacyPolicy" xml:space="preserve">
-    <value>Datenschutz</value>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
   </data>
 </root>

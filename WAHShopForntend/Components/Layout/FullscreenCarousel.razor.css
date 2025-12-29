@@ -1,0 +1,62 @@
+﻿.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85); 
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fullscreenCarousel {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.carouselInner{
+    width:100%;
+}
+.carouselImg {
+    width: 100%;
+    height: 450px;
+    object-fit: contain;
+    z-index: 10000;
+}
+
+/* Indicators */
+#offersCarouselFullscreen .carousel-indicators {
+    position: absolute;
+    z-index: 10100;
+}
+
+#offersCarouselFullscreen .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #ccc;
+    }
+
+#offersCarouselFullscreen .carousel-indicators .active {
+        background-color: #fff;
+    }
+#offersCarouselFullscreen .carousel-control-prev,
+#offersCarouselFullscreen .carousel-control-next {
+    z-index: 10100;
+}
+
+.fullscreenBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10010;
+}
+
+.closeFullscreenBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10110;
+}

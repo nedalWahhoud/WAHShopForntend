@@ -18,5 +18,6 @@ namespace WAHShopForntend.Components.Models
         public bool RememberMe { get; set; } = false;
         [JsonIgnore]
         public bool PasswordVisibility = false;
+        public string Token { get; set; } = string.Empty;
     }
 }

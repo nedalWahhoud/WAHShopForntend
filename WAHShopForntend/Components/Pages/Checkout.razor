@@ -740,10 +740,8 @@ else
 	}
 	// user data update
 	private UpdateProfile updateProfile = new UpdateProfile();
-	private bool isUpdateProfileEditing = false;
 	private async Task OnUserUpdate()
 	{
-		isUpdateProfileEditing = true;
 		updateProfile.UpdateType = UpdateTypeEnum.Birthday; // Assuming 3 is for birth date update
 		var result = await AuthService.UpdateProfileAsync(updateProfile);
 		if (!result.Result)
@@ -756,8 +754,6 @@ else
 			_ = JS.InvokeVoidAsync("showAlert", result.Message);
 		}
 		updateProfile = new UpdateProfile();
-
-		isUpdateProfileEditing = false;
 	}
 	private bool IsBirthDateValid(string birthDate)
 	{

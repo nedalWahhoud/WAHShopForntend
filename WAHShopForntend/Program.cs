@@ -11,7 +11,7 @@ using WAHShopForntend.Components.CategoriesF;
 using WAHShopForntend.Components.ProductGroupF;
 using WAHShopForntend.Components.DiscountF;
 using WAHShopForntend.Components.SearchF;
-using WAHShopForntend.Components.ProductImagesF;
+using WAHShopForntend.Components.ImagesF;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 
@@ -49,6 +49,7 @@ builder.Services.AddScoped(sp =>
 // Authorization
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddAuthorizationCore();
+
 // cache service
 builder.Services.AddMemoryCache();
 
@@ -74,6 +75,8 @@ builder.Services.AddScoped<DiscountService>();
 builder.Services.AddScoped<SearchService>();
 // ProductImages
 builder.Services.AddScoped<ProductImagesService>();
+// Carousel Images
+builder.Services.AddScoped<CarouselImagesService>();
 //
 
 var app = builder.Build();

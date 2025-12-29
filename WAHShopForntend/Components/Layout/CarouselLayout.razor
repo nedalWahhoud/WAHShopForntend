@@ -1,0 +1,68 @@
+﻿<div id="offersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+    <button class="btn btn-dark fullscreenBtn" @onclick="OnFullScreen">
+        ⛶
+    </button>
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        @for (int i = 0; i < carouselImagesService.DownloadedCarouselImage.Count; i++)
+        {
+            <button type="button"
+            data-bs-target="#offersCarousel"
+            data-bs-slide-to="@i"
+            class="@(i == 0 ? "active" : "")"
+            aria-current="@(i == 0 ? "true" : "false")">
+            </button>
+        }
+    </div>
+
+    <!-- Images -->
+    <div class="carousel-inner">
+        @for (int i = 0; i < carouselImagesService.DownloadedCarouselImage.Count; i++)
+        {
+            var item = carouselImagesService.DownloadedCarouselImage[i];
+
+            <div class="carousel-item @(i == 0 ? "active" : "")">
+                <img src="@carouselImagesService.GetImageUrl(item)"
+                class="d-block w-100 carousel-img"
+                alt="Carousel Image">
+            </div>
+        }
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#offersCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#offersCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> OnHandel { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                // Carousel automatisch laufen nach rended
+                await JS.InvokeVoidAsync("initCarousel", "offersCarousel");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+
+	private async Task OnFullScreen()
+	{
+        await OnHandel.InvokeAsync(true);
+	}
+}

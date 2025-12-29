@@ -2,7 +2,6 @@
 {
     using System.Net.Http;
     using System.Net.Http.Json;
-    using System.Security.Claims;
     using Microsoft.AspNetCore.Components.Authorization;
     using WAHShopForntend.Components.Models;
 
@@ -44,7 +43,7 @@
                 if (!response.IsSuccessStatusCode)
                     return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Einloggen fehlgeschlagen" };
                 // get result token
-                var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                var result = await response.Content.ReadFromJsonAsync<LoginModel>();
 
                 if (result == null || string.IsNullOrEmpty(result.Token))
                     return new ValidationResult { Result = false, Message = "Einloggen fehlgeschlagen" };
@@ -55,7 +54,7 @@
                 if (loginModel.RememberMe)
                     (_authStateProvider as CustomAuthStateProvider)?.LocalstorageSet("authToken", result.Token);
                 else
-                    (_authStateProvider as CustomAuthStateProvider)?.SessionStorageSet("authToken", result.Token);  
+                    (_authStateProvider as CustomAuthStateProvider)?.SessionStorageSet("authToken", result.Token);
 
                 return new ValidationResult { Result = true, Message = "erfolgreich eingeloggt" };
             }
@@ -83,12 +82,22 @@
                 }
 
                 // get result token
-                var result1 = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                var result1 = await response.Content.ReadFromJsonAsync<LoginModel>();
 
                 if (result1 == null || string.IsNullOrEmpty(result1.Token))
                     return new ValidationResult { Result = false, Message = "Token Error" };
 
                 (_authStateProvider as CustomAuthStateProvider)?.NotifyUserAuthentication(result1.Token);
+
+                string localToken = await (_authStateProvider as CustomAuthStateProvider)?.LocalstorageGet("authToken")!;
+
+                // update die Token in localStorage or sessionStorage
+                if (!string.IsNullOrEmpty(localToken))
+                    (_authStateProvider as CustomAuthStateProvider)?.LocalstorageSet("authToken", result1.Token);
+                else
+                    (_authStateProvider as CustomAuthStateProvider)?.SessionStorageSet("authToken", result1.Token);
+
+
 
                 return new ValidationResult { Result = true, Message = "erfolgreich Userdata geupdatet" };
             }
@@ -160,6 +169,26 @@
                 }
                 else
                     return new ValidationResult { Result = false, Message = checkPasswordResult?.Message ?? "Unbekannt fehler." };
+            }
+            catch (Exception ex)
+            {
+                return new ValidationResult { Result = false, Message = ex.Message };
+            }
+        }
+        // google login
+        public ValidationResult GoogleLogin(LoginModel loginModel)
+        {
+            try
+            {
+                (_authStateProvider as CustomAuthStateProvider)?.NotifyUserAuthentication(loginModel.Token);
+
+                // Save token to localStorage
+                if (loginModel.RememberMe)
+                    (_authStateProvider as CustomAuthStateProvider)?.LocalstorageSet("authToken", loginModel.Token);
+                else
+                    (_authStateProvider as CustomAuthStateProvider)?.SessionStorageSet("authToken", loginModel.Token);
+
+                return new ValidationResult { Result = true, Message = "erfolgreich eingeloggt" };
             }
             catch (Exception ex)
             {

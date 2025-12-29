@@ -12,6 +12,18 @@
 }
 else
 {
+    // carsousel images
+    @if (carouselImagesService.DownloadedCarouselImage.Any())
+    {
+        @if (!IsCarouselFullscreen)
+        {
+            <WAHShopForntend.Components.Layout.CarouselLayout OnHandel="HandleCarouselFullScreen" />
+        }
+        else if(IsCarouselFullscreen)
+        {
+            <WAHShopForntend.Components.Layout.FullscreenCarousel OnHandel="HandleCarouselFullScreen" />
+        }
+    }
     <div class="divCategory">
         @for (int x = 0; x < mainProductByCategory.Count; x++)
         {
@@ -20,23 +32,21 @@ else
             <div class="category">
                 <p class="@(category.Id == -1 ? "categoryOnOffer" : "")">
                     @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                     ? category.Name_ar
-                     : category.Name_de)
+                             ? category.Name_ar
+                             : category.Name_de)
                 </p>
             </div>
             <div class="mainProductsCard">
-
                 @for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
                 {
                     // product
                     var product = mainProductByCategory[x].Products[i];
-
                     <div class="productsCard">
+                        <WAHShopForntend.Components.Layout.ShareLayout product="@product"/>
                         <WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
                         <WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />                 
                     </div>
                 }
-
             </div>
         }
     </div>
@@ -58,6 +68,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        IsLoading = true;
         // get language
         lang = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
@@ -71,7 +82,9 @@ else
             return;
         }
 
-        IsLoading = true;
+        // get carousel images
+        await carouselImagesService.GetAllCarouselAsync();
+
         // get all categories
         allCategories = categoryService.GetAllCategoriesLocal() ?? await categoryService.GetAllCategoriesAsync();
         // get on offer products
@@ -95,6 +108,15 @@ else
             await Task.Delay(100);
             // Setzen Sie das Objekt von donNet in JavaScript und die ID:checkScrollEnd und rufen Sie die Funktion checkScrollEnd aus JavaScript ab.
             await JS.InvokeVoidAsync("scrollHelper.onScrollEnd", objRef);
+            try
+            {
+                // Carousel automatisch laufen nach rended
+                await JS.InvokeVoidAsync("initCarousel", "offersCarousel");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
     // recommended
@@ -283,4 +305,10 @@ else
         objRef?.Dispose();
         objRef = null;
     }
+	// carousel
+	private bool IsCarouselFullscreen = false;
+    private void HandleCarouselFullScreen(bool IsCarouselFullscreen1)
+	{
+        IsCarouselFullscreen = IsCarouselFullscreen1;
+	}
 }

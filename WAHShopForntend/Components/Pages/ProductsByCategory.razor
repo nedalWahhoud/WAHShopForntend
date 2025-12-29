@@ -19,6 +19,7 @@ else
 		@foreach (var product in products)
 		{
 			<div class="cardProduct">
+				<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
 				<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
 				<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 			</div>

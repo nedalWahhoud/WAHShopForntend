@@ -1,0 +1,99 @@
+﻿<div class="modalOverlay" tabindex="0" @onkeydown="HandleKeyDown" @onclick="CloseCarouselFullscreen">
+
+        <div class="fullscreenCarousel" @onclick:stopPropagation>
+            <div id="offersCarouselFullscreen"
+                 class="carousel slide"
+                 data-bs-ride="carousel"
+                 data-bs-interval="5000">
+
+                <!-- Close button  -->
+                <button class="btn btn-dark closeFullscreenBtn"
+                        @onclick="CloseCarouselFullscreen">
+                    ✕
+                </button>
+
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                @for (int i = 0; i < carouselImagesService.DownloadedCarouselImage.Count; i++)
+                {
+                    <button type="button"
+                            data-bs-target="#offersCarouselFullscreen"
+                            data-bs-slide-to="@i"
+                            class="@(i == 0 ? "active" : "")">
+                    </button>
+                }
+            </div>
+
+                <!-- Images -->
+                <div class="carouselInner">
+                    @for (int i = 0; i < carouselImagesService.DownloadedCarouselImage.Count; i++)
+                    {
+                        var item = carouselImagesService.DownloadedCarouselImage[i];
+
+                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                            <img src="@carouselImagesService.GetImageUrl(item)"
+                                 class="d-block carouselImg"
+                                 alt="Carousel Image">
+                        </div>
+                    }
+                </div>
+            </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#offersCarouselFullscreen"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#offersCarouselFullscreen"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+        </div>
+    </div>
+
+
+@code {
+    [Parameter]
+    public EventCallback<bool> OnHandel { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                // scroll spreen
+                await JS.InvokeVoidAsync("openFullscreen");
+                // Carousel automatisch laufen nach rended
+                await JS.InvokeVoidAsync("initCarousel", "offersCarouselFullscreen");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+	private async Task CloseCarouselFullscreen()
+	{
+        await OnHandel.InvokeAsync(false);
+        try
+        {
+			// scroll entsperren
+            await JS.InvokeVoidAsync("closeFullscreen");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+	}
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Escape")
+        {
+            await CloseCarouselFullscreen();
+        }
+    }
+}

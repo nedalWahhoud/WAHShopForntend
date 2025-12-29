@@ -3,13 +3,13 @@
 <footer class="footer" id="page-footer">
 	<ProjektLogo />
 	<div class="contactDiv">
-		<h2>Kontakt</h2>
+		<h3>@L["Contact"]</h3>
 		<p @onclick="OnOpenMap"><i class="bi bi-geo-alt" /><span>@ProjectInfo.Value.Address</span></p>
 		<p><i class="bi bi-envelope" /><span>@ProjectInfo.Value.Email</span></p>
 		<p @onclick="OnOpenWhatsApp"><i class="bi bi-telephone" /><span>@ProjectInfo.Value.Whatsapp</span></p>
 	</div>
 	<div class="socialMedia">
-		<h2>@L["FollowUs"]</h2>
+		<h3>@L["FollowUs"]</h3>
 		<div class="icons">
 		  <a href="@ProjectInfo.Value.Facebook" target="_blank" rel="noopener noreferrer">
 				<i class="bi bi-facebook" style="color:#1877F2" alt="Facebook Icon"></i>
@@ -20,12 +20,12 @@
 		</div>
 	</div>
 	<div class="linksDiv">
-		<h2>Links</h2>
-		<a href="/">Startseite</a>
-		<a href="/privacypolicy">Datenschutz</a>
+		<h3>@L["Links"]</h3>
+		<a href="/">@L["Home"]</a>
+		<a href="/privacypolicy">@L["PrivacyPolicy"]</a>
 	</div>
 	<div class="mapDiv">
-		<h2>Standort</h2>
+		<h3>@L["Location"]</h3>
 		<a href="https://www.google.com/maps?q=@ProjectInfo.Value.Latitude,@ProjectInfo.Value.Longitude"
 		   target="_blank"
 		   title="In Google Maps öffnen">

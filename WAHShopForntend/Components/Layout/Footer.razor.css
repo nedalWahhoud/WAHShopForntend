@@ -27,6 +27,16 @@ html[dir="rtl"] .footer {
     text-align: left;
     padding: 10px;
 }
+/* alle Header und arabsiche texts in Arabisch mode zu rechtseite scheben */
+html[dir="rtl"] .footer div h3,
+html[dir="rtl"] .footer .linksDiv a{
+    align-self: flex-end;
+    text-align: right;
+}
+/* icons in arbaische mode in rechte seite bleiben */
+html[dir="rtl"] .footer .icons {
+    margin-left: auto; 
+}
 
 .contactDiv {
     display: flex;
@@ -37,18 +47,19 @@ html[dir="rtl"] .footer {
     padding: 10px;
 }
 
-    .contactDiv h2 {
+    .contactDiv h3 {
         font-weight: bold;
     }
 
-    .contactDiv p {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        font-size: 22px;
-        color: #ffffff;
-        cursor: pointer;
-    }
+
+.contactDiv p {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    font-size: 20px;
+    color: #ffffff;
+    cursor: pointer;
+}
 
         .contactDiv p span {
             color: #ffffff;
@@ -65,11 +76,14 @@ html[dir="rtl"] .footer {
     padding:10px;
     gap:10px;
 }
-.icons{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-}
+    .socialMedia h3{
+        font-weight:bold;
+    }
+    .icons {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
     .icons a i{
         font-size:30px;
     }
@@ -82,7 +96,7 @@ html[dir="rtl"] .footer {
     gap: 10px;
 }
 
-    .linksDiv h2 {
+    .linksDiv h3 {
         font-weight: bold;
     }
 
@@ -90,7 +104,7 @@ html[dir="rtl"] .footer {
         display: flex;
         flex-direction: row;
         gap: 10px;
-        font-size: 22px;
+        font-size: 20px;
         color: #ffffff;
         text-decoration: none;
     }
@@ -109,7 +123,7 @@ html[dir="rtl"] .footer {
     width: 100%;
 }
 
-    .mapDiv h2 {
+    .mapDiv h3 {
         font-weight: bold;
     }
 
@@ -119,23 +133,34 @@ html[dir="rtl"] .footer {
 
 .iframe {
     width: 100%;
-    height: 180px;
+    height: clamp(150px, 40vw, 220px);
 }
 
 @media (max-width: 768px) {
     .footer {
         flex-direction: column;
-        align-items: flex-start;
-        height: 100%;
+        align-items: stretch;
+        gap: 15px;
     }
 
-    .contactDiv,
-    .linksDiv,
-    .mapDiv {
-        align-items: flex-start !important;
+        .footer > div {
+            width: 100%;
+            padding: 5px;
+        }
+
+    .icons {
+        flex-direction: row;
+        gap: 15px;
+    }
+    h3{
+        font-size:22px;
+    }
+    .contactDiv p {
+        font-size: 18px;
+    }
+    .linksDiv a {
+        font-size: 18px;
     }
 
-    .mapDiv {
-        width: 100%;
-    }
 }
+

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using WAHShopForntend.Components.Models;
 
-namespace WAHShopForntend.Components.ProductImagesF
+namespace WAHShopForntend.Components.ImagesF
 {
     public class ProductImagesService(IOptions<AppConfig> appConfig, IWebHostEnvironment env)
     {
@@ -14,8 +14,7 @@ namespace WAHShopForntend.Components.ProductImagesF
             if (dbImageUrl != null)
             {
                 // ✅ Füge eine Zufallszahl hinzu, um Cash zu vermeiden.
-                string unique = string.Empty;
-                unique = $"?v={productImages.LastModified}";
+                string unique = $"?v={productImages.LastModified}";
 
                 dbImageUrl = dbImageUrl.TrimStart('/');
                 if (_env.IsDevelopment())
@@ -31,11 +30,11 @@ namespace WAHShopForntend.Components.ProductImagesF
 
                     if (dbImageUrl.StartsWith("ProductsImages/", StringComparison.OrdinalIgnoreCase))
                     {
-                        dbImageUrl = dbImageUrl.Substring("ProductsImages/".Length);
+                        dbImageUrl = dbImageUrl["ProductsImages/".Length..];
                     }
                     string domin = _appConfig.Value.Domin.TrimEnd('/');
 
-                    string completteUrl = $"{domin}/{_appConfig.Value.ImagesProxy}/{dbImageUrl}{unique}";
+                    string completteUrl = $"{domin}/{_appConfig.Value.ProductImagesproxy}/{dbImageUrl}{unique}";
                     return completteUrl;
                 }
             }

@@ -112,7 +112,7 @@ namespace WAHShopForntend.Components.CategoriesF
                     return _getItems;
                 }
             }
-            catch(Exception ex)
+            catch
             {
                 return _getItems;
             }
