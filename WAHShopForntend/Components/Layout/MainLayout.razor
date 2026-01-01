@@ -9,32 +9,33 @@
 }
 else
 {
+
     @if (!HeaderHidden)
     {
         <Header />
 
         <CategoryNav />
     }
-
-    <div class="page">
-        <main class="main-content">
+    <div id="app" class="page">
+        <main class="mainContent">
+          
             <article class="content px-4">
                 @Body
             </article>
+           
         </main>
     </div>
-
     @if (!HeaderHidden)
     {
         <Footer />
     }
+  
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-
 }
 @code{
     private bool HeaderHidden => NavigationManager.Uri.Contains("login") || 

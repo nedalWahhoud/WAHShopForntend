@@ -122,5 +122,14 @@ namespace WAHShopForntend.Resources {
                 return ResourceManager.GetString("NoStock", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die On Offer ähnelt.
+        /// </summary>
+        public static string OnOffer {
+            get {
+                return ResourceManager.GetString("OnOffer", resourceCulture);
+            }
+        }
     }
 }

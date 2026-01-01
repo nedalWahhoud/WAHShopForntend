@@ -129,6 +129,12 @@
   <data name="AddressFormTitle" xml:space="preserve">
     <value>Shipping Address</value>
   </data>
+  <data name="Agb" xml:space="preserve">
+    <value>AGB</value>
+  </data>
+  <data name="AgbAccept" xml:space="preserve">
+    <value>I have read them and accept them.</value>
+  </data>
   <data name="AgeError" xml:space="preserve">
     <value>⚠️ Your purchase was not completed. There is a product in your cart that is intended for people over 18 years old.</value>
   </data>
@@ -201,8 +207,17 @@
   <data name="NoItemsInCategory" xml:space="preserve">
     <value>The order does not contain any item that has a category matching the discount code category.</value>
   </data>
+  <data name="NotAcceptAgbMessage" xml:space="preserve">
+    <value>Terms and conditions and cancellation policy must be accepted in order to proceed.</value>
+  </data>
   <data name="NotOurDelivery" xml:space="preserve">
     <value>This area is not within our delivery service range. Please choose delivery by Post.</value>
+  </data>
+  <data name="OurDeliveryServiceInformation" xml:space="preserve">
+    <value>Our delivery service information</value>
+  </data>
+  <data name="OurDeliveryServiceNote" xml:space="preserve">
+    <value>Please note: Our delivery service delivers orders only on specific weekdays within your delivery area. You can find the exact delivery dates on our delivery service information page.</value>
   </data>
   <data name="OurDeliveryServiceWaringMessage" xml:space="preserve">
     <value>Our delivery service delivers orders on a specific day of the week depending on your region. If you don't know the exact day for your area, please contact us for more information.</value>
@@ -215,6 +230,9 @@
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone number:</value>
+  </data>
+  <data name="RightOfWithdrawal" xml:space="preserve">
+    <value>Right of Withdrawal</value>
   </data>
   <data name="SelectDeliveryAddress" xml:space="preserve">
     <value>Please select a delivery address.</value>

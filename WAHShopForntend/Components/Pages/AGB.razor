@@ -1,0 +1,87 @@
+﻿@page "/agb"
+@inject IStringLocalizer< WAHShopForntend.Resources.AGB> L
+<div class="mainContainer">
+    <h1>@L["Agb"]</h1>
+    <h2>@L["Scope"]</h2>
+    <p>@L["Scope1"]</p>
+    <p>@ProjectInfo.Value.Name</p>
+    <p>@ProjectInfo.Value.Address</p>
+    <p>@ProjectInfo.Value.Email</p>
+    <p><span style="direction:ltr; unicode-bidi:isolate; display:inline-block;">@ProjectInfo.Value.Whatsapp</span></p>
+    <p>@L["Scope2"]</p>
+    <p>@L["Scope3"]</p>
+    <p>@L["Scope4"]</p>
+    <h2>@L["ConclusionContract"]</h2>
+    <p>@L["ConclusionContract1"]</p>
+    <p>@L["ConclusionContract2"]</p>
+    <p>@L["ConclusionContract3"]</p>
+    <h2>@L["PricesPayment"]</h2>
+    <p>@L["PricesPayment1"]</p>
+    <p>@L["PricesPayment2"]</p>
+    <p>@L["PricesPayment3"]</p>
+    <p>@L["PricesPayment4"]</p>
+    <h2>@L["DeliveryShipping"]</h2>
+    <p>@L["DeliveryShipping1"]</p>
+    <p>@L["DeliveryShipping2"]</p>
+    <p>@L["DeliveryShipping3"]</p>
+    <p>@L["DeliveryShipping4"]</p>
+    <h2>@L["SpecialFeaturesFoodstuffs"]</h2>
+    <p>@L["SpecialFeaturesFoodstuffs1"]</p>
+    <p>@L["SpecialFeaturesFoodstuffs2"]</p>
+    <p>@L["SpecialFeaturesFoodstuffs3"]</p>
+    <p>@L["SpecialFeaturesFoodstuffs4"]</p>
+    <h2>@L["RetentionTitle"]</h2>
+    <p>@L["RetentionTitle1"]</p>
+    <h2>@L["RightWithdrawal"]</h2>
+    <p>@L["RightWithdrawal1"]</p>
+    <p>@L["RightWithdrawal2"]</p>
+    <ul>
+        <li>@L["RightWithdrawal3"]</li>
+        <li>@L["RightWithdrawal4"]</li>
+        <li>@L["RightWithdrawal5"]</li>
+    </ul>
+    <p>@L["RightWithdrawal6"]</p>
+    <h2>@L["Warranty"]</h2>
+    <p>@L["Warranty1"]</p>
+    <p>@L["Warranty2"]</p>
+    <h2>@L["Liability"]</h2>
+    <p>@L["Liability1"]</p>
+    <p>@L["Liabilit2"]</p>
+    <h2>@L["TransportDamage"]</h2>
+    <p>@L["TransportDamage1"]</p>
+    <p>@L["TransportDamage2"]</p>
+    <h2>@L["FinalProvisions"]</h2>
+    <p>@L["FinalProvisions1"]</p>
+    <p>@L["FinalProvisions2"]</p>
+    <h2>@L["CollectionDelivery"]</h2>
+    <p>@L["CollectionDelivery1"]</p>
+    <p>@L["CollectionDelivery2"]</p>
+    <ul>
+        <li>@L["CollectionDelivery3"]</li>
+        <li>@L["CollectionDelivery4"]</li>
+        <li>@L["CollectionDelivery5"]</li>
+    </ul>
+    <p>@L["CollectionDelivery6"]</p>
+    <p>@L["CollectionDelivery7"]</p>
+    <ul>
+        <li>@L["CollectionDelivery8"] @ProjectInfo.Value.Address.</li>
+        <li>@L["CollectionDelivery9"]</li>
+        <li>@L["CollectionDelivery10"]</li>
+    </ul>
+    <p>@L["CollectionDelivery11"]</p>
+    @((MarkupString)L["CollectionDelivery12"].ToString())
+    <p>@L["CollectionDelivery13"]</p>
+    @((MarkupString)L["CollectionDelivery14"].ToString())
+    <p>@L["CollectionDelivery15"]</p>
+    <p>@L["CollectionDelivery16"]</p>
+    @((MarkupString)L["CollectionDelivery17"].ToString())
+    <p>@L["CollectionDelivery18"]</p>
+    @((MarkupString)L["CollectionDelivery19"].ToString())
+    <div class="logoDiv">
+      <WAHShopForntend.Components.Layout.ProjektLogo />
+    </div>
+</div>
+
+@code {
+
+}

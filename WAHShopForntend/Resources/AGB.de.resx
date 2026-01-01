@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Agb" xml:space="preserve">
+    <value>Allgemeine Geschäftsbedingungen (AGB)</value>
+  </data>
+  <data name="CollectionDelivery" xml:space="preserve">
+    <value>§ 12 Abholung und Lieferung</value>
+  </data>
+  <data name="CollectionDelivery1" xml:space="preserve">
+    <value>(1) Verbindliche Auswahl der Lieferoption</value>
+  </data>
+  <data name="CollectionDelivery10" xml:space="preserve">
+    <value>Erfolgt die Abholung nicht rechtzeitig, übernehmen wir keine Haftung für Verderb oder Qualitätsverluste, insbesondere bei verderblichen Lebensmitteln.</value>
+  </data>
+  <data name="CollectionDelivery11" xml:space="preserve">
+    <value>(3) Lieferung durch unseren eigenen Lieferservice</value>
+  </data>
+  <data name="CollectionDelivery12" xml:space="preserve">
+    <value>  &lt;ul&gt;
+      &lt;li&gt;Lieferservice erfolgt ausschließlich in die festgelegten Liefergebiete.&lt;/li&gt;
+      &lt;li&gt;Lieferung erfolgt in der Regel einmal wöchentlich oder alle zwei Wochen, abhängig vom Liefergebiet.&lt;/li&gt;
+      &lt;li&gt;Kunden werden über den genauen Liefertermin informiert.&lt;/li&gt;
+      &lt;li&gt;Der Kunde ist verpflichtet, die Ware zum vereinbarten Termin persönlich oder durch eine empfangsberechtigte Person anzunehmen.&lt;/li&gt;
+      &lt;li&gt;Kann die Lieferung aus Gründen, die der Kunde zu vertreten hat, nicht durchgeführt werden, übernimmt der Kunde die Verantwortung für nicht angenommene Lieferungen.&lt;/li&gt;
+      &lt;li&gt;Wir behalten uns das Recht vor, den Liefertermin aus sachlichen Gründen auf einen anderen Tag oder Woche zu verschieben.&lt;/li&gt;
+  &lt;/ul&gt;</value>
+  </data>
+  <data name="CollectionDelivery13" xml:space="preserve">
+    <value>(4) Versand per Post / Paketdienst</value>
+  </data>
+  <data name="CollectionDelivery14" xml:space="preserve">
+    <value>    &lt;ul&gt;
+        &lt;li&gt;Versand erfolgt an die vom Kunden angegebene Lieferadresse.&lt;/li&gt;
+        &lt;li&gt;Lieferzeit richtet sich nach den Angaben im Shop.&lt;/li&gt;
+        &lt;li&gt;Bei verderblichen Lebensmitteln, die gekühlt transportiert werden müssen, erfolgt der Versand auf Risiko des Kunden, insbesondere wenn keine durchgehende Kühlung gewährleistet ist.&lt;/li&gt;
+    &lt;/ul&gt;</value>
+  </data>
+  <data name="CollectionDelivery15" xml:space="preserve">
+    <value>(5) Gefahrübergang</value>
+  </data>
+  <data name="CollectionDelivery16" xml:space="preserve">
+    <value>Die Gefahr des zufälligen Untergangs oder der Verschlechterung der Ware geht auf den Kunden über:</value>
+  </data>
+  <data name="CollectionDelivery17" xml:space="preserve">
+    <value>   &lt;ul&gt;
+       &lt;li&gt;bei Abholung: mit Übergabe im Geschäft&lt;/li&gt;
+       &lt;li&gt;bei Lieferservice: mit Übergabe an der Lieferadresse&lt;/li&gt;
+       &lt;li&gt;bei Postversand: mit Übergabe durch den Paketdienst&lt;/li&gt;
+   &lt;/ul&gt;</value>
+  </data>
+  <data name="CollectionDelivery18" xml:space="preserve">
+    <value>(6) Hygiene &amp; Frische</value>
+  </data>
+  <data name="CollectionDelivery19" xml:space="preserve">
+    <value> &lt;ul&gt;
+     &lt;li&gt;Lebensmittel werden sorgfältig verpackt und, falls erforderlich, gekühlt transportiert.&lt;/li&gt;
+     &lt;li&gt;Kunden sind verpflichtet, die Lebensmittel unmittelbar nach Erhalt sachgerecht zu lagern und auf Qualität zu prüfen.&lt;/li&gt;
+ &lt;/ul&gt;</value>
+  </data>
+  <data name="CollectionDelivery2" xml:space="preserve">
+    <value>Bei der Bestellung wählt der Kunde eine der folgenden Optionen aus:</value>
+  </data>
+  <data name="CollectionDelivery3" xml:space="preserve">
+    <value>Abholung im Geschäftsladen</value>
+  </data>
+  <data name="CollectionDelivery4" xml:space="preserve">
+    <value>Lieferung durch unseren eigenen Lieferservice</value>
+  </data>
+  <data name="CollectionDelivery5" xml:space="preserve">
+    <value>Versand per Post / Paketdienst</value>
+  </data>
+  <data name="CollectionDelivery6" xml:space="preserve">
+    <value>Die gewählte Option ist verbindlich, sobald die Bestellung abgeschlossen wurde. Änderungen nach Bestellabschluss sind nur nach Rücksprache mit uns möglich.</value>
+  </data>
+  <data name="CollectionDelivery7" xml:space="preserve">
+    <value>(2) Abholung im Laden</value>
+  </data>
+  <data name="CollectionDelivery8" xml:space="preserve">
+    <value>Der Kunde kann die Bestellung im Geschäft abholen</value>
+  </data>
+  <data name="CollectionDelivery9" xml:space="preserve">
+    <value>Die Abholung sollte innerhalb der angegebenen Frist erfolgen.</value>
+  </data>
+  <data name="ConclusionContract" xml:space="preserve">
+    <value>§ 2 Vertragsschluss</value>
+  </data>
+  <data name="ConclusionContract1" xml:space="preserve">
+    <value>(1) Die Darstellung der Produkte im Online-Shop stellt kein rechtlich bindendes Angebot, sondern eine unverbindliche Aufforderung zur Bestellung dar.</value>
+  </data>
+  <data name="ConclusionContract2" xml:space="preserve">
+    <value>(2) Durch Anklicken des Buttons „Kaufen“ / „Jetzt bestellen“ gibt der Kunde ein verbindliches Angebot zum Abschluss eines Kaufvertrages ab.</value>
+  </data>
+  <data name="ConclusionContract3" xml:space="preserve">
+    <value>(3) Der Kaufvertrag kommt zustande, sobald wir die Bestellung durch eine Bestellbestätigungs-E-Mail annehmen oder die Ware versenden.</value>
+  </data>
+  <data name="DeliveryShipping" xml:space="preserve">
+    <value>§ 4 Lieferung und Versand</value>
+  </data>
+  <data name="DeliveryShipping1" xml:space="preserve">
+    <value>(1) Die Lieferung erfolgt an die vom Kunden angegebene Lieferadresse innerhalb Deutschlands.</value>
+  </data>
+  <data name="DeliveryShipping2" xml:space="preserve">
+    <value>(2) Lieferzeiten werden im Online-Shop angegeben und beginnen nach Zahlungseingang.</value>
+  </data>
+  <data name="DeliveryShipping3" xml:space="preserve">
+    <value>(3) Bei Lebensmitteln ist der Kunde verpflichtet, die Ware zum vereinbarten Lieferzeitpunkt unverzüglich anzunehmen.</value>
+  </data>
+  <data name="DeliveryShipping4" xml:space="preserve">
+    <value>(4) Erfolgt keine Annahme oder verzögert sich die Annahme aus Gründen, die der Kunde zu vertreten hat, übernehmen wir keine Haftung für Qualitätsverluste, insbesondere bei verderblichen Waren.</value>
+  </data>
+  <data name="FinalProvisions" xml:space="preserve">
+    <value>§ 11 Schlussbestimmungen</value>
+  </data>
+  <data name="FinalProvisions1" xml:space="preserve">
+    <value>(1) Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.</value>
+  </data>
+  <data name="FinalProvisions2" xml:space="preserve">
+    <value>(2) Sollte eine Bestimmung dieser AGB unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</value>
+  </data>
+  <data name="Liabilit2" xml:space="preserve">
+    <value>(2) Eine weitergehende Haftung ist ausgeschlossen.</value>
+  </data>
+  <data name="Liability" xml:space="preserve">
+    <value>§ 9 Haftung</value>
+  </data>
+  <data name="Liability1" xml:space="preserve">
+    <value>(1) Bei leichter Fahrlässigkeit haften wir nur bei Verletzung wesentlicher Vertragspflichten (Kardinalpflichten) und beschränkt auf den vorhersehbaren Schaden.</value>
+  </data>
+  <data name="PricesPayment" xml:space="preserve">
+    <value>§ 3 Preise und Zahlungsbedingungen</value>
+  </data>
+  <data name="PricesPayment1" xml:space="preserve">
+    <value>(1) Alle Preise sind Endpreise und enthalten die gesetzliche Mehrwertsteuer.</value>
+  </data>
+  <data name="PricesPayment2" xml:space="preserve">
+    <value>(2) Zusätzlich anfallende Versandkosten werden dem Kunden im Bestellprozess gesondert angezeigt.</value>
+  </data>
+  <data name="PricesPayment3" xml:space="preserve">
+    <value>(3) Die Zahlung erfolgt über die im Online-Shop angebotenen Zahlungsarten</value>
+  </data>
+  <data name="PricesPayment4" xml:space="preserve">
+    <value>(4) Der Kaufpreis ist unmittelbar mit Vertragsschluss fällig.</value>
+  </data>
+  <data name="RetentionTitle" xml:space="preserve">
+    <value>§ 6 Eigentumsvorbehalt</value>
+  </data>
+  <data name="RetentionTitle1" xml:space="preserve">
+    <value>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</value>
+  </data>
+  <data name="RightWithdrawal" xml:space="preserve">
+    <value>§ 7 Widerrufsrecht</value>
+  </data>
+  <data name="RightWithdrawal1" xml:space="preserve">
+    <value>(1) Verbrauchern steht grundsätzlich ein gesetzliches Widerrufsrecht zu.</value>
+  </data>
+  <data name="RightWithdrawal2" xml:space="preserve">
+    <value>(2) Das Widerrufsrecht ist jedoch gemäß § 312g Abs. 2 Nr. 2 BGB ausgeschlossen bei Verträgen zur Lieferung von:</value>
+  </data>
+  <data name="RightWithdrawal3" xml:space="preserve">
+    <value>Lebensmitteln, die schnell verderben können oder</value>
+  </data>
+  <data name="RightWithdrawal4" xml:space="preserve">
+    <value>Lebensmitteln, deren Verfallsdatum schnell überschritten würde,</value>
+  </data>
+  <data name="RightWithdrawal5" xml:space="preserve">
+    <value>versiegelten Lebensmitteln, die aus Gründen des Gesundheitsschutzes oder der Hygiene nicht zur Rückgabe geeignet sind, wenn die Versiegelung nach der Lieferung entfernt wurde.</value>
+  </data>
+  <data name="RightWithdrawal6" xml:space="preserve">
+    <value>(3) Einzelheiten ergeben sich aus unserer Widerrufsbelehrung, die im Online-Shop abrufbar ist.</value>
+  </data>
+  <data name="Scope" xml:space="preserve">
+    <value>§ 1 Geltungsbereich</value>
+  </data>
+  <data name="Scope1" xml:space="preserve">
+    <value>(1) Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge über die Lieferung von Waren an die vom Kunden angegebene Lieferadresse, die zwischen</value>
+  </data>
+  <data name="Scope2" xml:space="preserve">
+    <value>und Verbrauchern im Sinne des § 13 BGB abgeschlossen werden.</value>
+  </data>
+  <data name="Scope3" xml:space="preserve">
+    <value>(2) Verbraucher ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschließt, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet werden können.</value>
+  </data>
+  <data name="Scope4" xml:space="preserve">
+    <value>(3) Abweichende Bedingungen des Kunden finden keine Anwendung, es sei denn, wir stimmen ihrer Geltung ausdrücklich zu.</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs" xml:space="preserve">
+    <value>§ 5 Besonderheiten bei Lebensmitteln</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs1" xml:space="preserve">
+    <value>(1) Unsere Waren sind Lebensmittel und unterliegen besonderen Hygiene- und Gesundheitsanforderungen.</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs2" xml:space="preserve">
+    <value>(2) Der Kunde ist verpflichtet, die gelieferten Lebensmittel unmittelbar nach Erhalt zu prüfen und sachgerecht zu lagern.</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs3" xml:space="preserve">
+    <value>(3) Das auf der Verpackung angegebene Mindesthaltbarkeitsdatum (MHD) stellt kein Garantiedatum dar.</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs4" xml:space="preserve">
+    <value>(4) Eine Rücknahme von geöffneten, beschädigten oder unsachgemäß gelagerten Lebensmitteln ist ausgeschlossen.</value>
+  </data>
+  <data name="TransportDamage" xml:space="preserve">
+    <value>§ 10 Transportschäden</value>
+  </data>
+  <data name="TransportDamage1" xml:space="preserve">
+    <value>(1) Offensichtliche Transportschäden sind vom Kunden unverzüglich beim Zusteller zu reklamieren und uns mitzuteilen.</value>
+  </data>
+  <data name="TransportDamage2" xml:space="preserve">
+    <value>(2) Die gesetzlichen Gewährleistungsrechte bleiben hiervon unberührt.</value>
+  </data>
+  <data name="Warranty" xml:space="preserve">
+    <value>§ 8 Gewährleistung</value>
+  </data>
+  <data name="Warranty1" xml:space="preserve">
+    <value>(1) Es gelten die gesetzlichen Gewährleistungsrechte.</value>
+  </data>
+  <data name="Warranty2" xml:space="preserve">
+    <value>(2) Mängel, die auf unsachgemäße Lagerung, verspätete Annahme oder falsche Behandlung durch den Kunden zurückzuführen sind, begründen keine Gewährleistungsansprüche.</value>
+  </data>
+</root>

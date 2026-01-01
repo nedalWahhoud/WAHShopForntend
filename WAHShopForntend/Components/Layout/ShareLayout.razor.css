@@ -1,7 +1,6 @@
 ﻿.shareDiv {
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    justify-content: flex-start;
     width:100%;
 }
 
@@ -20,3 +19,12 @@
     .shareBtn i {
         font-size: 20px;
     }
+
+@media (max-width: 768px) {
+    .shareDiv[dir="rtl"] {
+        justify-content: flex-end;
+    }
+    .shareDiv[dir="rtl"] {
+        justify-content: flex-start;
+    }
+}

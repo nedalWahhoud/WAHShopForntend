@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Agb" xml:space="preserve">
+    <value>الشروط والأحكام العامة (AGB)</value>
+  </data>
+  <data name="CollectionDelivery" xml:space="preserve">
+    <value>المادة 12: التجميع والتسليم</value>
+  </data>
+  <data name="CollectionDelivery1" xml:space="preserve">
+    <value>(1) اختيار ملزم لخيار التسليم</value>
+  </data>
+  <data name="CollectionDelivery10" xml:space="preserve">
+    <value>إذا لم يتم الاستلام في الوقت المحدد، فإننا لا نتحمل أي مسؤولية عن التلف أو فقدان الجودة، وخاصة في حالة المنتجات الغذائية القابلة للتلف.</value>
+  </data>
+  <data name="CollectionDelivery11" xml:space="preserve">
+    <value>(3) التوصيل عن طريق خدمة التوصيل الخاصة بنا</value>
+  </data>
+  <data name="CollectionDelivery12" xml:space="preserve">
+    <value>&lt;ul&gt;
+
+&lt;li&gt;تُقدم خدمة التوصيل حصريًا ضمن مناطق التوصيل المحددة.&lt;/li&gt;
+
+&lt;li&gt;يتم التوصيل عادةً مرة واحدة أسبوعيًا أو كل أسبوعين، حسب منطقة التوصيل.&lt;/li&gt;
+
+&lt;li&gt;سيتم إبلاغ العملاء بتاريخ التوصيل المحدد.&lt;/li&gt;
+
+&lt;li&gt;يلتزم العميل باستلام البضائع شخصيًا أو عن طريق مستلم مُعتمد في التاريخ المتفق عليه.&lt;/li&gt;
+
+&lt;li&gt;في حال تعذر إتمام التوصيل لأسباب تعود إلى العميل، يتحمل العميل مسؤولية أي شحنات لم يتم استلامها.&lt;/li&gt;
+
+&lt;li&gt;نحتفظ بحقنا في تأجيل موعد التوصيل إلى يوم أو أسبوع آخر لأسباب مشروعة.&lt;/li&gt;
+
+&lt;/ul&gt;</value>
+  </data>
+  <data name="CollectionDelivery13" xml:space="preserve">
+    <value>(4) الشحن عبر البريد / خدمة الطرود</value>
+  </data>
+  <data name="CollectionDelivery14" xml:space="preserve">
+    <value>&lt;ul&gt;
+
+&lt;li&gt;يتم الشحن إلى عنوان التسليم الذي يقدمه العميل.&lt;/li&gt;
+
+&lt;li&gt;يعتمد وقت التسليم على المعلومات المقدمة في المتجر.&lt;/li&gt;
+
+&lt;li&gt;بالنسبة للمواد الغذائية القابلة للتلف والتي تتطلب التبريد أثناء النقل، يكون الشحن على مسؤولية العميل، خاصةً إذا تعذر ضمان التبريد المستمر.&lt;/li&gt;
+
+&lt;/ul&gt;</value>
+  </data>
+  <data name="CollectionDelivery15" xml:space="preserve">
+    <value>(5) نقل المخاطر</value>
+  </data>
+  <data name="CollectionDelivery16" xml:space="preserve">
+    <value>ينتقل خطر الفقدان أو التلف العرضي للبضائع إلى العميل:</value>
+  </data>
+  <data name="CollectionDelivery17" xml:space="preserve">
+    <value>&lt;ul&gt;
+
+&lt;li&gt;للاستلام من المتجر: عند التسليم في المتجر&lt;/li&gt;
+
+&lt;li&gt;لخدمة التوصيل: عند التسليم في عنوان التوصيل&lt;/li&gt;
+
+&lt;li&gt;للتوصيل البريدي: عند التسليم من قِبل شركة الشحن&lt;/li&gt;
+
+&lt;/ul&gt;</value>
+  </data>
+  <data name="CollectionDelivery18" xml:space="preserve">
+    <value>(6) النظافة والنضارة</value>
+  </data>
+  <data name="CollectionDelivery19" xml:space="preserve">
+    <value>&lt;ul&gt;
+
+&lt;li&gt;تُعبأ المنتجات الغذائية بعناية، وتُنقل مبردة عند الضرورة.&lt;/li&gt;
+
+&lt;li&gt;يُرجى من العملاء تخزين المنتجات الغذائية بشكل صحيح والتحقق من جودتها فور استلامها.&lt;/li&gt;
+
+&lt;/ul&gt;</value>
+  </data>
+  <data name="CollectionDelivery2" xml:space="preserve">
+    <value>عند تقديم الطلب، يختار العميل أحد الخيارات التالية:</value>
+  </data>
+  <data name="CollectionDelivery3" xml:space="preserve">
+    <value>الاستلام من المتجر</value>
+  </data>
+  <data name="CollectionDelivery4" xml:space="preserve">
+    <value>التوصيل عن طريق خدمة التوصيل الخاصة بنا</value>
+  </data>
+  <data name="CollectionDelivery5" xml:space="preserve">
+    <value>الشحن عبر البريد / خدمة الطرود</value>
+  </data>
+  <data name="CollectionDelivery6" xml:space="preserve">
+    <value>يصبح الخيار المُختار مُلزماً بمجرد إتمام الطلب. ولا يُمكن إجراء أي تغييرات بعد إتمام الطلب إلا بعد التشاور معنا.</value>
+  </data>
+  <data name="CollectionDelivery7" xml:space="preserve">
+    <value>(2) الاستلام من المتجر</value>
+  </data>
+  <data name="CollectionDelivery8" xml:space="preserve">
+    <value>يمكن للعميل استلام الطلب من المتجر</value>
+  </data>
+  <data name="CollectionDelivery9" xml:space="preserve">
+    <value>يجب أن تتم عملية الجمع خلال الفترة الزمنية المحددة.</value>
+  </data>
+  <data name="ConclusionContract" xml:space="preserve">
+    <value>المادة 2: إبرام العقد</value>
+  </data>
+  <data name="ConclusionContract1" xml:space="preserve">
+    <value>(1) إن عرض المنتجات في المتجر الإلكتروني لا يشكل عرضًا ملزمًا قانونًا، بل هو دعوة غير ملزمة لتقديم طلب.</value>
+  </data>
+  <data name="ConclusionContract2" xml:space="preserve">
+    <value>(2) بالنقر على زر "شراء" / "اطلب الآن"، يقدم العميل عرضًا ملزمًا لإبرام اتفاقية شراء.</value>
+  </data>
+  <data name="ConclusionContract3" xml:space="preserve">
+    <value>(3) يتم إبرام عقد الشراء بمجرد قبولنا للطلب عن طريق إرسال بريد إلكتروني لتأكيد الطلب أو شحن البضائع.</value>
+  </data>
+  <data name="DeliveryShipping" xml:space="preserve">
+    <value>المادة 4: التسليم والشحن</value>
+  </data>
+  <data name="DeliveryShipping1" xml:space="preserve">
+    <value>(1) سيتم التسليم إلى عنوان التسليم الذي يحدده العميل داخل ألمانيا.</value>
+  </data>
+  <data name="DeliveryShipping2" xml:space="preserve">
+    <value>(2) يتم تحديد أوقات التسليم في المتجر الإلكتروني وتبدأ بعد استلام الدفعة.</value>
+  </data>
+  <data name="DeliveryShipping3" xml:space="preserve">
+    <value>(3) في حالة المنتجات الغذائية، يكون العميل ملزماً بقبول البضائع فوراً في وقت التسليم المتفق عليه.</value>
+  </data>
+  <data name="DeliveryShipping4" xml:space="preserve">
+    <value>(4) إذا لم يتم القبول أو تأخر لأسباب تعود إلى العميل، فلن نكون مسؤولين عن أي فقدان للجودة، وخاصة في حالة البضائع القابلة للتلف.</value>
+  </data>
+  <data name="FinalProvisions" xml:space="preserve">
+    <value>المادة 11 الأحكام النهائية</value>
+  </data>
+  <data name="FinalProvisions1" xml:space="preserve">
+    <value>(1) يتم تطبيق قانون جمهورية ألمانيا الاتحادية، باستثناء اتفاقية الأمم المتحدة بشأن عقود البيع الدولي للبضائع.</value>
+  </data>
+  <data name="FinalProvisions2" xml:space="preserve">
+    <value>(2) في حالة بطلان أي بند من بنود هذه الشروط والأحكام، فإن ذلك لا يؤثر على صحة البنود المتبقية.</value>
+  </data>
+  <data name="Liabilit2" xml:space="preserve">
+    <value>(2) يتم استبعاد أي مسؤولية أخرى.</value>
+  </data>
+  <data name="Liability" xml:space="preserve">
+    <value>المادة 9: المسؤولية</value>
+  </data>
+  <data name="Liability1" xml:space="preserve">
+    <value>(1) في حالات الإهمال الطفيف، لن نكون مسؤولين إلا عن الإخلال بالالتزامات التعاقدية الأساسية (الالتزامات الجوهرية) وتقتصر مسؤوليتنا على الأضرار المتوقعة.</value>
+  </data>
+  <data name="PricesPayment" xml:space="preserve">
+    <value>المادة 3: الأسعار وشروط الدفع</value>
+  </data>
+  <data name="PricesPayment1" xml:space="preserve">
+    <value>(1) جميع الأسعار نهائية وتشمل ضريبة القيمة المضافة القانونية.</value>
+  </data>
+  <data name="PricesPayment2" xml:space="preserve">
+    <value>(2) سيتم عرض أي تكاليف شحن إضافية بشكل منفصل للعميل أثناء عملية الطلب.</value>
+  </data>
+  <data name="PricesPayment3" xml:space="preserve">
+    <value>(3) يتم الدفع باستخدام طرق الدفع المتوفرة في المتجر الإلكتروني</value>
+  </data>
+  <data name="PricesPayment4" xml:space="preserve">
+    <value>(4) يكون ثمن الشراء مستحقًا فور إبرام العقد.</value>
+  </data>
+  <data name="RetentionTitle" xml:space="preserve">
+    <value>المادة 6: الاحتفاظ بالملكية</value>
+  </data>
+  <data name="RetentionTitle1" xml:space="preserve">
+    <value>تبقى البضائع ملكاً لنا حتى يتم استلام كامل المبلغ.</value>
+  </data>
+  <data name="RightWithdrawal" xml:space="preserve">
+    <value>المادة 7 حق الانسحاب</value>
+  </data>
+  <data name="RightWithdrawal1" xml:space="preserve">
+    <value>(1) يتمتع المستهلكون عمومًا بحق قانوني في الانسحاب.</value>
+  </data>
+  <data name="RightWithdrawal2" xml:space="preserve">
+    <value>(2) ومع ذلك، يُستثنى حق الانسحاب وفقًا للفقرة 2 رقم 2 من المادة 312g من القانون المدني الألماني (BGB) بالنسبة لعقود توريد ما يلي:</value>
+  </data>
+  <data name="RightWithdrawal3" xml:space="preserve">
+    <value>الأطعمة التي يمكن أن تفسد بسرعة أو</value>
+  </data>
+  <data name="RightWithdrawal4" xml:space="preserve">
+    <value>المواد الغذائية التي ستنتهي صلاحيتها بسرعة،</value>
+  </data>
+  <data name="RightWithdrawal5" xml:space="preserve">
+    <value>المنتجات الغذائية المغلفة التي لا يمكن إرجاعها لأسباب تتعلق بحماية الصحة أو النظافة إذا تمت إزالة الغلاف بعد التسليم.</value>
+  </data>
+  <data name="RightWithdrawal6" xml:space="preserve">
+    <value>(3) يمكن الاطلاع على التفاصيل في سياسة الإلغاء الخاصة بنا، والمتوفرة في المتجر الإلكتروني.</value>
+  </data>
+  <data name="Scope" xml:space="preserve">
+    <value>§ 1 النطاق</value>
+  </data>
+  <data name="Scope1" xml:space="preserve">
+    <value>(1) تسري هذه الشروط والأحكام العامة على جميع عقود تسليم البضائع إلى عنوان التسليم الذي يحدده العميل، والتي يتم إبرامها بين</value>
+  </data>
+  <data name="Scope2" xml:space="preserve">
+    <value>ويتم إبرامها مع المستهلكين بالمعنى المقصود في المادة 13 من القانون المدني الألماني (BGB).</value>
+  </data>
+  <data name="Scope3" xml:space="preserve">
+    <value>(2) المستهلك هو أي شخص طبيعي يدخل في معاملة قانونية لأغراض لا تعزى في الغالب إلى نشاطه التجاري أو نشاطه المهني المستقل.</value>
+  </data>
+  <data name="Scope4" xml:space="preserve">
+    <value>(3) لا تسري أي شروط وأحكام مختلفة للعميل إلا إذا وافقنا صراحة على صحتها.</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs" xml:space="preserve">
+    <value>المادة 5: الخصائص المميزة للمواد الغذائية</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs1" xml:space="preserve">
+    <value>(1) منتجاتنا هي منتجات غذائية وتخضع لمتطلبات خاصة تتعلق بالنظافة والصحة.</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs2" xml:space="preserve">
+    <value>(2) يلتزم العميل بفحص المنتجات الغذائية المسلمة فور استلامها وتخزينها بشكل صحيح.</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs3" xml:space="preserve">
+    <value>(3) تاريخ انتهاء الصلاحية (BBE) الموضح على العبوة لا يشكل تاريخ ضمان.</value>
+  </data>
+  <data name="SpecialFeaturesFoodstuffs4" xml:space="preserve">
+    <value>(4) لا يتم قبول إرجاع المنتجات الغذائية المفتوحة أو التالفة أو المخزنة بشكل غير صحيح.</value>
+  </data>
+  <data name="TransportDamage" xml:space="preserve">
+    <value>المادة 10: أضرار النقل</value>
+  </data>
+  <data name="TransportDamage1" xml:space="preserve">
+    <value>(1) يجب على العميل الإبلاغ فوراً عن أي تلف واضح أثناء النقل إلى موظف التوصيل وإبلاغنا بذلك.</value>
+  </data>
+  <data name="TransportDamage2" xml:space="preserve">
+    <value>(2) تبقى حقوق الضمان القانونية دون تغيير.</value>
+  </data>
+  <data name="Warranty" xml:space="preserve">
+    <value>المادة 8 الضمان</value>
+  </data>
+  <data name="Warranty1" xml:space="preserve">
+    <value>(1) تسري حقوق الضمان القانونية.</value>
+  </data>
+  <data name="Warranty2" xml:space="preserve">
+    <value>(2) العيوب الناتجة عن التخزين غير السليم أو التأخير في القبول أو سوء التعامل من قبل العميل لا تؤدي إلى أي مطالبات ضمان.</value>
+  </data>
+</root>

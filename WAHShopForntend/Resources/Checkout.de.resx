@@ -129,6 +129,12 @@
   <data name="AddressFormTitle" xml:space="preserve">
     <value>Lieferadresse</value>
   </data>
+  <data name="Agb" xml:space="preserve">
+    <value>AGB</value>
+  </data>
+  <data name="AgbAccept" xml:space="preserve">
+    <value>habe Ich die gelesen und akzeptiere sie.</value>
+  </data>
   <data name="AgeError" xml:space="preserve">
     <value>⚠️ Ihr Kauf wurde nicht abgeschlossen. Der Warenkorb enthält ein Produkt, das nur für Personen ab 18 Jahren zugelassen ist.</value>
   </data>
@@ -201,8 +207,18 @@
   <data name="NoItemsInCategory" xml:space="preserve">
     <value>Die Bestellung enthält keinen Artikel, dessen Kategorie mit der Rabattcode-Kategorie übereinstimmt.</value>
   </data>
+  <data name="NotAcceptAgbMessage" xml:space="preserve">
+    <value>AGB und Widerrufsbelehrung müssen akzeptiert werden, um fortzufahren.</value>
+  </data>
   <data name="NotOurDelivery" xml:space="preserve">
     <value>Dieses Gebiet liegt nicht in unserem Lieferdienstbereich. Bitte wählen Sie die Lieferung per Post.</value>
+  </data>
+  <data name="OurDeliveryServiceInformation" xml:space="preserve">
+    <value>Unser Lieferservice-Info</value>
+  </data>
+  <data name="OurDeliveryServiceNote" xml:space="preserve">
+    <value>Bitte beachten Sie: Unser Lieferservice liefert Bestellungen nur an festgelegten Wochentagen für Ihr Liefergebiet. Die genauen Liefertermine erfahren Sie auf unserer Lieferservice-Info-Seite
+. Bitte lesen Sie diese Informationen, bevor Sie die Option „Lieferung durch unseren Lieferservice“ auswählen.</value>
   </data>
   <data name="OurDeliveryServiceWaringMessage" xml:space="preserve">
     <value>Unser Lieferservice liefert Bestellungen je nach Region an einem bestimmten Wochentag aus. Wenn Sie den genauen Tag für Ihre Region nicht kennen, nehmen Sie bitte Kontakt mit uns auf, um weitere Informationen zu erhalten.</value>
@@ -215,6 +231,9 @@
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Telefonnummer:</value>
+  </data>
+  <data name="RightOfWithdrawal" xml:space="preserve">
+    <value>Widerrufsrecht</value>
   </data>
   <data name="SelectDeliveryAddress" xml:space="preserve">
     <value>Bitte wählen Sie eine Lieferadresse aus.</value>

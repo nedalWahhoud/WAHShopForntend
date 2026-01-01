@@ -1,0 +1,34 @@
+﻿@page "/rightOfWithdrawal"
+@inject IStringLocalizer< WAHShopForntend.Resources.RightOfWithdrawal> L
+<div class="mainContainer">
+    <h1>@L["RightOfWithdrawall"]</h1>
+    <h2>@L["RightsConsumer"]</h2>
+    <p>@L["RightsConsumer1"]</p>
+    <p>@L["RightsConsumer2"]</p>
+    <h2>@L["RightOfWithdrawalText"]</h2>
+    <ul>
+      <li>@ProjectInfo.Value.Name</li>
+	  <li>Adresse: @ProjectInfo.Value.Address</li>
+	  <li>E-Mail: @ProjectInfo.Value.Email</li>
+      <li>Telefon: @ProjectInfo.Value.Whatsapp</li>
+    </ul>
+    <p>@L["RightOfWithdrawalText1"]</p>
+    <h2>@L["ConsequencesRevocation"]</h2>
+    <p>@L["ConsequencesRevocation1"]</p>
+    <p>@L["ConsequencesRevocation2"]</p>
+    <h2>@L["SpecialInstructionsFood"]</h2>
+    <h5>@L["SpecialInstructionsFood1"]</h5>
+    <p>@L["SpecialInstructionsFood2"]</p>
+    <h5>@L["SpecialInstructionsFood3"]</h5>
+    <p>@L["SpecialInstructionsFood4"]</p>
+    <h5>@L["SpecialInstructionsFood5"]</h5>
+    <p>@L["SpecialInstructionsFood6"]</p>
+    <h2>@L["ReturnGoods"]</h2>
+    <p> @((MarkupString)L["ReturnGoods1"].ToString())</p>
+    <div class="logoDiv">
+        <WAHShopForntend.Components.Layout.ProjektLogo />
+    </div>
+</div>
+@code {
+    
+}

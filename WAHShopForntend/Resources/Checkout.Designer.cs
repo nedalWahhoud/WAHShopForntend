@@ -97,6 +97,24 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die AGB ähnelt.
+        /// </summary>
+        public static string Agb {
+            get {
+                return ResourceManager.GetString("Agb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die I have read them and accept them. ähnelt.
+        /// </summary>
+        public static string AgbAccept {
+            get {
+                return ResourceManager.GetString("AgbAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die ⚠️ Your purchase was not completed. There is a product in your cart that is intended for people over 18 years old. ähnelt.
         /// </summary>
         public static string AgeError {
@@ -313,11 +331,38 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Terms and conditions and cancellation policy must be accepted in order to proceed. ähnelt.
+        /// </summary>
+        public static string NotAcceptAgbMessage {
+            get {
+                return ResourceManager.GetString("NotAcceptAgbMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die This area is not within our delivery service range. Please choose delivery by Post. ähnelt.
         /// </summary>
         public static string NotOurDelivery {
             get {
                 return ResourceManager.GetString("NotOurDelivery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Our delivery service information ähnelt.
+        /// </summary>
+        public static string OurDeliveryServiceInformation {
+            get {
+                return ResourceManager.GetString("OurDeliveryServiceInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please note: Our delivery service delivers orders only on specific weekdays within your delivery area. You can find the exact delivery dates on our delivery service information page. ähnelt.
+        /// </summary>
+        public static string OurDeliveryServiceNote {
+            get {
+                return ResourceManager.GetString("OurDeliveryServiceNote", resourceCulture);
             }
         }
         
@@ -354,6 +399,15 @@ namespace WAHShopForntend.Resources {
         public static string Phone {
             get {
                 return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Right of Withdrawal ähnelt.
+        /// </summary>
+        public static string RightOfWithdrawal {
+            get {
+                return ResourceManager.GetString("RightOfWithdrawal", resourceCulture);
             }
         }
         

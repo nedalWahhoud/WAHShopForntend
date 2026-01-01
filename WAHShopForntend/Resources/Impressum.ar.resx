@@ -117,76 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContactUs" xml:space="preserve">
-    <value>7. التواصل معنا</value>
+  <data name="Contact" xml:space="preserve">
+    <value>التواصل</value>
   </data>
-  <data name="ContactUsDescription" xml:space="preserve">
-    <value>إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه أو معالجة بياناتك، يمكنك الاتصال بنا عبر البريد الإلكتروني: &lt;strong&gt;Syriana.lebensmittel@gmail.com&lt;/strong&gt;</value>
+  <data name="developer" xml:space="preserve">
+    <value>المفهوم والتصميم والبرمجة وتطوير</value>
   </data>
-  <data name="Cookies" xml:space="preserve">
-    <value>6. ملفات تعريف الارتباط</value>
+  <data name="developerName" xml:space="preserve">
+    <value>محمد نضال وحود</value>
   </data>
-  <data name="CookiesDescription" xml:space="preserve">
-    <value>     نستخدم ملفات تعريف الارتباط لحفظ جلسات تسجيل الدخول وتفضيلات اللغة. هذه الملفات أساسية 
-        لعمل الموقع بشكل صحيح. يمكنك ضبط متصفحك لرفض الكوكيز، ولكن قد يؤدي ذلك إلى تعطيل بعض الوظائف.</value>
+  <data name="email" xml:space="preserve">
+    <value>الايميل</value>
   </data>
-  <data name="DataCollection" xml:space="preserve">
-    <value>1. البيانات التي نجمعها</value>
+  <data name="Hosting" xml:space="preserve">
+    <value>الاستضافة</value>
   </data>
-  <data name="DataCollectionDescription1" xml:space="preserve">
-    <value>معلومات تسجيل الدخول (مثل الايميل وكلمة المرور).</value>
+  <data name="HostingText" xml:space="preserve">
+    <value>نستضيف محتوى موقعنا الإلكتروني لدى المزود التالي:</value>
   </data>
-  <data name="DataCollectionDescription2" xml:space="preserve">
-    <value>ملفات تعريف الارتباط (Cookies) لحفظ جلسة الدخول وتفضيل اللغة.</value>
+  <data name="impressum" xml:space="preserve">
+    <value>بيانات النشر</value>
   </data>
-  <data name="DataCollectionDescription3" xml:space="preserve">
-    <value>معلومات عامة يقدمها متصفحك (مثل اللغة أو نوع الجهاز).</value>
+  <data name="Tel" xml:space="preserve">
+    <value>تليفون</value>
   </data>
-  <data name="DataSecurity" xml:space="preserve">
-    <value>5. أمن البيانات</value>
+  <data name="VATID" xml:space="preserve">
+    <value>رقم ضريبة القيمة المضافة</value>
   </data>
-  <data name="DataSecurityDescription1" xml:space="preserve">
-    <value>  نتخذ التدابير التقنية والتنظيمية المناسبة لحماية بياناتك من الوصول غير المصرح به
-        أو الفقدان أو التغيير.</value>
-  </data>
-  <data name="LastUpdate" xml:space="preserve">
-    <value>أخر تحديث:</value>
-  </data>
-  <data name="PrivacyPolicy1" xml:space="preserve">
-    <value>سياسة الخصوصية</value>
-  </data>
-  <data name="PrivacyPolicyDescription" xml:space="preserve">
-    <value>نحن نحترم خصوصيتك ونلتزم بحماية معلوماتك الشخصية. توضح هذه الصفحة المعلومات التي نجمعها، وكيفية استخدامها، وكيفية تخزينها عند استخدامك لموقعنا الإلكتروني أو تطبيقنا.</value>
-  </data>
-  <data name="ShareData" xml:space="preserve">
-    <value>3. مشاركة البيانات</value>
-  </data>
-  <data name="ShareDataDescription" xml:space="preserve">
-    <value>لا نشارك بياناتك الشخصية مع أي طرف ثالث، إلا إذا كان ذلك مطلوبًا بموجب القانون 
-        أو لتقديم خدمة أساسية يعتمد عليها الموقع (مثل تسجيل الدخول أو أنظمة الدفع).</value>
-  </data>
-  <data name="UseData" xml:space="preserve">
-    <value>2. كيفية استخدام البيانات</value>
-  </data>
-  <data name="UseDataDescription1" xml:space="preserve">
-    <value>لتوفير تجربة مستخدم آمنة ومخصصة.</value>
-  </data>
-  <data name="UseDataDescription2" xml:space="preserve">
-    <value>لتذكر إعداداتك مثل اللغة المفضلة.</value>
-  </data>
-  <data name="UseDataDescription3" xml:space="preserve">
-    <value>لتحسين أداء الموقع وخدماتنا.</value>
-  </data>
-  <data name="YourRights" xml:space="preserve">
-    <value>4. حقوقك</value>
-  </data>
-  <data name="YourRightsDescription1" xml:space="preserve">
-    <value>الوصول إلى بياناتك الشخصية أو طلب نسخة منها.</value>
-  </data>
-  <data name="YourRightsDescription2" xml:space="preserve">
-    <value>طلب تعديل أو حذف بياناتك.</value>
-  </data>
-  <data name="YourRightsDescription3" xml:space="preserve">
-    <value>الاعتراض على بعض طرق المعالجة.</value>
+  <data name="VATIDText" xml:space="preserve">
+    <value>رقم التعريف الضريبي وفقًا للمادة 27أ من قانون ضريبة القيمة المضافة الألماني: DE334553043</value>
   </data>
 </root>

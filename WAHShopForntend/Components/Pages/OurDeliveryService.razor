@@ -1,0 +1,26 @@
+﻿@page "/ourdeliveryservice"
+@inject IStringLocalizer< WAHShopForntend.Resources.OurDeliveryService> L
+<div class="mainContainer">
+	<h1>@L["OurDeliveryServiceInformation"]</h1>
+	<p>@L["OurDeliveryServiceInformation1"]</p>
+	<h2>@L["AreasFixed"]</h2>
+	<p>@L["AreasFixed1"]</p>
+	@((MarkupString)L["AreasFixed2"].ToString())
+	<h2>@L["deliveryServiceWorks"]</h2>
+	@((MarkupString)L["deliveryServiceWorks1"].ToString())
+	<h2>@L["ImportantInstructions"]</h2>
+	@((MarkupString)L["ImportantInstructions1"].ToString())
+	<h2>@L["IfQuestions"]</h2>
+	<p>@L["IfQuestions1"]</p>
+	<p>@ProjectInfo.Value.Name</p>
+	<p>@L["Address"] @ProjectInfo.Value.Address</p>
+	<p>@L["Email"] @ProjectInfo.Value.Email</p>
+	<p>@L["WhatsApp"] <span style="direction:ltr; unicode-bidi:isolate; display:inline-block;">@ProjectInfo.Value.Whatsapp</span></p>
+	<div class="logoDiv">
+		<WAHShopForntend.Components.Layout.ProjektLogo />
+	</div>
+</div>
+
+@code {
+
+}

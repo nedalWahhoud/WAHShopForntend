@@ -1,7 +1,7 @@
 ﻿@page "/privacyPolicy"
 @inject IStringLocalizer< WAHShopForntend.Resources.PrivacyPolicy> L
 <div class="mainContainer">
-    <h2 class="mb-3">@L["PrivacyPolicy1"]</h2>
+    <h1 class="mb-3">@L["PrivacyPolicy1"]</h1>
     <p> @L["PrivacyPolicyDescription"] </p>
     <h3 class="mt-4">@L["DataCollection"]</h3>
     <ul>
@@ -31,8 +31,11 @@
     <p>@((MarkupString)L["ContactUsDescription"].Value)</p>
 
     <p class="mt-5">
-        <em>@L["LastUpdate"] 16.12.2025</em>
+        <em>@L["LastUpdate"] 30.12.2025</em>
     </p>
+    <div class="logoDiv">
+        <WAHShopForntend.Components.Layout.ProjektLogo />
+    </div>
 </div>
 
 @code {

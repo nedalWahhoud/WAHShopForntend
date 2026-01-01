@@ -19,24 +19,24 @@
             <EditForm Model="@signupModel" OnValidSubmit="@HandleSubmit" FormName="signup">
                 <DataAnnotationsValidator />
                 <div class="form-group mt-3">
-                    <InputText @bind-Value="signupModel.UserName" placeholder="@L["NamePlaceholder"]" class="form-control" />
+                    <InputText id="userName" @bind-Value="signupModel.UserName" placeholder="@L["NamePlaceholder"]" class="form-control" />
                     <ValidationMessage For="@(() => signupModel.UserName)" />
                 </div>
                 <div class="form-group mt-3">
-                    <InputText @bind-Value="signupModel.Email" placeholder="@L["EmailPlaceholder"]" type="email" class="form-control" />
+                    <InputText id="email" @bind-Value="signupModel.Email" placeholder="@L["EmailPlaceholder"]" type="email" class="form-control" />
                     <ValidationMessage For="@(() => signupModel.Email)" />
                 </div>
                 <div class="form-group mt-3">
                     <label>@L["BirthDateLabel"]</label>
-                    <InputText @bind-Value="signupModel.BirthDate" type="date" class="form-control" />
+                    <InputText id="birthDate" @bind-Value="signupModel.BirthDate" type="date" class="form-control" />
                     <ValidationMessage For="@(() => signupModel.BirthDate)" />
                 </div>
                 <div class="form-group mt-3">
-                    <InputText @bind-Value="signupModel.Password" placeholder="@L["PasswordPlaceholder"]" type="password" class="form-control" />
+                    <InputText id="password" @bind-Value="signupModel.Password" placeholder="@L["PasswordPlaceholder"]" type="password" class="form-control" />
                     <ValidationMessage For="@(() => signupModel.Password)" />
                 </div>
                 <div class="form-group mt-3">
-                    <InputText @bind-Value="signupModel.PasswordAgain" placeholder="@L["PasswordAgainPlaceholder"]" type="password" class="form-control" />
+                    <InputText id="passwordAgain" @bind-Value="signupModel.PasswordAgain" placeholder="@L["PasswordAgainPlaceholder"]" type="password" class="form-control" />
                     <ValidationMessage For="@(() => signupModel.PasswordAgain)" />
                 </div>
                 <button type="submit" disabled="@IsLoading">

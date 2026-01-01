@@ -138,4 +138,7 @@
   <data name="NoStock" xml:space="preserve">
     <value>المخزون غير كافي</value>
   </data>
+  <data name="OnOffer" xml:space="preserve">
+    <value>عروض</value>
+  </data>
 </root>

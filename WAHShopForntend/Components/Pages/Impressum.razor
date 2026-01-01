@@ -1,0 +1,37 @@
+﻿@page "/impressum"
+@inject IStringLocalizer< WAHShopForntend.Resources.Impressum> L
+<div class="mainContainer">
+	<h1>@L["impressum"]</h1>
+	<p>@(ProjectInfo?.Value?.Name?.Replace(",", "\n") ?? "ProjectInfo ist null")</p>
+	<p style="white-space: pre-line;  line-height: 0.8;">
+		@(ProjectInfo?.Value?.Address?.Replace(",", "\n") ?? "ProjectInfo ist null")
+	</p>
+	<h1>@L["Contact"]</h1>
+	<p>
+		@L["Tel"]:  
+		<span style="direction:ltr; unicode-bidi:isolate; display:inline-block;">
+			@(ProjectInfo?.Value.Whatsapp ?? "ProjectInfo ist null")
+		</span>
+	</p>
+	<p>@L["email"]: @(ProjectInfo?.Value.Email ?? "ProjectInfo ist null")</p>
+	<h1>@L["VATID"]</h1>
+	<p>@L["VATIDText"]</p>
+	<h1>@L["Hosting"]</h1>
+	<p>@L["HostingText"]</p>
+	<p>IONOS</p>
+	<h1>@L["developer"]</h1>
+	<p>
+		@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+				? DeveloperInfo.Value.NameArabic
+				: DeveloperInfo.Value.Name)
+	</p>
+	<p>@L["Tel"] <span style="direction:ltr; unicode-bidi:isolate; display:inline-block;">@DeveloperInfo.Value.Telefonnummer</span></p>
+	<p>@L["email"] @DeveloperInfo.Value.Email</p>
+	<div class="logoDiv">
+	  <WAHShopForntend.Components.Layout.ProjektLogo />
+	</div>
+</div>
+
+@code {
+
+}

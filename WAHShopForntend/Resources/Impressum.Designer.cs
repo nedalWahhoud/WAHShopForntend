@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Footer {
+    public class Impressum {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Footer() {
+        internal Impressum() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Footer", typeof(Footer).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Impressum", typeof(Impressum).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,15 +61,6 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die AGB ähnelt.
-        /// </summary>
-        public static string Agb {
-            get {
-                return ResourceManager.GetString("Agb", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Contact ähnelt.
         /// </summary>
         public static string Contact {
@@ -79,74 +70,83 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Follow us on ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Concept, design and programming ähnelt.
         /// </summary>
-        public static string FollowUs {
+        public static string developer {
             get {
-                return ResourceManager.GetString("FollowUs", resourceCulture);
+                return ResourceManager.GetString("developer", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die MHD Nedal Wahhoud ähnelt.
         /// </summary>
-        public static string Home {
+        public static string developerName {
             get {
-                return ResourceManager.GetString("Home", resourceCulture);
+                return ResourceManager.GetString("developerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die E-Mail ähnelt.
+        /// </summary>
+        public static string email {
+            get {
+                return ResourceManager.GetString("email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hosting ähnelt.
+        /// </summary>
+        public static string Hosting {
+            get {
+                return ResourceManager.GetString("Hosting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die We host the content of our website with the following provider: ähnelt.
+        /// </summary>
+        public static string HostingText {
+            get {
+                return ResourceManager.GetString("HostingText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Impressum ähnelt.
         /// </summary>
-        public static string Impressum {
+        public static string impressum {
             get {
-                return ResourceManager.GetString("Impressum", resourceCulture);
+                return ResourceManager.GetString("impressum", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Links ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tel. ähnelt.
         /// </summary>
-        public static string Links {
+        public static string Tel {
             get {
-                return ResourceManager.GetString("Links", resourceCulture);
+                return ResourceManager.GetString("Tel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Location ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die VAT ID ähnelt.
         /// </summary>
-        public static string Location {
+        public static string VATID {
             get {
-                return ResourceManager.GetString("Location", resourceCulture);
+                return ResourceManager.GetString("VATID", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Our delivery service information ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die VAT identification number according to §27a of the German VAT Act: DE334553043 ähnelt.
         /// </summary>
-        public static string OurDeliveryServiceInformation {
+        public static string VATIDText {
             get {
-                return ResourceManager.GetString("OurDeliveryServiceInformation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Privacy Policy ähnelt.
-        /// </summary>
-        public static string PrivacyPolicy {
-            get {
-                return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Right of Withdrawal ähnelt.
-        /// </summary>
-        public static string RightOfWithdrawal {
-            get {
-                return ResourceManager.GetString("RightOfWithdrawal", resourceCulture);
+                return ResourceManager.GetString("VATIDText", resourceCulture);
             }
         }
     }

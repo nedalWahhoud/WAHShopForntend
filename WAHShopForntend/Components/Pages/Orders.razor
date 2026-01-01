@@ -32,7 +32,7 @@ else
                             @if (order.ShowStatusDropdown)
                             {
 
-                                <InputSelect Value="@order.StatusId"
+                                <InputSelect id="status" Value="@order.StatusId"
                                 ValueChanged="@((int val) => OnStatusChangedItem(order, val.ToString()))"
                                 ValueExpression="() => order.StatusId"
                                 class="form-select"

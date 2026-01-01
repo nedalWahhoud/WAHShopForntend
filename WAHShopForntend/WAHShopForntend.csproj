@@ -18,6 +18,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AddDecresaseCard.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\AGB.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AGB.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Cart.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -53,6 +58,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Header.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Impressum.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Impressum.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Index.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -73,6 +83,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Orders.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\OurDeliveryService.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OurDeliveryService.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\PrivacyPolicy.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -92,6 +107,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Profile.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\RightOfWithdrawal.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RightOfWithdrawal.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\SearchProducts.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -114,6 +134,10 @@
     <EmbeddedResource Update="Resources\AddDecresaseCard.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddDecresaseCard.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\AGB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AGB.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Cart.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -146,6 +170,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Header.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Impressum.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Impressum.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
@@ -162,6 +190,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Orders.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\OurDeliveryService.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OurDeliveryService.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\PrivacyPolicy.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrivacyPolicy.Designer.cs</LastGenOutput>
@@ -177,6 +209,10 @@
     <EmbeddedResource Update="Resources\Profile.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Profile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\RightOfWithdrawal.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RightOfWithdrawal.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\SearchProducts.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

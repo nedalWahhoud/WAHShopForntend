@@ -9,14 +9,14 @@
                 <h2 @onclick="OnProjectInfo">@ProjectInfo.Value.Name</h2>
                 <h3>@L["Welcome"]</h3>
                 <div class="form-group">
-                    <InputText @bind-Value="loginModel.Email"
+                    <InputText id="email" @bind-Value="loginModel.Email"
                     placeholder="@L["Email"]"
                     class="form-control" />
                     <ValidationMessage For="@(() => loginModel.Email)" />
                 </div>
                 <div class="form-group">
                     <div class="passwordDiv">
-                        <InputText @bind-Value="loginModel.Password"
+                        <InputText id="password" @bind-Value="loginModel.Password"
                         type="@passwordInputType"
                         placeholder="@L["Password"]"
                         class="form-control passwordInput" />
@@ -30,7 +30,7 @@
                     <ValidationMessage For="@(() => loginModel.Password)" />
                 </div>
                 <div class="RememberMe">
-                    <InputCheckbox @bind-Value="loginModel.RememberMe" />
+                    <InputCheckbox id="remember" @bind-Value="loginModel.RememberMe" />
                     <span>@L["RememberMe"]</span>
                 </div>
                 <button class="loginBtn" type="submit" disabled="@(isSingInLoading || isSingInLoading)">

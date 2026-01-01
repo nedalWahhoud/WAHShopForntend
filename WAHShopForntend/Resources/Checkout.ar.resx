@@ -129,6 +129,12 @@
   <data name="AddressFormTitle" xml:space="preserve">
     <value>عنوان التوصيل</value>
   </data>
+  <data name="Agb" xml:space="preserve">
+    <value>شروط والأحكام العامة</value>
+  </data>
+  <data name="AgbAccept" xml:space="preserve">
+    <value>لقد قرأتها وأوافق عليها.</value>
+  </data>
   <data name="AgeError" xml:space="preserve">
     <value>⚠️ لم تكتمل عملية الشراء. يوجد منتج في سلة التسوق خاص بك لمن تزيد أعمارهم عن ١٨ عامًا.</value>
   </data>
@@ -201,8 +207,18 @@
   <data name="NoItemsInCategory" xml:space="preserve">
     <value>الطلبية لا تحتوي على اي عنصر لديه فئة متطابقة مع فئة كود الخصم</value>
   </data>
+  <data name="NotAcceptAgbMessage" xml:space="preserve">
+    <value>يجب قبول الشروط والأحكام وسياسة الإلغاء للمتابعة.</value>
+  </data>
   <data name="NotOurDelivery" xml:space="preserve">
     <value>هذه المنطقة ليست ضمن نطاق خدمة التوصيل لدينا. يُرجى اختيار التوصيل عبر البريد.</value>
+  </data>
+  <data name="OurDeliveryServiceInformation" xml:space="preserve">
+    <value>معلومات خدمة التوصيل لدينا</value>
+  </data>
+  <data name="OurDeliveryServiceNote" xml:space="preserve">
+    <value>يرجى الملاحظة: خدمة التوصيل لدينا تُسلّم الطلبات في أيام محددة من الأسبوع ضمن منطقة التوصيل الخاصة بك. يمكنك الاطلاع على مواعيد التوصيل المحددة في صفحة معلومات خدمة التوصيل.
+يرجى قراءة هذه المعلومات قبل اختيار خيار "التوصيل عبر خدمة التوصيل لدينا".</value>
   </data>
   <data name="OurDeliveryServiceWaringMessage" xml:space="preserve">
     <value>خدمة التوصيل لدينا تُسلّم الطلبات في يوم مُحدّد من الأسبوع حسب منطقتك. إذا لم تكن تعرف اليوم المُحدّد لمنطقتك، يُرجى التواصل معنا لمزيد من المعلومات.</value>
@@ -215,6 +231,9 @@
   </data>
   <data name="Phone" xml:space="preserve">
     <value>رقم الهاتف:</value>
+  </data>
+  <data name="RightOfWithdrawal" xml:space="preserve">
+    <value>حق الارجاع</value>
   </data>
   <data name="SelectDeliveryAddress" xml:space="preserve">
     <value>الرجاء تحديد عنوان التسليم.</value>

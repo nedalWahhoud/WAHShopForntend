@@ -45,7 +45,7 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
 
 
     <title>@(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? "سيريانا سوبر ماركت" : "Syriana Supermarkt")</title>
-    <HeadOutlet/>
+    <Microsoft.AspNetCore.Components.Web.HeadOutlet/>
 </head>
 
 
@@ -108,23 +108,6 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
             get: function () {
             return navigator.language || navigator.userLanguage;
         }
-        };
-    </script>
-    @* footer hide and show *@
-    <script>
-        window.footerVisibility = {
-            initScrollWatcher: function (dotNetHelper) {
-                window.addEventListener("scroll", () => {
-                    const scrollY = window.scrollY + window.innerHeight;
-                    const pageHeight = document.body.offsetHeight;
-
-                    if (scrollY >= pageHeight - 10) {
-                        dotNetHelper.invokeMethodAsync("ShowFooter");
-                    } else {
-                        dotNetHelper.invokeMethodAsync("HideFooter");
-                    }
-                });
-            }
         };
     </script>
     @* script wenn Handy dann wird Whatsapp geöffent sonst wird webseite von Whatsapp geöffenet*@
@@ -252,7 +235,7 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
             });
         };
     </script>
-    ´@* Scroll sperren *@
+    @* Scroll sperren *@
     <script>
         window.openFullscreen = function() {
             document.body.style.overflow = 'hidden';

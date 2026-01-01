@@ -37,6 +37,8 @@ builder.Services.AddServerSideBlazor()
     });
 // project info
 builder.Services.Configure<ProjectInfo>(builder.Configuration.GetSection("ProjectInfo"));
+// Developer Info 
+builder.Services.Configure<DeveloperInfo>(builder.Configuration.GetSection("DeveloperInfo"));
 // app config
 builder.Services.Configure<AppConfig>(builder.Configuration.GetSection("AppConfig"));
 

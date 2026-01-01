@@ -77,6 +77,13 @@ else
 									</label>
 								}
 							}
+							@if (selectedPaymentId == 2)
+							{
+								<p class="alert alert-primary mt-3 mb-3" role="alert">
+									@L["OurDeliveryServiceNote"]
+								</p>
+								<a href="/ourdeliveryservice" target="_blank">@L["OurDeliveryServiceInformation"]</a>
+							}
 							<label>
 								@L["PaymentNote"]
 							</label>
@@ -86,7 +93,7 @@ else
 					<div class="mb-3">
 						<label>@L["HaveCode"]</label>
 						<div class="input-group d-flex gap-2 mb-1">
-							<InputText class="form-control" @bind-Value="discountCode.Code" />
+							<InputText id="discountCode" class="form-control" @bind-Value="discountCode.Code" />
 							<button type="button" class="btn btn-primary" @onclick="OnCode">
 								@if(IsDiscountCodeLoading)
 								{
@@ -179,7 +186,14 @@ else
 
 				<InputTextArea class="form-control" @bind-Value="order.Notes " placeholder="@L["AddNotePlaceholder"]" />
 				<div class="placeOrderB">
+					<div class="form-check">
+						<InputCheckbox id="agbCheck" @bind-Value="agbAkzeptiert" class="form-check-input" required />
+						<label class="form-check-label" for="agbCheck">
+							<a href="/agb" target="_blank">@L["Agb"]</a> und die <a href="/rightOfWithdrawal" target="_blank">@L["RightOfWithdrawal"]</a> @L["AgbAccept"]
+						</label>
+					</div>
 					<AuthorizeView>
+			
 						<Authorized Context="auth">
 
 							@if (!IsBirthDateValid(user.BirthDate))
@@ -232,6 +246,7 @@ else
 
 						</NotAuthorized>
 					</AuthorizeView>
+					
 				</div>
 			</div>
 
@@ -296,7 +311,7 @@ else
 	}
 }
 @code {
-
+	private bool agbAkzeptiert = false;
 	OrderStatusEnum orderStatusEnum = new OrderStatusEnum();
 	private User user = new User();
 	protected override async Task OnInitializedAsync()
@@ -486,6 +501,13 @@ else
 	private Order order = new Order();
 	private async Task OnPay()
 	{
+		// wenn der Kunde die AGB akzeptiert hat
+		if (!agbAkzeptiert)
+		{
+			_ = JS.InvokeVoidAsync("alert", L["NotAcceptAgbMessage"].ToString());
+			return;
+		}
+
 		orderStatusEnum = OrderStatusEnum.Processing;
 		string backToMainPageAlertMessage = null!;
 		// check address

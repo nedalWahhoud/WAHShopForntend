@@ -117,76 +117,75 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContactUs" xml:space="preserve">
-    <value>7. التواصل معنا</value>
+  <data name="Address" xml:space="preserve">
+    <value>عنوان:</value>
   </data>
-  <data name="ContactUsDescription" xml:space="preserve">
-    <value>إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه أو معالجة بياناتك، يمكنك الاتصال بنا عبر البريد الإلكتروني: &lt;strong&gt;Syriana.lebensmittel@gmail.com&lt;/strong&gt;</value>
+  <data name="AreasFixed" xml:space="preserve">
+    <value>مناطق التوصيل وأيام التوصيل المحددة</value>
   </data>
-  <data name="Cookies" xml:space="preserve">
-    <value>6. ملفات تعريف الارتباط</value>
+  <data name="AreasFixed1" xml:space="preserve">
+    <value>سيتم التوصيل:</value>
   </data>
-  <data name="CookiesDescription" xml:space="preserve">
-    <value>     نستخدم ملفات تعريف الارتباط لحفظ جلسات تسجيل الدخول وتفضيلات اللغة. هذه الملفات أساسية 
-        لعمل الموقع بشكل صحيح. يمكنك ضبط متصفحك لرفض الكوكيز، ولكن قد يؤدي ذلك إلى تعطيل بعض الوظائف.</value>
+  <data name="AreasFixed2" xml:space="preserve">
+    <value>&lt;ul&gt;
+
+&lt;li&gt;في لويتكيرش يوميًا: منطقة لويتكيرش إم ألغاو والمناطق المحيطة بها – يوم التوصيل: يوميًا (خلال ساعات العمل فقط)&lt;/em&gt;&lt;/li&gt;
+
+&lt;li&gt;اتجاه رافنسبورغ مرة واحدة أسبوعيًا: كيسليغ، وولفيغ، فوغت، فالدبورغ، شلير، رافنسبورغ، فاينغارتن، باينفورت، فايسناو، ميكنبويرن، تيتنانغ، بودنيغ، غرونكراوت، امتسيل والمناطق المحيطة بها – يوم التوصيل: السبت&lt;/li&gt;
+
+&lt;li&gt;اتجاه لينداو كل أسبوعين: لينداو، ليندين بيرغ إم ألغاو، شاي ديغ، فايلر-سيمربرغ، أوبرشتاوفن والمناطق المحيطة بها – يوم التوصيل: الخميس&lt;/li&gt;
+
+&lt;li&gt;اتجاه وانغن كل أسبوعين: فانغن ، فلتاهوفين، راتسينرايد، ارغن بوهل، Iازني والمنطقة المحيطة بها – يوم التسليم: السبت&lt;/li&gt;
+
+&lt;li&gt;اتجاه باد فالزي كل أسبوعين: باد فورسغ، باد فالزي، رويتي  والمناطق المحيطة - يوم التسليم: أيام السبت&lt;/li&gt;
+
+&lt;li&gt;اتجاه كيمتن كل أسبوعين: ايشتتين، ايتراخ، ممينغن، فولفا شفيندين، باد غرونين باخ، التستريد، كيمبت، ايممشتاد سونهوفين، فيشين، اوبرستدورف  والمناطق المحيطة - يوم التسليم: الخميس&lt;/li&gt;
+
+&lt;/ul&gt;</value>
   </data>
-  <data name="DataCollection" xml:space="preserve">
-    <value>1. البيانات التي نجمعها</value>
+  <data name="deliveryServiceWorks" xml:space="preserve">
+    <value>هكذا تعمل خدمة التوصيل</value>
   </data>
-  <data name="DataCollectionDescription1" xml:space="preserve">
-    <value>معلومات تسجيل الدخول (مثل الايميل وكلمة المرور).</value>
+  <data name="deliveryServiceWorks1" xml:space="preserve">
+    <value>&lt;ol&gt;
+ &lt;li&gt;اختر خيار "التوصيل عبر خدمة التوصيل الخاصة بنا" عند إتمام عملية الشراء.&lt;/li&gt;
+ &lt;li&gt;سنبلغك تلقائيًا بتاريخ التوصيل المحدد بناءً على منطقة التوصيل الخاصة بك.&lt;/li&gt;
+ &lt;li&gt;يرجى استلام الطلب شخصيًا أو تكليف شخص مُصرّح له باستلامه.&lt;/li&gt;
+ &lt;li&gt;سيتم تغليف الطعام بعناية، وتبريده أثناء النقل عند الضرورة.&lt;/li&gt;
+&lt;/ol&gt;</value>
   </data>
-  <data name="DataCollectionDescription2" xml:space="preserve">
-    <value>ملفات تعريف الارتباط (Cookies) لحفظ جلسة الدخول وتفضيل اللغة.</value>
+  <data name="Email" xml:space="preserve">
+    <value>بريد إلكتروني:</value>
   </data>
-  <data name="DataCollectionDescription3" xml:space="preserve">
-    <value>معلومات عامة يقدمها متصفحك (مثل اللغة أو نوع الجهاز).</value>
+  <data name="IfQuestions" xml:space="preserve">
+    <value>تواصل معنا إذا كانت لديك أي أسئلة</value>
   </data>
-  <data name="DataSecurity" xml:space="preserve">
-    <value>5. أمن البيانات</value>
+  <data name="IfQuestions1" xml:space="preserve">
+    <value>إذا كانت لديك أي أسئلة حول موعد التسليم أو منطقة التسليم، فيرجى الاتصال بنا:</value>
   </data>
-  <data name="DataSecurityDescription1" xml:space="preserve">
-    <value>  نتخذ التدابير التقنية والتنظيمية المناسبة لحماية بياناتك من الوصول غير المصرح به
-        أو الفقدان أو التغيير.</value>
+  <data name="ImportantInstructions" xml:space="preserve">
+    <value>تعليمات هامة</value>
   </data>
-  <data name="LastUpdate" xml:space="preserve">
-    <value>أخر تحديث:</value>
+  <data name="ImportantInstructions1" xml:space="preserve">
+    <value>&lt;ul&gt;
+
+&lt;li&gt;يُصبح خيار التوصيل مُلزمًا بمجرد إتمام الطلب.&lt;/li&gt;
+
+&lt;li&gt;بالنسبة للمواد الغذائية القابلة للتلف، يلتزم العميل بتخزين البضائع بشكل صحيح **فور استلامها**.&lt;/li&gt;
+
+&lt;li&gt;التوصيل **على مسؤولية العميل**، خاصةً إذا تعذر ضمان التبريد المستمر.&lt;/li&gt;
+
+&lt;li&gt;قد يتم تأجيل مواعيد التوصيل لأسباب طارئة. وسيتم إبلاغ العميل بذلك في الوقت المناسب.&lt;/li&gt;
+
+&lt;/ul&gt;</value>
   </data>
-  <data name="PrivacyPolicy1" xml:space="preserve">
-    <value>سياسة الخصوصية</value>
+  <data name="OurDeliveryServiceInformation" xml:space="preserve">
+    <value>معلومات خدمة التوصيل لدينا</value>
   </data>
-  <data name="PrivacyPolicyDescription" xml:space="preserve">
-    <value>نحن نحترم خصوصيتك ونلتزم بحماية معلوماتك الشخصية. توضح هذه الصفحة المعلومات التي نجمعها، وكيفية استخدامها، وكيفية تخزينها عند استخدامك لموقعنا الإلكتروني أو تطبيقنا.</value>
+  <data name="OurDeliveryServiceInformation1" xml:space="preserve">
+    <value>تقوم خدمة التوصيل لدينا بتوصيل طلباتكم بانتظام في أيام محددة، وذلك حسب منطقة التوصيل.</value>
   </data>
-  <data name="ShareData" xml:space="preserve">
-    <value>3. مشاركة البيانات</value>
-  </data>
-  <data name="ShareDataDescription" xml:space="preserve">
-    <value>لا نشارك بياناتك الشخصية مع أي طرف ثالث، إلا إذا كان ذلك مطلوبًا بموجب القانون 
-        أو لتقديم خدمة أساسية يعتمد عليها الموقع (مثل تسجيل الدخول أو أنظمة الدفع).</value>
-  </data>
-  <data name="UseData" xml:space="preserve">
-    <value>2. كيفية استخدام البيانات</value>
-  </data>
-  <data name="UseDataDescription1" xml:space="preserve">
-    <value>لتوفير تجربة مستخدم آمنة ومخصصة.</value>
-  </data>
-  <data name="UseDataDescription2" xml:space="preserve">
-    <value>لتذكر إعداداتك مثل اللغة المفضلة.</value>
-  </data>
-  <data name="UseDataDescription3" xml:space="preserve">
-    <value>لتحسين أداء الموقع وخدماتنا.</value>
-  </data>
-  <data name="YourRights" xml:space="preserve">
-    <value>4. حقوقك</value>
-  </data>
-  <data name="YourRightsDescription1" xml:space="preserve">
-    <value>الوصول إلى بياناتك الشخصية أو طلب نسخة منها.</value>
-  </data>
-  <data name="YourRightsDescription2" xml:space="preserve">
-    <value>طلب تعديل أو حذف بياناتك.</value>
-  </data>
-  <data name="YourRightsDescription3" xml:space="preserve">
-    <value>الاعتراض على بعض طرق المعالجة.</value>
+  <data name="WhatsApp" xml:space="preserve">
+    <value>واتساب:</value>
   </data>
 </root>

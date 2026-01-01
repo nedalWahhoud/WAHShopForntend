@@ -138,4 +138,7 @@
   <data name="NoStock" xml:space="preserve">
     <value>Insufficient stock</value>
   </data>
+  <data name="OnOffer" xml:space="preserve">
+    <value>On Offer</value>
+  </data>
 </root>

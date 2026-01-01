@@ -117,76 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContactUs" xml:space="preserve">
-    <value>7. التواصل معنا</value>
+  <data name="Address" xml:space="preserve">
+    <value>Address:</value>
   </data>
-  <data name="ContactUsDescription" xml:space="preserve">
-    <value>إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه أو معالجة بياناتك، يمكنك الاتصال بنا عبر البريد الإلكتروني: &lt;strong&gt;Syriana.lebensmittel@gmail.com&lt;/strong&gt;</value>
+  <data name="AreasFixed" xml:space="preserve">
+    <value>Delivery areas &amp; fixed days</value>
   </data>
-  <data name="Cookies" xml:space="preserve">
-    <value>6. ملفات تعريف الارتباط</value>
+  <data name="AreasFixed1" xml:space="preserve">
+    <value>Deliveries will be made:</value>
   </data>
-  <data name="CookiesDescription" xml:space="preserve">
-    <value>     نستخدم ملفات تعريف الارتباط لحفظ جلسات تسجيل الدخول وتفضيلات اللغة. هذه الملفات أساسية 
-        لعمل الموقع بشكل صحيح. يمكنك ضبط متصفحك لرفض الكوكيز، ولكن قد يؤدي ذلك إلى تعطيل بعض الوظائف.</value>
+  <data name="AreasFixed2" xml:space="preserve">
+    <value>&lt;ul&gt;
+
+&lt;li&gt;&lt;strong&gt;In Leutkirch&lt;/strong&gt; Daily: Leutkirch im Allgäu area and surrounding area&lt;/strong&gt; – Delivery day: Daily (only during our opening hours)&lt;/em&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;Towards Ravensburg&lt;/strong&gt; Once a week: Kisslegg, Wolfegg, Vogt, Waldburg, Schlier, Ravensburg, Weingarten, Baienfurt, Weißenau, Meckenbeuren, Tettnang, Bodnegg, Grünkraut, Amtzell and surrounding area&lt;/strong&gt; – Delivery day: Saturdays&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;Towards Lindau&lt;/strong&gt; Every two weeks: Lindau, Lindenberg im Allgäu, Scheidegg, Weiler-Simmerberg, Oberstaufen and surrounding area&lt;/strong&gt; – Delivery day: Thursdays&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;Towards Wangen&lt;/strong&gt; Every two weeks: Wangen im Allgäu, Waltershofen, Ratzenried, Argenbühl, Isny ​​im Allgäu and surrounding area&lt;/strong&gt; – Delivery day: Saturdays&lt;/li&gt;
+
+Towards Bad Waldsee&lt;/strong&gt; every two weeks: Bad Wurzach, Bad Waldsee, Reute &lt;strong&gt;and surrounding areas&lt;/strong&gt; – Delivery day: Saturdays&lt;/li&gt;
+
+Towards Kempten&lt;/strong&gt; every two weeks: Aichstetten, Aitrach, Memmingen, Wolfertschwenden, Bad Grönenbach, Altusried, Kempten, Immenstadt im Allgäu, Sonthofen, Fischen im Allgäu, Oberstdorf &lt;strong&gt;and surrounding areas&lt;/strong&gt; – Delivery day: Thursdays&lt;/li&gt;
+
+&lt;/ul&gt;</value>
   </data>
-  <data name="DataCollection" xml:space="preserve">
-    <value>1. البيانات التي نجمعها</value>
+  <data name="deliveryServiceWorks" xml:space="preserve">
+    <value>This is how the delivery service works</value>
   </data>
-  <data name="DataCollectionDescription1" xml:space="preserve">
-    <value>معلومات تسجيل الدخول (مثل الايميل وكلمة المرور).</value>
+  <data name="deliveryServiceWorks1" xml:space="preserve">
+    <value>&lt;ol&gt;
+
+&lt;li&gt;Select the "Delivery via our delivery service" option when completing your purchase.&lt;/li&gt;
+
+&lt;li&gt;We will automatically notify you of the specific delivery date based on your delivery area.&lt;/li&gt;
+
+&lt;li&gt;Please collect your order in person or authorize an authorized person to collect it.&lt;/li&gt;
+
+&lt;li&gt;Food will be carefully packaged and refrigerated during transit if necessary.&lt;/li&gt;
+&lt;ol&gt;</value>
   </data>
-  <data name="DataCollectionDescription2" xml:space="preserve">
-    <value>ملفات تعريف الارتباط (Cookies) لحفظ جلسة الدخول وتفضيل اللغة.</value>
+  <data name="Email" xml:space="preserve">
+    <value>E-Mail:</value>
   </data>
-  <data name="DataCollectionDescription3" xml:space="preserve">
-    <value>معلومات عامة يقدمها متصفحك (مثل اللغة أو نوع الجهاز).</value>
+  <data name="IfQuestions" xml:space="preserve">
+    <value>Contact us if you have any questions</value>
   </data>
-  <data name="DataSecurity" xml:space="preserve">
-    <value>5. أمن البيانات</value>
+  <data name="IfQuestions1" xml:space="preserve">
+    <value>If you have any questions about your delivery date or delivery area, please contact us:</value>
   </data>
-  <data name="DataSecurityDescription1" xml:space="preserve">
-    <value>  نتخذ التدابير التقنية والتنظيمية المناسبة لحماية بياناتك من الوصول غير المصرح به
-        أو الفقدان أو التغيير.</value>
+  <data name="ImportantInstructions" xml:space="preserve">
+    <value>Important instructions</value>
   </data>
-  <data name="LastUpdate" xml:space="preserve">
-    <value>أخر تحديث:</value>
+  <data name="ImportantInstructions1" xml:space="preserve">
+    <value>&lt;ul&gt;
+
+&lt;li&gt;The delivery option is binding once the order has been completed.&lt;/li&gt;
+
+&lt;li&gt;For perishable food items, the customer is obligated to store the goods properly **immediately after delivery**.&lt;/li&gt;
+
+&lt;li&gt;Delivery is **at the customer's risk**, especially if continuous refrigeration cannot be guaranteed.&lt;/li&gt;
+
+&lt;li&gt;Delivery dates may be postponed for unforeseen reasons. The customer will be informed in a timely manner.&lt;/li&gt;
+
+&lt;/ul&gt;</value>
   </data>
-  <data name="PrivacyPolicy1" xml:space="preserve">
-    <value>سياسة الخصوصية</value>
+  <data name="OurDeliveryServiceInformation" xml:space="preserve">
+    <value>Our delivery service information</value>
   </data>
-  <data name="PrivacyPolicyDescription" xml:space="preserve">
-    <value>نحن نحترم خصوصيتك ونلتزم بحماية معلوماتك الشخصية. توضح هذه الصفحة المعلومات التي نجمعها، وكيفية استخدامها، وكيفية تخزينها عند استخدامك لموقعنا الإلكتروني أو تطبيقنا.</value>
+  <data name="OurDeliveryServiceInformation1" xml:space="preserve">
+    <value>Our delivery service delivers your orders regularly on fixed days, depending on the delivery area.</value>
   </data>
-  <data name="ShareData" xml:space="preserve">
-    <value>3. مشاركة البيانات</value>
-  </data>
-  <data name="ShareDataDescription" xml:space="preserve">
-    <value>لا نشارك بياناتك الشخصية مع أي طرف ثالث، إلا إذا كان ذلك مطلوبًا بموجب القانون 
-        أو لتقديم خدمة أساسية يعتمد عليها الموقع (مثل تسجيل الدخول أو أنظمة الدفع).</value>
-  </data>
-  <data name="UseData" xml:space="preserve">
-    <value>2. كيفية استخدام البيانات</value>
-  </data>
-  <data name="UseDataDescription1" xml:space="preserve">
-    <value>لتوفير تجربة مستخدم آمنة ومخصصة.</value>
-  </data>
-  <data name="UseDataDescription2" xml:space="preserve">
-    <value>لتذكر إعداداتك مثل اللغة المفضلة.</value>
-  </data>
-  <data name="UseDataDescription3" xml:space="preserve">
-    <value>لتحسين أداء الموقع وخدماتنا.</value>
-  </data>
-  <data name="YourRights" xml:space="preserve">
-    <value>4. حقوقك</value>
-  </data>
-  <data name="YourRightsDescription1" xml:space="preserve">
-    <value>الوصول إلى بياناتك الشخصية أو طلب نسخة منها.</value>
-  </data>
-  <data name="YourRightsDescription2" xml:space="preserve">
-    <value>طلب تعديل أو حذف بياناتك.</value>
-  </data>
-  <data name="YourRightsDescription3" xml:space="preserve">
-    <value>الاعتراض على بعض طرق المعالجة.</value>
+  <data name="WhatsApp" xml:space="preserve">
+    <value>WhatsApp:</value>
   </data>
 </root>

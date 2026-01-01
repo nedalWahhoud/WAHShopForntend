@@ -135,7 +135,7 @@ Sie können Ihren Browser so einstellen, dass Cookies abgelehnt werden, allerdin
     <value>1. Welche Daten wir erheben</value>
   </data>
   <data name="DataCollectionDescription1" xml:space="preserve">
-    <value>Anmeldedaten (z. B. Benutzername und Passwort).</value>
+    <value>Anmeldedaten (z. B. E-Mail und Passwort).</value>
   </data>
   <data name="DataCollectionDescription2" xml:space="preserve">
     <value>Cookies zur Speicherung der Sitzung und der bevorzugten Sprache.</value>

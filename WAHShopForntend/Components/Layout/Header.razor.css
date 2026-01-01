@@ -119,14 +119,14 @@ html[dir="rtl"] .searchBox {
     }
 
     .header .containerCenter {
-        flex: 1; /* يتمدد حسب المساحة المتوفرة */
+        flex: 1; /* Es dehnt sich entsprechend dem verfügbaren Platz aus. */
         justify-content: center;
         padding: 0 1rem;
     }
 
     .header .containerRight {
-        flex-shrink: 0; /* ما يتقلص */
-        flex-grow: 0; /* ما يتمدد */
+        flex-shrink: 0; /* Was schrumpft */
+        flex-grow: 0; /* Was erweitert sich */
         justify-content: flex-end;
         padding-right: 1rem;
     }

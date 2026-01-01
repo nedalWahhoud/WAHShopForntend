@@ -4,10 +4,15 @@
     gap: 10px;
     flex-wrap: wrap;
 }
+.div img {
+        cursor: pointer;
+        width: clamp(60px, 15vw, 107px) !important;
+        height: auto;
+    }
 h2 {
     cursor: pointer;
     margin: 0;
-    font-size: 30px;
+    font-size: clamp(16px, 4vw, 30px);
 }
 
 @media (max-width: 768px) {

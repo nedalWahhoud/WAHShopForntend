@@ -117,76 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContactUs" xml:space="preserve">
-    <value>7. التواصل معنا</value>
+  <data name="ConsequencesRevocation" xml:space="preserve">
+    <value>عواقب الإلغاء</value>
   </data>
-  <data name="ContactUsDescription" xml:space="preserve">
-    <value>إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه أو معالجة بياناتك، يمكنك الاتصال بنا عبر البريد الإلكتروني: &lt;strong&gt;Syriana.lebensmittel@gmail.com&lt;/strong&gt;</value>
+  <data name="ConsequencesRevocation1" xml:space="preserve">
+    <value>في حال إلغاء هذا العقد، سنقوم برد جميع المبالغ المدفوعة منكم، بما في ذلك تكاليف التوصيل العادي، دون تأخير غير مبرر وفي موعد أقصاه 14 يومًا من تاريخ استلامنا لإشعار الإلغاء. ولا يشمل ذلك أي تكاليف إضافية ناتجة عن استخدام طريقة توصيل أخرى غير أرخص خيار للتوصيل العادي.</value>
   </data>
-  <data name="Cookies" xml:space="preserve">
-    <value>6. ملفات تعريف الارتباط</value>
+  <data name="ConsequencesRevocation2" xml:space="preserve">
+    <value>سيتم رد المبلغ باستخدام نفس طريقة الدفع التي استخدمتها في الطلب الأصلي، ما لم يتم الاتفاق على خلاف ذلك.</value>
   </data>
-  <data name="CookiesDescription" xml:space="preserve">
-    <value>     نستخدم ملفات تعريف الارتباط لحفظ جلسات تسجيل الدخول وتفضيلات اللغة. هذه الملفات أساسية 
-        لعمل الموقع بشكل صحيح. يمكنك ضبط متصفحك لرفض الكوكيز، ولكن قد يؤدي ذلك إلى تعطيل بعض الوظائف.</value>
+  <data name="ReturnGoods" xml:space="preserve">
+    <value>إرجاع البضائع</value>
   </data>
-  <data name="DataCollection" xml:space="preserve">
-    <value>1. البيانات التي نجمعها</value>
+  <data name="ReturnGoods1" xml:space="preserve">
+    <value>في حال إلغاء العقد، يُرجى إعادة البضائع إلينا فوراً وفي موعد أقصاه 14 يوماً من تاريخ استلامها. يتحمل العميل تكاليف الشحن للإرجاع، وذلك في حدود ما يسمح به القانون.</value>
   </data>
-  <data name="DataCollectionDescription1" xml:space="preserve">
-    <value>معلومات تسجيل الدخول (مثل الايميل وكلمة المرور).</value>
+  <data name="RightOfWithdrawall" xml:space="preserve">
+    <value>حق الارجاع</value>
   </data>
-  <data name="DataCollectionDescription2" xml:space="preserve">
-    <value>ملفات تعريف الارتباط (Cookies) لحفظ جلسة الدخول وتفضيل اللغة.</value>
+  <data name="RightOfWithdrawalText" xml:space="preserve">
+    <value>لممارسة حقك في الانسحاب، يجب عليك إبلاغنا</value>
   </data>
-  <data name="DataCollectionDescription3" xml:space="preserve">
-    <value>معلومات عامة يقدمها متصفحك (مثل اللغة أو نوع الجهاز).</value>
+  <data name="RightOfWithdrawalText1" xml:space="preserve">
+    <value>أبلغنا بقرارك بإلغاء الطلب من خلال بيان واضح (على سبيل المثال، عبر البريد الإلكتروني أو واتساب أو رسالة).</value>
   </data>
-  <data name="DataSecurity" xml:space="preserve">
-    <value>5. أمن البيانات</value>
+  <data name="RightsConsumer" xml:space="preserve">
+    <value>حقوقك القانونية كمستهلك</value>
   </data>
-  <data name="DataSecurityDescription1" xml:space="preserve">
-    <value>  نتخذ التدابير التقنية والتنظيمية المناسبة لحماية بياناتك من الوصول غير المصرح به
-        أو الفقدان أو التغيير.</value>
+  <data name="RightsConsumer1" xml:space="preserve">
+    <value>يحق للمستهلكين الانسحاب من الطلب عبر الإنترنت في غضون أربعة عشر (14) يومًا دون إبداء أي سبب، ما لم يكن هناك استثناء قانوني,</value>
   </data>
-  <data name="LastUpdate" xml:space="preserve">
-    <value>أخر تحديث:</value>
+  <data name="RightsConsumer2" xml:space="preserve">
+    <value>فترة الإلغاء هي 14 يومًا من اليوم الذي استلمت فيه أنت أو طرف ثالث قمت بتعيينه، وليس شركة النقل، البضائع المطلوبة.</value>
   </data>
-  <data name="PrivacyPolicy1" xml:space="preserve">
-    <value>سياسة الخصوصية</value>
+  <data name="SpecialInstructionsFood" xml:space="preserve">
+    <value>تعليمات خاصة للطعام</value>
   </data>
-  <data name="PrivacyPolicyDescription" xml:space="preserve">
-    <value>نحن نحترم خصوصيتك ونلتزم بحماية معلوماتك الشخصية. توضح هذه الصفحة المعلومات التي نجمعها، وكيفية استخدامها، وكيفية تخزينها عند استخدامك لموقعنا الإلكتروني أو تطبيقنا.</value>
+  <data name="SpecialInstructionsFood1" xml:space="preserve">
+    <value>1- المنتجات الغذائية المغلفة:</value>
   </data>
-  <data name="ShareData" xml:space="preserve">
-    <value>3. مشاركة البيانات</value>
+  <data name="SpecialInstructionsFood2" xml:space="preserve">
+    <value>لا يسري حق الاسترجاع على المنتجات الغذائية التي تم تسليمها مغلفة إذا تم كسر الغلاف بعد التسليم. وذلك لأن هذه المنتجات غير صالحة للإرجاع لأسباب تتعلق بحماية الصحة أو النظافة (المادة 312g الفقرة 2 رقم 3 من القانون المدني الألماني).</value>
   </data>
-  <data name="ShareDataDescription" xml:space="preserve">
-    <value>لا نشارك بياناتك الشخصية مع أي طرف ثالث، إلا إذا كان ذلك مطلوبًا بموجب القانون 
-        أو لتقديم خدمة أساسية يعتمد عليها الموقع (مثل تسجيل الدخول أو أنظمة الدفع).</value>
+  <data name="SpecialInstructionsFood3" xml:space="preserve">
+    <value>2. الأطعمة القابلة للتلف:</value>
   </data>
-  <data name="UseData" xml:space="preserve">
-    <value>2. كيفية استخدام البيانات</value>
+  <data name="SpecialInstructionsFood4" xml:space="preserve">
+    <value>كما لا يوجد حق في سحب المنتجات الغذائية التي تفسد بسرعة أو التي سينتهي تاريخ صلاحيتها قريباً.</value>
   </data>
-  <data name="UseDataDescription1" xml:space="preserve">
-    <value>لتوفير تجربة مستخدم آمنة ومخصصة.</value>
+  <data name="SpecialInstructionsFood5" xml:space="preserve">
+    <value>3. المرتجعات:</value>
   </data>
-  <data name="UseDataDescription2" xml:space="preserve">
-    <value>لتذكر إعداداتك مثل اللغة المفضلة.</value>
-  </data>
-  <data name="UseDataDescription3" xml:space="preserve">
-    <value>لتحسين أداء الموقع وخدماتنا.</value>
-  </data>
-  <data name="YourRights" xml:space="preserve">
-    <value>4. حقوقك</value>
-  </data>
-  <data name="YourRightsDescription1" xml:space="preserve">
-    <value>الوصول إلى بياناتك الشخصية أو طلب نسخة منها.</value>
-  </data>
-  <data name="YourRightsDescription2" xml:space="preserve">
-    <value>طلب تعديل أو حذف بياناتك.</value>
-  </data>
-  <data name="YourRightsDescription3" xml:space="preserve">
-    <value>الاعتراض على بعض طرق المعالجة.</value>
+  <data name="SpecialInstructionsFood6" xml:space="preserve">
+    <value>لا تُردّ قيمة المنتجات الغذائية المفتوحة.</value>
   </data>
 </root>

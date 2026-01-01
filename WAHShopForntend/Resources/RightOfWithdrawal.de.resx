@@ -117,76 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContactUs" xml:space="preserve">
-    <value>7. التواصل معنا</value>
+  <data name="ConsequencesRevocation" xml:space="preserve">
+    <value>Folgen des Widerrufs</value>
   </data>
-  <data name="ContactUsDescription" xml:space="preserve">
-    <value>إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه أو معالجة بياناتك، يمكنك الاتصال بنا عبر البريد الإلكتروني: &lt;strong&gt;Syriana.lebensmittel@gmail.com&lt;/strong&gt;</value>
+  <data name="ConsequencesRevocation1" xml:space="preserve">
+    <value>Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Lieferkosten für die Standardlieferung, unverzüglich und spätestens binnen 14 Tagen ab dem Tag des Eingangs Ihres Widerrufs zu erstatten. Ausgenommen sind zusätzliche Kosten, die durch eine andere als die günstigste Standardlieferung entstanden sind.</value>
   </data>
-  <data name="Cookies" xml:space="preserve">
-    <value>6. ملفات تعريف الارتباط</value>
+  <data name="ConsequencesRevocation2" xml:space="preserve">
+    <value>Die Rückzahlung erfolgt mit demselben Zahlungsmittel, das Sie bei der ursprünglichen Bestellung verwendet haben, sofern nichts anderes vereinbart wurde.</value>
   </data>
-  <data name="CookiesDescription" xml:space="preserve">
-    <value>     نستخدم ملفات تعريف الارتباط لحفظ جلسات تسجيل الدخول وتفضيلات اللغة. هذه الملفات أساسية 
-        لعمل الموقع بشكل صحيح. يمكنك ضبط متصفحك لرفض الكوكيز، ولكن قد يؤدي ذلك إلى تعطيل بعض الوظائف.</value>
+  <data name="ReturnGoods" xml:space="preserve">
+    <value>Rücksendung der Waren</value>
   </data>
-  <data name="DataCollection" xml:space="preserve">
-    <value>1. البيانات التي نجمعها</value>
+  <data name="ReturnGoods1" xml:space="preserve">
+    <value>Wenn Sie den Vertrag widerrufen, senden Sie die Waren unverzüglich und spätestens binnen 14 Tagen an uns zurück. Die Kosten der Rücksendung trägt &lt;strong&gt;der Kunde&lt;/strong&gt;, soweit gesetzlich zulässig.</value>
   </data>
-  <data name="DataCollectionDescription1" xml:space="preserve">
-    <value>معلومات تسجيل الدخول (مثل الايميل وكلمة المرور).</value>
+  <data name="RightOfWithdrawall" xml:space="preserve">
+    <value>Widerrufsrecht</value>
   </data>
-  <data name="DataCollectionDescription2" xml:space="preserve">
-    <value>ملفات تعريف الارتباط (Cookies) لحفظ جلسة الدخول وتفضيل اللغة.</value>
+  <data name="RightOfWithdrawalText" xml:space="preserve">
+    <value>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns</value>
   </data>
-  <data name="DataCollectionDescription3" xml:space="preserve">
-    <value>معلومات عامة يقدمها متصفحك (مثل اللغة أو نوع الجهاز).</value>
+  <data name="RightOfWithdrawalText1" xml:space="preserve">
+    <value>mittels einer eindeutigen Erklärung (z. B. per E-Mail, Whatsapp oder Brief) über Ihren Entschluss informieren, die Bestellung zu widerrufen.</value>
   </data>
-  <data name="DataSecurity" xml:space="preserve">
-    <value>5. أمن البيانات</value>
+  <data name="RightsConsumer" xml:space="preserve">
+    <value>Deine gesetzlichen Rechte als Verbraucher</value>
   </data>
-  <data name="DataSecurityDescription1" xml:space="preserve">
-    <value>  نتخذ التدابير التقنية والتنظيمية المناسبة لحماية بياناتك من الوصول غير المصرح به
-        أو الفقدان أو التغيير.</value>
+  <data name="RightsConsumer1" xml:space="preserve">
+    <value>Verbraucher haben das Recht, eine Online-Bestellung binnen vierzehn (14) Tagen ohne Angabe von Gründen zu widerrufen, soweit kein gesetzlicher Ausschluss besteht,</value>
   </data>
-  <data name="LastUpdate" xml:space="preserve">
-    <value>أخر تحديث:</value>
+  <data name="RightsConsumer2" xml:space="preserve">
+    <value>Die Widerrufsfrist beträgt 14 Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die bestellten Waren in Besitz genommen haben.</value>
   </data>
-  <data name="PrivacyPolicy1" xml:space="preserve">
-    <value>سياسة الخصوصية</value>
+  <data name="SpecialInstructionsFood" xml:space="preserve">
+    <value>Besondere Hinweise für Lebensmittel</value>
   </data>
-  <data name="PrivacyPolicyDescription" xml:space="preserve">
-    <value>نحن نحترم خصوصيتك ونلتزم بحماية معلوماتك الشخصية. توضح هذه الصفحة المعلومات التي نجمعها، وكيفية استخدامها، وكيفية تخزينها عند استخدامك لموقعنا الإلكتروني أو تطبيقنا.</value>
+  <data name="SpecialInstructionsFood1" xml:space="preserve">
+    <value>1- Versiegelte Lebensmittel:</value>
   </data>
-  <data name="ShareData" xml:space="preserve">
-    <value>3. مشاركة البيانات</value>
+  <data name="SpecialInstructionsFood2" xml:space="preserve">
+    <value>Das Widerrufsrecht besteht nicht für Lebensmittel, die versiegelt geliefert wurden, wenn die Versiegelung nach der Lieferung geöffnet wurde. Dies gilt, da diese aus Gründen des Gesundheitsschutzes oder der Hygiene nicht zur Rückgabe geeignet sind (§ 312g Abs. 2 Nr. 3 BGB).</value>
   </data>
-  <data name="ShareDataDescription" xml:space="preserve">
-    <value>لا نشارك بياناتك الشخصية مع أي طرف ثالث، إلا إذا كان ذلك مطلوبًا بموجب القانون 
-        أو لتقديم خدمة أساسية يعتمد عليها الموقع (مثل تسجيل الدخول أو أنظمة الدفع).</value>
+  <data name="SpecialInstructionsFood3" xml:space="preserve">
+    <value>2- Verderbliche Lebensmittel:</value>
   </data>
-  <data name="UseData" xml:space="preserve">
-    <value>2. كيفية استخدام البيانات</value>
+  <data name="SpecialInstructionsFood4" xml:space="preserve">
+    <value>Für Lebensmittel, die schnell verderben oder deren Mindesthaltbarkeitsdatum bald überschritten würde, besteht ebenfalls kein Widerrufsrecht.</value>
   </data>
-  <data name="UseDataDescription1" xml:space="preserve">
-    <value>لتوفير تجربة مستخدم آمنة ومخصصة.</value>
+  <data name="SpecialInstructionsFood5" xml:space="preserve">
+    <value>3- Rücksendungen:</value>
   </data>
-  <data name="UseDataDescription2" xml:space="preserve">
-    <value>لتذكر إعداداتك مثل اللغة المفضلة.</value>
-  </data>
-  <data name="UseDataDescription3" xml:space="preserve">
-    <value>لتحسين أداء الموقع وخدماتنا.</value>
-  </data>
-  <data name="YourRights" xml:space="preserve">
-    <value>4. حقوقك</value>
-  </data>
-  <data name="YourRightsDescription1" xml:space="preserve">
-    <value>الوصول إلى بياناتك الشخصية أو طلب نسخة منها.</value>
-  </data>
-  <data name="YourRightsDescription2" xml:space="preserve">
-    <value>طلب تعديل أو حذف بياناتك.</value>
-  </data>
-  <data name="YourRightsDescription3" xml:space="preserve">
-    <value>الاعتراض على بعض طرق المعالجة.</value>
+  <data name="SpecialInstructionsFood6" xml:space="preserve">
+    <value>Rücksendungen von geöffneten Lebensmitteln werden nicht erstattet.</value>
   </data>
 </root>
