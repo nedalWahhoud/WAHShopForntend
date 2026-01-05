@@ -1,4 +1,5 @@
-﻿@inject IStringLocalizer< WAHShopForntend.Resources.MainLayout> L
+﻿@using System.Globalization;
+@inject IStringLocalizer< WAHShopForntend.Resources.MainLayout> L
 @inherits LayoutComponentBase
 
 @if (!isRended)
@@ -18,18 +19,30 @@ else
     }
     <div id="app" class="page">
         <main class="mainContent">
-          
             <article class="content px-4">
                 @Body
+                @* cookie benner *@
+                @if (!hasAccepted && shouldShow)
+                {
+                    <div class="cookieBanner">
+                        <span>@L["CookieMessage"]</span>
+                        <div class="buttonGroup @((CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar") ? "rtl" : "ltr")">
+                            <button class="btn btn-primary me-2" @onclick="Accept">@L["Yes"]</button>
+                            <button class="btn btn-secondary" @onclick="Decline">@L["No"]</button>
+                        </div>
+                    </div>
+                }
+                <div @onclick="OnOpenWhatsApp" class="whatsappIcon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+                </div>
             </article>
-           
         </main>
     </div>
     @if (!HeaderHidden)
     {
         <Footer />
     }
-  
+
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -43,14 +56,59 @@ else
     NavigationManager.Uri.Contains("forgotpassword") ||
     NavigationManager.Uri.Contains("confirmemail");
     private bool isRended = false;
+    private bool hasAccepted;
+    private bool shouldShow = false;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             // Initialize the cartService to get the saved cart
             await cartService.InitializeAsync();
+            // Check for cookie consent
+            hasAccepted = await cookieService.HasAcceptedAsync();
+            // überprüfe ob Benutzer schon die Cookie Banner angabe gegeben hat
+            shouldShow = await cookieService.GetBannerSessionAsync();
+            // wenn der benutzer Cookie zugestimmt hat, setze die Culture von der Cookie
+            if (hasAccepted == true)
+            {
+				// get culture from cookie and set it
+				string currentCulture = await cookieService.GetLanguageCookiesync();
+                bool schouldReload = await cookieService.SetLanguageAsync(currentCulture,false);
+                if (schouldReload)
+                {
+                    NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+                }
+            }
+            else
+			{
+				// setze standardmäßig die Sprache auf Deutsch
+				bool schouldReload = await cookieService.SetLanguageAsync("de", false);
+				if (schouldReload)
+				{
+					NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+				}
+			}
+            //
             isRended = true;
             StateHasChanged();
         }
+    }
+    private async Task Accept()
+    {
+        await cookieService.SetConsentAsync(true);
+        hasAccepted = true;
+        StateHasChanged();
+    }
+    private async Task Decline()
+    {
+        await cookieService.SetConsentAsync(false);
+		// verschwinde Banner
+        hasAccepted = true;
+        StateHasChanged();
+    }
+
+    private async Task OnOpenWhatsApp()
+    {
+        await JS.InvokeVoidAsync("whatsappRedirect.openWhatsApp", ProjectInfo.Value.Whatsapp, " ");
     }
 }

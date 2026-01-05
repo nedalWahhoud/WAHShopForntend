@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="IsNotShippable" xml:space="preserve">
+    <value>هذا المنتج غير مناسب للشحن عبر مزود خدمة الشحن, ولكن ممكن عبر خدمة التوصيل الخاصة بنا, اذا كانت منطقتك ضمن نطاق خدمتنا.</value>
+  </data>
+  <data name="IsShippable" xml:space="preserve">
+    <value>هذا المنتج مناسب للشحن عبر مزود خدمة الشحن.</value>
+  </data>
   <data name="Loading" xml:space="preserve">
     <value>جاري التحميل...</value>
   </data>

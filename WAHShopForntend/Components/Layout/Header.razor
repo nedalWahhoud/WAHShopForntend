@@ -6,7 +6,7 @@
 
 <header class="header ltr-section">
     <div class="containerLeft">
-       <ProjektLogo />
+        <ProjektLogo />
     </div>
     <div class="containerCenter">
         @* Search *@
@@ -27,8 +27,8 @@
                                 <img src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" loading="lazy" />
                                 <strong>
                                     @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" 
-                                        ?product.Name_ar
-                                        : product.Name_de) </strong>
+                                                                        ?product.Name_ar
+                                                                        : product.Name_de) </strong>
                             </li>
                         }
                     </ul>
@@ -54,7 +54,7 @@
         @* Sprache *@
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de" ? "fi fi-de" : "fi fi-sy")" style="border-radius:2px;"></span>
+                <span class="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "fi fi-sy" : "fi fi-de")" style="border-radius:2px;"></span>
             </button>
             <ul class="dropdown-menu dropdownMenu rtl-right" aria-labelledby="dropdownMenuButton">
                 <li>
@@ -85,10 +85,10 @@
                 </AuthorizeView>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item dropdownItem" href="/privacyPolicy">@L["PrivacyPolicy"]</a></li>
-             
+
             </ul>
         </div>
-      
+
     </div>
 </header>
 
@@ -103,7 +103,7 @@
     {
         InvokeAsync(StateHasChanged);
     }
- 
+
     private async Task Logout()
     {
         var authState = await AuthStateProvider.GetAuthenticationStateAsync();
@@ -168,26 +168,24 @@
     // language selection
     private async Task SetLanguage(string culture)
     {
-		// set culture in cookie
-        await JS.InvokeVoidAsync("blazorCulture.set", culture);
-        // page reload
-        var uri = NavigationManager.Uri;
-        var baseUri = NavigationManager.BaseUri; 
-        var relativeUri = uri.Replace(baseUri, "");
-
-        var segments = relativeUri.Split('/', StringSplitOptions.RemoveEmptyEntries);
-
-        if (segments.Length > 0 && ((segments[0] == "lang" && segments[1] == "ar") || (segments[0] == "lang" && segments[1] == "de")))
+        var sa = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        // überprüfe ob der benutzer cookies akzeptiert hat
+        bool hasAccepted = await cookieService.HasAcceptedAsync();
+        if (hasAccepted)
         {
-            segments = segments.Skip(1)
-            .Skip(1)
-            .ToArray();
+            await cookieService.SetLanguageAsync(culture,true);
         }
-
-        var newRelativeUri = string.Join('/', segments);
-        var newUri = NavigationManager.BaseUri + newRelativeUri;
-
-        NavigationManager.NavigateTo(newUri, forceLoad: true);
+        else
+        {
+			// wenn der benutzer die cookies nicht akzeptiert hat, setze die culture nur für die aktuelle Sitzung
+            var cultureInfo = new CultureInfo(culture);
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            CultureInfo.CurrentCulture = cultureInfo;
+            CultureInfo.CurrentUICulture = cultureInfo;
+        }
+        // page reload to apply new culture
+        NavigationManager.NavigateTo(NavigationManager.Uri,forceLoad: true);
     }
     public void Dispose()
     {

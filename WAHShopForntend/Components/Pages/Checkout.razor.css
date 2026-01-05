@@ -13,7 +13,30 @@
     box-sizing: border-box;
     margin-top:70px;
 }
+/* ======== Message  ======== */
+.messageWarning {
+    display: flex;
+    align-items: flex-start;
+    justify-content:center;
+    gap: 10px;
+    background-color: #fff8e1; 
+    border-left: 4px solid #ffc107;
+    padding: 12px 14px;
+    border-radius: 6px;
+    color: #6b4f00;
+    font-size: 0.95rem;
+}
 
+    .messageWarning i {
+        font-size: 1.2rem;
+        color: #ffc107;
+        margin-right: auto;
+    }
+
+    .messageWarning p {
+        margin: 0;
+        margin-right: auto;
+    }
 /* ======== BACK TO MAIN PAGE ======== */
 .backToMainPage {
     width: 100%;

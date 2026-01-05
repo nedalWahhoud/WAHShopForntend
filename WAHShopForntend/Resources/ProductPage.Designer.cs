@@ -61,6 +61,24 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This product is not suitable for shipping via a courier service. ähnelt.
+        /// </summary>
+        public static string IsNotShippable {
+            get {
+                return ResourceManager.GetString("IsNotShippable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This product is suitable for shipping via a shipping service provider. ähnelt.
+        /// </summary>
+        public static string IsShippable {
+            get {
+                return ResourceManager.GetString("IsShippable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die loading... ähnelt.
         /// </summary>
         public static string Loading {

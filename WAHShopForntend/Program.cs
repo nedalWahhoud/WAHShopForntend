@@ -14,6 +14,8 @@ using WAHShopForntend.Components.SearchF;
 using WAHShopForntend.Components.ImagesF;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
+using WAHShopForntend.Components.CookieF;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 // langauge 
@@ -79,19 +81,12 @@ builder.Services.AddScoped<SearchService>();
 builder.Services.AddScoped<ProductImagesService>();
 // Carousel Images
 builder.Services.AddScoped<CarouselImagesService>();
+// cookie service
+builder.Services.AddScoped<CookieService>();
+
 //
-
 var app = builder.Build();
-// language aktivation
-var supportedCultures = new[] { "ar", "de" };
-var localizationOptions = new RequestLocalizationOptions()
-    .SetDefaultCulture("de")
-    .AddSupportedCultures(supportedCultures)
-    .AddSupportedUICultures(supportedCultures);
-// lesen der Cookies für die Sprache
-localizationOptions.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 
-app.UseRequestLocalization(localizationOptions);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

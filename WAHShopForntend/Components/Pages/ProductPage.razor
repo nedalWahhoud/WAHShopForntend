@@ -63,6 +63,16 @@ else
 				<div class="DivQuantity">
 					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 				</div>
+				<p class="text-secondary fw-semibold">
+					@if (product.IsShippable)
+					{
+						<i class="bi bi-box-fill text-warning"> </i> @(" " + L["IsShippable"])
+					}
+					else
+					{
+						<i class="bi bi-slash-circle-fill text-warning"></i> @(" " + L["IsNotShippable"])
+					}
+				</p>
 			</div>
 		</div>
 	}

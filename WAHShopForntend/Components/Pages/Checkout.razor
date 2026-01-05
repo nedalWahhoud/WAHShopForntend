@@ -12,6 +12,7 @@
 else
 {
 	<div class="mainContainer">
+		
 		@if (cartService.CartItems.Count == 0 || orderStatusEnum == OrderStatusEnum.Processing)
 		{
 			<div class="backToMainPage">
@@ -68,7 +69,7 @@ else
 							@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
 							{
 								if (orderService.DownloadedPaymentMethods[i].Id == 1 || orderService.DownloadedPaymentMethods[i].Id == 2 ||
-						            orderService.DownloadedPaymentMethods[i].Id == 5)
+					orderService.DownloadedPaymentMethods[i].Id == 5)
 								{
 									var paymentMethod = orderService.DownloadedPaymentMethods[i];
 									<label>
@@ -193,7 +194,7 @@ else
 						</label>
 					</div>
 					<AuthorizeView>
-			
+
 						<Authorized Context="auth">
 
 							@if (!IsBirthDateValid(user.BirthDate))
@@ -246,10 +247,20 @@ else
 
 						</NotAuthorized>
 					</AuthorizeView>
-					
+
 				</div>
 			</div>
 
+		}
+		@* Message Wahrung Bereich *@
+		@if (MessageWarning != null)
+		{
+			<div class="messageWarning">
+				<i class="bi bi-exclamation-triangle-fill"></i>
+				<p>
+					@MessageWarning
+				</p>
+			</div>
 		}
 	</div>
 	@* address *@
@@ -311,6 +322,7 @@ else
 	}
 }
 @code {
+	private string MessageWarning = null!;
 	private bool agbAkzeptiert = false;
 	OrderStatusEnum orderStatusEnum = new OrderStatusEnum();
 	private User user = new User();
@@ -349,7 +361,7 @@ else
 			var result = await cartService.LoadCartProductsAsync();
 			if (!result.Result)
 			{
-				_ = JS.InvokeVoidAsync("alert", result.Message);
+				MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
 				return;
 			}
 
@@ -406,7 +418,7 @@ else
 		}
 		else
 		{
-			_ = JS.InvokeVoidAsync("alert", result.Message);
+			MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
 		}
 	}
 	private void CancelAddAddressForm()
@@ -430,7 +442,7 @@ else
 		}
 		else
 		{
-			_ = JS.InvokeVoidAsync("alert", result.Message);
+			MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
 		}
 	}
 	// update address
@@ -465,7 +477,7 @@ else
 		}
 		else
 		{
-			_ = JS.InvokeVoidAsync("alert", result.Message);
+			MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
 		}
 	}
 	// Payment
@@ -504,7 +516,7 @@ else
 		// wenn der Kunde die AGB akzeptiert hat
 		if (!agbAkzeptiert)
 		{
-			_ = JS.InvokeVoidAsync("alert", L["NotAcceptAgbMessage"].ToString());
+			MessageWarning = L["NotAcceptAgbMessage"].ToString();
 			return;
 		}
 
@@ -513,14 +525,14 @@ else
 		// check address
 		if ((selectedPaymentId == 2 || selectedPaymentId == 5) && selectedAddressId == 0)
 		{
-			_ = JS.InvokeVoidAsync("alert", L["SelectDeliveryAddress"].ToString());
+			MessageWarning = L["SelectDeliveryAddress"];
 			orderStatusEnum = OrderStatusEnum.Pending;
 			return;
 		}
 		// check payment method
 		if (selectedPaymentId == 0)
 		{
-			_ = JS.InvokeVoidAsync("alert", L["SelectPaymentMethod"].ToString());
+			MessageWarning = L["SelectPaymentMethod"];
 			orderStatusEnum = OrderStatusEnum.Pending;
 			return;
 		}
@@ -534,7 +546,7 @@ else
 				var result = await orderService.CheckIfWithinDeliveryRangeAsync(address.ZipCode!);
 				if (result.Item1.Result == false)
 				{
-					_ = JS.InvokeVoidAsync("alert", $"{address.ZipCode} " + L[result.Item1.Message!].ToString());
+					MessageWarning = $"{address.ZipCode} " + L[result.Item1.Message!].ToString();
 					orderStatusEnum = OrderStatusEnum.Pending;
 					return;
 				}
@@ -543,14 +555,14 @@ else
 					var area = result.Item2;
 					if (cartService.GetTotalPrice() < area.MinimumPurchaseAmount)
 					{
-						_ = JS.InvokeVoidAsync("alert", L["MinimumPurchaseAmountMessage"].ToString() + $" {area.MinimumPurchaseAmount}€");
+						MessageWarning = L["MinimumPurchaseAmountMessage"].ToString() + $" {area.MinimumPurchaseAmount}€";
 						orderStatusEnum = OrderStatusEnum.Pending;
 						return;
 					}
 				}
 				else
 				{
-					_ = JS.InvokeVoidAsync("alert", "Unknown Error.");
+					MessageWarning = "Unknown Error.";
 					orderStatusEnum = OrderStatusEnum.Pending;
 					return;
 				}
@@ -558,7 +570,7 @@ else
 			}
 			else
 			{
-				_ = JS.InvokeVoidAsync("alert", L["ErrorAddressOurDelivery"].ToString());
+				MessageWarning = L["ErrorAddressOurDelivery"];
 				orderStatusEnum = OrderStatusEnum.Pending;
 				return;
 			}
@@ -567,7 +579,7 @@ else
 		var resultAge = await orderService.CheckAge(cartService.CartItems, user);
 		if (!resultAge.Result)
 		{
-			_ = JS.InvokeVoidAsync("alert", L[resultAge.Message ?? ""].ToString());
+			MessageWarning = L[resultAge.Message ?? ""];
 			orderStatusEnum = OrderStatusEnum.Pending;
 			return;
 		}
@@ -575,7 +587,7 @@ else
 		var resultShipping = await orderService.CanShipByPostAsync(cartService.CartItems, selectedPaymentId, System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
 		if (!resultShipping.result)
 		{
-			_ = JS.InvokeVoidAsync("alert", $"{resultShipping.productsName}, " + L[resultShipping.errorMessage].ToString());
+			MessageWarning = $"{resultShipping.productsName}, " + L[resultShipping.errorMessage].ToString();
 			orderStatusEnum = OrderStatusEnum.Pending;
 			return;
 		}
@@ -593,7 +605,7 @@ else
 			var result = await AuthService.AddGuestAsync(user);
 			if (result.Result == false)
 			{
-				_ = JS.InvokeVoidAsync("alert", result.Message);
+				MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
 				resultBool = false;
 			}
 			else
@@ -608,7 +620,7 @@ else
 				}
 				else
 				{
-					_ = JS.InvokeVoidAsync("alert", "Ungültige Benutzer-ID erhalten.");
+					MessageWarning = "Ungültige Benutzer-ID erhalten.";
 					resultBool = false;
 					return;
 				}
@@ -619,6 +631,8 @@ else
 
 		if (resultBool)
 		{
+			MessageWarning = null!;
+
 			backToMainPageMessage = new MarkupString($"{L["ThankYouMessage"]}" +
 			"<br/>" +
 			backToMainPageAlertMessage);
@@ -664,7 +678,7 @@ else
 		}
 		else
 		{
-			_ = JS.InvokeVoidAsync("alert", result.Message);
+			MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
 			return false;
 		}
 	}
@@ -768,12 +782,12 @@ else
 		var result = await AuthService.UpdateProfileAsync(updateProfile);
 		if (!result.Result)
 		{
-			_ = JS.InvokeVoidAsync("showAlert", result.Message);
+			MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
 		}
 		else
 		{
 			user.BirthDate = updateProfile.BirthDate;
-			_ = JS.InvokeVoidAsync("showAlert", result.Message);
+			MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
 		}
 		updateProfile = new UpdateProfile();
 	}

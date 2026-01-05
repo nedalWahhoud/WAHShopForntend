@@ -56,21 +56,21 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     @* scroll *@
-	<script>
+    <script>
             window.scrollHelper = {
             onScrollEnd: function (dotnetObj) {
                 let isLoading = false; // 🚫 Verhindert Wiederholung
                 window.addEventListener("scroll", function () {
-                    
+
                     const scrollPosition = window.innerHeight + window.scrollY;
                     let pageHeight = document.body.scrollHeight;
-                     
+
                       // Die Footer sollte nicht zur Seitenlänge gezählt werden.
                       const footer = document.getElementById("page-footer") ;
                       if(footer)
                       {
                           pageHeight -= footer.offsetHeight;
-                      } 
+                      }
 
                       if (scrollPosition >= pageHeight - 2 && !isLoading) {
                           isLoading = true;
@@ -80,7 +80,7 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
                           }
                           catch(err)
                           {
-							  console.error("Fehler beim Aufrufen der .NET-Methode:", err);
+                              console.error("Fehler beim Aufrufen der .NET-Methode:", err);
                           }
                           finally
                           {
@@ -99,14 +99,52 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
           return confirm(message);
         }
 	</script>
-    @* langauge cocikes *@
+    @* langauge cocikes fixd *@
     <script>
         window.blazorCulture = {
             set: function (value) {
                 document.cookie = `.AspNetCore.Culture=c=${value}|uic=${value}; path=/; SameSite=Lax`;
             },
-            get: function () {
-            return navigator.language || navigator.userLanguage;
+             get: function() {
+            const name = ".AspNetCore.Culture=";
+            const decodedCookie = decodeURIComponent(document.cookie); 
+            const cookies = decodedCookie.split(';'); 
+            for (let i = 0; i < cookies.length; i++) {
+                let c = cookies[i].trim();
+                if (c.indexOf(name) === 0) {
+                      const value = c.substring(name.length); 
+            const cPart = value.split('|')[0];     
+            return cPart.split('=')[1];
+                }
+            }
+            return null; 
+        }
+
+        };
+    </script>
+    @* Cookie Consent  *@
+    <script>
+        window.cookieHelper = {
+            set: function (name, value, days) {
+                let expires = "";
+                if (days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = `${name}=${value}; path=/; SameSite=Lax${expires}`;
+            },
+            get: function (name) {
+            const cookies = document.cookie.split('; ');
+            for (let c of cookies) {
+                const [key, value] = c.split('=');
+                if (key === name) return value;
+            }
+            return null;
+            },
+
+        delete: function (name) {
+            document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`;
         }
         };
     </script>
@@ -147,30 +185,30 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
             longitude = String(longitude).trim();
             label = String(label || '').trim();
 
-            // إذا كان هناك اسم، نستخدمه فقط كـ query، وإلا نستخدم الإحداثيات
+            // Wenn ein Name vorhanden ist, verwenden wir diesen nur als Suchanfrage; andernfalls verwenden wir die Koordinaten.
             const query = label ? encodeURIComponent(label) : `${latitude},${longitude}`;
 
-            // روابط تعتمد على الاسم أو الإحداثيات
+            // Links basierend auf Namen oder Koordinaten
             const appleUrl = `maps://?ll=${latitude},${longitude}`;
             const googleAppUrl = `comgooglemaps://?q=${query}`;
             const webUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
             const androidUrl = `geo:${latitude},${longitude}?q=${query}`;
 
-            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const ua = navigator.userAgent || window.opera;
             const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
             const isAndroid = /Android/.test(ua);
 
             const openWebFallback = () => window.open(webUrl, '_blank');
 
             if (isIOS) {
-              // iOS: حاول Apple Maps أولاً
+              // iOS: Versuchen Sie es zuerst mit Apple Maps.
               window.location = appleUrl;
 
-              // بعد ثانية: جرب Google Maps App
+              // Gleich: Probieren Sie die Google Maps App aus.
               setTimeout(() => {
                 window.location = googleAppUrl;
 
-                // بعد ثانية: افتح Web كخيار أخير
+                // Nach einer Sekunde: Öffnen Sie das Web als letzte Option.
                 setTimeout(() => openWebFallback(), 1000);
               }, 1000);
 
@@ -178,11 +216,11 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
               // Android: استخدم geo URI
               window.location = androidUrl;
 
-              // fallback للويب بعد ثانية
+              // Web-Fallback nach einer Sekunde
               setTimeout(() => openWebFallback(), 1000);
 
             } else {
-              // أي جهاز آخر → افتح Web مباشرة
+              //Jedes andere Gerät → Web direkt öffnen
               openWebFallback();
             }
           }
@@ -235,6 +273,7 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
             });
         };
     </script>
+
     @* Scroll sperren *@
     <script>
         window.openFullscreen = function() {

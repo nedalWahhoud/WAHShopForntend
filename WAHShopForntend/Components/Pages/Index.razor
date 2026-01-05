@@ -1,5 +1,4 @@
 ﻿@page "/"
-@page "/lang/{culture?}"
 @inject IStringLocalizer< WAHShopForntend.Resources.Index> L
 @inherits LayoutComponentBase
 @implements IDisposable
@@ -32,8 +31,8 @@ else
             <div class="category">
                 <p class="@(category.Id == -1 ? "categoryOnOffer" : "")">
                     @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                             ? category.Name_ar
-                             : category.Name_de)
+                                         ? category.Name_ar
+                                         : category.Name_de)
                 </p>
             </div>
             <div class="mainProductsCard">
@@ -58,29 +57,12 @@ else
     // to exclude categories already loaded in the main product list
     private List<int> excludeCategoriesIds = new();
     private List<Categories> allCategories = new();
-    // lang
-    private string lang = string.Empty;
-    // wenn über die url zu Language wechselt, dann Seite neu laden
-    [Parameter]
-    public string? culture { get; set; } = "";
 
     private readonly Random random = new();
 
     protected override async Task OnInitializedAsync()
     {
         IsLoading = true;
-        // get language
-        lang = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-
-        if (!string.IsNullOrEmpty(culture) && (culture == "ar" || culture == "de") && culture != lang)
-        {
-            var ci = new System.Globalization.CultureInfo(culture);
-            // set culture in cookie
-            await JS.InvokeVoidAsync("blazorCulture.set", culture);
-            // page reload
-            NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
-            return;
-        }
 
         // get carousel images
         await carouselImagesService.GetAllCarouselAsync();
@@ -167,8 +149,8 @@ else
         Categories categoryRecommended = new Categories()
             {
                 Id = 0,
-                Name_de = lang == "de" ? L["RecommendedForYou"] : string.Empty,
-                Name_ar = lang == "ar" ? L["RecommendedForYou"] : string.Empty
+                Name_de = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de" ? L["RecommendedForYou"] : string.Empty,
+                Name_ar = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? L["RecommendedForYou"] : string.Empty
 
             };
         if (Recommended.Products.Count == 0)
