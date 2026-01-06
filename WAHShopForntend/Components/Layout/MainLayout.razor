@@ -58,6 +58,7 @@ else
     private bool isRended = false;
     private bool hasAccepted;
     private bool shouldShow = false;
+	private string defaultCulture = "de";
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -71,8 +72,15 @@ else
             // wenn der benutzer Cookie zugestimmt hat, setze die Culture von der Cookie
             if (hasAccepted == true)
             {
-				// get culture from cookie and set it
-				string currentCulture = await cookieService.GetLanguageCookiesync();
+                // get culture from cookie and set it
+                string currentCulture = await cookieService.GetLanguageCookiesync();
+
+				// wenn die culture null ist, setze sie auf Deutsch
+                if (!string.IsNullOrEmpty(currentCulture))
+                {
+                    currentCulture = defaultCulture;
+                }
+
                 bool schouldReload = await cookieService.SetLanguageAsync(currentCulture,false);
                 if (schouldReload)
                 {
@@ -82,7 +90,7 @@ else
             else
 			{
 				// setze standardmäßig die Sprache auf Deutsch
-				bool schouldReload = await cookieService.SetLanguageAsync("de", false);
+                bool schouldReload = await cookieService.SetLanguageAsync(defaultCulture, false);
 				if (schouldReload)
 				{
 					NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
