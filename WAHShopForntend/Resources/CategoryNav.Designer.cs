@@ -79,6 +79,15 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Frozen ähnelt.
+        /// </summary>
+        public static string Frozen {
+            get {
+                return ResourceManager.GetString("Frozen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Meats ähnelt.
         /// </summary>
         public static string Meats {

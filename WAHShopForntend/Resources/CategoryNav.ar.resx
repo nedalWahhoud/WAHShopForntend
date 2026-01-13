@@ -123,6 +123,9 @@
   <data name="foodstuffs" xml:space="preserve">
     <value>مواد غذائية</value>
   </data>
+  <data name="Frozen" xml:space="preserve">
+    <value>مفرزات</value>
+  </data>
   <data name="Meats" xml:space="preserve">
     <value>اللحوم</value>
   </data>

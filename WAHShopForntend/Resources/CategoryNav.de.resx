@@ -123,6 +123,9 @@
   <data name="foodstuffs" xml:space="preserve">
     <value>Lebensmittel</value>
   </data>
+  <data name="Frozen" xml:space="preserve">
+    <value>Gefroren</value>
+  </data>
   <data name="Meats" xml:space="preserve">
     <value>Fleische</value>
   </data>

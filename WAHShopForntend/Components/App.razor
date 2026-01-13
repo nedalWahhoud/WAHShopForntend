@@ -102,10 +102,15 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
     @* langauge cocikes fixd *@
     <script>
         window.blazorCulture = {
-            set: function (value) {
-                document.cookie = `.AspNetCore.Culture=c=${value}|uic=${value}; path=/; SameSite=Lax`;
-            },
-             get: function() {
+        set: function (value) {
+                   const days = 365; // 1 Jahr
+                   const date = new Date();
+                   date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                   const expires = "expires=" + date.toUTCString();
+
+                   document.cookie =
+                       `.AspNetCore.Culture=c=${value}|uic=${value}; ${expires}; path=/; SameSite=Lax`;
+               },             get: function() {
             const name = ".AspNetCore.Culture=";
             const decodedCookie = decodeURIComponent(document.cookie); 
             const cookies = decodedCookie.split(';'); 
@@ -168,7 +173,6 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
 
             if (isMobile) {
               // auf Handy versuche erst app zu öffnen
-              const now = Date.now();
               window.location = appUrl;
             } else {
 			  // auf Computer app nicht möglich, öffne Web

@@ -121,16 +121,16 @@
                 }
             </div>
         </div>
-        @* Vape *@
-        var vapeCategory = GetVape();
-        if (vapeCategory != null)
+        @* Household *@
+        var householdCategory = GetHousehold();
+        if (householdCategory != null)
         {
-            <a @onclick="() => OnCategory(vapeCategory.Id)"
-               class="categoryLink @(vapeCategory.Id == currentCategoryId ? "selected" : "")">
+            <a @onclick="() => OnCategory(householdCategory.Id)"
+               class="categoryLink @(householdCategory.Id == currentCategoryId ? "selected" : "")">
                 @(
                              System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                    ? vapeCategory.Name_ar
-                    : vapeCategory.Name_de
+                    ? householdCategory.Name_ar
+                    : householdCategory.Name_de
                             )
             </a>
         }
@@ -193,7 +193,8 @@
                     (c.Id >= 9 && c.Id <= 13) ||
                     (c.Id >= 15 && c.Id <= 19) ||
                     (c.Id == 21) ||
-                    (c.Id >= 24 && c.Id <= 29))
+                    (c.Id >= 24 && c.Id <= 29) || 
+                    (c.Id == 38))
                     .ToList() ?? null!;
     }
     private List<Categories> GetDrinks()
@@ -211,7 +212,8 @@
                     .Where(c =>
                     (c.Id == 8) ||
                     (c.Id >= 30 && c.Id <= 31) ||
-                    (c.Id == 33))
+                    (c.Id == 33) || 
+                    (c.Id == 39))
                     .ToList() ?? null!;
     }
 	private List<Categories> GetMeats()
@@ -221,15 +223,15 @@
 					.Where(c => ids.Contains(c.Id))
 					.ToList() ?? null!;
 	}
-    private Categories GetVape()
-    {
-        return categoryService?.DownloadedCategories?
-            .FirstOrDefault(c => c.Id == 5) ?? null! ;
-    }
     private Categories GetOther()
     {
         return categoryService.DownloadedCategories?
                     .FirstOrDefault(c => c.Id == 32) ?? null!;
     }
+    private Categories GetHousehold()
+	{
+		return categoryService.DownloadedCategories?
+					.FirstOrDefault(c => c.Id == 40) ?? null!;
+	}
     
 }

@@ -4,9 +4,7 @@
 
 @if (!isRended)
 {
-    <div class="lodingContainer">
-        <p>@L["Loading"]</p>
-    </div>
+ 
 }
 else
 {
@@ -58,7 +56,7 @@ else
     private bool isRended = false;
     private bool hasAccepted;
     private bool shouldShow = false;
-	private string defaultCulture = "de";
+	private const string defaultCulture = "de";
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -76,7 +74,7 @@ else
                 string currentCulture = await cookieService.GetLanguageCookiesync();
 
 				// wenn die culture null ist, setze sie auf Deutsch
-                if (!string.IsNullOrEmpty(currentCulture))
+                if (string.IsNullOrEmpty(currentCulture))
                 {
                     currentCulture = defaultCulture;
                 }
