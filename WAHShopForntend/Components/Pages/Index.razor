@@ -3,6 +3,28 @@
 @inherits LayoutComponentBase
 @implements IDisposable
 
+<HeadContent>
+    <!-- Page Title -->
+    <PageTitle>
+        @(
+            System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+            ? ProjectInfo.Value.Name
+            : ProjectInfo.Value.NameArabic 
+        )
+    </PageTitle>
+
+    <!-- Meta Description -->
+    <meta name="description" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+        ? "Entdecken Sie die besten arabischen Produkte online: Lebensmittel, Süßigkeiten, Gewürze und Getränke mit schneller Lieferung."
+        : "اكتشف أفضل المنتجات العربية والسورية عبر الإنترنت: مواد غذائية، حلويات، توابل ومشروبات مع توصيل سريع.")" />
+
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+        ? "arabisches Laden, arabische Lebensmittel, syrische Produkte, Lebensmittel online"
+        : "متجر عربي, مواد غذائية, حلويات, توابل, متجر سوري, تسوق أونلاين")" />
+</HeadContent>
+
+
 @if (IsLoading)
 {
     <div class="lodingContainer">
