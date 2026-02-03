@@ -22,6 +22,9 @@
 @using WAHShopForntend.Components.SearchF
 @using WAHShopForntend.Components.ImagesF
 @using WAHShopForntend.Components.CookieF
+@using WAHShopForntend.Components.CustomersF
+@using WAHShopForntend.Components.TransactionsCustomersF
+@using WAHShopForntend.Components.DebtF
 @using Microsoft.Extensions.Localization
 @* --- *@
 @inject IJSRuntime JS
@@ -43,3 +46,6 @@
 @inject ProductImagesService productImagesService
 @inject CarouselImagesService carouselImagesService
 @inject CookieService cookieService
+@inject CustomersService customersService
+@inject TransactionsCustomersService transactionsCustomersService
+@inject DebtService debtService

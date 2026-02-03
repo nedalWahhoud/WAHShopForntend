@@ -1,0 +1,82 @@
+﻿@page "/customerPortal"
+@inject IStringLocalizer< WAHShopForntend.Resources.CustomerPortal> L
+<div class="main">
+    <div class="loginContainer">
+
+        <h2 @onclick="OnProjectInfo">@ProjectInfo.Value.Name</h2>
+        <h5>@L["CustomerLogin"]</h5>
+
+        <EditForm Model="customerLoginDto" OnValidSubmit="HandleLogin">
+            <DataAnnotationsValidator />
+
+            <div class="mb-3">
+                <InputText @bind-Value="customerLoginDto.PhoneNumber" placeholder="@L["PhoneNumber"]" class="form-control" />
+                <ValidationMessage For="@(() => customerLoginDto.PhoneNumber)" />
+            </div>
+
+            <div class="mb-3">
+                <InputText @bind-Value="customerLoginDto.PIN" type="password" placeholder="@L["PIN"]" class="form-control" maxlength="4" />
+                <ValidationMessage For="@(() => customerLoginDto.PIN)" />
+            </div>
+
+            <button class="btn btn-primary w-100" type="submit" disabled="@IsProcessing">
+                @if (IsProcessing)
+                {
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                }
+                else
+                {
+                    <span>@L["Login"]</span>
+                }
+            </button>
+
+            @if (!string.IsNullOrEmpty(customerLoginDto.LoginError))
+            {
+                <div class="text-danger text-center mt-2">@customerLoginDto.LoginError</div>
+            }
+        </EditForm>
+    </div>
+</div>
+
+
+@code {
+
+    private CustomerLoginDto customerLoginDto = new();
+    private bool IsProcessing = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+      
+    }
+
+    private async Task HandleLogin()
+    {
+        IsProcessing = true;
+
+        if (int.TryParse(customerLoginDto.PhoneNumber, out int phoneNumberAsInt))
+        {
+            customerLoginDto.Id = phoneNumberAsInt;
+        }
+
+
+        var result = await customersService.Login(customerLoginDto);
+        if(result.Result)
+		{
+            await JS.InvokeVoidAsync("localStorage.setItem", "jwtCustomerToken", result.Message);
+
+			NavigationManager.NavigateTo("/customerDashboard");
+		}
+		else
+		{
+            customerLoginDto.LoginError = L[result.Message ?? "LoginFailed"];
+		}
+        
+        IsProcessing = false;
+    }
+
+
+    private void OnProjectInfo()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

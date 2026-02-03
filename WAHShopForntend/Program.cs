@@ -16,6 +16,9 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using WAHShopForntend.Components.CookieF;
 using System.Globalization;
+using WAHShopForntend.Components.CustomersF;
+using WAHShopForntend.Components.TransactionsCustomersF;
+using WAHShopForntend.Components.DebtF;
 
 var builder = WebApplication.CreateBuilder(args);
 // langauge 
@@ -83,6 +86,12 @@ builder.Services.AddScoped<ProductImagesService>();
 builder.Services.AddScoped<CarouselImagesService>();
 // cookie service
 builder.Services.AddScoped<CookieService>();
+// Customer service
+builder.Services.AddScoped<CustomersService>();
+// TransactionsCustomers service
+builder.Services.AddScoped<TransactionsCustomersService>();
+// DebtCustomers service
+builder.Services.AddScoped<DebtService>();
 
 //
 var app = builder.Build();

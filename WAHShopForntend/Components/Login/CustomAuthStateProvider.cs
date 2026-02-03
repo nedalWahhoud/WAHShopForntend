@@ -68,7 +68,7 @@ namespace WAHShopForntend.Components.Login
         }
         private async Task LocalstorageRemove(string key)
         {
-            await _js.InvokeVoidAsync("localStorage.removeItem", "authToken");
+            await _js.InvokeVoidAsync("localStorage.removeItem", key);
         }
         public async Task SessionStorageSet(string key, string value)
         {
@@ -84,7 +84,7 @@ namespace WAHShopForntend.Components.Login
         {
             await _js.InvokeVoidAsync("sessionStorage.removeItem", key);
         }
-        private ClaimsIdentity GetIdentity(string token)
+        public ClaimsIdentity GetIdentity(string token)
         {
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
@@ -96,6 +96,5 @@ namespace WAHShopForntend.Components.Login
 
             return identity;
         }
-        
     }
 }

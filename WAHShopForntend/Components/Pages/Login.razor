@@ -99,8 +99,6 @@
     {
         isGoogleLoading = true;
         string currenApiUrl = AppConfig.Value.ApiBaseUrl;
-       // NavigationManager.NavigateTo($"{currenApiUrl}/api/users/google-login?rememberMe={loginModel.RememberMe}", true);
-       // NavigationManager.NavigateTo($"/users/google-login?rememberMe={loginModel.RememberMe}", true);
 
         NavigationManager.NavigateTo($"{AppConfig.Value.GoogleApiUrl}?rememberMe={loginModel.RememberMe}", true);
 

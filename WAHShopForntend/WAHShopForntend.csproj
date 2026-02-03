@@ -43,6 +43,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ConfirmEmail.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\customerDashboard.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>customerDashboard.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\CustomerPortal.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CustomerPortal.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Footer.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -157,6 +167,14 @@
     <EmbeddedResource Update="Resources\ConfirmEmail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConfirmEmail.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\customerDashboard.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>customerDashboard.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\CustomerPortal.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomerPortal.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Footer.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
