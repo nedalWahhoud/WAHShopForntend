@@ -138,6 +138,9 @@
   <data name="MoreLoading" xml:space="preserve">
     <value>جارٍ التحميل</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
   <data name="Repay" xml:space="preserve">
     <value>تم سداد</value>
   </data>

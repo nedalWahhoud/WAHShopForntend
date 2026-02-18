@@ -9,6 +9,7 @@ namespace WAHShopForntend.Components.Models
         public TransactionType Type { get; set; }
         public decimal Amount { get; set; }
         public DateTime TransactionDate { get; set; }
+        public string? Notes { get; set; }
     }
     public enum TransactionType
     {

@@ -2,3 +2,23 @@
     width: 100%;
     margin-top: 70px;
 }
+
+
+@media (max-width: 767.98px) {
+    table thead th:nth-child(1) {
+        width: 22%;
+    }
+    table thead th:nth-child(2) {
+        width: 14%;
+    }
+    table thead th:nth-child(3) {
+        width: 33%;
+    }
+    table thead th:nth-child(4) {
+    }
+
+    table td, table th {
+        font-size: 0.85rem;
+        padding: 8px 4px !important;
+    }
+}

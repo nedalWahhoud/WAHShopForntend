@@ -45,7 +45,7 @@ else
 				Token = token
 			};
 
-        var result = await AuthService.UserActivate(activateRequest);
+        var result = await authService.UserActivate(activateRequest);
         if (result.Result)
         {
             activateRequest.StatusMessage = L["ConfirmationSuccessful"];

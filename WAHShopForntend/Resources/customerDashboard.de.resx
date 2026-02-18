@@ -127,7 +127,7 @@
     <value>ausgeliehen</value>
   </data>
   <data name="CreatedAt" xml:space="preserve">
-    <value>Erstellt am</value>
+    <value>Erstellt</value>
   </data>
   <data name="CurrentAmount" xml:space="preserve">
     <value>Aktueller Schuldenbetrag</value>
@@ -138,10 +138,13 @@
   <data name="MoreLoading" xml:space="preserve">
     <value>Mehr Laden</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Anmerkungen</value>
+  </data>
   <data name="Repay" xml:space="preserve">
     <value>zurückgezahlt</value>
   </data>
   <data name="TransactionType" xml:space="preserve">
-    <value>Transaktionstyp</value>
+    <value>Tr-Type</value>
   </data>
 </root>

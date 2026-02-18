@@ -110,7 +110,7 @@
         var user = authState.User;
         if (user.Identity?.IsAuthenticated == true)
         {
-            await AuthService!.Logout();
+            await authService!.Logout();
             NavigationManager.NavigateTo("/", true);
         }
     }

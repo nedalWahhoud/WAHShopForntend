@@ -11,12 +11,12 @@
 	<div class="socialMedia">
 		<h3>@L["FollowUs"]</h3>
 		<div class="icons">
-		  <a href="@ProjectInfo.Value.Facebook" target="_blank" rel="noopener noreferrer">
+			<a href="@ProjectInfo.Value.Facebook" target="_blank" rel="noopener noreferrer">
 				<i class="bi bi-facebook" style="color:#1877F2" alt="Facebook Icon"></i>
-		  </a>
-		  <a href="@ProjectInfo.Value.Instagram" target="_blank" rel="noopener noreferrer">
+			</a>
+			<a href="@ProjectInfo.Value.Instagram" target="_blank" rel="noopener noreferrer">
 				<i class="bi bi-instagram" style="color:#E4405F" alt="Instagram Icon"></i>
-		  </a>
+			</a>
 		</div>
 	</div>
 	<div class="linksDiv">
@@ -31,12 +31,12 @@
 	<div class="mapDiv">
 		<h3>@L["Location"]</h3>
 		<a href="https://www.google.com/maps?q=@ProjectInfo.Value.Latitude,@ProjectInfo.Value.Longitude"
-		   target="_blank"
-		   title="In Google Maps öffnen">
+		target="_blank"
+		title="In Google Maps öffnen">
 			<iframe class="iframe" src="https://www.google.com/maps?q=@ProjectInfo.Value.Latitude,@ProjectInfo.Value.Longitude&output=embed"
-					style="border:0; border-radius:8px;"
-					allowfullscreen
-					loading="lazy">
+			style="border:0; border-radius:8px;"
+			allowfullscreen
+			loading="lazy">
 			</iframe>
 		</a>
 	</div>
@@ -49,6 +49,13 @@
 	}
 	private async Task OnOpenMap()
 	{
-		await JS.InvokeVoidAsync("mapRedirect.openMap", ProjectInfo.Value.Latitude, ProjectInfo.Value.Longitude, ProjectInfo.Value.Name);
+		try
+		{
+			await JS.InvokeVoidAsync("mapRedirect.openMap", ProjectInfo.Value.Latitude, ProjectInfo.Value.Longitude,ProjectInfo.Value.Address + ProjectInfo.Value.Name);
+		}
+		catch(Exception ex)
+		{
+
+		}
 	}
 }

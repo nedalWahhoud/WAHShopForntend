@@ -44,11 +44,6 @@
     private CustomerLoginDto customerLoginDto = new();
     private bool IsProcessing = false;
 
-    protected override async Task OnInitializedAsync()
-    {
-      
-    }
-
     private async Task HandleLogin()
     {
         IsProcessing = true;
@@ -57,7 +52,6 @@
         {
             customerLoginDto.Id = phoneNumberAsInt;
         }
-
 
         var result = await customersService.Login(customerLoginDto);
         if(result.Result)
@@ -73,7 +67,6 @@
         
         IsProcessing = false;
     }
-
 
     private void OnProjectInfo()
     {

@@ -127,7 +127,7 @@
     <value>Borrow</value>
   </data>
   <data name="CreatedAt" xml:space="preserve">
-    <value>Created At</value>
+    <value>Created</value>
   </data>
   <data name="CurrentAmount" xml:space="preserve">
     <value>Current debt amount</value>
@@ -137,6 +137,9 @@
   </data>
   <data name="MoreLoading" xml:space="preserve">
     <value>More loading</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
   </data>
   <data name="Repay" xml:space="preserve">
     <value>Repay</value>

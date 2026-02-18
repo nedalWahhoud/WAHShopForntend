@@ -73,7 +73,7 @@
     {
         IsLoading = true;
         signupModel.SignupProvider = "Manual"; // Set the signup provider to Manual
-        var result = await AuthService!.Signup(signupModel);
+        var result = await authService!.Signup(signupModel);
         if (result.Result == true)
         {
             signupModel.ValidationResult = result;

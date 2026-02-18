@@ -134,6 +134,19 @@
                             )
             </a>
         }
+        @* Dates *@
+        var DatesCategory = GetDates();
+        if (DatesCategory != null)
+        {
+            <a @onclick="() => OnCategory(DatesCategory.Id)"
+               class="categoryLink @(DatesCategory.Id == currentCategoryId ? "selected" : "")">
+                @(
+                    System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                    ? DatesCategory.Name_ar
+                    : DatesCategory.Name_de
+                    )
+            </a>
+        }
         @* Other *@
         var otherCategory = GetOther();
         if (otherCategory != null)
@@ -233,5 +246,11 @@
 		return categoryService.DownloadedCategories?
 					.FirstOrDefault(c => c.Id == 40) ?? null!;
 	}
+
+    private Categories GetDates()
+    {
+        return categoryService.DownloadedCategories?
+                    .FirstOrDefault(c => c.Id == 41) ?? null!;
+    }
     
 }

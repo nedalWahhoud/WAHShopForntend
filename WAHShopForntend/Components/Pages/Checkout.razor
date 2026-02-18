@@ -602,7 +602,7 @@ else
 		if (user.Id == 0)
 		{
 			user.Password = "gustPawword"; // set password to default value, because gust user not have password
-			var result = await AuthService.AddGuestAsync(user);
+			var result = await authService.AddGuestAsync(user);
 			if (result.Result == false)
 			{
 				MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
@@ -779,7 +779,7 @@ else
 	private async Task OnUserUpdate()
 	{
 		updateProfile.UpdateType = UpdateTypeEnum.Birthday; // Assuming 3 is for birth date update
-		var result = await AuthService.UpdateProfileAsync(updateProfile);
+		var result = await authService.UpdateProfileAsync(updateProfile);
 		if (!result.Result)
 		{
 			MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";

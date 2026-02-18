@@ -153,7 +153,7 @@ else
         if (updateProfile.UserId > 0)
         { 
             updateProfile.UpdateType = UpdateTypeEnum.Password; // Assuming 1 is for password update
-            var result = await AuthService.UpdateProfileAsync(updateProfile);
+            var result = await authService.UpdateProfileAsync(updateProfile);
             if (!result.Result)
             {
                 _ = JS.InvokeVoidAsync("showAlert", result.Message);
@@ -188,11 +188,11 @@ else
     private async Task DeleteConfirmed()
     {
 		IsLoading = true;
-        var result = await AuthService.AccountDeleteAsync(updateProfile);
+        var result = await authService.AccountDeleteAsync(updateProfile);
         if (result.Result)
         {
             _ = JS.InvokeVoidAsync("showAlert", result.Message);
-            await AuthService!.Logout();
+            await authService!.Logout();
             NavigationManager.NavigateTo("/", true);
         }
         else

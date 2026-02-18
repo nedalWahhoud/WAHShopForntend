@@ -21,7 +21,7 @@
             }
             loginModel.RememberMe = rememberMe;
             loginModel.Token = token;
-            var result = AuthService!.GoogleLogin(loginModel);
+            var result = authService!.GoogleLogin(loginModel);
             if (result.Result == true)
                 NavigationManager!.NavigateTo("/", true);
             else

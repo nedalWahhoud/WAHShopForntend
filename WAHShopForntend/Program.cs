@@ -12,10 +12,8 @@ using WAHShopForntend.Components.ProductGroupF;
 using WAHShopForntend.Components.DiscountF;
 using WAHShopForntend.Components.SearchF;
 using WAHShopForntend.Components.ImagesF;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using WAHShopForntend.Components.CookieF;
-using System.Globalization;
 using WAHShopForntend.Components.CustomersF;
 using WAHShopForntend.Components.TransactionsCustomersF;
 using WAHShopForntend.Components.DebtF;
@@ -30,7 +28,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddServerSideBlazor()
     .AddHubOptions(options =>
     {
-        options.ClientTimeoutInterval = TimeSpan.FromMinutes(5); // Wartet 5 Minuten, bevor die Verbindung getrennt wird
+        options.ClientTimeoutInterval = TimeSpan.FromMinutes(10); // Wartet 10 Minuten, bevor die Verbindung getrennt wird
         options.KeepAliveInterval = TimeSpan.FromSeconds(15);    // Alle 15 Sekunden ein Ping durchführen, um die Verbindung aufrechtzuerhalten
         options.HandshakeTimeout = TimeSpan.FromSeconds(30);
     })

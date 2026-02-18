@@ -52,8 +52,8 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
     <component type="typeof(App)" render-mode="ServerPrerendered" />
 
     <Routes />
+    <script src="_framework/blazor.server.js" autostart="false"></script>
     <script src="JS/script.js"></script>
-    <script src="_framework/blazor.server.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     @* scroll *@
@@ -218,7 +218,7 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
               }, 1000);
 
             } else if (isAndroid) {
-              // Android: استخدم geo URI
+              // Android: nutzen geo URI
               window.location = androidUrl;
 
               // Web-Fallback nach einer Sekunde
@@ -288,6 +288,41 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
         window.closeFullscreen = function() {
             document.body.style.overflow = '';
         };
+    </script>
+
+    <script>
+        Blazor.start({
+            ssr: {
+                disablePrerendering: false // Für schnelleres Laden auf „false“ setzen
+            },
+            circuit: {
+                reconnectionHandler: {
+                    onConnectionDown: (options, error) => {
+                       // Versuch, die Verbindung sofort und ohne Unterbrechung wiederherzustellen
+                        return new Promise(resolve => {
+                            const attempt = () => {
+                                if (navigator.onLine) {
+                                    resolve();
+                                } else {
+                                    setTimeout(attempt, 1000);
+                                }
+                            };
+                            attempt();
+                        });
+                    }
+                }
+            }
+        });
+
+        // Code zum Wiederverbinden nach der Rückkehr von WhatsApp oder aus dem Hintergrund
+        window.addEventListener('focus', async () => {
+            try {
+                // Versuch der manuellen Wiederverbindung
+                await Blazor.reconnect();
+            } catch (e) {
+                console.log("Reconnection attempt failed, but Blazor will keep trying...");
+            }
+        });
     </script>
 </body>
 

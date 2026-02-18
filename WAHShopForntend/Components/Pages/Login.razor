@@ -82,7 +82,7 @@
     {
         isSingInLoading = true;
         loginModel.SignupProvider = "Manual";
-        var isLogged = await AuthService!.Login(loginModel, null!);
+        var isLogged = await authService!.Login(loginModel, null!);
         if (isLogged.Result == true)
             NavigationManager!.NavigateTo(returnUrl ?? "/",true);
         else
