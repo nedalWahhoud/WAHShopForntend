@@ -61,6 +61,15 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die  Available again soon. ähnelt.
+        /// </summary>
+        public static string AvailableSoon {
+            get {
+                return ResourceManager.GetString("AvailableSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die This product is not suitable for shipping via a courier service. ähnelt.
         /// </summary>
         public static string IsNotShippable {
@@ -102,6 +111,15 @@ namespace WAHShopForntend.Resources {
         public static string NoStock {
             get {
                 return ResourceManager.GetString("NoStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Currently sold out due to high demand – available again soon. ähnelt.
+        /// </summary>
+        public static string OutStock {
+            get {
+                return ResourceManager.GetString("OutStock", resourceCulture);
             }
         }
     }

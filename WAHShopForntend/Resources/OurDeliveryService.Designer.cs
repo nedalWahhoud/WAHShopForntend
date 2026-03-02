@@ -172,8 +172,6 @@ namespace WAHShopForntend.Resources {
         ///
         ///&lt;li&gt;For perishable food items, the customer is obligated to store the goods properly **immediately after delivery**.&lt;/li&gt;
         ///
-        ///&lt;li&gt;Delivery is **at the customer&apos;s risk**, especially if continuous refrigeration cannot be guaranteed.&lt;/li&gt;
-        ///
         ///&lt;li&gt;Delivery dates may be postponed for unforeseen reasons. The customer will be informed in a timely manner.&lt;/li&gt;
         ///
         ///&lt;/ul&gt; ähnelt.

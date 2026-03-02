@@ -56,7 +56,23 @@ else
 
 	@if (product == null)
 	{
-		<p>Product not found.</p>
+		<div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+			<div class="card border-0 shadow-sm rounded-4 text-center px-3 py-3" style="max-width: 400px;">
+
+				<div class="mb-3">
+					<i class="bi bi-clock-history fs-1" style="color: #5bc0f8;"></i>
+				</div>
+
+				<h5 class="mb-2">
+					@L["OutStock"]
+				</h5>
+
+				<p class="mb-0 fw-bold fs-2" style="color: #5bc0f8;">
+					@L["AvailableSoon"]
+				</p>
+
+			</div>
+		</div>
 	}
 	else
 	{

@@ -1,13 +1,16 @@
 ﻿@inject IStringLocalizer< WAHShopForntend.Resources.CategoryNav> L
 
 <div class="categoryNav">
+    @if (!string.IsNullOrEmpty(activeDropdownId))
+    {
+        <div class="backdrop" @onclick='() => ToggleDropdown(null!)'></div>
+    }
     @if (categoryService.DownloadedCategories!= null && categoryService.DownloadedCategories.Count > 0)
     {
         @* foodstuffs *@
-        <div class="dropdown">
-            <button class="dropdownButton">▼ @L["foodstuffs"]</button>
+        <div class="dropdown @(activeDropdownId == "foodstuffs" ? "active" : "")">
+            <button class="dropdownButton" @onclick='() => ToggleDropdown("foodstuffs")'>▼ @L["foodstuffs"]</button>
             <div class="dropdownMenu">
-
                 @{
                     var foodstuffsArray = GetFoodstuffs();
                     if (foodstuffsArray != null)
@@ -35,8 +38,8 @@
             </div>
         </div>
         @* drinks *@
-        <div class="dropdown">
-            <button class="dropdownButton">▼ @L["drinks"]</button>
+        <div class="dropdown @(activeDropdownId == "drinks" ? "active" : "")">
+            <button class="dropdownButton" @onclick='() => ToggleDropdown("drinks")'>▼ @L["drinks"]</button>
             <div class="dropdownMenu">
 
                 @{
@@ -66,8 +69,8 @@
             </div>
         </div>
         @* SweetsSnacks *@
-        <div class="dropdown">
-            <button class="dropdownButton">▼ @L["SweetsSnacks"]</button>
+        <div class="dropdown @(activeDropdownId == "sweetsSnacks" ? "active" : "")">
+            <button class="dropdownButton" @onclick='() => ToggleDropdown("sweetsSnacks")'>▼ @L["SweetsSnacks"]</button>
             <div class="dropdownMenu">
                 @{
                     var SweetsSnacksArray = GetSweetsSnacks();
@@ -93,8 +96,8 @@
             </div>
         </div>
         @* Fleische *@
-        <div class="dropdown">
-            <button class="dropdownButton">▼ @L["Meats"]</button>
+        <div class="dropdown @(activeDropdownId == "meats" ? "active" : "")">
+            <button class="dropdownButton" @onclick='() => ToggleDropdown("meats")'>▼ @L["Meats"]</button>
             <div class="dropdownMenu">
                 @{
                     var Mates = GetMeats();
@@ -252,5 +255,12 @@
         return categoryService.DownloadedCategories?
                     .FirstOrDefault(c => c.Id == 41) ?? null!;
     }
-    
+
+    /**/
+    private string? activeDropdownId = null;
+
+    private void ToggleDropdown(string id)
+    {
+        activeDropdownId = (activeDropdownId == id) ? null : id;
+    }
 }

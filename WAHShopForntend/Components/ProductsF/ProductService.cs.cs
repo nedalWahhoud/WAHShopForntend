@@ -33,7 +33,7 @@ namespace WAHShopForntend.Components.ProductsF
         {
             try
             {
-                var response = await _http.GetAsync($"api/Products/getProductById/{productId}");
+                var response = await _http.GetAsync($"api/Products/getProductById/{productId}?onlyInStock={true}");
 
                 if (!response.IsSuccessStatusCode)
                     return null!;

@@ -114,6 +114,9 @@ html[dir="rtl"] .searchBox {
     }
 
 @media (max-width: 768px) {
+    .header {
+        height: 4rem;
+    }
     .header .containerLeft {
         display: none;
     }
@@ -134,11 +137,6 @@ html[dir="rtl"] .searchBox {
     .searchBox {
         width: 100%;
         max-width: none;
-    }
-    .searchInput {
-        width: 100%;
-        padding: 0.5rem;
-        font-size: 0.1rem;
     }
     .searchDropdown li {
         font-size: 0.8rem;

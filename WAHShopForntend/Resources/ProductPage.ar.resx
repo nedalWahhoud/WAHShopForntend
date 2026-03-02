@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AvailableSoon" xml:space="preserve">
+    <value> وسيتوفر قريباً بإذن الله.</value>
+  </data>
   <data name="IsNotShippable" xml:space="preserve">
     <value>هذا المنتج غير مناسب للشحن عبر مزود خدمة الشحن, ولكن ممكن عبر خدمة التوصيل الخاصة بنا, اذا كانت منطقتك ضمن نطاق خدمتنا.</value>
   </data>
@@ -131,5 +134,8 @@
   </data>
   <data name="NoStock" xml:space="preserve">
     <value>المخزون غير كافي</value>
+  </data>
+  <data name="OutStock" xml:space="preserve">
+    <value>نفد المنتج حالياً بسبب الإقبال الكبير.</value>
   </data>
 </root>

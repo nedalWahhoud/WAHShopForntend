@@ -133,7 +133,7 @@
   &lt;li&gt;&lt;strong&gt;Richtung Lindau&lt;/strong&gt; alle zwei Wochen: Gebiete Lindau, Lindenberg im Allgäu, Scheidegg, Weiler-Simmerberg, Oberstaufen, &lt;strong&gt;und Umgebung&lt;/strong&gt; – Liefertag: Donnerstags&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Richtung Wangen&lt;/strong&gt; alle zwei Wochen: Gebiete Wangen im Allgäu, Waltershofen, Ratzenried,Argenbühl, Isny im Allgäu &lt;strong&gt;und Umgebung&lt;/strong&gt; – Liefertag: Samstags&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Richtung Bad Waldsee&lt;/strong&gt; alle zwei Wochen: Gebiete Bad Wurzach, Bad Waldsee, Reute &lt;strong&gt;und Umgebung &lt;/strong&gt; – Liefertag: Samstags&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Richtung Kempten&lt;/strong&gt; alle zwei Wochen: Gebiete Aichstetten, Aitrach, Memmingen, Wolfertschwenden, Bad Grönenbach, Altusried, Kempten, Immenstadt im Allgäu, Sonthofen, Fischen im Allgäu, Oberstdorf &lt;strong&gt;und Umgebung&lt;/strong&gt; – Liefertag: Donnerstags&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Richtung Memmingen&lt;/strong&gt; alle zwei Wochen: Gebiete Aichstetten, Aitrach, Memmingen, Wolfertschwenden, Bad Grönenbach, Altusried, Kempten, Immenstadt im Allgäu, Sonthofen, Fischen im Allgäu, Oberstdorf &lt;strong&gt;und Umgebung&lt;/strong&gt; – Liefertag: Donnerstags&lt;/li&gt;
  &lt;/ul&gt;</value>
   </data>
   <data name="deliveryServiceWorks" xml:space="preserve">
@@ -163,7 +163,6 @@
     <value> &lt;ul&gt;
   &lt;li&gt;Die Lieferoption ist verbindlich, sobald die Bestellung abgeschlossen wurde.&lt;/li&gt;
   &lt;li&gt;Bei verderblichen Lebensmitteln ist der Kunde verpflichtet, die Ware **unmittelbar nach Lieferung sachgerecht zu lagern**.&lt;/li&gt;
-  &lt;li&gt;Die Lieferung erfolgt **auf Risiko des Kunden**, insbesondere wenn keine durchgehende Kühlung gewährleistet ist.&lt;/li&gt;
   &lt;li&gt;Liefertermine können aus sachlichen Gründen verschoben werden. Der Kunde wird rechtzeitig informiert.&lt;/li&gt;
  &lt;/ul&gt;</value>
   </data>

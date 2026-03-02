@@ -11,7 +11,7 @@
     <div class="containerCenter">
         @* Search *@
         <div class="searchBox">
-            <InputText class="form-control rtl-right" style="height: 60px; font-size: 1rem;" @onfocus="OnSearchInputFocus" @onblur="OnSearchInputBlur" @bind-Value="searchText" placeholder="@L["ProductSearch"]" @oninput="SearchProducts" />
+            <InputText class="form-control searchInput rtl-right" style="height: 40px; font-size: 1rem;" @onfocus="OnSearchInputFocus" @onblur="OnSearchInputBlur" @bind-Value="searchText" placeholder="@L["ProductSearch"]" @oninput="SearchProducts" />
             @if (IsSearching)
             {
                 <p class="searchDropdown">Suche läuft...</p>

@@ -19,6 +19,16 @@ using WAHShopForntend.Components.TransactionsCustomersF;
 using WAHShopForntend.Components.DebtF;
 
 var builder = WebApplication.CreateBuilder(args);
+
+/* local test port listen */
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(7078, listenOptions =>
+    {
+        listenOptions.UseHttps();
+    });
+});
+
 // langauge 
 builder.Services.AddLocalization();
 
