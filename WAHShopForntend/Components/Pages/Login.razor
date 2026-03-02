@@ -1,7 +1,6 @@
 ﻿@page "/login"
 @inject IStringLocalizer< WAHShopForntend.Resources.Login> L
 
-<div class="main">
     <div class="loginContainer">
         <div class ="loginForm">
             <EditForm style="display:flex;flex-direction:column;gap:10px;" Model="@loginModel" OnValidSubmit="@HandleSubmit">
@@ -68,7 +67,6 @@
             </div>
         </div>
     </div>
-</div>
 
 @code {
     private bool isSingInLoading = false;

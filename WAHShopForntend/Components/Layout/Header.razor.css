@@ -1,5 +1,5 @@
 ﻿.header {
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     background-color: var(--hederBackgroundColoe);
@@ -11,7 +11,13 @@
     justify-content: space-between;
     z-index: 9999;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 }
+
+    .header.hidden {
+        transform: translateY(-100%); /* سحب الهيدر خارج الشاشة للأعلى */
+    }
+
 /* vermeiden die Header bewegen von rechts nach links*/
 html[dir="rtl"] .header {
     direction: ltr;
@@ -115,7 +121,7 @@ html[dir="rtl"] .searchBox {
 
 @media (max-width: 768px) {
     .header {
-        height: 4rem;
+        height: 4.5rem;
     }
     .header .containerLeft {
         display: none;

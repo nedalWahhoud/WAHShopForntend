@@ -3,9 +3,9 @@
     display: flex;
     flex-direction: column;
     background-color: var(--mainBackgroundColor);
-    min-height: 100vh;
+    min-height: 100dvh;
     flex: 1;
-    padding-top: calc(6rem + 3rem); /* header height und categoryNav height */
+    padding-top: calc(7rem + 3rem); /* header height und categoryNav height */
 }
 
 html, body {

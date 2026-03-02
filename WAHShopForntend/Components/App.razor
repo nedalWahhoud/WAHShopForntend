@@ -233,9 +233,8 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
     </script>
     @* share product *@
     <script>
-               window.shareProduct = async (title, url) => {
+        window.shareProduct = async (title, url) => {
             try {
-                //  überprüfen Web Share API
                 if (navigator.share) {
                     await navigator.share({
                         title: title ?? '',
@@ -243,26 +242,18 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
                         url: url
                     });
                 }
-                // überprüfen Clipboard API 
                 else if (navigator.clipboard && window.isSecureContext) {
                     await navigator.clipboard.writeText(url);
+                    console.log("تم نسخ الرابط بنجاح!");
                 }
-                // letzte Lösung
                 else {
-                    const tempInput = document.createElement("input");
-                    tempInput.value = url;
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    document.execCommand("copy");
-                    document.body.removeChild(tempInput);
+                    throw new Error("Clipboard API غير مدعوم أو الموقع غير آمن (HTTPS).");
                 }
             }
             catch (error) {
-                console.warn("Share failed:", error);
-                
+                console.warn("Share/Copy failed:", error);
             }
         };
-
     </script>
     @* Carousel automatisch laufen nach rended *@
     <script>
@@ -288,6 +279,29 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
         window.closeFullscreen = function() {
             document.body.style.overflow = '';
         };
+    </script>
+    @* header verschwenden und categoryNav ganz top verscheben *@
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            const nav = document.querySelector('.categoryNav'); 
+
+            if (!header || !nav) return;
+
+            const scrollTop = window.scrollY;
+            const lastScrollTop = sessionStorage.getItem('lastScrollTop') || 0;
+
+            if (scrollTop > lastScrollTop && scrollTop > 60) {
+                header.classList.add('hidden');
+                nav.classList.add('stick-to-top'); 
+            }
+            else {
+                header.classList.remove('hidden');
+                nav.classList.remove('stick-to-top'); 
+            }
+
+            sessionStorage.setItem('lastScrollTop', scrollTop);
+        });
     </script>
 
     <script>
