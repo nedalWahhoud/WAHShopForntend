@@ -168,6 +168,9 @@
   <data name="DiscountPercentage" xml:space="preserve">
     <value>Discount Percentage</value>
   </data>
+  <data name="EmailExists" xml:space="preserve">
+    <value>Your email address already exists, please log in.</value>
+  </data>
   <data name="EnterCode" xml:space="preserve">
     <value>Enter the code</value>
   </data>

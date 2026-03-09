@@ -69,7 +69,7 @@ else
 							@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
 							{
 								if (orderService.DownloadedPaymentMethods[i].Id == 1 || orderService.DownloadedPaymentMethods[i].Id == 2 ||
-					orderService.DownloadedPaymentMethods[i].Id == 5)
+					                orderService.DownloadedPaymentMethods[i].Id == 5)
 								{
 									var paymentMethod = orderService.DownloadedPaymentMethods[i];
 									<label>
@@ -237,10 +237,6 @@ else
 								<div class="form-group mb-1">
 									<InputText @bind-Value="user.Email" placeholder="@L["InputEmail"]" class="form-control" />
 									<ValidationMessage For="@(() => user.Email)" />
-								</div>
-								<div class="form-group mb-1">
-									<InputText @bind-Value="user.BirthDate" type="date" class="form-control" />
-									<ValidationMessage For="@(() => user.BirthDate)" />
 								</div>
 								<button type="submit" class="btn btnPay mt-2">@L["BuyWithoutLoginButton"]</button>
 							</EditForm>
@@ -576,13 +572,13 @@ else
 			}
 		}
 		// check Age
-		var resultAge = await orderService.CheckAge(cartService.CartItems, user);
+		/*var resultAge = await orderService.CheckAge(cartService.CartItems, user);
 		if (!resultAge.Result)
 		{
 			MessageWarning = L[resultAge.Message ?? ""];
 			orderStatusEnum = OrderStatusEnum.Pending;
 			return;
-		}
+		}*/
 		// check if shipping by post
 		var resultShipping = await orderService.CanShipByPostAsync(cartService.CartItems, selectedPaymentId, System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
 		if (!resultShipping.result)
@@ -605,7 +601,7 @@ else
 			var result = await authService.AddGuestAsync(user);
 			if (result.Result == false)
 			{
-				MessageWarning = result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen";
+				MessageWarning = L[result.Message?.ToString() ?? "Warnung Nachricht ist null gekommen"];
 				resultBool = false;
 			}
 			else

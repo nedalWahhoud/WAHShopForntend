@@ -85,7 +85,7 @@
             NavigationManager!.NavigateTo(returnUrl ?? "/",true);
         else
         {
-            _ = JS.InvokeVoidAsync("showAlert", isLogged.Message);
+            _ = JS.InvokeVoidAsync("window.alert", isLogged.Message);
         }
         isSingInLoading = false;
     }

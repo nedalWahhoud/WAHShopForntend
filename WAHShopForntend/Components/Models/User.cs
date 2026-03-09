@@ -14,7 +14,6 @@ namespace WAHShopForntend.Components.Models
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
-        [Required(ErrorMessage = "Bitte Geburtsdatum eingeben")]
         public string BirthDate { get; set; } =string.Empty;
         public bool IsGuest { get; set; }
         public string SignupProvider { get; set; } = string.Empty;

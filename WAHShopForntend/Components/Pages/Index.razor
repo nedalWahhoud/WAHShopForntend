@@ -1,6 +1,7 @@
 ﻿@page "/"
 @inject IStringLocalizer< WAHShopForntend.Resources.Index> L
 @inherits LayoutComponentBase
+@using System.Globalization;
 @implements IDisposable
 
 <HeadContent>
@@ -22,6 +23,7 @@
     <meta name="keywords" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
         ? "arabisches Laden, arabische Lebensmittel, syrische Produkte, Lebensmittel online"
         : "متجر عربي, مواد غذائية, حلويات, توابل, متجر سوري, تسوق أونلاين")" />
+
 </HeadContent>
 
 

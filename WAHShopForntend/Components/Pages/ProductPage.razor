@@ -2,47 +2,7 @@
 @inject IStringLocalizer< WAHShopForntend.Resources.ProductPage> L
 @implements IDisposable
 
-<HeadContent>
-	<PageTitle>
-		@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-				? product?.Name_ar + " | " + ProjectInfo.Value.NameArabic
-				: product?.Name_de + " | " + ProjectInfo.Value.Name)
-	</PageTitle>
-	<meta name="description" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-        ? product?.Description_ar
-        : product?.Description_de)" />
-	<meta name="keywords" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-        ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
-        : product?.Name_de + ", Syriana Leutkirch, Syriana Supermarkt, arabische Supermarkt, Lebensmittel, arabische Lebensmittel, arabisches Laden, arabisches Laden in Leutkirhc")" />
 
-    <!-- Structured Data -->
-    @if (product != null)
-    {
-	  string? productName = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? product.Name_ar : product.Name_de;
-		string? productDescription = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? product.Description_ar : product.Description_de;
-		string? availability = (product.Quantity > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock");
-
-		<script type="application/ld+json">
-			  @((MarkupString)$@"{{
-		""@context"": ""https://schema.org"",
-		""@type"": ""Product"",
-		""name"": ""{productName}"",
-		""description"": ""{productDescription}"",
-		""image"": ""{productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? null!)}"",
-		""offers"": {{
-							""@type"": ""Offer"",
-							""url"": ""{NavigationManager.Uri}"",
-							""priceCurrency"": ""EUR"",
-							""price"": ""{(product?.SalePrice ?? 0):0.00}"",
-							""availability"": ""{availability}"",
-		                    ""itemCondition"": ""https://schema.org/NewCondition""
-
-						}}
-	             	}}
-				}}"))
-		</script>
-    }
-</HeadContent>
 
 
 @if (isLoading)
@@ -76,6 +36,50 @@ else
 	}
 	else
 	{
+		@* SEO *@
+		var imageUrl = productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? null!);
+		var productName = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? product?.Name_ar : product?.Name_de;
+		var productDescription = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? product?.Description_ar : product?.Description_de;
+		var availability = (product?.Quantity > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock");
+		var productUrl = NavigationManager.Uri;
+		
+		<HeadContent>
+			<PageTitle>
+				@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+						? product?.Name_ar + " | " + ProjectInfo.Value.NameArabic
+						: product?.Name_de + " | " + ProjectInfo.Value.Name)
+			</PageTitle>
+			<meta name="description" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+        ? product?.Description_ar
+        : product?.Description_de)" />
+			<meta name="keywords" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+        ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
+        : product?.Name_de + ", Syriana Leutkirch, Syriana Supermarkt, arabische Supermarkt, Lebensmittel, arabische Lebensmittel, arabisches Laden, arabisches Laden in Leutkirhc")" />
+
+		
+
+			<!-- Structured Data -->
+				<script type="application/ld+json">
+					@((MarkupString)$@"{{
+		            ""@context"": ""https://schema.org"",
+		            ""@type"": ""Product"",
+		            ""name"": ""{productName}"",
+		            ""description"": ""{productDescription}"",
+		            ""image"": ""{imageUrl}"",
+		            ""offers"": {{
+							""@type"": ""Offer"",
+							""url"": ""{NavigationManager.Uri}"",
+							""priceCurrency"": ""EUR"",
+							""price"": ""{(product?.SalePrice ?? 0):0.00}"",
+							""availability"": ""{availability}"",
+							""itemCondition"": ""https://schema.org/NewCondition""
+
+						}}
+					}}
+				   }}"))
+				</script>
+		</HeadContent>
+		@**@
 		<div class="productDetails">
 			<div class="ImageSection">
 				<img class="zoomableImage" @onclick="OpenImage" src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" alt="@product.Name_de" />
@@ -181,6 +185,8 @@ else
 	private List<ProductByCategory> mainProductByCategory = new();
 	protected override async Task OnInitializedAsync()
 	{
+		var productUrl = NavigationManager.Uri;
+
 		isLoading = true;
 		// get product by id
 		List<Task> tasks = new();

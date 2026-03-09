@@ -1,0 +1,42 @@
+﻿@inject NavigationManager NavigationManager
+<HeadContent>
+    @* Open Graph-Tags zum Teilen*@
+    <meta property="og:title" content="@Title" />
+    <meta property="og:description" content="@Description" />
+    <meta property="og:image" content="@ImageUrl" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="@NavigationManager.Uri" />
+    <meta property="og:type" content="product" />
+    @* Twitter-Karten-Tags *@
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@Title" />
+    <meta name="twitter:description" content="@Description" />
+    <meta name="twitter:image" content="@ImageUrl" />
+</HeadContent>
+
+@code {
+
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public string? Description { get; set; } 
+    [Parameter] public string? ImageUrl { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        var lang = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+
+        Title ??= (lang == "ar" ? "سيريانا سوبر ماركت" : "Syriana Supermarkt");
+
+        Description ??= (lang == "ar"
+            ? "اكتشف أفضل المنتجات العربية والسورية عبر الإنترنت."
+            : "Entdecken Sie die besten arabischen und syrischen Produkte online.");
+
+        ImageUrl ??= "https://syriana-supermarkt.de/ProjectImages/SyrianaSupermarktLogoOhneText.png";
+
+        var relativePath = ImageUrl;
+        var baseUri = NavigationManager.BaseUri.TrimEnd('/');  // https://localhost:7250 أو https://syriana-supermarkt.de
+        var absoluteImageUrl = $"{baseUri}/{relativePath.TrimStart('/')}";
+
+		ImageUrl = absoluteImageUrl;
+    }
+}

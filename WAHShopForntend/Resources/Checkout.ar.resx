@@ -168,6 +168,9 @@
   <data name="DiscountPercentage" xml:space="preserve">
     <value>نسبة الخصم</value>
   </data>
+  <data name="EmailExists" xml:space="preserve">
+    <value>عنوان بريدك الإلكتروني موجود بالفعل، يرجى تسجيل الدخول.</value>
+  </data>
   <data name="EnterCode" xml:space="preserve">
     <value>ادخل الرمز</value>
   </data>

@@ -156,17 +156,17 @@ else
             var result = await authService.UpdateProfileAsync(updateProfile);
             if (!result.Result)
             {
-                _ = JS.InvokeVoidAsync("showAlert", result.Message);
+                _ = JS.InvokeVoidAsync("window.alert", result.Message);
             }
             else
             {
-                _ = JS.InvokeVoidAsync("showAlert", result.Message);
+                _ = JS.InvokeVoidAsync("window.alert", result.Message);
                 isEditing = false;
             }
         }
         else
         {
-            _ = JS.InvokeVoidAsync("showAlert", "Benutzer-ID ist ungültig.");
+            _ = JS.InvokeVoidAsync("window.alert", "Benutzer-ID ist ungültig.");
         }
         updateProfile = new UpdateProfile();
         IsLoading = false;
@@ -191,13 +191,13 @@ else
         var result = await authService.AccountDeleteAsync(updateProfile);
         if (result.Result)
         {
-            _ = JS.InvokeVoidAsync("showAlert", result.Message);
+            _ = JS.InvokeVoidAsync("window.alert", result.Message);
             await authService!.Logout();
             NavigationManager.NavigateTo("/", true);
         }
         else
         {
-            _ = JS.InvokeVoidAsync("showAlert", result.Message);
+            _ = JS.InvokeVoidAsync("window.alert", result.Message);
         }
 		IsLoading = false;
     }
