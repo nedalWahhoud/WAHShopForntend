@@ -4,44 +4,43 @@
 
 
 <HeadContent>
-
 	<!-- Page Title -->
 	<PageTitle>
-		@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+		@(category != null ? 
+		     System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
 				? category.Name_de
-				: category.Name_ar)
+				: category.Name_ar
+		     : L["OnOffer"])
 	</PageTitle>
 
 	<!-- Meta Description -->
-	<meta name="description" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
-    ? $"Entdecken Sie unsere Kategorie {category.Name_de}: hochwertige arabische Lebensmittel online kaufen."
-    : $"اكتشف فئة {category.Name_ar}: أفضل المنتجات العربية والسورية للشراء عبر الإنترنت.")" />
+	<meta name="description" content="@(category != null 
+      ? System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+                      ? $"Entdecken Sie unsere Kategorie {category.Name_de}: hochwertige arabische Lebensmittel online kaufen."
+                      : $"اكتشف فئة {category.Name_ar}: أفضل المنتجات العربية والسورية للشراء عبر الإنترنت."
+	  :L["OnOffer"])" />
 
 
 	<!-- Meta Keywords -->
-	<meta name="keywords" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
-        ?  $"{category.Name_de}, arabische Lebensmittel, syrische Produkte"
-        :  $"{category.Name_ar}, مواد غذائية, منتجات سورية, تسوق أونلاين")" />
+	<meta name="keywords" content="@(category != null 
+        ?System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+                      ?  $"{category.Name_de}, arabische Lebensmittel, syrische Produkte"
+                      :  $"{category.Name_ar}, مواد غذائية, منتجات سورية, تسوق أونلاين"
+	    : L["OnOffer"])" />
 </HeadContent>
 
-@if (!IsLoading)
-{
 
-}
-else
+@if (IsLoaded)
 {
 	<div class="mainContainer">
 		<h3 class="@(CategoryId == -1 ? "text-danger" : "text-dark")">
-			@if (CategoryId != -1)
-			{
-				@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+			<strong>
+				@(CategoryId != -1 
+					 ?System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
 						? category?.Name_ar ?? ""
-						: category?.Name_de ?? "")
-			}
-			else
-			{
-				@L["OnOffer"]
-			}
+						: category?.Name_de ?? ""
+				: L["OnOffer"])
+			</strong>
 		</h3>
 		<div class="productItems">
 			@foreach (var product in products)
@@ -74,14 +73,7 @@ else
 			}
 			else
 			{
-				@if (CategoryId != -1)
-				{
-					<span class="NoItemsFound">@L["NoItemsFound"]</span>
-				}
-				else
-				{
-					<span class="NoOffersFound">@L["NoOffersFound"]</span>
-				}
+			   <span class="@(CategoryId != -1 ? "NoItemsFound" : "NoOffersFound")">@(CategoryId != -1 ? L["NoItemsFound"] : L["NoOffersFound"])</span>
 			}
 
 		</div>
@@ -89,17 +81,17 @@ else
 }
 @code {
 	[Parameter] public int CategoryId { get; set; }
-	private bool IsLoading = true;
+	private bool IsLoaded = true;
 	private List<Product> products = new();
 	private Categories category = new();
 
 	protected override async Task OnInitializedAsync()
 	{
-		IsLoading = false;
+		IsLoaded = false;
 		await MoreProductsload(false);
 		// get all categories
 		category = categoryService.GetCategoryByIdLocal(CategoryId) ?? await categoryService.GetCategoryByIdAsync(CategoryId);
-		IsLoading = true;
+		IsLoaded = true;
 	}
 	private List<int>? excludeProductsIds = new();
 	private async Task MoreProductsload(bool IfOnMoreProductsLoad)

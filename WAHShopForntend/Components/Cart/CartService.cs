@@ -156,20 +156,20 @@ namespace WAHShopForntend.Components.Cart
             var item = CartItems.FirstOrDefault(ci => ci.ProductId == id && ci.Product != null);
 
             return (double)(item != null
-                ? (item.Product.DiscountedPrice > 0 ? item.Product.DiscountedPrice : item.Product.SalePrice)
+                ? ((item.Product.ProductDiscount != null && item.Product.ProductDiscount.DiscountedPrice > 0) ? item.Product.ProductDiscount.DiscountedPrice : item.Product.SalePrice)
                 : 0);
 
         }
         public double GetTotalPrice()
         {
             return (double)(CartItems
-                .Sum(ci => (ci.Product?.DiscountedPrice > 0 ? ci.Product?.DiscountedPrice : ci.Product?.SalePrice) * ci.Quantity) ?? 0);
+                .Sum(ci => ((ci.Product.ProductDiscount != null && ci.Product.ProductDiscount.DiscountedPrice > 0) ? ci.Product.ProductDiscount.DiscountedPrice : ci.Product?.SalePrice) * ci.Quantity) ?? 0);
         }
         public double GetTotalPriceOfProduct(int id)
         {
             return (double)CartItems
            .Where(ci => ci.ProductId == id && ci.Product != null)
-           .Sum(ci => ((ci.Product?.DiscountedPrice > 0 ? ci.Product?.DiscountedPrice : ci.Product?.SalePrice ) * ci.Quantity) ?? 0);
+           .Sum(ci => (((ci.Product.ProductDiscount != null && ci.Product.ProductDiscount.DiscountedPrice > 0) ? ci.Product.ProductDiscount.DiscountedPrice : ci.Product?.SalePrice ) * ci.Quantity) ?? 0);
 
         }
         public bool IsProductAdded(int productId)

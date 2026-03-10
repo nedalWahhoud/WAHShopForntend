@@ -151,7 +151,14 @@ namespace WAHShopForntend.Components.CategoriesF
                 excludeProductsId ??= 0;
                 //
                 return _productService.DownloadedProduct
-                    .Where(p => p.CategoryId != 0 && (categoryId == -1 ? p.DiscountedPrice > 0 : p.CategoryId == categoryId)
+                    .Where(p => p.CategoryId != 0 
+                    && (categoryId == -1 ?
+                       (p.ProductDiscount != null &&
+                        p.ProductDiscount.DiscountedPrice > 0 &&
+                        DateTime.Today >= p.ProductDiscount.StartDate.Date &&
+                        DateTime.Today <= p.ProductDiscount.EndDate.Date)
+                        : p.CategoryId == categoryId
+                        )
                     && !excludeProductsIds.Contains(p.Id)
                     && p.Id != excludeProductsId)
                     .ToList();

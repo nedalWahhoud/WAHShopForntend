@@ -27,7 +27,7 @@ namespace WAHShopForntend.Components.Models
         public int? ProductGroupID { get; set; }
         public GroupProducts? ProductGroup { get; set; }
         public bool IsShippable { get; set; }
-        public double DiscountedPrice { get; set; }
+        public ProductDiscounts? ProductDiscount { get; set; }
         //
         public CartItem CartItem { get; set; } = null!;
         public void InitializeCartItem(int quantity)

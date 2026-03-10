@@ -74,7 +74,8 @@ else
                 string currentCulture = await cookieService.GetLanguageCookiesync();
 
 				// wenn die culture null ist, setze sie auf Deutsch
-                if (string.IsNullOrEmpty(currentCulture))
+                if (string.IsNullOrWhiteSpace(currentCulture) ||
+                      (currentCulture != "de" && currentCulture != "ar"))
                 {
                     currentCulture = defaultCulture;
                 }

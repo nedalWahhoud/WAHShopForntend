@@ -1,11 +1,11 @@
 ﻿<div class="PriceDiv">
-    @if (product.DiscountedPrice > 0)
+    @if (product.ProductDiscount != null && product.ProductDiscount.DiscountedPrice > 0)
     {
         <p class="oldPrice">
             @product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
         </p>
         <p class="newPrice">
-            @product.DiscountedPrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
+            @product.ProductDiscount.DiscountedPrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
         </p>
     }
     else
