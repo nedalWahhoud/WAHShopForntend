@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Cart {
+    public class Impressum {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Cart() {
+        internal Impressum() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Cart", typeof(Cart).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.Impressum", typeof(Impressum).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,92 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Article ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Contact ähnelt.
         /// </summary>
-        public static string Article {
+        public static string Contact {
             get {
-                return ResourceManager.GetString("Article", resourceCulture);
+                return ResourceManager.GetString("Contact", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Back to Shop ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Concept, design and programming ähnelt.
         /// </summary>
-        public static string BackToShopButton {
+        public static string developer {
             get {
-                return ResourceManager.GetString("BackToShopButton", resourceCulture);
+                return ResourceManager.GetString("developer", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Your shopping cart is empty. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die MHD Nedal Wahhoud ähnelt.
         /// </summary>
-        public static string CartEmptyMessage {
+        public static string developerName {
             get {
-                return ResourceManager.GetString("CartEmptyMessage", resourceCulture);
+                return ResourceManager.GetString("developerName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Shopping Cart  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die E-Mail ähnelt.
         /// </summary>
-        public static string CartTitle {
+        public static string email {
             get {
-                return ResourceManager.GetString("CartTitle", resourceCulture);
+                return ResourceManager.GetString("email", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Checkout ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hosting ähnelt.
         /// </summary>
-        public static string CheckoutButton {
+        public static string Hosting {
             get {
-                return ResourceManager.GetString("CheckoutButton", resourceCulture);
+                return ResourceManager.GetString("Hosting", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die loading... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die We host the content of our website with the following provider: ähnelt.
         /// </summary>
-        public static string Loading {
+        public static string HostingText {
             get {
-                return ResourceManager.GetString("Loading", resourceCulture);
+                return ResourceManager.GetString("HostingText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Price: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Impressum ähnelt.
         /// </summary>
-        public static string PriceLabel {
+        public static string impressum {
             get {
-                return ResourceManager.GetString("PriceLabel", resourceCulture);
+                return ResourceManager.GetString("impressum", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Product not found ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tel. ähnelt.
         /// </summary>
-        public static string ProductNotFound {
+        public static string Tel {
             get {
-                return ResourceManager.GetString("ProductNotFound", resourceCulture);
+                return ResourceManager.GetString("Tel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Total: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die VAT ID ähnelt.
         /// </summary>
-        public static string TotalLabel {
+        public static string VATID {
             get {
-                return ResourceManager.GetString("TotalLabel", resourceCulture);
+                return ResourceManager.GetString("VATID", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Total price ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die VAT identification number according to §27a of the German VAT Act: DE334553043 ähnelt.
         /// </summary>
-        public static string TotalPrice {
+        public static string VATIDText {
             get {
-                return ResourceManager.GetString("TotalPrice", resourceCulture);
+                return ResourceManager.GetString("VATIDText", resourceCulture);
             }
         }
     }

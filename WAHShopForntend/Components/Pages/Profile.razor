@@ -1,7 +1,8 @@
 ﻿@page "/profile"
 @inject AuthenticationStateProvider AuthStateProvider
 @using System.Security.Claims;
-@inject IStringLocalizer< WAHShopForntend.Resources.Profile> L
+@namespace WAHShopForntend.Components.Layout
+@inject IStringLocalizer<WAHShopForntend.Components.Layout.Profile> L
 
 @if (!IsRending)
 {

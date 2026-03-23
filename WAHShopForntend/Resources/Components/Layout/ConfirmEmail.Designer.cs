@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CategoryNav {
+    public class ConfirmEmail {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CategoryNav() {
+        internal ConfirmEmail() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.CategoryNav", typeof(CategoryNav).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.ConfirmEmail", typeof(ConfirmEmail).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,47 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Drinks ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email confirmation failed. ähnelt.
         /// </summary>
-        public static string drinks {
+        public static string ConfirmationFailed {
             get {
-                return ResourceManager.GetString("drinks", resourceCulture);
+                return ResourceManager.GetString("ConfirmationFailed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Foodstuffs ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email confirmation successful, please log in. ähnelt.
         /// </summary>
-        public static string foodstuffs {
+        public static string ConfirmationSuccessful {
             get {
-                return ResourceManager.GetString("foodstuffs", resourceCulture);
+                return ResourceManager.GetString("ConfirmationSuccessful", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Frozen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Go To Login ähnelt.
         /// </summary>
-        public static string Frozen {
+        public static string GoToLogin {
             get {
-                return ResourceManager.GetString("Frozen", resourceCulture);
+                return ResourceManager.GetString("GoToLogin", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Meats ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Loading... ähnelt.
         /// </summary>
-        public static string Meats {
+        public static string Loading {
             get {
-                return ResourceManager.GetString("Meats", resourceCulture);
+                return ResourceManager.GetString("Loading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die On Offer ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Missing confirmation data. ähnelt.
         /// </summary>
-        public static string OnOffer {
+        public static string MissingData {
             get {
-                return ResourceManager.GetString("OnOffer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Sweets and snacks ähnelt.
-        /// </summary>
-        public static string SweetsSnacks {
-            get {
-                return ResourceManager.GetString("SweetsSnacks", resourceCulture);
+                return ResourceManager.GetString("MissingData", resourceCulture);
             }
         }
     }

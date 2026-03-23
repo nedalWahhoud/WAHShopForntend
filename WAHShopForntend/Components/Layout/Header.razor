@@ -1,7 +1,7 @@
 ﻿@implements IDisposable
 @using System.Globalization;
 @using Microsoft.AspNetCore.Localization;
-@inject IStringLocalizer< WAHShopForntend.Resources.Header> L
+@inject IStringLocalizer<WAHShopForntend.Components.Layout.Header> L
 
 
 <header class="header ltr-section">
@@ -27,8 +27,8 @@
                                 <img src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" loading="lazy" />
                                 <strong>
                                     @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" 
-                                                                        ?product.Name_ar
-                                                                        : product.Name_de) </strong>
+                                                                            ?product.Name_ar
+                                                                            : product.Name_de) </strong>
                             </li>
                         }
                     </ul>
@@ -168,24 +168,9 @@
     // language selection
     private async Task SetLanguage(string culture)
     {
-        var sa = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-        // überprüfe ob der benutzer cookies akzeptiert hat
-        bool hasAccepted = await cookieService.HasAcceptedAsync();
-        if (hasAccepted)
-        {
-            await cookieService.SetLanguageAsync(culture,true);
-        }
-        else
-        {
-			// wenn der benutzer die cookies nicht akzeptiert hat, setze die culture nur für die aktuelle Sitzung
-            var cultureInfo = new CultureInfo(culture);
-            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-            CultureInfo.CurrentCulture = cultureInfo;
-            CultureInfo.CurrentUICulture = cultureInfo;
-        }
+        await cookieService.SetLanguageAsync(culture, true);
         // page reload to apply new culture
-        NavigationManager.NavigateTo(NavigationManager.Uri,forceLoad: true);
+        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
     }
     public void Dispose()
     {

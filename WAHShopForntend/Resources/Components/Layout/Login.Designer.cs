@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Signup {
+    public class Login {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Signup() {
+        internal Login() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Signup", typeof(Signup).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.Login", typeof(Login).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,20 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Already registered? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email  ähnelt.
         /// </summary>
-        public static string AlreadyRegisteredText {
+        public static string Email {
             get {
-                return ResourceManager.GetString("AlreadyRegisteredText", resourceCulture);
+                return ResourceManager.GetString("Email", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Your Date of Birth ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Forgot password? ähnelt.
         /// </summary>
-        public static string BirthDateLabel {
+        public static string ForgotPassword {
             get {
-                return ResourceManager.GetString("BirthDateLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Email ähnelt.
-        /// </summary>
-        public static string EmailPlaceholder {
-            get {
-                return ResourceManager.GetString("EmailPlaceholder", resourceCulture);
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
             }
         }
         
@@ -97,38 +88,20 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Your Name ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die No Account Text ähnelt.
         /// </summary>
-        public static string NamePlaceholder {
+        public static string NoAccountText {
             get {
-                return ResourceManager.GetString("NamePlaceholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Okay ähnelt.
-        /// </summary>
-        public static string Okay {
-            get {
-                return ResourceManager.GetString("Okay", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Re-enter Password ähnelt.
-        /// </summary>
-        public static string PasswordAgainPlaceholder {
-            get {
-                return ResourceManager.GetString("PasswordAgainPlaceholder", resourceCulture);
+                return ResourceManager.GetString("NoAccountText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Password ähnelt.
         /// </summary>
-        public static string PasswordPlaceholder {
+        public static string Password {
             get {
-                return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
+                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         
@@ -142,29 +115,20 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die User created successfully. Please check your email to confirm your account. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remember me ähnelt.
         /// </summary>
-        public static string SignupSuccessMessage {
+        public static string RememberMe {
             get {
-                return ResourceManager.GetString("SignupSuccessMessage", resourceCulture);
+                return ResourceManager.GetString("RememberMe", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Please check your email to confirm your account. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Welcome ähnelt.
         /// </summary>
-        public static string SignupSuccessMessageAgain {
+        public static string Welcome {
             get {
-                return ResourceManager.GetString("SignupSuccessMessageAgain", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Create Account  ähnelt.
-        /// </summary>
-        public static string SignupText {
-            get {
-                return ResourceManager.GetString("SignupText", resourceCulture);
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
     }

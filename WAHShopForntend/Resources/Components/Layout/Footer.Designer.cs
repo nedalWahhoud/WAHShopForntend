@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Forgotpassword {
+    public class Footer {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Forgotpassword() {
+        internal Footer() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Forgotpassword", typeof(Forgotpassword).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.Footer", typeof(Footer).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,92 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Back to login ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die AGB ähnelt.
         /// </summary>
-        public static string BackToLogin {
+        public static string Agb {
             get {
-                return ResourceManager.GetString("BackToLogin", resourceCulture);
+                return ResourceManager.GetString("Agb", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Email address ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Contact ähnelt.
         /// </summary>
-        public static string EmailPlaceholder {
+        public static string Contact {
             get {
-                return ResourceManager.GetString("EmailPlaceholder", resourceCulture);
+                return ResourceManager.GetString("Contact", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Loading... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Follow us on ähnelt.
         /// </summary>
-        public static string Loading {
+        public static string FollowUs {
             get {
-                return ResourceManager.GetString("Loading", resourceCulture);
+                return ResourceManager.GetString("FollowUs", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die New password ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
         /// </summary>
-        public static string NewPasswordPlaceholder {
+        public static string Home {
             get {
-                return ResourceManager.GetString("NewPasswordPlaceholder", resourceCulture);
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Re-enter password ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Impressum ähnelt.
         /// </summary>
-        public static string PasswordAgainPlaceholder {
+        public static string Impressum {
             get {
-                return ResourceManager.GetString("PasswordAgainPlaceholder", resourceCulture);
+                return ResourceManager.GetString("Impressum", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die A new password has been sent to your email. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Links ähnelt.
         /// </summary>
-        public static string PasswordSentMessage {
+        public static string Links {
             get {
-                return ResourceManager.GetString("PasswordSentMessage", resourceCulture);
+                return ResourceManager.GetString("Links", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Please change your password ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Location ähnelt.
         /// </summary>
-        public static string PleaseChangePassword {
+        public static string Location {
             get {
-                return ResourceManager.GetString("PleaseChangePassword", resourceCulture);
+                return ResourceManager.GetString("Location", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Enter your email to reset your password.  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Our delivery service information ähnelt.
         /// </summary>
-        public static string ResetPasswordInstruction {
+        public static string OurDeliveryServiceInformation {
             get {
-                return ResourceManager.GetString("ResetPasswordInstruction", resourceCulture);
+                return ResourceManager.GetString("OurDeliveryServiceInformation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Reset Password ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Privacy Policy ähnelt.
         /// </summary>
-        public static string ResetPasswordText {
+        public static string PrivacyPolicy {
             get {
-                return ResourceManager.GetString("ResetPasswordText", resourceCulture);
+                return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Sent password ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Right of Withdrawal ähnelt.
         /// </summary>
-        public static string SentPasswordPlaceholder {
+        public static string RightOfWithdrawal {
             get {
-                return ResourceManager.GetString("SentPasswordPlaceholder", resourceCulture);
+                return ResourceManager.GetString("RightOfWithdrawal", resourceCulture);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿@page "/"
-@inject IStringLocalizer< WAHShopForntend.Resources.Index> L
+@namespace WAHShopForntend.Components.Layout
+@inject IStringLocalizer<WAHShopForntend.Components.Layout.Index> L
 @inherits LayoutComponentBase
 @using System.Globalization;
 @implements IDisposable
@@ -8,10 +9,10 @@
     <!-- Page Title -->
     <PageTitle>
         @(
-            System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
-            ? ProjectInfo.Value.Name
-            : ProjectInfo.Value.NameArabic 
-        )
+                    System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+                    ? ProjectInfo.Value.Name
+                    : ProjectInfo.Value.NameArabic 
+                )
     </PageTitle>
 
     <!-- Meta Description -->
@@ -25,8 +26,6 @@
         : "متجر عربي, مواد غذائية, حلويات, توابل, متجر سوري, تسوق أونلاين")" />
 
 </HeadContent>
-
-
 @if (IsLoading)
 {
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
@@ -36,47 +35,45 @@
         <h5 class="mt-3 text-muted fw-light">@L["Loading"]</h5>
     </div>
 }
-else
+
+@* carsousel images *@
+@if (carouselImagesService.DownloadedCarouselImage.Any())
 {
-    // carsousel images
-    @if (carouselImagesService.DownloadedCarouselImage.Any())
+    @if (!IsCarouselFullscreen)
     {
-        @if (!IsCarouselFullscreen)
-        {
-            <WAHShopForntend.Components.Layout.CarouselLayout OnHandel="HandleCarouselFullScreen" />
-        }
-        else if(IsCarouselFullscreen)
-        {
-            <WAHShopForntend.Components.Layout.FullscreenCarousel OnHandel="HandleCarouselFullScreen" />
-        }
+        <WAHShopForntend.Components.Layout.CarouselLayout OnHandel="HandleCarouselFullScreen" />
     }
-    <div class="divCategory">
-        @for (int x = 0; x < mainProductByCategory.Count; x++)
-        {
-            // category
-            var category = mainProductByCategory[x].Category;
-            <div class="category">
-                <p class="@(category.Id == -1 ? "categoryOnOffer" : "")">
-                    @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                         ? category.Name_ar
-                                         : category.Name_de)
-                </p>
-            </div>
-            <div class="mainProductsCard">
-                @for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
-                {
-                    // product
-                    var product = mainProductByCategory[x].Products[i];
-                    <div class="productsCard">
-                        <WAHShopForntend.Components.Layout.ShareLayout product="@product"/>
-                        <WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
-                        <WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />                 
-                    </div>
-                }
-            </div>
-        }
-    </div>
+    else if(IsCarouselFullscreen)
+    {
+        <WAHShopForntend.Components.Layout.FullscreenCarousel OnHandel="HandleCarouselFullScreen" />
+    }
 }
+<div class="divCategory">
+    @for (int x = 0; x < mainProductByCategory.Count; x++)
+    {
+        // category
+        var category = mainProductByCategory[x].Category;
+        <div class="category">
+            <p class="@(category.Id == -1 ? "categoryOnOffer" : "")">
+                @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                             ? category.Name_ar
+                                             : category.Name_de)
+            </p>
+        </div>
+        <div class="mainProductsCard">
+            @for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
+            {
+                // product
+                var product = mainProductByCategory[x].Products[i];
+                <div class="productsCard">
+                    <WAHShopForntend.Components.Layout.ShareLayout product="@product"/>
+                    <WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+                    <WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />                 
+                </div>
+            }
+        </div>
+    }
+</div>
 @code{
     private GetItems<Product> getItems = new();
     private List<ProductByCategory> mainProductByCategory = new();
@@ -99,7 +96,7 @@ else
         // get on offer products
         await LoadOnOfferProducts(-1);
         // get recommended products
-        List<Categories> categories = await categoryService.GetRandomCategories(2,excludeCategoriesIds,random);
+        List<Categories> categories = await categoryService.GetRandomCategories(2, excludeCategoriesIds, random);
         await LoadProductsRecommended(categories);
         // Diese Kategorien beim nächsten Ladevorgang ausschließen
         excludeCategoriesIds.AddRange(categories.Select(s => s.Id));

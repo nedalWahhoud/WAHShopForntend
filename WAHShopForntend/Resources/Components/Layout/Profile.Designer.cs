@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Profile", typeof(Profile).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.Profile", typeof(Profile).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

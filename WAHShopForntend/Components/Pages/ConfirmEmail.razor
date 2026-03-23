@@ -1,5 +1,6 @@
 ﻿@page "/confirmemail"
-@inject IStringLocalizer< WAHShopForntend.Resources.ConfirmEmail> L
+@namespace WAHShopForntend.Components.Layout
+@inject IStringLocalizer<WAHShopForntend.Components.Layout.ConfirmEmail> L
 @inject NavigationManager NavManager
 
 @if (activateRequest.IsLoading)

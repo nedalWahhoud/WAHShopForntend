@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class CategoryNav {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal CategoryNav() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.CategoryNav", typeof(CategoryNav).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,56 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Loading ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Drinks ähnelt.
         /// </summary>
-        public static string Loading {
+        public static string drinks {
             get {
-                return ResourceManager.GetString("Loading", resourceCulture);
+                return ResourceManager.GetString("drinks", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Recommended for you ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Foodstuffs ähnelt.
         /// </summary>
-        public static string RecommendedForYou {
+        public static string foodstuffs {
             get {
-                return ResourceManager.GetString("RecommendedForYou", resourceCulture);
+                return ResourceManager.GetString("foodstuffs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Frozen ähnelt.
+        /// </summary>
+        public static string Frozen {
+            get {
+                return ResourceManager.GetString("Frozen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Meats ähnelt.
+        /// </summary>
+        public static string Meats {
+            get {
+                return ResourceManager.GetString("Meats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die On Offer ähnelt.
+        /// </summary>
+        public static string OnOffer {
+            get {
+                return ResourceManager.GetString("OnOffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sweets and snacks ähnelt.
+        /// </summary>
+        public static string SweetsSnacks {
+            get {
+                return ResourceManager.GetString("SweetsSnacks", resourceCulture);
             }
         }
     }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AddDecresaseCard {
+    public class customerDashboard {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AddDecresaseCard() {
+        internal customerDashboard() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.AddDecresaseCard", typeof(AddDecresaseCard).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.customerDashboard", typeof(customerDashboard).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,92 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You cannot order more than 5 piece. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die All loaded ähnelt.
         /// </summary>
-        public static string MaxQuantity {
+        public static string AllLoaded {
             get {
-                return ResourceManager.GetString("MaxQuantity", resourceCulture);
+                return ResourceManager.GetString("AllLoaded", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Insufficient stock ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Amount ähnelt.
         /// </summary>
-        public static string NoStock {
+        public static string Amount {
             get {
-                return ResourceManager.GetString("NoStock", resourceCulture);
+                return ResourceManager.GetString("Amount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Not found in Cart ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Borrow ähnelt.
         /// </summary>
-        public static string ProductNotFound {
+        public static string Borrow {
             get {
-                return ResourceManager.GetString("ProductNotFound", resourceCulture);
+                return ResourceManager.GetString("Borrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Created ähnelt.
+        /// </summary>
+        public static string CreatedAt {
+            get {
+                return ResourceManager.GetString("CreatedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Current debt amount ähnelt.
+        /// </summary>
+        public static string CurrentAmount {
+            get {
+                return ResourceManager.GetString("CurrentAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Debts of ähnelt.
+        /// </summary>
+        public static string DebtsOf {
+            get {
+                return ResourceManager.GetString("DebtsOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die More loading ähnelt.
+        /// </summary>
+        public static string MoreLoading {
+            get {
+                return ResourceManager.GetString("MoreLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Notes ähnelt.
+        /// </summary>
+        public static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Repay ähnelt.
+        /// </summary>
+        public static string Repay {
+            get {
+                return ResourceManager.GetString("Repay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Transaction Type ähnelt.
+        /// </summary>
+        public static string TransactionType {
+            get {
+                return ResourceManager.GetString("TransactionType", resourceCulture);
             }
         }
     }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CustomerPortal {
+    public class AddDecresaseCard {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CustomerPortal() {
+        internal AddDecresaseCard() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.CustomerPortal", typeof(CustomerPortal).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.AddDecresaseCard", typeof(AddDecresaseCard).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,29 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Customer Login ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die You cannot order more than 5 piece. ähnelt.
         /// </summary>
-        public static string CustomerLogin {
+        public static string MaxQuantity {
             get {
-                return ResourceManager.GetString("CustomerLogin", resourceCulture);
+                return ResourceManager.GetString("MaxQuantity", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Insufficient stock ähnelt.
         /// </summary>
-        public static string Login {
+        public static string NoStock {
             get {
-                return ResourceManager.GetString("Login", resourceCulture);
+                return ResourceManager.GetString("NoStock", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Phone Number ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Not found in Cart ähnelt.
         /// </summary>
-        public static string PhoneNumber {
+        public static string ProductNotFound {
             get {
-                return ResourceManager.GetString("PhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die PIN ähnelt.
-        /// </summary>
-        public static string PIN {
-            get {
-                return ResourceManager.GetString("PIN", resourceCulture);
+                return ResourceManager.GetString("ProductNotFound", resourceCulture);
             }
         }
     }

@@ -17,6 +17,7 @@ using WAHShopForntend.Components.CookieF;
 using WAHShopForntend.Components.CustomersF;
 using WAHShopForntend.Components.TransactionsCustomersF;
 using WAHShopForntend.Components.DebtF;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -101,8 +102,20 @@ builder.Services.AddScoped<TransactionsCustomersService>();
 // DebtCustomers service
 builder.Services.AddScoped<DebtService>();
 
+// Sprachen
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+var supportedCultures = new[] { "de", "ar" };
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[1]) 
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+localizationOptions.RequestCultureProviders.Clear();
+localizationOptions.RequestCultureProviders.Add(new CookieRequestCultureProvider());
+
 //
 var app = builder.Build();
+
+app.UseRequestLocalization(localizationOptions);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

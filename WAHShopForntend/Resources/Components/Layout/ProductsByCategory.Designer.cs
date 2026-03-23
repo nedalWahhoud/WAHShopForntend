@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Impressum {
+    public class ProductsByCategory {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Impressum() {
+        internal ProductsByCategory() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Impressum", typeof(Impressum).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.ProductsByCategory", typeof(ProductsByCategory).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,74 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Contact ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die All loaded ähnelt.
         /// </summary>
-        public static string Contact {
+        public static string AllItemsLoaded {
             get {
-                return ResourceManager.GetString("Contact", resourceCulture);
+                return ResourceManager.GetString("AllItemsLoaded", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Concept, design and programming ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Loading... ähnelt.
         /// </summary>
-        public static string developer {
+        public static string LoadingButton {
             get {
-                return ResourceManager.GetString("developer", resourceCulture);
+                return ResourceManager.GetString("LoadingButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die MHD Nedal Wahhoud ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Load more ähnelt.
         /// </summary>
-        public static string developerName {
+        public static string LoadMore {
             get {
-                return ResourceManager.GetString("developerName", resourceCulture);
+                return ResourceManager.GetString("LoadMore", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die E-Mail ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die You cannot order more than 5 piece. ähnelt.
         /// </summary>
-        public static string email {
+        public static string MaxQuantity {
             get {
-                return ResourceManager.GetString("email", resourceCulture);
+                return ResourceManager.GetString("MaxQuantity", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Hosting ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die No Products Found ähnelt.
         /// </summary>
-        public static string Hosting {
+        public static string NoItemsFound {
             get {
-                return ResourceManager.GetString("Hosting", resourceCulture);
+                return ResourceManager.GetString("NoItemsFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die We host the content of our website with the following provider: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die There are currently no offers. However, we regularly add new offers—check back later and you&apos;re sure to find something. ähnelt.
         /// </summary>
-        public static string HostingText {
+        public static string NoOffersFound {
             get {
-                return ResourceManager.GetString("HostingText", resourceCulture);
+                return ResourceManager.GetString("NoOffersFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Impressum ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Insufficient stock ähnelt.
         /// </summary>
-        public static string impressum {
+        public static string NoStock {
             get {
-                return ResourceManager.GetString("impressum", resourceCulture);
+                return ResourceManager.GetString("NoStock", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Tel. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die On Offer ähnelt.
         /// </summary>
-        public static string Tel {
+        public static string OnOffer {
             get {
-                return ResourceManager.GetString("Tel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die VAT ID ähnelt.
-        /// </summary>
-        public static string VATID {
-            get {
-                return ResourceManager.GetString("VATID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die VAT identification number according to §27a of the German VAT Act: DE334553043 ähnelt.
-        /// </summary>
-        public static string VATIDText {
-            get {
-                return ResourceManager.GetString("VATIDText", resourceCulture);
+                return ResourceManager.GetString("OnOffer", resourceCulture);
             }
         }
     }

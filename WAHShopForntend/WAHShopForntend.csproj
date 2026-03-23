@@ -13,127 +13,127 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\AddDecresaseCard.Designer.cs">
+    <Compile Update="Resources\Components\Layout\AddDecresaseCard.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AddDecresaseCard.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\AGB.Designer.cs">
+    <Compile Update="Resources\Components\Layout\AGB.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AGB.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Cart.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Cart.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Cart.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\CategoryNav.Designer.cs">
+    <Compile Update="Resources\Components\Layout\CategoryNav.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CategoryNav.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Checkout.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Checkout.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Checkout.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\ConfirmEmail.Designer.cs">
+    <Compile Update="Resources\Components\Layout\ConfirmEmail.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ConfirmEmail.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\customerDashboard.Designer.cs">
+    <Compile Update="Resources\Components\Layout\customerDashboard.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>customerDashboard.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\CustomerPortal.Designer.cs">
+    <Compile Update="Resources\Components\Layout\CustomerPortal.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CustomerPortal.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Footer.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Footer.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Footer.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Forgotpassword.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Forgotpassword.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Forgotpassword.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Header.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Header.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Header.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Impressum.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Impressum.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Impressum.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Index.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Index.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Index.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Login.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Login.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Login.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\MainLayout.Designer.cs">
+    <Compile Update="Resources\Components\Layout\MainLayout.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>MainLayout.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Orders.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Orders.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Orders.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\OurDeliveryService.Designer.cs">
+    <Compile Update="Resources\Components\Layout\OurDeliveryService.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>OurDeliveryService.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\PrivacyPolicy.Designer.cs">
+    <Compile Update="Resources\Components\Layout\PrivacyPolicy.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>PrivacyPolicy.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\ProductPage.Designer.cs">
+    <Compile Update="Resources\Components\Layout\ProductPage.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ProductPage.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\ProductsByCategory.Designer.cs">
+    <Compile Update="Resources\Components\Layout\ProductsByCategory.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ProductsByCategory.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Profile.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Profile.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Profile.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\RightOfWithdrawal.Designer.cs">
+    <Compile Update="Resources\Components\Layout\RightOfWithdrawal.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>RightOfWithdrawal.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\SearchProducts.Designer.cs">
+    <Compile Update="Resources\Components\Layout\SearchProducts.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SearchProducts.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\ShareLayout.Designer.cs">
+    <Compile Update="Resources\Components\Layout\ShareLayout.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ShareLayout.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Signup.Designer.cs">
+    <Compile Update="Resources\Components\Layout\Signup.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Signup.resx</DependentUpon>
@@ -141,106 +141,106 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\AddDecresaseCard.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\AddDecresaseCard.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddDecresaseCard.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\AGB.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\AGB.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AGB.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Cart.ar.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Cart.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Cart.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Cart.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Cart.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\CategoryNav.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\CategoryNav.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CategoryNav.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Checkout.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Checkout.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Checkout.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ConfirmEmail.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\ConfirmEmail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConfirmEmail.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\customerDashboard.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\customerDashboard.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>customerDashboard.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\CustomerPortal.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\CustomerPortal.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CustomerPortal.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Footer.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Footer.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Footer.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Forgotpassword.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Forgotpassword.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Forgotpassword.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Header.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Header.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Header.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Impressum.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Impressum.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Impressum.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Index.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Login.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Login.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Login.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\MainLayout.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\MainLayout.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainLayout.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Orders.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Orders.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Orders.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\OurDeliveryService.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\OurDeliveryService.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>OurDeliveryService.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\PrivacyPolicy.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\PrivacyPolicy.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrivacyPolicy.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ProductPage.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\ProductPage.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProductPage.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ProductsByCategory.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\ProductsByCategory.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProductsByCategory.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Profile.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Profile.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Profile.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\RightOfWithdrawal.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\RightOfWithdrawal.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RightOfWithdrawal.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SearchProducts.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\SearchProducts.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SearchProducts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ShareLayout.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\ShareLayout.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ShareLayout.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Signup.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Signup.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Signup.Designer.cs</LastGenOutput>
     </EmbeddedResource>

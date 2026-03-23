@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ShareLayout {
+    public class ProductPage {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ShareLayout() {
+        internal ProductPage() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.ShareLayout", typeof(ShareLayout).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.ProductPage", typeof(ProductPage).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,65 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Share ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die  Available again soon. ähnelt.
         /// </summary>
-        public static string Share {
+        public static string AvailableSoon {
             get {
-                return ResourceManager.GetString("Share", resourceCulture);
+                return ResourceManager.GetString("AvailableSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This product is not suitable for shipping via a courier service. ähnelt.
+        /// </summary>
+        public static string IsNotShippable {
+            get {
+                return ResourceManager.GetString("IsNotShippable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This product is suitable for shipping via a shipping service provider. ähnelt.
+        /// </summary>
+        public static string IsShippable {
+            get {
+                return ResourceManager.GetString("IsShippable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die loading... ähnelt.
+        /// </summary>
+        public static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You cannot order more than 5 piece. ähnelt.
+        /// </summary>
+        public static string MaxQuantity {
+            get {
+                return ResourceManager.GetString("MaxQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Insufficient stock ähnelt.
+        /// </summary>
+        public static string NoStock {
+            get {
+                return ResourceManager.GetString("NoStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Currently sold out due to high demand – available again soon. ähnelt.
+        /// </summary>
+        public static string OutStock {
+            get {
+                return ResourceManager.GetString("OutStock", resourceCulture);
             }
         }
     }

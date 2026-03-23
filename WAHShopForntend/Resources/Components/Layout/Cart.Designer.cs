@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Footer {
+    public class Cart {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Footer() {
+        internal Cart() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Footer", typeof(Footer).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.Cart", typeof(Cart).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,92 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die AGB ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Article ähnelt.
         /// </summary>
-        public static string Agb {
+        public static string Article {
             get {
-                return ResourceManager.GetString("Agb", resourceCulture);
+                return ResourceManager.GetString("Article", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Contact ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Back to Shop ähnelt.
         /// </summary>
-        public static string Contact {
+        public static string BackToShopButton {
             get {
-                return ResourceManager.GetString("Contact", resourceCulture);
+                return ResourceManager.GetString("BackToShopButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Follow us on ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your shopping cart is empty. ähnelt.
         /// </summary>
-        public static string FollowUs {
+        public static string CartEmptyMessage {
             get {
-                return ResourceManager.GetString("FollowUs", resourceCulture);
+                return ResourceManager.GetString("CartEmptyMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shopping Cart  ähnelt.
         /// </summary>
-        public static string Home {
+        public static string CartTitle {
             get {
-                return ResourceManager.GetString("Home", resourceCulture);
+                return ResourceManager.GetString("CartTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Impressum ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Checkout ähnelt.
         /// </summary>
-        public static string Impressum {
+        public static string CheckoutButton {
             get {
-                return ResourceManager.GetString("Impressum", resourceCulture);
+                return ResourceManager.GetString("CheckoutButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Links ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die loading... ähnelt.
         /// </summary>
-        public static string Links {
+        public static string Loading {
             get {
-                return ResourceManager.GetString("Links", resourceCulture);
+                return ResourceManager.GetString("Loading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Location ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Price: ähnelt.
         /// </summary>
-        public static string Location {
+        public static string PriceLabel {
             get {
-                return ResourceManager.GetString("Location", resourceCulture);
+                return ResourceManager.GetString("PriceLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Our delivery service information ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Product not found ähnelt.
         /// </summary>
-        public static string OurDeliveryServiceInformation {
+        public static string ProductNotFound {
             get {
-                return ResourceManager.GetString("OurDeliveryServiceInformation", resourceCulture);
+                return ResourceManager.GetString("ProductNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Privacy Policy ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total: ähnelt.
         /// </summary>
-        public static string PrivacyPolicy {
+        public static string TotalLabel {
             get {
-                return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
+                return ResourceManager.GetString("TotalLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Right of Withdrawal ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total price ähnelt.
         /// </summary>
-        public static string RightOfWithdrawal {
+        public static string TotalPrice {
             get {
-                return ResourceManager.GetString("RightOfWithdrawal", resourceCulture);
+                return ResourceManager.GetString("TotalPrice", resourceCulture);
             }
         }
     }

@@ -8,7 +8,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Cart.ar.resx">
+    <EmbeddedResource Update="Resources\Components\Layout\Cart.ar.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

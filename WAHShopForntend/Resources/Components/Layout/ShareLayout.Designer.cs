@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ProductsByCategory {
+    public class ShareLayout {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ProductsByCategory() {
+        internal ShareLayout() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.ProductsByCategory", typeof(ProductsByCategory).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.ShareLayout", typeof(ShareLayout).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,11 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die All loaded ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Share ähnelt.
         /// </summary>
-        public static string AllItemsLoaded {
+        public static string Share {
             get {
-                return ResourceManager.GetString("AllItemsLoaded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Loading... ähnelt.
-        /// </summary>
-        public static string LoadingButton {
-            get {
-                return ResourceManager.GetString("LoadingButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Load more ähnelt.
-        /// </summary>
-        public static string LoadMore {
-            get {
-                return ResourceManager.GetString("LoadMore", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You cannot order more than 5 piece. ähnelt.
-        /// </summary>
-        public static string MaxQuantity {
-            get {
-                return ResourceManager.GetString("MaxQuantity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die No Products Found ähnelt.
-        /// </summary>
-        public static string NoItemsFound {
-            get {
-                return ResourceManager.GetString("NoItemsFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die There are currently no offers. However, we regularly add new offers—check back later and you&apos;re sure to find something. ähnelt.
-        /// </summary>
-        public static string NoOffersFound {
-            get {
-                return ResourceManager.GetString("NoOffersFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Insufficient stock ähnelt.
-        /// </summary>
-        public static string NoStock {
-            get {
-                return ResourceManager.GetString("NoStock", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die On Offer ähnelt.
-        /// </summary>
-        public static string OnOffer {
-            get {
-                return ResourceManager.GetString("OnOffer", resourceCulture);
+                return ResourceManager.GetString("Share", resourceCulture);
             }
         }
     }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Login {
+    public class Index {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Login() {
+        internal Index() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Login", typeof(Login).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.Index", typeof(Index).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,20 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Email  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Loading ähnelt.
         /// </summary>
-        public static string Email {
+        public static string Loading {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("Loading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Forgot password? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Recommended for you ähnelt.
         /// </summary>
-        public static string ForgotPassword {
+        public static string RecommendedForYou {
             get {
-                return ResourceManager.GetString("ForgotPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
-        /// </summary>
-        public static string LoginText {
-            get {
-                return ResourceManager.GetString("LoginText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die No Account Text ähnelt.
-        /// </summary>
-        public static string NoAccountText {
-            get {
-                return ResourceManager.GetString("NoAccountText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Password ähnelt.
-        /// </summary>
-        public static string Password {
-            get {
-                return ResourceManager.GetString("Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Register ähnelt.
-        /// </summary>
-        public static string Register {
-            get {
-                return ResourceManager.GetString("Register", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Remember me ähnelt.
-        /// </summary>
-        public static string RememberMe {
-            get {
-                return ResourceManager.GetString("RememberMe", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Welcome ähnelt.
-        /// </summary>
-        public static string Welcome {
-            get {
-                return ResourceManager.GetString("Welcome", resourceCulture);
+                return ResourceManager.GetString("RecommendedForYou", resourceCulture);
             }
         }
     }

@@ -1,7 +1,8 @@
 ﻿@page "/checkout"
 @using System.Security.Claims
 @implements IDisposable
-@inject IStringLocalizer< WAHShopForntend.Resources.Checkout> L
+@namespace WAHShopForntend.Components.Layout
+@inject IStringLocalizer<WAHShopForntend.Components.Layout.Checkout> L
 
 @if (!IsLoaded)
 {

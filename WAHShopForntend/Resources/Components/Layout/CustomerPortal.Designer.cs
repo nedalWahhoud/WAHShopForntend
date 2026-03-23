@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class MainLayout {
+    public class CustomerPortal {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MainLayout() {
+        internal CustomerPortal() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.MainLayout", typeof(MainLayout).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.CustomerPortal", typeof(CustomerPortal).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,38 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die We use cookies to enhance your experience on our website, such as remembering your preferences and providing personalized content securely. Do you agree to the use of cookies? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Customer Login ähnelt.
         /// </summary>
-        public static string CookieMessage {
+        public static string CustomerLogin {
             get {
-                return ResourceManager.GetString("CookieMessage", resourceCulture);
+                return ResourceManager.GetString("CustomerLogin", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Loading ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
         /// </summary>
-        public static string Loading {
+        public static string Login {
             get {
-                return ResourceManager.GetString("Loading", resourceCulture);
+                return ResourceManager.GetString("Login", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die No ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Phone Number ähnelt.
         /// </summary>
-        public static string No {
+        public static string PhoneNumber {
             get {
-                return ResourceManager.GetString("No", resourceCulture);
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Yes ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die PIN ähnelt.
         /// </summary>
-        public static string Yes {
+        public static string PIN {
             get {
-                return ResourceManager.GetString("Yes", resourceCulture);
+                return ResourceManager.GetString("PIN", resourceCulture);
             }
         }
     }

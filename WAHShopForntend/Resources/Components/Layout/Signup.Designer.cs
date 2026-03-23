@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class customerDashboard {
+    public class Signup {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal customerDashboard() {
+        internal Signup() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.customerDashboard", typeof(customerDashboard).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.Signup", typeof(Signup).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,110 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die All loaded ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Already registered? ähnelt.
         /// </summary>
-        public static string AllLoaded {
+        public static string AlreadyRegisteredText {
             get {
-                return ResourceManager.GetString("AllLoaded", resourceCulture);
+                return ResourceManager.GetString("AlreadyRegisteredText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Amount ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your Date of Birth ähnelt.
         /// </summary>
-        public static string Amount {
+        public static string BirthDateLabel {
             get {
-                return ResourceManager.GetString("Amount", resourceCulture);
+                return ResourceManager.GetString("BirthDateLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Borrow ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email ähnelt.
         /// </summary>
-        public static string Borrow {
+        public static string EmailPlaceholder {
             get {
-                return ResourceManager.GetString("Borrow", resourceCulture);
+                return ResourceManager.GetString("EmailPlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Created ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
         /// </summary>
-        public static string CreatedAt {
+        public static string LoginText {
             get {
-                return ResourceManager.GetString("CreatedAt", resourceCulture);
+                return ResourceManager.GetString("LoginText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Current debt amount ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your Name ähnelt.
         /// </summary>
-        public static string CurrentAmount {
+        public static string NamePlaceholder {
             get {
-                return ResourceManager.GetString("CurrentAmount", resourceCulture);
+                return ResourceManager.GetString("NamePlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Debts of ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Okay ähnelt.
         /// </summary>
-        public static string DebtsOf {
+        public static string Okay {
             get {
-                return ResourceManager.GetString("DebtsOf", resourceCulture);
+                return ResourceManager.GetString("Okay", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die More loading ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Re-enter Password ähnelt.
         /// </summary>
-        public static string MoreLoading {
+        public static string PasswordAgainPlaceholder {
             get {
-                return ResourceManager.GetString("MoreLoading", resourceCulture);
+                return ResourceManager.GetString("PasswordAgainPlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Notes ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Password ähnelt.
         /// </summary>
-        public static string Notes {
+        public static string PasswordPlaceholder {
             get {
-                return ResourceManager.GetString("Notes", resourceCulture);
+                return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Repay ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Register ähnelt.
         /// </summary>
-        public static string Repay {
+        public static string Register {
             get {
-                return ResourceManager.GetString("Repay", resourceCulture);
+                return ResourceManager.GetString("Register", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Transaction Type ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die User created successfully. Please check your email to confirm your account. ähnelt.
         /// </summary>
-        public static string TransactionType {
+        public static string SignupSuccessMessage {
             get {
-                return ResourceManager.GetString("TransactionType", resourceCulture);
+                return ResourceManager.GetString("SignupSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please check your email to confirm your account. ähnelt.
+        /// </summary>
+        public static string SignupSuccessMessageAgain {
+            get {
+                return ResourceManager.GetString("SignupSuccessMessageAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create Account  ähnelt.
+        /// </summary>
+        public static string SignupText {
+            get {
+                return ResourceManager.GetString("SignupText", resourceCulture);
             }
         }
     }

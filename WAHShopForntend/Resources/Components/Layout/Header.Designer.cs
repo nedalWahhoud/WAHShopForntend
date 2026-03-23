@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ProductPage {
+    public class Header {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ProductPage() {
+        internal Header() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.ProductPage", typeof(ProductPage).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.Header", typeof(Header).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,74 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die  Available again soon. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Account ähnelt.
         /// </summary>
-        public static string AvailableSoon {
+        public static string Account {
             get {
-                return ResourceManager.GetString("AvailableSoon", resourceCulture);
+                return ResourceManager.GetString("Account", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die This product is not suitable for shipping via a courier service. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
         /// </summary>
-        public static string IsNotShippable {
+        public static string Home {
             get {
-                return ResourceManager.GetString("IsNotShippable", resourceCulture);
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die This product is suitable for shipping via a shipping service provider. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
         /// </summary>
-        public static string IsShippable {
+        public static string Login {
             get {
-                return ResourceManager.GetString("IsShippable", resourceCulture);
+                return ResourceManager.GetString("Login", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die loading... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Logout ähnelt.
         /// </summary>
-        public static string Loading {
+        public static string Logout {
             get {
-                return ResourceManager.GetString("Loading", resourceCulture);
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You cannot order more than 5 piece. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die MyOrders ähnelt.
         /// </summary>
-        public static string MaxQuantity {
+        public static string MyOrders {
             get {
-                return ResourceManager.GetString("MaxQuantity", resourceCulture);
+                return ResourceManager.GetString("MyOrders", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Insufficient stock ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die My Profile ähnelt.
         /// </summary>
-        public static string NoStock {
+        public static string MyProfile {
             get {
-                return ResourceManager.GetString("NoStock", resourceCulture);
+                return ResourceManager.GetString("MyProfile", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Currently sold out due to high demand – available again soon. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Privacy Policy ähnelt.
         /// </summary>
-        public static string OutStock {
+        public static string PrivacyPolicy {
             get {
-                return ResourceManager.GetString("OutStock", resourceCulture);
+                return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Search product... ähnelt.
+        /// </summary>
+        public static string ProductSearch {
+            get {
+                return ResourceManager.GetString("ProductSearch", resourceCulture);
             }
         }
     }

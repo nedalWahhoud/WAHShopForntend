@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WAHShopForntend.Resources {
+namespace WAHShopForntend.Resources.Components.Layout {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ConfirmEmail {
+    public class MainLayout {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ConfirmEmail() {
+        internal MainLayout() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.ConfirmEmail", typeof(ConfirmEmail).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.MainLayout", typeof(MainLayout).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,34 +61,16 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Email confirmation failed. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die We use cookies to enhance your experience on our website, such as remembering your preferences and providing personalized content securely. Do you agree to the use of cookies? ähnelt.
         /// </summary>
-        public static string ConfirmationFailed {
+        public static string CookieMessage {
             get {
-                return ResourceManager.GetString("ConfirmationFailed", resourceCulture);
+                return ResourceManager.GetString("CookieMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Email confirmation successful, please log in. ähnelt.
-        /// </summary>
-        public static string ConfirmationSuccessful {
-            get {
-                return ResourceManager.GetString("ConfirmationSuccessful", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Go To Login ähnelt.
-        /// </summary>
-        public static string GoToLogin {
-            get {
-                return ResourceManager.GetString("GoToLogin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Loading... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Loading ähnelt.
         /// </summary>
         public static string Loading {
             get {
@@ -97,11 +79,20 @@ namespace WAHShopForntend.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Missing confirmation data. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die No ähnelt.
         /// </summary>
-        public static string MissingData {
+        public static string No {
             get {
-                return ResourceManager.GetString("MissingData", resourceCulture);
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Yes ähnelt.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿@inject IStringLocalizer< WAHShopForntend.Resources.CategoryNav> L
-
+﻿@inject IStringLocalizer<WAHShopForntend.Components.Layout.CategoryNav> L
 <div class="categoryNav">
     @if (!string.IsNullOrEmpty(activeDropdownId))
     {
@@ -25,9 +24,9 @@
                                     <li @onclick="() => OnCategory(category.Id)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
                                         @(
-                                    System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                                                                ? category.Name_ar
-                                                                                : category.Name_de)
+                                            System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                                                        ? category.Name_ar
+                                                                                        : category.Name_de)
                                     </li>
                                 }
                             </ul>
@@ -55,10 +54,10 @@
                                     <li @onclick="() => OnCategory(category.Id)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
                                         @(
-                                    System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                                                ? category.Name_ar
-                                                                : category.Name_de
-                                                                )
+                                            System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                                        ? category.Name_ar
+                                                                        : category.Name_de
+                                                                        )
                                     </li>
                                 }
                             </ul>
@@ -74,24 +73,24 @@
             <div class="dropdownMenu">
                 @{
                     var SweetsSnacksArray = GetSweetsSnacks();
-					if (SweetsSnacksArray != null)
-					{
-                     for (int i = 0; i < SweetsSnacksArray.Count; i += 5)
-                     {
-                        <ul class="column">
-                            @for (int j = i; j < i + 5 && j < SweetsSnacksArray.Count; j++)
-                            {
-                                var category = SweetsSnacksArray[j];
-                                <li @onclick="() => OnCategory(category.Id)"
-                                class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                    @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                                    ? category.Name_ar
-                                                    : category.Name_de)
-                                </li>
-                            }
-                        </ul>
+                    if (SweetsSnacksArray != null)
+                    {
+                        for (int i = 0; i < SweetsSnacksArray.Count; i += 5)
+                        {
+                            <ul class="column">
+                                @for (int j = i; j < i + 5 && j < SweetsSnacksArray.Count; j++)
+                                {
+                                    var category = SweetsSnacksArray[j];
+                                    <li @onclick="() => OnCategory(category.Id)"
+                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                        @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                                ? category.Name_ar
+                                                                : category.Name_de)
+                                    </li>
+                                }
+                            </ul>
                         }
-                     }
+                    }
                 }
             </div>
         </div>
@@ -110,12 +109,12 @@
                                 {
                                     var category = Mates[j];
                                     <li @onclick="() => OnCategory(category.Id)"
-                                        class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
                                         @(
-                                        System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                        ? category.Name_ar
-                                        : category.Name_de
-                                            )
+                                                System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                ? category.Name_ar
+                                                : category.Name_de
+                                                    )
                                     </li>
                                 }
                             </ul>
@@ -130,11 +129,9 @@
         {
             <a @onclick="() => OnCategory(householdCategory.Id)"
                class="categoryLink @(householdCategory.Id == currentCategoryId ? "selected" : "")">
-                @(
-                             System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                    ? householdCategory.Name_ar
-                    : householdCategory.Name_de
-                            )
+                @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                            ? householdCategory.Name_ar
+                            : householdCategory.Name_de)
             </a>
         }
         @* Dates *@
@@ -142,12 +139,12 @@
         if (DatesCategory != null)
         {
             <a @onclick="() => OnCategory(DatesCategory.Id)"
-               class="categoryLink @(DatesCategory.Id == currentCategoryId ? "selected" : "")">
+            class="categoryLink @(DatesCategory.Id == currentCategoryId ? "selected" : "")">
                 @(
-                    System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                    ? DatesCategory.Name_ar
-                    : DatesCategory.Name_de
-                    )
+                            System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                            ? DatesCategory.Name_ar
+                            : DatesCategory.Name_de
+                            )
             </a>
         }
         @* Other *@
@@ -155,17 +152,17 @@
         if (otherCategory != null)
         {
             <a @onclick="() => OnCategory(otherCategory.Id)"
-               class="categoryLink @(otherCategory.Id == currentCategoryId ? "selected" : "")">
+            class="categoryLink @(otherCategory.Id == currentCategoryId ? "selected" : "")">
                 @(
-                System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                    ? otherCategory.Name_ar
-                    : otherCategory.Name_de
-                                            )
+                        System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                            ? otherCategory.Name_ar
+                            : otherCategory.Name_de
+                                                    )
             </a>
         }
         @* Im Angebot *@
         <a @onclick="() => OnCategory(-1)"
-           class="categoryLinkOnOffer @(currentCategoryId == -1 ? "selected" : "")">
+        class="categoryLinkOnOffer @(currentCategoryId == -1 ? "selected" : "")">
             @L["OnOffer"]
         </a>
     }
@@ -175,6 +172,9 @@
     private int currentCategoryId = 0;
     protected override async Task OnInitializedAsync()
     {
+        var sa2 = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var sa = L["OnOffer"];
+
         await categoryService.GetAllCategoriesAsync();
 
         // get the current category id from the URL
@@ -249,7 +249,6 @@
 		return categoryService.DownloadedCategories?
 					.FirstOrDefault(c => c.Id == 40) ?? null!;
 	}
-
     private Categories GetDates()
     {
         return categoryService.DownloadedCategories?
@@ -258,7 +257,6 @@
 
     /**/
     private string? activeDropdownId = null;
-
     private void ToggleDropdown(string id)
     {
         activeDropdownId = (activeDropdownId == id) ? null : id;

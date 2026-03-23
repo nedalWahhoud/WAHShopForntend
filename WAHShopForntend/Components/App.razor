@@ -47,8 +47,13 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
 
 
 <body>
-
-    <Routes @rendermode="InteractiveServer" />
+    @* 
+      Vorrendering deaktivieren:
+      Durch die Einstellung `prerender: false` verhindern wir, dass Blazor die Seite zweimal rendert (einmal als statisches HTML und einmal interaktiv).
+      Dadurch wird das „Flackern“ beim Laden der Seite behoben und verhindert, dass der Code OnInitializedAsync zweimal ausgeführt wird.
+      Allerdings kann dies die Geschwindigkeit, mit der primäre Inhalte in Suchmaschinen angezeigt werden (SEO), geringfügig beeinflussen.
+    *@
+    <Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" />
     <script src="_framework/blazor.server.js" autostart="false"></script>
     <script src="JS/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
