@@ -61,6 +61,24 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If there are any errors, please contact us directly. ähnelt.
+        /// </summary>
+        public static string AccountNotice {
+            get {
+                return ResourceManager.GetString("AccountNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Account of ähnelt.
+        /// </summary>
+        public static string AccountOf {
+            get {
+                return ResourceManager.GetString("AccountOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die All loaded ähnelt.
         /// </summary>
         public static string AllLoaded {
@@ -102,15 +120,6 @@ namespace WAHShopForntend.Resources.Components.Layout {
         public static string CurrentAmount {
             get {
                 return ResourceManager.GetString("CurrentAmount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Debts of ähnelt.
-        /// </summary>
-        public static string DebtsOf {
-            get {
-                return ResourceManager.GetString("DebtsOf", resourceCulture);
             }
         }
         

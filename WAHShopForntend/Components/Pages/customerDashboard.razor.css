@@ -1,24 +1,69 @@
 ﻿.mainContainer {
     width: 100%;
-    margin-top: 70px;
+    margin-bottom: 50px;
+}
+.iconCircle {
+    width: 35px;
+    height: 35px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
 }
 
+.balanceCard {
+    border-radius: 15px;
+    background: linear-gradient(to bottom right, #ffffff, #fcfcfc);
+}
+
+.bg-danger-soft {
+    background-color: #fee2e2;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+.titleUnderline {
+    width: 100px; 
+    height: 4px; 
+    background-color: #0d6efd; 
+    border-radius: 2px; 
+    margin-top: 8px; 
+}
 
 @media (max-width: 767.98px) {
-    table thead th:nth-child(1) {
-        width: 22%;
-    }
-    table thead th:nth-child(2) {
-        width: 14%;
-    }
-    table thead th:nth-child(3) {
-        width: 33%;
-    }
-    table thead th:nth-child(4) {
+    .balanceText {
+        font-size: 1.5rem !important; /* حجم مناسب للموبايل */
     }
 
-    table td, table th {
-        font-size: 0.85rem;
-        padding: 8px 4px !important;
+    .cardBody {
+        padding: 1rem !important;
     }
+    .tableResponsive {
+        border-radius: 10px;
+        overflow-x: auto;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .customTable {
+        font-size: 12px;
+    }
+
+        .customTable td,
+        .customTable th {
+            padding: 6px;
+        }
+/* Button */
+    .btnMobileSmall {
+        padding: 5px 15px !important; 
+        font-size: 12px !important; 
+        min-height: 35px; 
+    }
+
+        .btnMobileSmall .spinner-border {
+            width: 12px; 
+            height: 12px;
+        }
 }

@@ -132,8 +132,8 @@
   <data name="CurrentAmount" xml:space="preserve">
     <value>مبلغ الدين الحالي</value>
   </data>
-  <data name="DebtsOf" xml:space="preserve">
-    <value>ديون</value>
+  <data name="AccountOf" xml:space="preserve">
+    <value>حساب العميل</value>
   </data>
   <data name="MoreLoading" xml:space="preserve">
     <value>تحميل المزيد</value>
@@ -146,5 +146,8 @@
   </data>
   <data name="TransactionType" xml:space="preserve">
     <value>نوع المعاملة</value>
+  </data>
+  <data name="AccountNotice" xml:space="preserve">
+    <value>في حال وجود أخطاء يرجى مراسلتنا مباشرة.</value>
   </data>
 </root>

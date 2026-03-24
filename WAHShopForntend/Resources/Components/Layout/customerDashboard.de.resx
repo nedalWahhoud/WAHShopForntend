@@ -132,8 +132,8 @@
   <data name="CurrentAmount" xml:space="preserve">
     <value>Aktueller Schuldenbetrag</value>
   </data>
-  <data name="DebtsOf" xml:space="preserve">
-    <value>Schulden von</value>
+  <data name="AccountOf" xml:space="preserve">
+    <value>Kundenkonto</value>
   </data>
   <data name="MoreLoading" xml:space="preserve">
     <value>Mehr Laden</value>
@@ -146,5 +146,8 @@
   </data>
   <data name="TransactionType" xml:space="preserve">
     <value>Tr-Type</value>
+  </data>
+  <data name="AccountNotice" xml:space="preserve">
+    <value>Sollten Fehler auftreten, kontaktieren Sie uns bitte direkt.</value>
   </data>
 </root>
