@@ -21,7 +21,6 @@ namespace WAHShopForntend.Components.Models
 
         [Compare("Password", ErrorMessage = "Passwörter stimmen nicht überein.")]
         public string PasswordAgain { get; set; } = string.Empty;
-        [Required(ErrorMessage = "Rolle ist erforderlich.")]
         public string BirthDate { get; set; } = string.Empty;
         public bool IsGuest { get; set; } = false;
         public string SignupProvider { get; set; } = string.Empty;
