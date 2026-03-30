@@ -52,8 +52,7 @@
             <span class="carousel-control-next-icon"></span>
         </button>
         </div>
-    </div>
-
+</div>
 
 @code {
     [Parameter]
@@ -67,6 +66,11 @@
             {
                 // scroll spreen
                 await JS.InvokeVoidAsync("openFullscreen");
+
+                // Vollbildmodus aktivieren
+                // ID des zu vergrößernden Elements angeben
+                await JS.InvokeVoidAsync("openNativeFullscreen", "offersCarouselFullscreen");
+
                 // Carousel automatisch laufen nach rended
                 await JS.InvokeVoidAsync("initCarousel", "offersCarouselFullscreen");
             }
@@ -83,6 +87,8 @@
         {
 			// scroll entsperren
             await JS.InvokeVoidAsync("closeFullscreen");
+            //  Verlassen des echten Vollbildmodus
+            await JS.InvokeVoidAsync("exitNativeFullscreen");
         }
         catch (Exception ex)
         {

@@ -178,7 +178,17 @@ window.shareProduct = async (title, url) => {
             catch (error) {
                 console.warn("Share/Copy failed:", error);
             }
-        };
+};
+
+// Vollbildmodus aktivieren
+window.openNativeFullscreen = function (elementId) {
+    var elem = document.getElementById(elementId);
+    if (elem && elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem && elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    }
+};
 // Carousel automatisch laufen nach rended
 window.initCarousel = function (carouselId) {
             var myCarousel = document.querySelector('#' + carouselId);
@@ -188,9 +198,17 @@ window.initCarousel = function (carouselId) {
             new bootstrap.Carousel(myCarousel, {
                 interval: 5000,
                 ride: 'carousel',
-                pause: 'hover'
+                pause: 'false'
             });
-        };
+};
+//  Verlassen des echten Vollbildmodus 
+window.exitNativeFullscreen = function () {
+    if (document.fullscreenElement) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+};
 // Scroll sperren
 window.openFullscreen = function() {
    document.body.style.overflow = 'hidden';

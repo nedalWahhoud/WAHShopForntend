@@ -1,5 +1,4 @@
 ﻿<div id="offersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-
     <button class="fullscreenBtn" @onclick="OnFullScreen">
         ⛶
     </button>
@@ -8,27 +7,22 @@
     <div class="carousel-indicators">
         @for (int i = 0; i < carouselImagesService.DownloadedCarouselImage.Count; i++)
         {
-            <button type="button"
-            data-bs-target="#offersCarousel"
-            data-bs-slide-to="@i"
-            class="@(i == 0 ? "active" : "")"
-            aria-current="@(i == 0 ? "true" : "false")">
-            </button>
+            <button type="button" data-bs-target="#offersCarousel" data-bs-slide-to="@i"  class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" />
         }
     </div>
 
     <!-- Images -->
-    <div class="carousel-inner">
-        @for (int i = 0; i < carouselImagesService.DownloadedCarouselImage.Count; i++)
-        {
-            var item = carouselImagesService.DownloadedCarouselImage[i];
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @for (int i = 0; i < carouselImagesService.DownloadedCarouselImage.Count; i++)
+            {
+                var item = carouselImagesService.DownloadedCarouselImage[i];
 
-            <div class="carousel-item @(i == 0 ? "active" : "")">
-                <img src="@carouselImagesService.GetImageUrl(item)"
-                class="d-block w-100 carousel-img"
-                alt="Carousel Image">
-            </div>
-        }
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                    <img src="@carouselImagesService.GetImageUrl(item)" class="carousel-img">
+                </div>
+            }
+        </div>
     </div>
 
     <!-- Controls -->
@@ -60,7 +54,6 @@
             }
         }
     }
-
 	private async Task OnFullScreen()
 	{
         await OnHandel.InvokeAsync(true);

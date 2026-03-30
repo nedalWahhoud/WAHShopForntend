@@ -1,22 +1,27 @@
-﻿#offersCarousel {
-    margin-top: 80px; 
-}
-
-.carousel-item {
-    width: 100%;
-    height: 400px;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.0);
+﻿.carousel {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden; 
 }
 
 .carousel-img {
-    width: 100%;
-    height: 350px;
+    width: auto ;
+    max-width: 100%;
+    height: auto;
+    max-height: 100vh; 
+    display: block;
+    margin: 0 auto;
     object-fit: contain;
-    transform: scaleX(1.2);
 }
 
+.carousel-item {
+    background-color: #000;
+    text-align: center;
+}
 
 .fullscreenBtn {
     position: absolute;
@@ -24,13 +29,19 @@
     right: 15px;
     z-index: 1060;
     border-radius: 50%;
-    border:none;
+    border: none;
     width: 50px;
     height: 50px;
     font-size: 20px;
     color: white;
-    background-color: #0094ff;
+    background-color: rgba(0, 148, 255, 0.3);
+    transition: all 0.3s ease-in-out;
 }
+    .fullscreenBtn:hover {
+        background-color: #0094ff;
+        transform: scale(1.1);
+    }
+
 /* Indicators */
 .carousel-indicators [data-bs-target] {
     width: 12px;
@@ -43,14 +54,68 @@
     background-color: #0094ff;
 }
 
-.carousel-control-prev-icon {
-    background-color: #0094ff;
+.carousel-control-prev {
+    left: 0;
+    width: 5%; 
+    justify-content: flex-start; 
+    padding-left: 30px; 
 }
+
+.carousel-control-next {
+    right: 0;
+    width: 5%;
+    justify-content: flex-end; 
+    padding-right: 30px; 
+}
+
+.carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: #0094ff;
+    background-color: rgba(0, 148, 255, 0.3);
+    transition: all 0.3s ease-in-out;
+    border-radius: 50%;
+    background-size: 60%;
+    width: 45px;
+    height: 45px;
 }
+    .carousel-control-prev-icon:hover,
+    .carousel-control-next-icon:hover {
+        background-color: #0094ff;
+        transform: scale(1.1);
+    }
+
 @media (max-width: 768px) {
     .carousel-img {
         transform: scaleX(1);
+    }
+    .fullscreenBtn {
+        top: 1px;
+        right: 10px;
+        width: 38px; 
+        height: 38px;
+        font-size: 16px;
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 15%; 
+        opacity: 0.9;
+        z-index: 1050; 
+    }
+
+    .carousel-control-prev {
+        justify-content: flex-start;
+        padding-left: 10px; 
+    }
+
+    .carousel-control-next {
+        justify-content: flex-end;
+        padding-right: 10px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        border-radius: 50%;
+        width: 35px; 
+        height: 35px;
+        background-size: 50%;
     }
 }
