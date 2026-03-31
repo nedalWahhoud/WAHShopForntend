@@ -51,21 +51,14 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
       Vorrendering deaktivieren:
       Durch die Einstellung `prerender: false` verhindern wir, dass Blazor die Seite zweimal rendert (einmal als statisches HTML und einmal interaktiv).
       Dadurch wird das „Flackern“ beim Laden der Seite behoben und verhindert, dass der Code OnInitializedAsync zweimal ausgeführt wird.
-      Allerdings kann dies die Geschwindigkeit, mit der primäre Inhalte in Suchmaschinen angezeigt werden (SEO), geringfügig beeinflussen.
+      Allerdings kann dies die Geschwindigkeit, mit der primäre Inhalte in Suchmaschinen angezeigt werden (SEO), geringfügig beeinflussen.*@
     
-    <Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" />*@
+    <Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" />
 
-    <Routes @rendermode="InteractiveServer" />
     <script src="_framework/blazor.server.js" autostart="false"></script>
     <script src="JS/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 
-
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
 </body>
 
 </html>
