@@ -44,22 +44,38 @@ html, body {
 
 /* Catogry Card */
 /* category */
+.divCategory{
+    margin:0;
+}
 .category {
     display: flex;
     flex: 0 0 100%;
     font-size: 1.25rem;
-    font-weight: bold;
-    color: #333;
     box-sizing: border-box;
-    height: 50px; /* حدد ارتفاع */
-    align-items: flex-end; /* يحرك النص لأسفل */
+    height: 50px;
+    align-items: flex-end;
     padding-left: 0.4rem;
 }
 
-    .category p {
-        margin: 0; /* إزالة أي هوامش قد تسبب مشاكل */
+.categoryLinkIndex {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2d3436;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+    .categoryLinkIndex:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        background: #fff;
+        color: #007bff;
     }
-
+    .categoryLinkIndex.pe-none{
+        cursor: default;
+        color: #059669;
+    }
 /* product */
 .mainProductsCard {
     display: flex;
@@ -67,7 +83,7 @@ html, body {
     overflow-x: auto; /* يسمح بالتمرير الأفقي */
     overflow-y: hidden;
     gap: 16px;
-    padding: 60px;
+    padding: 20px;
     scroll-padding-left: 20px;
     scroll-snap-type: x mandatory;
     width: 100%;

@@ -106,7 +106,7 @@ builder.Services.AddScoped<DebtService>();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 var supportedCultures = new[] { "de", "ar" };
 var localizationOptions = new RequestLocalizationOptions()
-    .SetDefaultCulture(supportedCultures[1]) 
+    .SetDefaultCulture(supportedCultures[0]) 
     .AddSupportedCultures(supportedCultures)
     .AddSupportedUICultures(supportedCultures);
 localizationOptions.RequestCultureProviders.Clear();

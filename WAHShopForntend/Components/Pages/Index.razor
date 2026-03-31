@@ -8,20 +8,16 @@
 <HeadContent>
     <!-- Page Title -->
     <PageTitle>
-        @(
-                    System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
-                    ? ProjectInfo.Value.Name
-                    : ProjectInfo.Value.NameArabic 
-                )
+        @(isArabic ? ProjectInfo.Value.NameArabic : ProjectInfo.Value.Name)
     </PageTitle>
 
     <!-- Meta Description -->
-    <meta name="description" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+    <meta name="description" content="@(!isArabic
         ? "Entdecken Sie die besten arabischen Produkte online: Lebensmittel, Süßigkeiten, Gewürze und Getränke mit schneller Lieferung."
         : "اكتشف أفضل المنتجات العربية والسورية عبر الإنترنت: مواد غذائية، حلويات، توابل ومشروبات مع توصيل سريع.")" />
 
     <!-- Meta Keywords -->
-    <meta name="keywords" content="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+    <meta name="keywords" content="@(!isArabic
         ? "arabisches Laden, arabische Lebensmittel, syrische Produkte, Lebensmittel online"
         : "متجر عربي, مواد غذائية, حلويات, توابل, متجر سوري, تسوق أونلاين")" />
 
@@ -37,7 +33,7 @@
 }
 
 @* carsousel images *@
-@if (carouselImagesService.DownloadedCarouselImage.Any())
+@if (carouselImagesService.DownloadedCarouselImage.Count > 0)
 {
     @if (!IsCarouselFullscreen)
     {
@@ -48,24 +44,24 @@
         <WAHShopForntend.Components.Layout.FullscreenCarousel OnHandel="HandleCarouselFullScreen" />
     }
 }
+@* Category Abschnitte *@
 <div class="divCategory">
-    @for (int x = 0; x < mainProductByCategory.Count; x++)
+    @foreach (var categoryGroup in mainProductByCategory)
     {
         // category
-        var category = mainProductByCategory[x].Category;
-        <div class="category">
-            <p class="@(category.Id == -1 ? "categoryOnOffer" : "")">
-                @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                             ? category.Name_ar
-                                             : category.Name_de)
-            </p>
+        var category = categoryGroup.Category;
+        <div class="category" @key="category.Id">
+            <a href="@(category.Id != 0 ? $"/ProductsByCategory/{category.Id}" : "javascript:void(0)")"
+               class="categoryLinkIndex @(category.Id == -1 ? " text-danger" : (category.Id != 0 ? "" : "pe-none"))">
+                <i class="bi bi-grid-fill"></i>
+                <span>@(isArabic ? category.Name_ar : category.Name_de)</span>
+            </a>
         </div>
         <div class="mainProductsCard">
-            @for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
+            @foreach (var product in categoryGroup.Products)
             {
                 // product
-                var product = mainProductByCategory[x].Products[i];
-                <div class="productsCard">
+                <div class="productsCard" @key="product.Id">
                     <WAHShopForntend.Components.Layout.ShareLayout product="@product"/>
                     <WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
                     <WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />                 
@@ -81,7 +77,7 @@
     // to exclude categories already loaded in the main product list
     private List<int> excludeCategoriesIds = new();
     private List<Categories> allCategories = new();
-
+	private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
     private readonly Random random = new();
 
     protected override async Task OnInitializedAsync()
@@ -173,8 +169,8 @@
         Categories categoryRecommended = new Categories()
             {
                 Id = 0,
-                Name_de = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de" ? L["RecommendedForYou"] : string.Empty,
-                Name_ar = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? L["RecommendedForYou"] : string.Empty
+                Name_de = !isArabic ? L["RecommendedForYou"] : string.Empty,
+                Name_ar = isArabic ? L["RecommendedForYou"] : string.Empty
 
             };
         if (Recommended.Products.Count == 0)

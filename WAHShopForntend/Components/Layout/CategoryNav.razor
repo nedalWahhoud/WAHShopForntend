@@ -23,10 +23,7 @@
 
                                     <li @onclick="() => OnCategory(category.Id)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                        @(
-                                            System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                                                                        ? category.Name_ar
-                                                                                        : category.Name_de)
+                                        @(isArabic ? category.Name_ar : category.Name_de)
                                     </li>
                                 }
                             </ul>
@@ -53,11 +50,7 @@
                                     var category = drinksArray[j];
                                     <li @onclick="() => OnCategory(category.Id)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                        @(
-                                            System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                                                        ? category.Name_ar
-                                                                        : category.Name_de
-                                                                        )
+                                        @(isArabic ? category.Name_ar : category.Name_de)
                                     </li>
                                 }
                             </ul>
@@ -83,9 +76,7 @@
                                     var category = SweetsSnacksArray[j];
                                     <li @onclick="() => OnCategory(category.Id)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                        @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                                                ? category.Name_ar
-                                                                : category.Name_de)
+                                        @(isArabic ? category.Name_ar : category.Name_de)
                                     </li>
                                 }
                             </ul>
@@ -110,11 +101,7 @@
                                     var category = Mates[j];
                                     <li @onclick="() => OnCategory(category.Id)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                        @(
-                                                System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                                ? category.Name_ar
-                                                : category.Name_de
-                                                    )
+                                        @(isArabic ? category.Name_ar : category.Name_de)
                                     </li>
                                 }
                             </ul>
@@ -129,9 +116,7 @@
         {
             <a @onclick="() => OnCategory(householdCategory.Id)"
                class="categoryLink @(householdCategory.Id == currentCategoryId ? "selected" : "")">
-                @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                            ? householdCategory.Name_ar
-                            : householdCategory.Name_de)
+                @(isArabic? householdCategory.Name_ar : householdCategory.Name_de)
             </a>
         }
         @* Dates *@
@@ -140,11 +125,7 @@
         {
             <a @onclick="() => OnCategory(DatesCategory.Id)"
             class="categoryLink @(DatesCategory.Id == currentCategoryId ? "selected" : "")">
-                @(
-                            System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                            ? DatesCategory.Name_ar
-                            : DatesCategory.Name_de
-                            )
+                @(isArabic? DatesCategory.Name_ar: DatesCategory.Name_de)
             </a>
         }
         @* Other *@
@@ -153,11 +134,7 @@
         {
             <a @onclick="() => OnCategory(otherCategory.Id)"
             class="categoryLink @(otherCategory.Id == currentCategoryId ? "selected" : "")">
-                @(
-                        System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                            ? otherCategory.Name_ar
-                            : otherCategory.Name_de
-                                                    )
+                @(isArabic? otherCategory.Name_ar : otherCategory.Name_de)
             </a>
         }
         @* Im Angebot *@
@@ -170,11 +147,9 @@
 @code {
 
     private int currentCategoryId = 0;
+    private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
     protected override async Task OnInitializedAsync()
     {
-        var sa2 = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-        var sa = L["OnOffer"];
-
         await categoryService.GetAllCategoriesAsync();
 
         // get the current category id from the URL
