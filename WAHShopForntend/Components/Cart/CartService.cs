@@ -156,20 +156,26 @@ namespace WAHShopForntend.Components.Cart
             var item = CartItems.FirstOrDefault(ci => ci.ProductId == id && ci.Product != null);
 
             return (double)(item != null
-                ? ((item.Product.ProductDiscount != null && item.Product.ProductDiscount.DiscountedPrice > 0) ? item.Product.ProductDiscount.DiscountedPrice : item.Product.SalePrice)
+                ? ((item.Product.ProductDiscount != null && item.Product.ProductDiscount.DiscountedPrice > 0 &&
+                               DateTime.Today >= item.Product.ProductDiscount.StartDate.Date &&
+                               DateTime.Today <= item.Product.ProductDiscount.EndDate.Date) ? item.Product.ProductDiscount.DiscountedPrice : item.Product.SalePrice)
                 : 0);
 
         }
         public double GetTotalPrice()
         {
             return (double)(CartItems
-                .Sum(ci => ((ci.Product.ProductDiscount != null && ci.Product.ProductDiscount.DiscountedPrice > 0) ? ci.Product.ProductDiscount.DiscountedPrice : ci.Product?.SalePrice) * ci.Quantity) ?? 0);
+                .Sum(item => ((item.Product.ProductDiscount != null && item.Product.ProductDiscount.DiscountedPrice > 0 &&
+                               DateTime.Today >= item.Product.ProductDiscount.StartDate.Date &&
+                               DateTime.Today <= item.Product.ProductDiscount.EndDate.Date) ? item.Product.ProductDiscount.DiscountedPrice : item.Product?.SalePrice) * item.Quantity) ?? 0);
         }
         public double GetTotalPriceOfProduct(int id)
         {
             return (double)CartItems
            .Where(ci => ci.ProductId == id && ci.Product != null)
-           .Sum(ci => (((ci.Product.ProductDiscount != null && ci.Product.ProductDiscount.DiscountedPrice > 0) ? ci.Product.ProductDiscount.DiscountedPrice : ci.Product?.SalePrice ) * ci.Quantity) ?? 0);
+           .Sum(item => (((item.Product.ProductDiscount != null && item.Product.ProductDiscount.DiscountedPrice > 0 &&
+                               DateTime.Today >= item.Product.ProductDiscount.StartDate.Date &&
+                               DateTime.Today <= item.Product.ProductDiscount.EndDate.Date) ? item.Product.ProductDiscount.DiscountedPrice : item.Product?.SalePrice ) * item.Quantity) ?? 0);
 
         }
         public bool IsProductAdded(int productId)
