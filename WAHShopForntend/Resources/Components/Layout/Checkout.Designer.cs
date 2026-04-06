@@ -322,6 +322,15 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You must log in to check the discount code. ähnelt.
+        /// </summary>
+        public static string LoginForDiscount {
+            get {
+                return ResourceManager.GetString("LoginForDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The order value is less than the minimum delivery amount ähnelt.
         /// </summary>
         public static string MinimumPurchaseAmountMessage {

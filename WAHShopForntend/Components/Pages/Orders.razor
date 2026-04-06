@@ -41,9 +41,7 @@
                                         @foreach (var status in PossibleStatuses)
                                         {
                                             <option value="@status.Id">
-                                                @(isArabic
-                                    ? status.StatusPresent_ar
-                                    : status.StatusPresent_de)</option>
+                                                @(isArabic ? status.StatusPresent_ar : status.StatusPresent_de)</option>
                                         }
                                     </InputSelect>
 
@@ -57,9 +55,7 @@
                                 else
                                 {
                                     <span class="status">
-                                        @(isArabic
-                                                   ? order.Status?.Status_ar
-                                                   : order.Status?.Status_de ?? L["Unknown"])
+                                        @(isArabic ? order.Status?.Status_ar : order.Status?.Status_de ?? L["Unknown"])
                                     </span>
                                 }
                             </div>
@@ -142,14 +138,10 @@
                                         <img @onclick="() => OnProduct(item.ProductId)" src="@productImagesService.GetProductImageUrl(mainImage!)" loading="lazy" alt="@item.Product?.Name_de" />
                                         <div class="orderItemsDetails">
                                             <h4>
-                                                @(isArabic
-                                                                           ? item.Product?.Name_ar
-                                                                           : @item.Product?.Name_de)
+                                                @(isArabic? item.Product?.Name_ar : @item.Product?.Name_de)
                                             </h4>
                                             <p>
-                                                @(isArabic
-                                                                               ?item.Product?.Description_ar
-                                                                               : item.Product?.Description_de)</p>
+                                                @(isArabic ?item.Product?.Description_ar : item.Product?.Description_de)</p>
                                             <p>
                                                 @L["Price"]: @item.UnitPrice.ToString("C", culture)
                                                 &nbsp; | &nbsp;
@@ -335,12 +327,11 @@
     {
         if (order.DiscountCategory != null)
         {
-            double categoryitemsPrice = 0;
             var categoryItemsPrice = order.OrderItems
-              .Where(i => i.Product?.CategoryId == order.DiscountCategory.CategoriesId)
-              .Sum(i => i.Product!.SalePrice * i.Quantity);
+              .Where(i => i.CategoryId == order.DiscountCategory.CategoriesId)
+              .Sum(i => i.UnitPrice * i.Quantity);
 
-            double categoryDiscountValue = categoryitemsPrice * (order.DiscountCategory.DiscountPercentage / 100.0);
+            double categoryDiscountValue = categoryItemsPrice * (order.DiscountCategory.DiscountPercentage / 100.0);
 
             return categoryDiscountValue;
         }

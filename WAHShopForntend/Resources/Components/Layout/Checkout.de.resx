@@ -204,6 +204,9 @@
   <data name="LoginButton" xml:space="preserve">
     <value>Einloggen</value>
   </data>
+  <data name="LoginForDiscount" xml:space="preserve">
+    <value>Sie müssen sich einloggen, um den Rabattcode zu prüfen.</value>
+  </data>
   <data name="MinimumPurchaseAmountMessage" xml:space="preserve">
     <value>Der Bestellwert liegt unter der Mindestlieferwert</value>
   </data>

@@ -12,7 +12,7 @@
             @product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
         </p>
         <p class="newPrice">
-            @product.ProductDiscount.DiscountedPrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
+            @(product.ProductDiscount?.DiscountedPrice.ToString("C", new System.Globalization.CultureInfo("de-DE")) ?? "Fehler")
         </p>
     }
     else

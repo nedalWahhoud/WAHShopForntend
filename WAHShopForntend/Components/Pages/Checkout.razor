@@ -13,7 +13,7 @@
 else
 {
 	<div class="mainContainer">
-		
+
 		@if (cartService.CartItems.Count == 0 || orderStatusEnum == OrderStatusEnum.Processing)
 		{
 			<div class="backToMainPage">
@@ -70,7 +70,7 @@ else
 							@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
 							{
 								if (orderService.DownloadedPaymentMethods[i].Id == 1 || orderService.DownloadedPaymentMethods[i].Id == 2 ||
-					                orderService.DownloadedPaymentMethods[i].Id == 5)
+					orderService.DownloadedPaymentMethods[i].Id == 5)
 								{
 									var paymentMethod = orderService.DownloadedPaymentMethods[i];
 									<label>
@@ -575,7 +575,7 @@ else
 		// check Age
 		/*var resultAge = await orderService.CheckAge(cartService.CartItems, user);
 		if (!resultAge.Result)
-		{
+			{
 			MessageWarning = L[resultAge.Message ?? ""];
 			orderStatusEnum = OrderStatusEnum.Pending;
 			return;
@@ -654,7 +654,8 @@ else
 				{
 					ProductId = item.ProductId,
 					Quantity = item.Quantity,
-					UnitPrice = cartService.GetPriceOfProduct(item.ProductId)
+					UnitPrice = cartService.GetPriceOfProduct(item.ProductId),
+					CategoryId = item.Product?.CategoryId ?? 0
 				}).ToList(),
 				TotalPrice = order.TotalPrice,
 				OrderDate = DateTime.Now,
@@ -690,8 +691,14 @@ else
 	private bool IsDiscountCodeLoading = false;
 	private async Task OnCode()
 	{
+		if (user == null || user.Id == 0)
+		{
+			MessageWarning = L["LoginForDiscount"].ToString();
+			return;
+		}
+
 		IsDiscountCodeLoading = true;
-		var result = await discountService.CheckDiscountCodeAsync(discountCode.Code);
+		var result = await discountService.CheckDiscountCodeAsync(discountCode.Code, user.Id);
 		if (result.validationResult.Result == true && result.discountCodes != null)
 		{
 			discountCode = result.discountCodes;
@@ -706,7 +713,7 @@ else
 			// reset discount code
 			discountCode = new();
 			// check discount category code
-			var result1 = await discountService.CheckDiscountCategoryAsync(discountCategory.Code);
+			var result1 = await discountService.CheckDiscountCategoryAsync(discountCategory.Code.Trim(), user.Id);
 			if (result1.validationResult.Result == true && result1.discountCategory != null)
 			{
 				discountCategory = result1.discountCategory;

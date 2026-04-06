@@ -204,6 +204,9 @@
   <data name="LoginButton" xml:space="preserve">
     <value>تسجيل الدخول</value>
   </data>
+  <data name="LoginForDiscount" xml:space="preserve">
+    <value>يجب تسجيل الدخول لفحص الكود الخصم.</value>
+  </data>
   <data name="MinimumPurchaseAmountMessage" xml:space="preserve">
     <value>قيمة الطلب أقل من الحد الأدنى للتوصيل</value>
   </data>

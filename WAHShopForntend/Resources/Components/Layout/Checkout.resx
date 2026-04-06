@@ -204,6 +204,9 @@
   <data name="LoginButton" xml:space="preserve">
     <value>Log in</value>
   </data>
+  <data name="LoginForDiscount" xml:space="preserve">
+    <value>You must log in to check the discount code.</value>
+  </data>
   <data name="MinimumPurchaseAmountMessage" xml:space="preserve">
     <value>The order value is less than the minimum delivery amount</value>
   </data>
