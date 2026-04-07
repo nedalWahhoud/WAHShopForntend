@@ -50,13 +50,7 @@
     {
         // category
         var category = categoryGroup.Category;
-        <div class="category" @key="category.Id">
-            <a href="@(category.Id != 0 ? $"/ProductsByCategory/{category.Id}" : "javascript:void(0)")"
-               class="categoryLinkIndex @(category.Id == -1 ? " text-danger" : (category.Id != 0 ? "" : "pe-none"))">
-                <i class="bi bi-grid-fill"></i>
-                <span>@(isArabic ? category.Name_ar : category.Name_de)</span>
-            </a>
-        </div>
+        <WAHShopForntend.Components.Layout.CategoryLinkIndex category="category" />
         <div class="mainProductsCard">
             @foreach (var product in categoryGroup.Products)
             {

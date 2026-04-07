@@ -3,16 +3,13 @@
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.ProductPage> L
 @implements IDisposable
 
-
-
-
 @if (isLoading)
 {
 	
 }
 else
 {
-	bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+	
 	@if (product == null)
 	{
 		<div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
@@ -46,18 +43,11 @@ else
 		
 		<HeadContent>
 			<PageTitle>
-				@(isArabic
-						? product?.Name_ar 
-						: product?.Name_de)
+				@(isArabic ? product?.Name_ar : product?.Name_de)
 			</PageTitle>
-			<meta name="description" content="@(isArabic
-        ? product?.Description_ar
-        : product?.Description_de)" />
-			<meta name="keywords" content="@(isArabic
-        ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
-        : product?.Name_de + ", Syriana Leutkirch, Syriana Supermarkt, arabische Supermarkt, Lebensmittel, arabische Lebensmittel, arabisches Laden, arabisches Laden in Leutkirhc")" />
-
-		
+			<meta name="description" content="@(isArabic ? product?.Description_ar : product?.Description_de)" />
+			<meta name="keywords" content="@(isArabic ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
+			: product?.Name_de + ", Syriana Leutkirch, Syriana Supermarkt, arabische Supermarkt, Lebensmittel, arabische Lebensmittel, arabisches Laden, arabisches Laden in Leutkirhc")" />
 
 			<!-- Structured Data -->
 				<script type="application/ld+json">
@@ -98,30 +88,22 @@ else
 				<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
 
 				<h2 class="productTitle">
-					@(isArabic
-					? product.Name_ar
-					: product.Name_de)
+					@(isArabic? product.Name_ar: product.Name_de)
 				</h2>
 				<p class="productDescription">
-					@(isArabic
-					? product.Description_ar
-					: product.Description_de)
+					@(isArabic? product.Description_ar: product.Description_de)
 				</p>
 				<div class="productPrice"> <WAHShopForntend.Components.Layout.PriceLayout ProductId="product.Id" /> </div>
 				@if (product.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
 				{
 					<select class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
 						<option value="0">
-							@(isArabic
-							? product.ProductGroup.GroupName_ar
-							: product.ProductGroup.GroupName_de)
+							@(isArabic? product.ProductGroup.GroupName_ar: product.ProductGroup.GroupName_de)
 						</option>
 						@foreach (var groupProduct in groupProducts)
 						{
 							<option value="@groupProduct.Id">
-								@(isArabic
-					        ? groupProduct.Name_ar
-					        : groupProduct.Name_de)
+								@(isArabic? groupProduct.Name_ar : groupProduct.Name_de)
 							</option>
 						}
 					</select>
@@ -145,30 +127,20 @@ else
 	@* random categorys *@
 	@for (int x = 0; x < mainProductByCategory.Count; x++)
 	{
-
 		// category
 		var category = mainProductByCategory[x].Category;
-		<div class="category">
-			<p>
-				@(isArabic
-				? category.Name_ar
-				: category.Name_de)
-			</p>
-		</div>
+		<WAHShopForntend.Components.Layout.CategoryLinkIndex category="category" />
 		<div class="mainProductsCard">
-
 			@for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
 			{
 				// product
 				var product = mainProductByCategory[x].Products[i];
-
 				<div class="productsCard">
 					<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
 					<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
 					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 				</div>
 			}
-
 		</div>
 	}
 
@@ -178,6 +150,7 @@ else
 	public int ProductId { get; set; }
 	private Product? product;
 	private List<Product>? groupProducts = new ();
+	private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
 	private bool isLoading = true;
 	// to exclude categories already loaded in the main product list
 	private List<int> excludeCategoriesIds = new();
