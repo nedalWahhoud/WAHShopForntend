@@ -165,8 +165,8 @@
   <data name="DeliveryTitle" xml:space="preserve">
     <value>Lieferung an:</value>
   </data>
-  <data name="DiscountPercentage" xml:space="preserve">
-    <value>Rabattprozentsatz</value>
+  <data name="DiscountValue" xml:space="preserve">
+    <value>Rabattwert</value>
   </data>
   <data name="EmailExists" xml:space="preserve">
     <value>E-Mail existiert bereits, bitte loggen Sie sich</value>

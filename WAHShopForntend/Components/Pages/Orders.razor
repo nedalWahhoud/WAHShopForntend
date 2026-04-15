@@ -7,7 +7,7 @@
 
 @if (IsRendered)
 {
-    
+
     bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
     var culture = new System.Globalization.CultureInfo("de-DE");
     <div class="mainContainer">
@@ -77,12 +77,11 @@
                             {
                                 <span>
                                     <strong>@L["Discount"]</strong>
-                                    @order.DiscountCategory.DiscountPercentage%
+                                    @order.DiscountCategory.DiscountAmount @(order.DiscountCategory.DiscountType == DiscountType.Percentage ? "%" : "€")
                                 </span>
                                 <span>
                                     <strong>
-                                        @L["MoneySaved"] @(isArabic
-                                    ? order.DiscountCategory.Category.Name_ar : order.DiscountCategory.Category.Name_de ?? "Keine Angabe")</strong>
+                                        @L["MoneySaved"] @(isArabic ? order.DiscountCategory.Category.Name_ar : order.DiscountCategory.Category.Name_de ?? "Keine Angabe")</strong>
                                     @GetDiscountedValue(order).ToString("C", culture)
                                 </span>
                             }
@@ -91,7 +90,7 @@
                             {
                                 <span>
                                     <strong>@L["Discount"]</strong>
-                                    @order.DiscountCode.DiscountPercentage%
+                                    @order.DiscountCode.DiscountAmount @(order.DiscountCode.DiscountType == DiscountType.Percentage ? "%" : "€")
 
                                 </span>
                                 <span>
@@ -196,7 +195,7 @@
 
         IsRendered = true;
     }
-   
+
     // more load
     private bool IsOrdersLoading { get; set; } = false;
     private bool AllItemsLoaded { get; set; } = false;
@@ -255,14 +254,14 @@
                         PossibleStatuses.Add(item);
                     }
                 }
-				// der benutzer darf es abschlißen oder stornieren wenn die bestellung durch unsere Liefservice zugestellt wird
+                // der benutzer darf es abschlißen oder stornieren wenn die bestellung durch unsere Liefservice zugestellt wird
                 else if((order.StatusId > 0 && order.StatusId <= 3) && order.PaymentMethodId == 2)
-				{
-					if (item.Id == 7 || item.Id == 8)
-					{
-						PossibleStatuses.Add(item);
-					}
-				}
+                {
+                    if (item.Id == 7 || item.Id == 8)
+                    {
+                        PossibleStatuses.Add(item);
+                    }
+                }
                 // der benutzer darf stornieren, abschlißen oder zugestellt wenn die nicht versendet ist
                 else if (order.StatusId > 0 && order.StatusId <= 3)
                 {
@@ -328,18 +327,32 @@
         if (order.DiscountCategory != null)
         {
             var categoryItemsPrice = order.OrderItems
-              .Where(i => i.CategoryId == order.DiscountCategory.CategoriesId)
-              .Sum(i => i.UnitPrice * i.Quantity);
+             .Where(i => i.CategoryId == order.DiscountCategory.CategoriesId)
+             .Sum(i => i.UnitPrice * i.Quantity);
 
-            double categoryDiscountValue = categoryItemsPrice * (order.DiscountCategory.DiscountPercentage / 100.0);
+            double calculatedDiscount;
+            if (order.DiscountCategory.DiscountType == DiscountType.Percentage)
+                calculatedDiscount = categoryItemsPrice * (order.DiscountCategory.DiscountAmount / 100.0);
+            else
+                calculatedDiscount = order.DiscountCategory.DiscountAmount;
 
-            return categoryDiscountValue;
+            return Math.Min(calculatedDiscount, categoryItemsPrice);
+
         }
         else if (order.DiscountCode != null)
         {
-            return order.TotalPrice / (1 - (order.DiscountCode.DiscountPercentage / 100.0)) - order.TotalPrice;
+            var totalItemsPrice = order.OrderItems.Sum(i => i.UnitPrice * i.Quantity);
+            double calculatedDiscount;
+
+            if (order.DiscountCode.DiscountType == DiscountType.Percentage)
+                calculatedDiscount = totalItemsPrice * (order.DiscountCode.DiscountAmount / 100.0);
+            else
+                calculatedDiscount = order.DiscountCode.DiscountAmount;
+
+            return Math.Min(calculatedDiscount, totalItemsPrice);
+
         }
-        return order.TotalPrice;
+        return 0;
     }
  }
 

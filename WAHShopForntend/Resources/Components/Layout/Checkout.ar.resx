@@ -165,8 +165,8 @@
   <data name="DeliveryTitle" xml:space="preserve">
     <value>التوصيل إلى:</value>
   </data>
-  <data name="DiscountPercentage" xml:space="preserve">
-    <value>نسبة الخصم</value>
+  <data name="DiscountValue" xml:space="preserve">
+    <value>قيمة الخصم</value>
   </data>
   <data name="EmailExists" xml:space="preserve">
     <value>عنوان بريدك الإلكتروني موجود بالفعل، يرجى تسجيل الدخول.</value>

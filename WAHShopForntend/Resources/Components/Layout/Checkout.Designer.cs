@@ -205,11 +205,11 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Discount Percentage ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Discount Value ähnelt.
         /// </summary>
-        public static string DiscountPercentage {
+        public static string DiscountValue {
             get {
-                return ResourceManager.GetString("DiscountPercentage", resourceCulture);
+                return ResourceManager.GetString("DiscountValue", resourceCulture);
             }
         }
         
