@@ -73,12 +73,12 @@ else
 		@**@
 		<div class="productDetails">
 			<div class="ImageSection">
-				<img class="zoomableImage" @onclick="OpenImage" src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" alt="@product.Name_de" />
+				<img class="zoomableImage" @onclick="OpenImage" src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())" alt="@(product?.Name_de ?? "Produkt Name")" />
 				@if (ShowFullImage)
 				{
 					<div loading="lazy" class="modalOverlay" @onclick="CloseImage">
 						<img class="modalImage"
-						src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)"
+						src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())"
 						alt="Image of Product"
 						@onclick:stopPropagation />
 					</div>
@@ -88,13 +88,13 @@ else
 				<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
 
 				<h2 class="productTitle">
-					@(isArabic? product.Name_ar: product.Name_de)
+					@(isArabic? product?.Name_ar: product?.Name_de)
 				</h2>
 				<p class="productDescription">
-					@(isArabic? product.Description_ar: product.Description_de)
+					@(isArabic? product?.Description_ar: product?.Description_de)
 				</p>
-				<div class="productPrice"> <WAHShopForntend.Components.Layout.PriceLayout ProductId="product.Id" /> </div>
-				@if (product.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
+				<div class="productPrice"> <WAHShopForntend.Components.Layout.PriceLayout ProductId="product?.Id ?? 0" /> </div>
+				@if (product?.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
 				{
 					<select class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
 						<option value="0">

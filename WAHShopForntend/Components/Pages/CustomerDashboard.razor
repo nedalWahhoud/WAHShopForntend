@@ -148,7 +148,7 @@ else
 
 		// Transaktionen des Kunden laden
 		// initialize TransactionsCustomers list
-		transactionsCustomersService.GetItems = new GetItems<TransactionsCustomers> { Id = customerIdFromToken.Value, PageSize = 10, };
+		transactionsCustomersService.GetItems = new GetItems<TransactionsCustomers> { Filter = new(){ Id = customerIdFromToken.Value,Type = GetItemFilterType.Custom }, PageSize = 10, };
         await OnMoreLoadTransactionsCustomers();
 		IsLoading = false;
     }
