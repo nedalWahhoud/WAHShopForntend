@@ -18,8 +18,7 @@ namespace WAHShopForntend.Components.Models
         public double SalePrice { get; set; }
         public int MinimumStock { get; set; }
         public DateTime EXPDate { get; set; }
-        public int SupplierId { get; set; }
-        public Suppliers? Supplier { get; set; }
+        public ICollection<Suppliers> Suppliers { get; set; } = [];
         public int UserId { get; set; }
         public ICollection<ProductImages> ProductImages { get; set; } = [];
         public string? Name_ar { get; set; }
