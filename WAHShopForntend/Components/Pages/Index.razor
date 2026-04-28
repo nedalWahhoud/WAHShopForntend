@@ -71,7 +71,7 @@
     // to exclude categories already loaded in the main product list
     private List<int> excludeCategoriesIds = new();
     private List<Categories> allCategories = new();
-	private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
     private readonly Random random = new();
 
     protected override async Task OnInitializedAsync()
@@ -118,8 +118,8 @@
     // recommended
     public async Task LoadProductsRecommended(List<Categories> categories)
     {
+        List<int> excludeProductsIds = new();
         ProductByCategory Recommended = new();
-		List<int> excludeProductsIds = new();
         foreach (var category in categories)
         {
 
@@ -143,15 +143,10 @@
                 foreach (var p in productsServer.Items)
                 {
                     p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
-                    //
                     excludeProductsIds!.Add(p.Id);
                 }
 
                 Recommended.Products.AddRange(productsServer.Items);
-
-                // add to local Products list
-                productService.AddProductToLocal(productsServer.Items);
-
 
             }
             else if (productsServer != null && productsServer.AllItemsLoaded)
@@ -185,7 +180,7 @@
         foreach (var category in Categories)
         {
             List<Product> allProducts = new();
-			List<int> excludeProductsIds = new();
+            List<int> excludeProductsIds = new();
             // get products local
             var productsLocal =  categoryService.GetProductByCategoryIdLocal(category.Id);
             if (productsLocal != null && productsLocal.Count > 0)
@@ -214,8 +209,6 @@
 
                 allProducts.AddRange(productsServer.Items);
 
-                // add to local Products list
-           //     productService.AddProductToLocal(productsServer.Items);
             }
             else if (productsServer != null && productsServer.AllItemsLoaded)
             {
@@ -229,7 +222,7 @@
     public async Task LoadOnOfferProducts(int categoryId)
     {
         List<Product> allProducts = new();
-		List<int> excludeProductsIds = new();
+        List<int> excludeProductsIds = new();
         // get products local
         var productsLocal =  categoryService.GetProductByCategoryIdLocal(categoryId);
         if (productsLocal != null && productsLocal.Count > 0)
@@ -239,7 +232,7 @@
             {
                 p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
                 //
-                excludeProductsIds!.Add(p.Id);
+                //  excludeProductsIds!.Add(p.Id);
             }
             allProducts.AddRange(productsLocal);
         }
@@ -252,7 +245,7 @@
             {
                 p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
                 //
-                excludeProductsIds!.Add(p.Id);
+                //  excludeProductsIds!.Add(p.Id);
             }
             allProducts.AddRange(productsServer.Items);
 
@@ -287,8 +280,12 @@
                 // load random products
                 await LoadRandomProductsByCategory(categories);
             }
-
-            StateHasChanged();
+         
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
         finally
         {

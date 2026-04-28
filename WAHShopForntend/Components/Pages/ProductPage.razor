@@ -230,7 +230,7 @@ else
 				foreach (var p in productsLocal)
 				{
 					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
-					excludeProductsIds!.Add(p.Id);
+				//	excludeProductsIds!.Add(p.Id);
 				}
 
 				allProducts.AddRange(productsLocal);
@@ -244,7 +244,7 @@ else
 				foreach (var p in productsServer.Items)
 				{
 					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
-					excludeProductsIds!.Add(p.Id);
+				//	excludeProductsIds!.Add(p.Id);
 				}
 
 				allProducts.AddRange(productsServer.Items);
@@ -283,7 +283,7 @@ else
 				foreach (var p in productsLocal)
 				{
 					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
-					excludeProductsIds!.Add(p.Id);
+					//excludeProductsIds!.Add(p.Id);
 				}
 				mainProductByCategory.Add(new ProductByCategory() { Category = category, Products = productsLocal });
 				currentIndex = mainProductByCategory.FindIndex(c => c.Category.Id == category.Id);
@@ -297,7 +297,7 @@ else
 				foreach (var p in productsServer.Items)
 				{
 					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
-					excludeProductsIds!.Add(p.Id);
+					//excludeProductsIds!.Add(p.Id);
 				}
 
 
