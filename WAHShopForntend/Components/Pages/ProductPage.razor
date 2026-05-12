@@ -5,11 +5,11 @@
 
 @if (isLoading)
 {
-	
+
 }
 else
 {
-	
+
 	@if (product == null)
 	{
 		<div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
@@ -32,7 +32,7 @@ else
 	}
 	else
 	{
-		
+
 
 		@* SEO *@
 		var imageUrl = productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? null!);
@@ -40,7 +40,7 @@ else
 		var productDescription = isArabic ? product?.Description_ar : product?.Description_de;
 		var availability = (product?.Quantity > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock");
 		var productUrl = NavigationManager.Uri;
-		
+
 		<HeadContent>
 			<PageTitle>
 				@(isArabic ? product?.Name_ar : product?.Name_de)
@@ -50,8 +50,8 @@ else
 			: product?.Name_de + ", Syriana Leutkirch, Syriana Supermarkt, arabische Supermarkt, Lebensmittel, arabische Lebensmittel, arabisches Laden, arabisches Laden in Leutkirhc")" />
 
 			<!-- Structured Data -->
-				<script type="application/ld+json">
-					@((MarkupString)$@"{{
+			<script type="application/ld+json">
+				@((MarkupString)$@"{{
 		            ""@context"": ""https://schema.org"",
 		            ""@type"": ""Product"",
 		            ""name"": ""{productName}"",
@@ -68,7 +68,7 @@ else
 						}}
 					}}
 				   }}"))
-				</script>
+			</script>
 		</HeadContent>
 		@**@
 		<div class="productDetails">
@@ -96,7 +96,7 @@ else
 				<div class="productPrice"> <WAHShopForntend.Components.Layout.PriceLayout ProductId="product?.Id ?? 0" /> </div>
 				@if (product?.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
 				{
-					<select class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
+					<select @key="product.Id" class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
 						<option value="0">
 							@(isArabic? product.ProductGroup.GroupName_ar: product.ProductGroup.GroupName_de)
 						</option>
@@ -154,18 +154,22 @@ else
 	private bool isLoading = true;
 	// to exclude categories already loaded in the main product list
 	private List<int> excludeCategoriesIds = new();
+	private List<int> excludeProductsIdsGroupProducts = new();
 	//
 	private List<Categories> allCategories = new();
 	private Random random = new();
 	// product by caegory for products card
 	private List<ProductByCategory> mainProductByCategory = new();
-	protected override async Task OnInitializedAsync()
-	{
-		var productUrl = NavigationManager.Uri;
 
+	protected override async Task OnParametersSetAsync()
+	{
 		isLoading = true;
+		excludeProductsIdsGroupProducts = new();
+		excludeCategoriesIds = new();
+		allCategories = new();
+		mainProductByCategory = new();
+		groupProducts = new();
 		// get product by id
-		List<Task> tasks = new();
 		product = productService.GetProductByIdLocal(ProductId)
 					?? await productService.GetProductByIdAsync(ProductId);
 		if (product != null)
@@ -179,19 +183,16 @@ else
 			// get group products if exists
 			if (product != null && product.ProductGroupID.HasValue && product.ProductGroupID.Value > 0)
 			{
-				tasks.Add(LoadGroupProducts(product.ProductGroupID.Value));
+				await LoadGroupProducts(product.ProductGroupID.Value);
 			}
 		}
 		// get product by categoryId
-		tasks.Add(MoreProductsOfSameCategory(product?.CategoryId ?? 0, product?.Category ?? null));
+		await MoreProductsOfSameCategory(product?.CategoryId ?? 0, product?.Category ?? null);
 		// get all categories
-		allCategories = categoryService.GetAllCategoriesLocal()
-							?? await categoryService.GetAllCategoriesAsync();
-		// die Tasks ausführen
-		await Task.WhenAll(tasks);
-
+		allCategories = categoryService.GetAllCategoriesLocal()	?? await categoryService.GetAllCategoriesAsync();
 
 		isLoading = false;
+		StateHasChanged();
 	}
 	private DotNetObjectReference<ProductPage>? objRef;
 	protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -231,7 +232,6 @@ else
 				foreach (var p in productsLocal)
 				{
 					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
-				//	excludeProductsIds!.Add(p.Id);
 				}
 
 				allProducts.AddRange(productsLocal);
@@ -245,17 +245,12 @@ else
 				foreach (var p in productsServer.Items)
 				{
 					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
-				//	excludeProductsIds!.Add(p.Id);
 				}
 
 				allProducts.AddRange(productsServer.Items);
 
 				// add to local Products list
 				productService.AddProductToLocal(productsServer.Items);
-			}
-			else if (productsServer != null && productsServer.AllItemsLoaded)
-			{
-
 			}
 			// add to main list
 			if (allProducts.Count > 0)
@@ -328,10 +323,9 @@ else
 	// On Product Click
 	private void OnProduct(int ProductId)
 	{
-		NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
+		NavigationManager.NavigateTo($"/ProductPage/{ProductId}");
 	}
 	// groupProducts
-	private List<int> excludeProductsIdsGroupProducts = new();
 	private async Task LoadGroupProducts(int groupId)
 	{
 		// current product excelude
@@ -346,17 +340,22 @@ else
 				groupProduct.InitializeCartItem(cartService.GetQuantityOfProduct(groupProduct.Id));
 				// add to exclude list
 				excludeProductsIdsGroupProducts.Add(groupProduct.Id);
+			
+				// get group product group if not exist
+				groupProduct.ProductGroup ??= await productGroupService.GetGroupProductByIdAsync(groupProduct.ProductGroupID ?? 0);
 			}
 			// add to groupProducts of page
 			this.groupProducts!.AddRange(groupProductsLocal);
 		}
 		// get from server
-		var groupProductsServer = await productGroupService.GetProductsByGroupProductsIdAsynce(groupId, excludeProductsIdsGroupProducts);
+		var groupProductsServer = await productGroupService.GetProductsByGroupProductsIdAsync(groupId, excludeProductsIdsGroupProducts);
 		if (groupProductsServer != null && groupProductsServer.Count > 0)
 		{
 			foreach (var groupProduct in groupProductsServer)
 			{
 				groupProduct.InitializeCartItem(cartService.GetQuantityOfProduct(groupProduct.Id));
+				// get group product group if not exist 
+				groupProduct.ProductGroup ??= await productGroupService.GetGroupProductByIdAsync(groupProduct.ProductGroupID ?? 0);
 			}
 
 			productService.AddProductToLocal(groupProductsServer);
@@ -370,7 +369,7 @@ else
 	{
 		if (int.TryParse(e.Value?.ToString(), out int selectedGroupId) && selectedGroupId > 0)
 		{
-			NavigationManager.NavigateTo($"/ProductPage/{selectedGroupId}", true);
+			NavigationManager.NavigateTo($"/ProductPage/{selectedGroupId}");
 		}
 	}
 	// Scroll

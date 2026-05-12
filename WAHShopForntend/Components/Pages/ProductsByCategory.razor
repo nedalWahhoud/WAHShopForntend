@@ -8,10 +8,10 @@
 	<!-- Page Title -->
 	<PageTitle>
 		@(category != null ? 
-		     System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
-				? category.Name_de
-				: category.Name_ar
-		     : L["OnOffer"])
+						System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+						? category.Name_de
+						: category.Name_ar
+						: L["OnOffer"])
 	</PageTitle>
 
 	<!-- Meta Description -->
@@ -37,10 +37,10 @@
 		<h3 class="@(CategoryId == -1 ? "text-danger" : "text-dark")">
 			<strong>
 				@(CategoryId != -1 
-					 ?System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-						? category?.Name_ar ?? ""
-						: category?.Name_de ?? ""
-				: L["OnOffer"])
+										?System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+										? category?.Name_ar ?? ""
+										: category?.Name_de ?? ""
+								: L["OnOffer"])
 			</strong>
 		</h3>
 		<div class="productItems">
@@ -56,17 +56,17 @@
 		<div class="moreLoadContainer">
 			@if (products.Count > 0)
 			{
-				<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || AllItemsLoaded)">
+				<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || categoryService._getItems.AllItemsLoaded)">
 					@if (IsOrdersLoading)
 					{
 						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 						<span class="ms-2">@L["LoadingButton"]</span>
 					}
-					else if (!AllItemsLoaded)
+					else if (!categoryService._getItems.AllItemsLoaded)
 					{
 						<span>@L["LoadMore"]</span>
 					}
-					@if (AllItemsLoaded)
+					@if (categoryService._getItems.AllItemsLoaded)
 					{
 						<span>@L["AllItemsLoaded"]</span>
 					}
@@ -74,7 +74,7 @@
 			}
 			else
 			{
-			   <span class="@(CategoryId != -1 ? "NoItemsFound" : "NoOffersFound")">@(CategoryId != -1 ? L["NoItemsFound"] : L["NoOffersFound"])</span>
+				<span class="@(CategoryId != -1 ? "NoItemsFound" : "NoOffersFound")">@(CategoryId != -1 ? L["NoItemsFound"] : L["NoOffersFound"])</span>
 			}
 
 		</div>
@@ -85,23 +85,19 @@
 	private bool IsLoaded = true;
 	private List<Product> products = new();
 	private Categories category = new();
+	private List<int>? excludeProductsIds = new();
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
 		IsLoaded = false;
-		await MoreProductsload(false);
-		// get all categories
+		categoryService._getItems = new();
+		excludeProductsIds = new();
+		products.Clear();
 		category = categoryService.GetCategoryByIdLocal(CategoryId) ?? await categoryService.GetCategoryByIdAsync(CategoryId);
+		await MoreProductsload(false);
+	
 		IsLoaded = true;
 	}
-	protected override void OnAfterRender(bool firstRender)
-	{
-		if (firstRender)
-		{
-			StateHasChanged();
-		}
-	}
-	private List<int>? excludeProductsIds = new();
 	private async Task MoreProductsload(bool IfOnMoreProductsLoad)
 	{
 		// -1 is for OnOffer
@@ -141,12 +137,9 @@
 				productService.AddProductToLocal(products);
 			});
 		}
-		else if (productsServer != null && productsServer.AllItemsLoaded)
-			AllItemsLoaded = true;
 	}
 	// OnMoreLoad
 	private bool IsOrdersLoading = false;
-	private bool AllItemsLoaded = false;
 	private async Task OnMoreLoad()
 	{
 		if (IsOrdersLoading)
@@ -159,6 +152,6 @@
 	// On Product Click
 	private void OnProduct(int ProductId)
 	{
-		NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
+		NavigationManager.NavigateTo($"/ProductPage/{ProductId}");
 	}
 }

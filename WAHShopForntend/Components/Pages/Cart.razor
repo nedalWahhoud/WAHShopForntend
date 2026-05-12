@@ -103,11 +103,11 @@ else
 	// emptyCart
 	private void OnBackToShop()
 	{
-		NavigationManager.NavigateTo("/",false);
+		NavigationManager.NavigateTo("/");
 	}
 	// On Product Click
 	private void OnProduct(int ProductId)
 	{
-		NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
+		NavigationManager.NavigateTo($"/ProductPage/{ProductId}");
 	}
 }

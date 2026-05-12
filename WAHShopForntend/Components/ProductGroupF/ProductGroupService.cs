@@ -6,7 +6,7 @@ namespace WAHShopForntend.Components.ProductGroupF
     public class ProductGroupService(HttpClient http)
     {
         private readonly HttpClient _http = http;
-        public async Task<List<Product>> GetProductsByGroupProductsIdAsynce(int groupProductsId, List<int>? excludeProductsIds = null)
+        public async Task<List<Product>> GetProductsByGroupProductsIdAsync(int groupProductsId, List<int>? excludeProductsIds = null)
         {
             try
             {
@@ -20,7 +20,7 @@ namespace WAHShopForntend.Components.ProductGroupF
                 if (!response.IsSuccessStatusCode)
                     return [];
 
-                GetItems<Product> getItems = new ();
+                GetItems<Product> getItems = new();
 
                 getItems = await response.Content.ReadFromJsonAsync<GetItems<Product>>() ?? new GetItems<Product>();
                 return getItems.Items;
@@ -28,6 +28,21 @@ namespace WAHShopForntend.Components.ProductGroupF
             catch
             {
                 return [];
+            }
+        }
+        public async Task<GroupProducts> GetGroupProductByIdAsync(int groupProductsId)
+        {
+            try
+            {
+                var response = await _http.GetAsync($"api/GroupProducts/getGroupProductById/{groupProductsId}");
+                if (!response.IsSuccessStatusCode)
+                    return null!;
+                var groupProduct = await response.Content.ReadFromJsonAsync<GroupProducts>();
+                return groupProduct ?? null!;
+            }
+            catch
+            {
+                return null!;
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿@inject IStringLocalizer<WAHShopForntend.Components.Layout.CategoryNav> L
+﻿@implements IDisposable
+
+@inject IStringLocalizer<WAHShopForntend.Components.Layout.CategoryNav> L
 <div class="categoryNav">
     @if (!string.IsNullOrEmpty(activeDropdownId))
     {
@@ -10,7 +12,9 @@
             <div class="dropdownMenu">
                 @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
                 {
-                    <div class="skeleton-loader"></div>
+                   <ul class="column">
+                        <li><div class="skeleton-text" style="width: 100px;">...</div></li>
+                   </ul>
                 }
                 else
                 {
@@ -183,29 +187,34 @@
 		// wenn die Kategorien noch nicht geladen sind, warten bis sie geladen sind, die await ist klug genug, um weißen ob schon geladen sind oder nicht, daher bruchen kein if
         await categoryService.taskCatyrories;
 
-        // get the current category id from the URL
+        NavigationManager.LocationChanged += HandleLocationChanged;
+    }
+    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+		// Extrahiere die Kategorie-ID aus der URL und aktualisiere currentCategoryId entsprechend
         var uri = new Uri(NavigationManager.Uri);
         var segments = uri.Segments;
 
         if (segments.Length > 2 && segments[1].TrimEnd('/') == "ProductsByCategory")
         {
-            //Holen Sie sich das Teil vom Link
             var rawId = segments[2].Trim('/');
-            // Entfernen Sie alle versteckten Symbole (wie U+200F oder U+202B)
             rawId = new string(rawId.Where(ch => char.IsDigit(ch) || ch == '-').ToArray());
 
-            if (!int.TryParse(rawId, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out currentCategoryId))
+            if (!int.TryParse(rawId, out var id))
                 currentCategoryId = 0;
+            else
+                currentCategoryId = id;
         }
         else
         {
             currentCategoryId = 0;
         }
-
+        StateHasChanged(); 
     }
+  
     private void OnCategory(int categoryId)
     {
-        NavigationManager.NavigateTo($"/ProductsByCategory/{categoryId.ToString(System.Globalization.CultureInfo.InvariantCulture)}", true);
+        NavigationManager.NavigateTo($"/ProductsByCategory/{categoryId.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
     }
     // 
     private List<Categories> GetFoodstuffs()
@@ -265,6 +274,11 @@
     private string? activeDropdownId = null;
     private void ToggleDropdown(string id)
     {
-        activeDropdownId = (activeDropdownId == id) ? null : id;
+       activeDropdownId = (activeDropdownId == id) ? null : id;
     }
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= HandleLocationChanged;
+    }
+}
 }

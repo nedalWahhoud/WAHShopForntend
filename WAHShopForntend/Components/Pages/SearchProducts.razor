@@ -20,11 +20,11 @@ else
 					var product = searchedProducts[i];
 					// cart product, bind with productId,quantity and product, the in OnInititalized configured.
 					/*var cartItem = searchedProducts[i].CartItem;
-				    cartItem.Product = cartItem.Product ?? product;*/
+					cartItem.Product = cartItem.Product ?? product;*/
 
 					<div class="cardProduct">
 						<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
-				     	<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+						<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
 						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 					</div>
 				}
@@ -43,12 +43,12 @@ else
 	public string? searchText { get; set; } = string.Empty;	
 
 	private List<Product> searchedProducts = new();
-	private List<CartItem> tempCartItems = new();
 	private bool Isloading = true;
-	protected override async Task OnInitializedAsync()
+
+	protected override async Task OnParametersSetAsync()
 	{
 		Isloading = true;
-
+		searchedProducts = new();
 		// get on clicked item
 		var product = productService.GetProductByIdLocal(productId)
 					?? await productService.GetProductByIdAsync(productId);
@@ -88,6 +88,6 @@ else
 	// On Product Click
 	private void OnProduct(int ProductId)
 	{
-		NavigationManager.NavigateTo($"/ProductPage/{ProductId}", true);
+		NavigationManager.NavigateTo($"/ProductPage/{ProductId}");
 	}
 }
