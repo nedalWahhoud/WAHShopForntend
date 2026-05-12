@@ -204,6 +204,7 @@ else
 			await Task.Delay(100);
 			// Setzen Sie das Objekt von donNet in JavaScript und die ID:checkScrollEnd und rufen Sie die Funktion checkScrollEnd aus JavaScript ab.
 			await JS.InvokeVoidAsync("scrollHelper.onScrollEnd", objRef);
+			StateHasChanged();
 		}
 	}
 	private async Task MoreProductsOfSameCategory(int categoryId,Categories? category = null)

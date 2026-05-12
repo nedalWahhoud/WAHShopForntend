@@ -238,7 +238,7 @@ window.addEventListener('scroll', function () {
 
             sessionStorage.setItem('lastScrollTop', scrollTop);
         });
-//  Verbindung wiederherstellen
+// Verbindung wiederherstellen
 Blazor.start({
     circuit: {
         reconnectionHandler: {
@@ -269,7 +269,6 @@ Blazor.start({
         }
     }
 });
-
 // Code zum Wiederverbinden nach der Rückkehr von WhatsApp oder aus dem Hintergrund
 window.addEventListener('focus', async () => {
     try {
@@ -279,3 +278,16 @@ window.addEventListener('focus', async () => {
         console.log("Reconnection attempt failed, but Blazor will keep trying...");
     }
 });
+/* card transform */
+window.initScrollObserver = (className) => {
+    const cards = document.querySelectorAll(className);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    }, { threshold: 0.2 });
+
+    cards.forEach(card => observer.observe(card));
+};

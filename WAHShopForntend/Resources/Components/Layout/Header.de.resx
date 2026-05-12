@@ -120,6 +120,9 @@
   <data name="Account" xml:space="preserve">
     <value>Konto</value>
   </data>
+  <data name="OurProducts" xml:space="preserve">
+    <value>Unsere Produkte</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Startseite</value>
   </data>

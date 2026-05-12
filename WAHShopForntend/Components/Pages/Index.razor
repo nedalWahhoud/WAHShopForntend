@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/webshop"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Index> L
 @inherits LayoutComponentBase
@@ -30,6 +30,7 @@
         </div>
         <h5 class="mt-3 text-muted fw-light">@L["Loading"]</h5>
     </div>
+    return;
 }
 
 @* carsousel images *@
@@ -67,7 +68,7 @@
 @code{
     private GetItems<Product> getItems = new();
     private List<ProductByCategory> mainProductByCategory = new();
-    private bool IsLoading = true;
+    private bool IsLoading = false;
     // to exclude categories already loaded in the main product list
     private List<int> excludeCategoriesIds = new();
     private List<Categories> allCategories = new();
@@ -108,6 +109,7 @@
             {
                 // Carousel automatisch laufen nach rended
                 await JS.InvokeVoidAsync("initCarousel", "offersCarousel");
+                StateHasChanged();
             }
             catch (Exception ex)
             {

@@ -1,0 +1,46 @@
+﻿<div class="FeatureSectionCard">
+    <h1 style="--h1-color: @model.TextH1Color;">@model.Title</h1>
+    <div class="cardImg" style="order:@model.ImgOrder;">
+        <img src="@model.ImageSrc" alt="CardTrucks" />
+    </div>
+    <div class="cardText" style="order:@model.TextOrder;">
+        <p>@((MarkupString)model.Text)</p>
+        @if (!string.IsNullOrEmpty(model.ButtonLink))
+        {
+            <a class="cardBtn" style="--btn-bg-color: @model.ButtonColor; --btn-text-color: @model.ButtonTextColor; --btn-hover-bg-color: @model.ButtonHoverColor;" href="@model.ButtonLink">@model.ButtonText</a>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public FeatureSectionModel model { get; set; } = new FeatureSectionModel();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("initScrollObserver", ".FeatureSectionCard");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"JS Error: {ex.Message}");
+            }
+        }
+    }
+    public class FeatureSectionModel
+    {
+        public string Title { get; set; } = string.Empty;
+        public string ImageSrc { get; set; } = string.Empty;
+        public string Text { get; set; } = string.Empty;
+        public int ImgOrder { get; set; } = 1;
+        public int TextOrder { get; set; } = 2;
+		public string TextH1Color { get; set; } = string.Empty;
+        public string ButtonLink { get; set; } = string.Empty;
+        public string ButtonText { get; set; } = string.Empty;
+		public string ButtonColor { get; set; } = string.Empty;
+		public string ButtonTextColor { get; set; } = string.Empty;
+		public string ButtonHoverColor { get; set; } = string.Empty;
+    }
+}

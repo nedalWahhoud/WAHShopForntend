@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Dates" xml:space="preserve">
+    <value>تمور</value>
+  </data>
   <data name="drinks" xml:space="preserve">
     <value>المشروبات</value>
   </data>
@@ -126,11 +129,17 @@
   <data name="Frozen" xml:space="preserve">
     <value>مفرزات</value>
   </data>
+  <data name="Household" xml:space="preserve">
+    <value>الأدوات المنزلية</value>
+  </data>
   <data name="Meats" xml:space="preserve">
     <value>اللحوم</value>
   </data>
   <data name="OnOffer" xml:space="preserve">
     <value>العروض</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>أخرى</value>
   </data>
   <data name="SweetsSnacks" xml:space="preserve">
     <value>الحلويات والتسالي</value>

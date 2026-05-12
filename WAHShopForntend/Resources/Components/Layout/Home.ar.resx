@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DescriptionCardButton" xml:space="preserve">
+    <value>تصفح المخبوزات</value>
+  </data>
+  <data name="DescriptionCardTitle" xml:space="preserve">
+    <value>خبز طازج يومياً</value>
+  </data>
+  <data name="DescriptionCardText" xml:space="preserve">
+    <value>استمتع بطعم الخبز العربي الأصيل، يُخبز بعناية ومتوفر في متجرنا طازجاً كل يوم.&lt;br/&gt;&lt;br/&gt; ولمحبي الخيارات الصحية، نقدم لكم خبز النخالة (الأسمر) الغني بالألياف والفوائد الصحية.</value>
+  </data>
+  <data name="DescriptionCardTitle1" xml:space="preserve">
+    <value>لحوم طازجة وحلال</value>
+  </data>
+  <data name="DescriptionCardText1" xml:space="preserve">
+    <value>نقدم لكم أجود أنواع اللحوم الطازجة يومياً: &lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;لحم خاروف&lt;/li&gt;
+&lt;li&gt;لحم عجل&lt;/li&gt;
+&lt;li&gt;لحم دجاج&lt;/li&gt;
+&lt;li&gt;كبدة دجاج و خاروف&lt;/li&gt;
+&lt;li&gt;حلال 100%، طازج يومياً، وبأعلى معايير النظافة.&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton1" xml:space="preserve">
+    <value>تصفح اللحوم</value>
+  </data>
+  <data name="DescriptionCardTitle2" xml:space="preserve">
+    <value>خدمة توصيل موثوقة و منتظمة </value>
+  </data>
+  <data name="DescriptionCardText2" xml:space="preserve">
+    <value>راحتكم تهمنا! لذلك نوفر لكم خدمة توصيل منتظمة ومجانية*&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;نصلكم في مواعيد محددة ودقيقة كل أسبوع.&lt;/li&gt;
+&lt;li&gt;نضمن وصول منتجاتنا واللحوم وكافة احتياجاتكم طازجة وبحالة ممتازة.&lt;/li&gt;
+&lt;li&gt;تغطية واسعة للمناطق المحيطة لضمان وصول خيرات سيريانا لباب بيتكم.&lt;/li&gt;
+&lt;li&gt;تعرف على المزيد حول أوقات التسليم الدقيقة لمنطقتك .&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton2" xml:space="preserve">
+    <value>عرض جدول التوصيل</value>
+  </data>
+  <data name="DescriptionCardTitle3" xml:space="preserve">
+    <value>تصفح تشكيلة منتجاتنا الواسعة</value>
+  </data>
+  <data name="DescriptionCardText3" xml:space="preserve">
+    <value>من خيرات بلادنا إلى السوق الأوروبية، جمعنا لكم كل ما تحتاجه عائلتكم في مكان واحد
+&lt;ul&gt;
+&lt;li&gt;أكثر من 500 منتج مختار بعناية (مونة، أجبان، حلويات، ومعلبات, مشروبات, لحوم).&lt;/li&gt;
+&lt;li&gt;عروض متجددة وجودة تضمن لكم تجربة تسوق عربية فريدة.&lt;/li&gt;
+&lt;li&gt;اكتشف تشكيلتنا الواسعة الآن واستمتع بأفضل الأسعار.&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton3" xml:space="preserve">
+    <value>إلى المتجر</value>
+  </data>
+  <data name="DescriptionCardTitle4" xml:space="preserve">
+    <value>استمتع بمشروباتنا العربية المنعشة</value>
+  </data>
+  <data name="DescriptionCardText4" xml:space="preserve">
+    <value>اروي عطشك مع تشكيلتنا الواسعة من المشروبات المنعشة
+&lt;ul&gt;
+&lt;li&gt;حتى في غربتك مشروبات بلدك في متناول يدك&lt;/li&gt;
+&lt;li&gt;تشكيلة واسعة من لمشروبات(عصير طبيعي, ردبول سوريا, ببركان, راني)&lt;/li&gt;
+&lt;li&gt;كل ما تفضله من مشروبات باردة متوفر لدينا بجودة عالية&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton4" xml:space="preserve">
+    <value>قائمة المشروبات</value>
+  </data>
+  <data name="DescriptionCardTitle5" xml:space="preserve">
+    <value>مجمداتنا: جودة طازجة لتحضير سريع</value>
+  </data>
+  <data name="DescriptionCardText5" xml:space="preserve">
+    <value>نوفر لك أفضل المنتجات المجمدة التي تضمن لك نكهة طازجة مع سهولة فائقة في التحضير
+&lt;ul&gt;
+&lt;li&gt;خضروات مقطعة بعناية تحافظ على قيمتها الغذائية&lt;/li&gt;
+&lt;li&gt;تشكيلة من المونة الجاهزة (كبة، سمبوسك، فلافل)&lt;/li&gt;
+&lt;li&gt;كل ما تحتاجه لتقديم وجبة شهية في وقت قياسي متوفر في قسم المجمدات&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardTitle6" xml:space="preserve">
+    <value>بزورات ومقرمشات لأحلى الجلسات</value>
+  </data>
+  <data name="DescriptionCardText6" xml:space="preserve">
+    <value>لا تكتمل السهرة إلا مع تشكيلتنا الواسعة من البزورات والمقرمشات الطازجة
+&lt;ul&gt;
+&lt;li&gt;مكسرات وبزورات محمصة بعناية (بزر دوار الشمس، بزر قرع، مكسرات صينية,فستق كاجو)&lt;/li&gt;
+&lt;li&gt;تشكيلة متنوعة من المقرمشات بنكهات الجبنة، الفلفل، والليمون&lt;/li&gt;
+&lt;li&gt;نقدم لكم أجود منتجات المحامص العربية لتستمتعوا بطعم لا يُنسى&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton5" xml:space="preserve">
+    <value>اكتشف الآن</value>
+  </data>
+  <data name="DescriptionCardButton6" xml:space="preserve">
+    <value>تصفح التسالي</value>
+  </data>
+  <data name="DescriptionCardTitle7" xml:space="preserve">
+    <value>حلويات عربية فاخرة لكل المناسبات</value>
+  </data>
+  <data name="DescriptionCardText7" xml:space="preserve">
+    <value>نقدم لكم تشكيلة من أفخر الحلويات العربية التي تجسد عراقة الضيافة الشرقية
+&lt;ul&gt;
+&lt;li&gt;المعمول بالفستق والتمر، البرازق المقرمشة والغريبة والكثير من لحلويات الفاخرة بانتظارك&lt;/li&gt;
+&lt;li&gt;حلويات مشكلة مصنعة من أجود السمن الحيواني والمكونات الطبيعية&lt;/li&gt;
+&lt;li&gt;مثالية لتقديمها كهدية راقية أو للاستمتاع بها مع العائلة والأصدقاء&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton7" xml:space="preserve">
+    <value>تصفح الحلويات</value>
+  </data>
+</root>

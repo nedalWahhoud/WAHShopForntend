@@ -68,6 +68,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Header.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Components\Layout\Home.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Home.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Components\Layout\Impressum.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -187,6 +192,10 @@
     <EmbeddedResource Update="Resources\Components\Layout\Header.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Header.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Layout\Home.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Home.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Components\Layout\Impressum.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

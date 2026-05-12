@@ -4,13 +4,16 @@
     {
         <div class="backdrop" @onclick='() => ToggleDropdown(null!)'></div>
     }
-    @if (categoryService.DownloadedCategories!= null && categoryService.DownloadedCategories.Count > 0)
-    {
         @* foodstuffs *@
         <div class="dropdown @(activeDropdownId == "foodstuffs" ? "active" : "")">
             <button class="dropdownButton" @onclick='() => ToggleDropdown("foodstuffs")'>▼ @L["foodstuffs"]</button>
             <div class="dropdownMenu">
-                @{
+                @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+                {
+                    <div class="skeleton-loader"></div>
+                }
+                else
+                {
                     var foodstuffsArray = GetFoodstuffs();
                     if (foodstuffsArray != null)
                     {
@@ -37,8 +40,12 @@
         <div class="dropdown @(activeDropdownId == "drinks" ? "active" : "")">
             <button class="dropdownButton" @onclick='() => ToggleDropdown("drinks")'>▼ @L["drinks"]</button>
             <div class="dropdownMenu">
-
-                @{
+                @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+                {
+                    <div class="skeleton-loader"></div>
+                }
+                else
+                {
                     var drinksArray = GetDrinks();
                     if (drinksArray != null)
                     {
@@ -64,7 +71,12 @@
         <div class="dropdown @(activeDropdownId == "sweetsSnacks" ? "active" : "")">
             <button class="dropdownButton" @onclick='() => ToggleDropdown("sweetsSnacks")'>▼ @L["SweetsSnacks"]</button>
             <div class="dropdownMenu">
-                @{
+                @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+                {
+                    <div class="skeleton-loader"></div>
+                }
+                else
+                {
                     var SweetsSnacksArray = GetSweetsSnacks();
                     if (SweetsSnacksArray != null)
                     {
@@ -89,28 +101,34 @@
         <div class="dropdown @(activeDropdownId == "meats" ? "active" : "")">
             <button class="dropdownButton" @onclick='() => ToggleDropdown("meats")'>▼ @L["Meats"]</button>
             <div class="dropdownMenu">
-                @{
-                    var Mates = GetMeats();
-                    if (Mates != null)
-                    {
-                        for (int i = 0; i < Mates.Count; i += 5)
+                @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+                {
+                    <div class="skeleton-loader"></div>
+                }
+                else
+                {
+                        var Mates = GetMeats();
+                        if (Mates != null)
                         {
-                            <ul class="column">
-                                @for (int j = i; j < i + 5 && j < Mates.Count; j++)
-                                {
-                                    var category = Mates[j];
-                                    <li @onclick="() => OnCategory(category.Id)"
-                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                        @(isArabic ? category.Name_ar : category.Name_de)
-                                    </li>
-                                }
-                            </ul>
+                            for (int i = 0; i < Mates.Count; i += 5)
+                            {
+                                <ul class="column">
+                                    @for (int j = i; j < i + 5 && j < Mates.Count; j++)
+                                    {
+                                        var category = Mates[j];
+                                        <li @onclick="() => OnCategory(category.Id)"
+                                        class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                            @(isArabic ? category.Name_ar : category.Name_de)
+                                        </li>
+                                    }
+                                </ul>
+                            }
                         }
-                    }
                 }
             </div>
         </div>
         @* Household *@
+        @{
         var householdCategory = GetHousehold();
         if (householdCategory != null)
         {
@@ -118,6 +136,10 @@
                class="categoryLink @(householdCategory.Id == currentCategoryId ? "selected" : "")">
                 @(isArabic? householdCategory.Name_ar : householdCategory.Name_de)
             </a>
+        }
+        else if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+        {
+            <a class="categoryLink skeleton-text-link">@L["Household"]</a>
         }
         @* Dates *@
         var DatesCategory = GetDates();
@@ -128,6 +150,10 @@
                 @(isArabic? DatesCategory.Name_ar: DatesCategory.Name_de)
             </a>
         }
+        else if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+        {
+            <a class="categoryLink skeleton-text-link">@L["Dates"]</a>
+        }
         @* Other *@
         var otherCategory = GetOther();
         if (otherCategory != null)
@@ -137,12 +163,16 @@
                 @(isArabic? otherCategory.Name_ar : otherCategory.Name_de)
             </a>
         }
+        else if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+        {
+            <a class="categoryLink skeleton-text-link">@L["Other"]</a>
+        }
+        }
         @* Im Angebot *@
         <a @onclick="() => OnCategory(-1)"
-        class="categoryLinkOnOffer @(currentCategoryId == -1 ? "selected" : "")">
+           class="categoryLinkOnOffer @(currentCategoryId == -1 ? "selected" : "")">
             @L["OnOffer"]
         </a>
-    }
 </div>
 @code {
 
@@ -150,7 +180,8 @@
     private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
     protected override async Task OnInitializedAsync()
     {
-        await categoryService.GetAllCategoriesAsync();
+		// wenn die Kategorien noch nicht geladen sind, warten bis sie geladen sind, die await ist klug genug, um weißen ob schon geladen sind oder nicht, daher bruchen kein if
+        await categoryService.taskCatyrories;
 
         // get the current category id from the URL
         var uri = new Uri(NavigationManager.Uri);

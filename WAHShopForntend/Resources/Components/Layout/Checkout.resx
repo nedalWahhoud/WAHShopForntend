@@ -183,9 +183,6 @@
   <data name="HaveCode" xml:space="preserve">
     <value>Do you have a discount Code?</value>
   </data>
-  <data name="InputBirthdate" xml:space="preserve">
-    <value>Input Birthdate</value>
-  </data>
   <data name="InputEmail" xml:space="preserve">
     <value>Enter your E-Mail</value>
   </data>

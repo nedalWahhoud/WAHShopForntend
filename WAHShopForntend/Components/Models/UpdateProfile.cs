@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 namespace WAHShopForntend.Components.Models
 {
     public class UpdateProfile : IValidatableObject
-
     {
 
         public int UserId { get; set; }

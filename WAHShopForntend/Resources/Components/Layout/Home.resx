@@ -117,31 +117,114 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>الحساب</value>
+  <data name="DescriptionCardButton" xml:space="preserve">
+    <value>Bakery Products</value>
   </data>
-  <data name="OurProducts" xml:space="preserve">
-    <value>منتجاتنا</value>
+  <data name="DescriptionCardTitle" xml:space="preserve">
+    <value>Fresh Arabic flatbreads daily</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>الصفحة الرئيسية</value>
+  <data name="DescriptionCardText" xml:space="preserve">
+    <value>Enjoy the authentic taste of traditional flatbread—baked fresh for you every day. For the health-conscious, we also offer our healthy, fiber-rich whole-grain flatbread.</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>تسجيل الدخول</value>
+  <data name="DescriptionCardTitle1" xml:space="preserve">
+    <value>Fresh Halal-Meat</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>تسجيل الخروج</value>
+  <data name="DescriptionCardText1" xml:space="preserve">
+    <value>Top quality for your enjoyment:&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Fresh lamb&lt;/li&gt;
+&lt;li&gt;Fresh veal and beef&lt;/li&gt;
+&lt;li&gt;Fresh chicken&lt;/li&gt;
+&lt;li&gt;Poultry and lamb liver&lt;/li&gt;
+&lt;li&gt;100% Halal, fresh daily and prepared according to the highest hygiene standards.&lt;/li&gt;
+&lt;/ul&gt;</value>
   </data>
-  <data name="MyOrders" xml:space="preserve">
-    <value>الطلبات</value>
+  <data name="DescriptionCardButton1" xml:space="preserve">
+    <value>To butcher shop</value>
   </data>
-  <data name="MyProfile" xml:space="preserve">
-    <value>الملف الشخصي</value>
+  <data name="DescriptionCardTitle2" xml:space="preserve">
+    <value>Reliable and regular delivery service</value>
   </data>
-  <data name="PrivacyPolicy" xml:space="preserve">
-    <value>سياسة الخصوية</value>
+  <data name="DescriptionCardText2" xml:space="preserve">
+    <value>We come to you! Take advantage of our regular delivery service. &lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Punctual delivery on fixed days every week.&lt;/li&gt;
+&lt;li&gt;We deliver our products—including fresh meat and all your daily essentials—directly to your doorstep.&lt;/li&gt;
+&lt;li&gt;Reliable, convenient, and always fresh—your groceries from Syriana, delivered right to you.&lt;/li&gt;
+&lt;li&gt;Find out the exact delivery times for your region.&lt;/li&gt;
+&lt;/ul&gt;</value>
   </data>
-  <data name="ProductSearch" xml:space="preserve">
-    <value>البحث عن منتج...</value>
+  <data name="DescriptionCardButton2" xml:space="preserve">
+    <value>View Delivery Schedule</value>
+  </data>
+  <data name="DescriptionCardTitle3" xml:space="preserve">
+    <value>Our Product Range</value>
+  </data>
+  <data name="DescriptionCardText3" xml:space="preserve">
+    <value>From local specialties to European market favorites – we have it all.
+&lt;ul&gt;
+&lt;li&gt;Over 500 carefully selected items for your daily needs.&lt;/li&gt;
+&lt;li&gt;Top quality and attractive offers, all in one place.&lt;/li&gt;
+&lt;li&gt;Discover our product range now and enjoy a unique shopping experience.&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton3" xml:space="preserve">
+    <value>Go to Shop</value>
+  </data>
+  <data name="DescriptionCardTitle4" xml:space="preserve">
+    <value>Enjoy Arabic drinks.</value>
+  </data>
+  <data name="DescriptionCardText4" xml:space="preserve">
+    <value>Pure Refreshment for Every Taste!
+&lt;ul&gt;
+&lt;li&gt;Experience pure refreshment with our Arabic beverages.&lt;/li&gt;
+&lt;li&gt;A wide selection of soft drinks and natural juices.&lt;/li&gt;
+&lt;li&gt;Enjoy our chilled drinks.&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton4" xml:space="preserve">
+    <value>To select</value>
+  </data>
+  <data name="DescriptionCardTitle5" xml:space="preserve">
+    <value>Fresh Frozen Foods for Quick Meals</value>
+  </data>
+  <data name="DescriptionCardText5" xml:space="preserve">
+    <value>Enjoy premium frozen products with a fresh taste and minimal effort.
+&lt;ul&gt;
+&lt;li&gt;Garden-fresh vegetables that retain their vitamins&lt;/li&gt;
+&lt;li&gt;Traditional specialties such as Kibbeh, Sambusa, and Falafel&lt;/li&gt;
+&lt;li&gt;Find everything you need for a delicious meal in record time&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardTitle6" xml:space="preserve">
+    <value>Arabian Roasted Goods &amp; Snacks</value>
+  </data>
+  <data name="DescriptionCardText6" xml:space="preserve">
+    <value>The perfect snack treat for your cozy evenings!
+&lt;ul&gt;
+&lt;li&gt;Freshly roasted seeds and nuts (sunflower seeds, pumpkin seeds, Chinese mix, nuts, and much more)&lt;/li&gt;
+&lt;li&gt;A wide variety of corn snacks in various flavors&lt;/li&gt;
+&lt;li&gt;Enjoy the finest selection of traditional Oriental snacks—available directly from us&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton5" xml:space="preserve">
+    <value>Discover Now</value>
+  </data>
+  <data name="DescriptionCardButton6" xml:space="preserve">
+    <value>Discover Our Range</value>
+  </data>
+  <data name="DescriptionCardTitle7" xml:space="preserve">
+    <value>Exquisite Arabic Sweets</value>
+  </data>
+  <data name="DescriptionCardText7" xml:space="preserve">
+    <value>Whether as an elegant gift or for your own coffee table—our sweets are always a delight. Discover the world of fine Oriental confectionery.
+&lt;ul&gt;
+&lt;li&gt;Maamoul, Barazek, Ghraybeh, and much more await you.&lt;/li&gt;
+&lt;li&gt;Traditional recipes featuring high-quality ingredients for the ultimate indulgence.&lt;/li&gt;
+&lt;li&gt;Whether as an elegant gift or for your own coffee table—our sweets are always a highlight.&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton7" xml:space="preserve">
+    <value>To the Sweets</value>
   </data>
 </root>

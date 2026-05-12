@@ -49,16 +49,19 @@
 
     protected override async Task OnInitializedAsync()
     {
+		// starten get alle categories, damit bei categoryNav schneller geladen wird
+        categoryService.taskCatyrories = categoryService.GetAllCategoriesAsync();
+
         // Initialize the cartService to get the saved cart
         await cartService.InitializeAsync();
-
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-
+			// Check user authentication status and update the authentication state accordingly
+			await CheckUserStatusAsync();
             // Check for cookie consent
             hasAccepted = await cookieService.HasAcceptedAsync();
             // überprüfe ob Benutzer schon die Cookie Banner angabe gegeben hat
@@ -84,5 +87,35 @@
     private async Task OnOpenWhatsApp()
     {
         await JS.InvokeVoidAsync("whatsappRedirect.openWhatsApp", ProjectInfo.Value.Whatsapp, " ");
+    }
+
+    private async Task CheckUserStatusAsync()
+    {
+        // check admin status
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var localUser = authState.User;
+        if (localUser.Identity != null && localUser.Identity.IsAuthenticated)
+        {
+            var userIdStr = localUser.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value!;
+            if (int.TryParse(userIdStr, out int userIdInt))
+            {
+                LoginModel loginModel = await authService.GetItemsUsersAsync(userIdInt);
+
+                if (loginModel == null)
+                {
+                    await authService.Logout();
+                    return;
+                }
+                else
+                {
+                    // Benachrichtige den Anbieter des Authentifizierungsstatus über den neuen Authentifizierungsstatus.
+                    (AuthStateProvider as CustomAuthStateProvider)?.NotifyUserAuthentication(loginModel.Token);
+                    // aktualisieren Sie den Token im Local Storage, wenn nicht sessionToken ist
+                    string sessionToken = await (AuthStateProvider as CustomAuthStateProvider)?.SessionStorageGet("authToken")!;
+                    if (sessionToken == null)
+                        (AuthStateProvider as CustomAuthStateProvider)?.LocalstorageSet("authToken", loginModel.Token);
+                }
+            }
+        }
     }
 }

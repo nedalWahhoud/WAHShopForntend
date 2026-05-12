@@ -71,6 +71,21 @@
             }
             _http!.DefaultRequestHeaders.Authorization = null;
         }
+        public async Task<LoginModel> GetItemsUsersAsync(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _http!.GetAsync($"api/Users/getUserById/{id}");
+                if (!response.IsSuccessStatusCode)
+                    return null!;
+                var result = await response.Content.ReadFromJsonAsync<LoginModel>();
+                return result ?? null!;
+            }
+            catch
+            {
+                return null!;
+            }
+        }
         public async Task<ValidationResult> UpdateProfileAsync(UpdateProfile updateProfile)
         {
             try

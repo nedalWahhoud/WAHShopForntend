@@ -259,15 +259,6 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Input Birthdate ähnelt.
-        /// </summary>
-        public static string InputBirthdate {
-            get {
-                return ResourceManager.GetString("InputBirthdate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Enter your E-Mail ähnelt.
         /// </summary>
         public static string InputEmail {

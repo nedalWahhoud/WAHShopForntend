@@ -115,6 +115,15 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Our products ähnelt.
+        /// </summary>
+        public static string OurProducts {
+            get {
+                return ResourceManager.GetString("OurProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Privacy Policy ähnelt.
         /// </summary>
         public static string PrivacyPolicy {

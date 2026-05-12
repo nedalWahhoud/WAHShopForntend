@@ -11,7 +11,9 @@ namespace WAHShopForntend.Components.CategoriesF
         private readonly HttpClient _http = http;
         private readonly ProductService _productService = productService;
         private readonly IMemoryCache _cache = cache;
-       
+
+        // zentrale taskCateories, damit die Kategorien nur einmal heruntergeladen werden, wenn mehrere Komponenten gleichzeitig auf die Kategorien zugreifen
+        public Task taskCatyrories = Task.CompletedTask;
         public List<Categories> DownloadedCategories { get; private set; } = [];
         private const string DACCachKey = "DownloadedAllCategories";
         // Async

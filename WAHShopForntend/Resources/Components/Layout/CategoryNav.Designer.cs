@@ -61,6 +61,15 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dates ähnelt.
+        /// </summary>
+        public static string Dates {
+            get {
+                return ResourceManager.GetString("Dates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Drinks ähnelt.
         /// </summary>
         public static string drinks {
@@ -88,6 +97,15 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Household ähnelt.
+        /// </summary>
+        public static string Household {
+            get {
+                return ResourceManager.GetString("Household", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Meats ähnelt.
         /// </summary>
         public static string Meats {
@@ -102,6 +120,15 @@ namespace WAHShopForntend.Resources.Components.Layout {
         public static string OnOffer {
             get {
                 return ResourceManager.GetString("OnOffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Other ähnelt.
+        /// </summary>
+        public static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
             }
         }
         

@@ -1,0 +1,37 @@
+﻿.heroSection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background-image: url('/ProjectImages/HeroSection.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    align-items: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('/ProjectImages/HeroSection.png');
+}
+
+.heroSectionH1 {
+    outline: none;
+    display: flex;
+    color: #ffffff;
+    font-weight: bold;
+    white-space: pre-line;
+    margin: 0;
+    z-index: 5;
+    font-size: clamp(24px, 4vw, 68px);
+    text-shadow: 2px 4px 10px rgba(0, 0, 0, 2.7);
+    /**/
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+    .heroSectionH1.show {
+        opacity: 1;
+        transform: translateY(0);
+    }

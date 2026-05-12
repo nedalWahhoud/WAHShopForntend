@@ -94,6 +94,13 @@
 		category = categoryService.GetCategoryByIdLocal(CategoryId) ?? await categoryService.GetCategoryByIdAsync(CategoryId);
 		IsLoaded = true;
 	}
+	protected override void OnAfterRender(bool firstRender)
+	{
+		if (firstRender)
+		{
+			StateHasChanged();
+		}
+	}
 	private List<int>? excludeProductsIds = new();
 	private async Task MoreProductsload(bool IfOnMoreProductsLoad)
 	{

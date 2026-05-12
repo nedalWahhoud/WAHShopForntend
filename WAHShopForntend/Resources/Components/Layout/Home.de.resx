@@ -117,31 +117,114 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>الحساب</value>
+  <data name="DescriptionCardButton" xml:space="preserve">
+    <value>Zum Backwaren</value>
   </data>
-  <data name="OurProducts" xml:space="preserve">
-    <value>منتجاتنا</value>
+  <data name="DescriptionCardTitle" xml:space="preserve">
+    <value>Täglich frische arabische Fladenbrote</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>الصفحة الرئيسية</value>
+  <data name="DescriptionCardText" xml:space="preserve">
+    <value>Genießen Sie den authentischen Geschmack von traditionellem Fladenbrot – täglich frisch für Sie gebacken. &lt;br \&gt;&lt;br \&gt;Für Ernährungsbewusste bieten wir auch unser gesundes und ballaststoffreiches Vollkorn-Fladenbrot an.</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>تسجيل الدخول</value>
+  <data name="DescriptionCardTitle1" xml:space="preserve">
+    <value>Frisches Halal-Fleisch</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>تسجيل الخروج</value>
+  <data name="DescriptionCardText1" xml:space="preserve">
+    <value>Beste Qualität für Ihren Genuss: &lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Frisches Lammfleisch&lt;/li&gt;
+&lt;li&gt;Frisches Kalb-, Rindfleisch&lt;/li&gt;
+&lt;li&gt;Frisches Hähnchenfleisch&lt;/li&gt;
+&lt;li&gt;Geflügel-, Lammleber&lt;/li&gt;
+&lt;li&gt;100% Halal, täglich frisch und unter höchsten Hygienestandards.&lt;/li&gt;
+&lt;/ul&gt;</value>
   </data>
-  <data name="MyOrders" xml:space="preserve">
-    <value>الطلبات</value>
+  <data name="DescriptionCardButton1" xml:space="preserve">
+    <value>Zur Metzgerei</value>
   </data>
-  <data name="MyProfile" xml:space="preserve">
-    <value>الملف الشخصي</value>
+  <data name="DescriptionCardTitle2" xml:space="preserve">
+    <value>Zuverlässiger und regelmäßiger Lieferservice</value>
   </data>
-  <data name="PrivacyPolicy" xml:space="preserve">
-    <value>سياسة الخصوية</value>
+  <data name="DescriptionCardText2" xml:space="preserve">
+    <value>Wir kommen zu Ihnen! Nutzen Sie unseren regelmäßigen Lieferservice: &lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Pünktliche Auslieferung an festen Terminen jede Woche.&lt;/li&gt;
+&lt;li&gt;Wir liefern unsere Produkte, frisches Fleisch, und alles für den täglichen Bedarf direkt vor Ihre Haustür.&lt;/li&gt;
+&lt;li&gt;Zuverlässig, bequem und immer frisch – Ihr Einkauf bei Syriana, mobil geliefert.&lt;/li&gt;
+&lt;li&gt;Informieren Sie sich über die genauen Lieferzeiten für Ihre Region.&lt;/li&gt;
+&lt;/ul&gt;</value>
   </data>
-  <data name="ProductSearch" xml:space="preserve">
-    <value>البحث عن منتج...</value>
+  <data name="DescriptionCardButton2" xml:space="preserve">
+    <value>Lieferplan ansehen</value>
+  </data>
+  <data name="DescriptionCardTitle3" xml:space="preserve">
+    <value>Unsere Produktvielfalt</value>
+  </data>
+  <data name="DescriptionCardText3" xml:space="preserve">
+    <value>Von heimischen Spezialitäten bis zum europäischen Markt – wir haben alles
+&lt;ul&gt;
+&lt;li&gt;Über 500 sorgfältig ausgewählte Artikel für Ihren täglichen Bedarf.&lt;/li&gt;
+&lt;li&gt;Beste Qualität und attraktive Angebote an einem Ort.&lt;/li&gt;
+&lt;li&gt;Entdecken Sie jetzt unser Sortiment und genießen Sie ein besonderes Einkaufserlebnis.&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton3" xml:space="preserve">
+    <value>zum Shop</value>
+  </data>
+  <data name="DescriptionCardTitle4" xml:space="preserve">
+    <value>Genießen die arabische Getränke</value>
+  </data>
+  <data name="DescriptionCardText4" xml:space="preserve">
+    <value>Erfrischung pur für jeden Geschmack!
+&lt;ul&gt;
+&lt;li&gt;Erleben Sie pure Erfrischung mit unseren arabischen Getränke.&lt;/li&gt;
+&lt;li&gt;Eine große Auswahl an Softdrinks und Natursäfte&lt;/li&gt;
+&lt;li&gt;Genießen Sie unsere gekühlten Getränke&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton4" xml:space="preserve">
+    <value>Zur Auswahl</value>
+  </data>
+  <data name="DescriptionCardTitle5" xml:space="preserve">
+    <value>Frische Tiefkühlkost für die schnelle Küche</value>
+  </data>
+  <data name="DescriptionCardText5" xml:space="preserve">
+    <value>Genießen Sie erstklassige Tiefkühlprodukte mit frischem Geschmack und minimalem Zeitaufwand
+&lt;ul&gt;
+&lt;li&gt;Erntefrisches Gemüse, das seine Vitamine behält&lt;/li&gt;
+&lt;li&gt;Traditionelle Spezialitäten wie Kibbeh, Sambusa und Falafel&lt;/li&gt;
+&lt;li&gt;Alles für eine köstliche Mahlzeit in Rekordzeit finden Sie bei uns&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardTitle6" xml:space="preserve">
+    <value>Arabische Röstwaren &amp; Knabbereien</value>
+  </data>
+  <data name="DescriptionCardText6" xml:space="preserve">
+    <value>Der perfekte Knabberspaß für Ihre gemütlichen Abende!
+&lt;ul&gt;
+&lt;li&gt;Frisch geröstete Kerne und Nüsse (Sonnenblumenkerne, Kürbiskerne,  chinesischer Mix, Nüsse uvm.)&lt;/li&gt;
+&lt;li&gt;Vielfältige Corn-Snacks in verschiedenen Geschmacksrichtungen&lt;/li&gt;
+&lt;li&gt;Genießen Sie die beste Auswahl traditioneller orientalischer Knabbereien direkt bei uns&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton5" xml:space="preserve">
+    <value>Jetzt entdecken</value>
+  </data>
+  <data name="DescriptionCardButton6" xml:space="preserve">
+    <value>Sortiment entdecken</value>
+  </data>
+  <data name="DescriptionCardTitle7" xml:space="preserve">
+    <value>Edle arabische Süßwaren</value>
+  </data>
+  <data name="DescriptionCardText7" xml:space="preserve">
+    <value>Entdecken Sie die Welt der feinen orientalischen Konditorei
+&lt;ul&gt;
+&lt;li&gt;Maamoul, Barazek und Ghraybeh und viel mehr warten auch Sie&lt;/li&gt;
+&lt;li&gt;Traditionelle Rezepturen mit hochwertigen Zutaten für höchsten Genuss&lt;/li&gt;
+&lt;li&gt;Ob als edles Geschenk oder für den eigenen Kaffeetisch – unsere Süßigkeiten sind immer ein Highlight&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="DescriptionCardButton7" xml:space="preserve">
+    <value>Zu Süßigkeiten</value>
   </data>
 </root>

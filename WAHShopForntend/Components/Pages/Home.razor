@@ -1,0 +1,152 @@
+﻿@page "/"
+@namespace WAHShopForntend.Components.Layout
+@inject IStringLocalizer<WAHShopForntend.Components.Layout.Home> L
+
+
+@* Hero Section *@
+<WAHShopForntend.Components.Layout.HeroSection />
+@* Description Cards *@
+<div class="cardsContainer">
+
+	@foreach (var item in FeatureSections)
+	{
+		<WAHShopForntend.Components.Layout.FeatureSection model="item" />
+	}
+</div>
+
+@code {
+	private List<WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel> FeatureSections = new List<WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		//IsLoading = true;
+
+		FeatureSections = new List<WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel>
+		{
+			new WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel
+		{
+			Title = L["DescriptionCardTitle"],
+			ImageSrc = "ProjectImages/FeatureSection/FeatureSectionImg.png",
+			Text =  L["DescriptionCardText"],
+			ImgOrder = 1,
+			TextOrder = 2,
+			TextH1Color = "#A07855",
+			ButtonLink = "/ProductsByCategory/9",
+			ButtonText =  L["DescriptionCardButton"],
+			ButtonColor = "#A07855",
+			ButtonTextColor = "#ffffff",
+			ButtonHoverColor = "#C19A6B"
+		},
+		new WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel
+		{
+			Title = L["DescriptionCardTitle1"],
+			ImageSrc = "ProjectImages/FeatureSection/FeatureSectionImg1.png",
+			Text =  L["DescriptionCardText1"],
+			ImgOrder = 2,
+			TextOrder = 1,
+			TextH1Color = "#5D0000",
+			ButtonLink = "/ProductsByCategory/9",
+			ButtonText =  L["DescriptionCardButton1"],
+			ButtonColor = "#8B0000",
+			ButtonTextColor = "#ffffff",
+			ButtonHoverColor = "#5D0000"
+		},
+		new WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel
+		{
+			Title = L["DescriptionCardTitle2"],
+			ImageSrc = "ProjectImages/FeatureSection/FeatureSectionImg2.png",
+			Text =  L["DescriptionCardText2"],
+			ImgOrder = 1,
+			TextOrder = 2,
+			TextH1Color = "#C89B3C",
+			ButtonLink = "/ourdeliveryservice",
+			ButtonText =  L["DescriptionCardButton2"],
+			ButtonColor = "#B6862F",
+			ButtonTextColor = "#ffffff",
+			ButtonHoverColor = "#C89B3C"
+		},
+		new WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel
+		{
+			Title = L["DescriptionCardTitle4"],
+			ImageSrc = "ProjectImages/FeatureSection/FeatureSectionImg4.png",
+			Text =  L["DescriptionCardText4"],
+			ImgOrder = 1,
+			TextOrder = 2,
+			TextH1Color = "#6F8E3A",
+			ButtonLink = "/ProductsByCategory/14",
+			ButtonText =  L["DescriptionCardButton4"],
+			ButtonColor = "#5C742F",
+			ButtonTextColor = "#ffffff",
+			ButtonHoverColor = "#6F8E3A"
+		},
+		new WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel
+		{
+			Title = L["DescriptionCardTitle5"],
+			ImageSrc = "ProjectImages/FeatureSection/FeatureSectionImg5.png",
+			Text =  L["DescriptionCardText5"],
+			ImgOrder = 2,
+			TextOrder = 1,
+			TextH1Color = "#5E7D2C",
+			ButtonLink = "/ProductsByCategory/38",
+			ButtonText =  L["DescriptionCardButton5"],
+			ButtonColor = "#8FAF45",
+			ButtonTextColor = "#ffffff",
+			ButtonHoverColor = "#5E7D2C"
+		},
+		new WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel
+		{
+			Title = L["DescriptionCardTitle6"],
+			ImageSrc = "ProjectImages/FeatureSection/FeatureSectionImg6.png",
+			Text =  L["DescriptionCardText6"],
+			ImgOrder = 1,
+			TextOrder = 2,
+			TextH1Color = "#A9151C",
+			ButtonLink = "/ProductsByCategory/33",
+			ButtonText =  L["DescriptionCardButton6"],
+			ButtonColor = "#D62828",
+			ButtonTextColor = "#ffffff",
+			ButtonHoverColor = "#A9151C"
+		},
+			new WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel
+		{
+			Title = L["DescriptionCardTitle7"],
+			ImageSrc = "ProjectImages/FeatureSection/FeatureSectionImg7.png",
+			Text =  L["DescriptionCardText7"],
+			ImgOrder = 2,
+			TextOrder = 1,
+			TextH1Color = "#C89B3C",
+			ButtonLink = "/ProductsByCategory/33",
+			ButtonText =  L["DescriptionCardButton7"],
+			ButtonColor = "#9E6C1E",
+			ButtonTextColor = "#ffffff",
+			ButtonHoverColor = "#C89B3C"
+		},
+		new WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel
+		{
+			Title = L["DescriptionCardTitle3"],
+			ImageSrc = "ProjectImages/FeatureSection/FeatureSectionImg3.png",
+			Text =  L["DescriptionCardText3"],
+			ImgOrder = 2,
+			TextOrder = 1,
+			TextH1Color = "#991826",
+			ButtonLink = "/webshop",
+			ButtonText =  L["DescriptionCardButton3"],
+			ButtonColor = "#B61E2E",
+			ButtonTextColor = "#ffffff",
+			ButtonHoverColor = "#991826"
+		},
+		};
+
+		// get carousel images
+		await carouselImagesService.GetAllCarouselAsync();
+
+		//IsLoading = false;
+	}
+
+	// carousel
+	private bool IsCarouselFullscreen = false;
+	private void HandleCarouselFullScreen(bool IsCarouselFullscreen1)
+	{
+		IsCarouselFullscreen = IsCarouselFullscreen1;
+	}
+}

@@ -235,6 +235,7 @@
     {
         PossibleStatuses = new();
         // load orderStatusList
+
         var result = await orderService.GetOrderStatusAsync();
         if (result.Result)
         {
@@ -242,42 +243,68 @@
             foreach (var item in orderService.DownloadedOrderStatus)
             {
                 // add aktuelle status
-                if (item.Id == order.StatusId)
-                {
-                    PossibleStatuses.Insert(0, item);
-                }
+                if (item.Id == order.StatusId) { PossibleStatuses.Add(item); continue; }
+
                 // der Benutzer darf es stornieren oder abschlißen wenn die Bestellung von das Laden abgeholt werden muss
-                if ((order.StatusId > 0 && order.StatusId <= 3) && order.PaymentMethodId == 1)
+                if ((order.StatusId == (int)OrderStatusEnum.Eingegangen || order.StatusId == (int)OrderStatusEnum.InBearbeitung) && order.PaymentMethodId == 1)
                 {
-                    if (item.Id == 7 || item.Id == 8)
+                    if (item.Id == (int)OrderStatusEnum.Storniert || item.Id == (int)OrderStatusEnum.Abgeholt || item.Id == (int)OrderStatusEnum.erfolgreichAbgeschlossen)
                     {
                         PossibleStatuses.Add(item);
                     }
                 }
                 // der benutzer darf es abschlißen oder stornieren wenn die bestellung durch unsere Liefservice zugestellt wird
-                else if((order.StatusId > 0 && order.StatusId <= 3) && order.PaymentMethodId == 2)
+                else if ((order.StatusId == (int)OrderStatusEnum.Eingegangen || order.StatusId == (int)OrderStatusEnum.InBearbeitung || order.StatusId == (int)OrderStatusEnum.Versendet) && order.PaymentMethodId == 2)
                 {
-                    if (item.Id == 7 || item.Id == 8)
+                    if (item.Id == (int)OrderStatusEnum.Storniert || item.Id == (int)OrderStatusEnum.Zugestellt || item.Id == (int)OrderStatusEnum.erfolgreichAbgeschlossen)
                     {
                         PossibleStatuses.Add(item);
                     }
                 }
                 // der benutzer darf stornieren, abschlißen oder zugestellt wenn die nicht versendet ist
-                else if (order.StatusId > 0 && order.StatusId <= 3)
+                else if (order.StatusId == (int)OrderStatusEnum.Eingegangen || order.StatusId == (int)OrderStatusEnum.InBearbeitung)
                 {
-                    if (item.Id == 8 || item.Id == 6 || item.Id == 7)
+                    if (item.Id == (int)OrderStatusEnum.Storniert || item.Id == (int)OrderStatusEnum.erfolgreichAbgeschlossen)
                     {
                         PossibleStatuses.Add(item);
                     }
                 }
                 // der benutzer darf zurücksetzen oder abschließen wenn die versendet ist
-                else if (order.StatusId >= 4 && order.StatusId <= 6)
+                else if (order.StatusId == (int)OrderStatusEnum.Versendet)
                 {
-                    if (item.Id == 9 || item.Id == 7)
+                    if (item.Id == (int)OrderStatusEnum.Zugestellt || item.Id == (int)OrderStatusEnum.erfolgreichAbgeschlossen)
                     {
                         PossibleStatuses.Add(item);
                     }
                 }
+                else if (order.StatusId == (int)OrderStatusEnum.Bezahlt)
+                {
+                    if (item.Id == (int)OrderStatusEnum.Storniert)
+                    {
+                        PossibleStatuses.Add(item);
+                    }
+                }
+                else if (order.StatusId == (int)OrderStatusEnum.Zugestellt)
+                {
+                    if (item.Id == (int)OrderStatusEnum.RückgabeAngefordert || item.Id == (int)OrderStatusEnum.erfolgreichAbgeschlossen)
+                    {
+                        PossibleStatuses.Add(item);
+                    }
+                }
+                else if (order.StatusId == (int)OrderStatusEnum.Rückerstattet)
+                {
+                    if (item.Id == (int)OrderStatusEnum.RückgabeAbgeschlossen)
+                    {
+                        PossibleStatuses.Add(item);
+                    }
+                }
+                else if (order.StatusId == (int)OrderStatusEnum.RückgabeAngefordert)
+				{
+					if (item.Id == (int)OrderStatusEnum.Rückerstattet)
+					{
+						PossibleStatuses.Add(item);
+					}
+				}
             }
         }
         else

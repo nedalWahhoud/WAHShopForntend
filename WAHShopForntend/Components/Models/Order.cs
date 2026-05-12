@@ -35,7 +35,7 @@ namespace WAHShopForntend.Components.Models
         [Required(ErrorMessage = "Bitte geben Sie eine Lieferadresse an.")]
         public string DeliveryAddress1 { get; set; } = string.Empty;
     }
-    public enum OrderStatusEnum : byte
+    public enum CheckoutOrderEnum : byte
     {
         Pending = 1,
         Processing = 2,

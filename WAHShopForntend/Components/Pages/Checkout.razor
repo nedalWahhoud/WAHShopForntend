@@ -12,14 +12,14 @@ else
 {
 	<div class="mainContainer">
 
-		@if (cartService.CartItems.Count == 0 || orderStatusEnum == OrderStatusEnum.Processing)
+		@if (cartService.CartItems.Count == 0 || orderStatusEnum == CheckoutOrderEnum.Processing)
 		{
 			<div class="backToMainPage">
-				@if (orderStatusEnum == OrderStatusEnum.Commpleted)
+				@if (orderStatusEnum == CheckoutOrderEnum.Commpleted)
 				{
 					<p>@backToMainPageMessage</p>
 				}
-				else if (orderStatusEnum == OrderStatusEnum.Processing)
+				else if (orderStatusEnum == CheckoutOrderEnum.Processing)
 				{
 					<div class="d-flex align-items-center">
 						<div class="spinner-border text-primary me-2" role="status">
@@ -27,7 +27,7 @@ else
 						</div>
 					</div>
 				}
-				@if (orderStatusEnum != OrderStatusEnum.Processing)
+				@if (orderStatusEnum != CheckoutOrderEnum.Processing)
 				{
 					<button @onclick="OnMainPage" class="btn">@L["BackToHomeButton"]</button>
 				}
@@ -202,33 +202,7 @@ else
 						</label>
 					</div>
 					<AuthorizeView>
-
 						<Authorized Context="auth">
-
-							@if (!IsBirthDateValid(user.BirthDate))
-							{
-								<EditForm Model="@updateProfile" OnValidSubmit="OnUserUpdate">
-									<DataAnnotationsValidator />
-									<label>@L["BirthdateUpdate"]</label>
-									<div class="form-group mb-1">
-										<InputText @bind-Value="updateProfile.BirthDate" type="date" class="form-control" />
-										<ValidationMessage For="@(() => updateProfile.BirthDate)" />
-									</div>
-									<div class="d-flex justify-content-center mt-2">
-										<button type="submit" class="btn btnEinloggen" disabled="@IsUpdateAddressMode">
-											@if (IsUpdateAddressMode)
-											{
-												<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-												<span class="ms-2">@L["Loading"]</span>
-											}
-											else
-											{
-												<span>@L["UserUpdateB"]</span>
-											}
-										</button>
-									</div>
-								</EditForm>
-							}
 							<button class="btn btnPay" type="button" @onclick="OnPay">@L["BuyButton"]</button>
 						</Authorized>
 						<NotAuthorized Context="auth">
@@ -328,7 +302,7 @@ else
 @code {
 	private string MessageWarning = null!;
 	private bool agbAkzeptiert = false;
-	OrderStatusEnum orderStatusEnum = new OrderStatusEnum();
+	CheckoutOrderEnum orderStatusEnum = new CheckoutOrderEnum();
 	private User user = new User();
 	protected override async Task OnInitializedAsync()
 	{
@@ -355,7 +329,7 @@ else
 		// get payment methods
 		await orderService.GetPaymentMethodsAsync();
 		// set default order status
-		orderStatusEnum = OrderStatusEnum.Pending;
+		orderStatusEnum = CheckoutOrderEnum.Pending;
 	}
 	private bool IsLoaded = false;
 	protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -524,20 +498,20 @@ else
 			return;
 		}
 
-		orderStatusEnum = OrderStatusEnum.Processing;
+		orderStatusEnum = CheckoutOrderEnum.Processing;
 		string backToMainPageAlertMessage = null!;
 		// check address
 		if ((selectedPaymentId == 2 || selectedPaymentId == 5) && selectedAddressId == 0)
 		{
 			MessageWarning = L["SelectDeliveryAddress"];
-			orderStatusEnum = OrderStatusEnum.Pending;
+			orderStatusEnum = CheckoutOrderEnum.Pending;
 			return;
 		}
 		// check payment method
 		if (selectedPaymentId == 0)
 		{
 			MessageWarning = L["SelectPaymentMethod"];
-			orderStatusEnum = OrderStatusEnum.Pending;
+			orderStatusEnum = CheckoutOrderEnum.Pending;
 			return;
 		}
 		// check MinimumPurchaseAmount
@@ -551,7 +525,7 @@ else
 				if (result.Item1.Result == false)
 				{
 					MessageWarning = $"{address.ZipCode} " + L[result.Item1.Message!].ToString();
-					orderStatusEnum = OrderStatusEnum.Pending;
+					orderStatusEnum = CheckoutOrderEnum.Pending;
 					return;
 				}
 				else if (result.Item1.Result == true)
@@ -560,14 +534,14 @@ else
 					if (cartService.GetTotalPrice() < area.MinimumPurchaseAmount)
 					{
 						MessageWarning = L["MinimumPurchaseAmountMessage"].ToString() + $" {area.MinimumPurchaseAmount}€";
-						orderStatusEnum = OrderStatusEnum.Pending;
+						orderStatusEnum = CheckoutOrderEnum.Pending;
 						return;
 					}
 				}
 				else
 				{
 					MessageWarning = "Unknown Error.";
-					orderStatusEnum = OrderStatusEnum.Pending;
+					orderStatusEnum = CheckoutOrderEnum.Pending;
 					return;
 				}
 				backToMainPageAlertMessage += $"<span style='color:#1E88E5; font-weight:bold;'>{L["OurDeliveryServiceWaringMessage"].ToString()}</span><br/>";
@@ -575,7 +549,7 @@ else
 			else
 			{
 				MessageWarning = L["ErrorAddressOurDelivery"];
-				orderStatusEnum = OrderStatusEnum.Pending;
+				orderStatusEnum = CheckoutOrderEnum.Pending;
 				return;
 			}
 		}
@@ -592,7 +566,7 @@ else
 		if (!resultShipping.result)
 		{
 			MessageWarning = $"{resultShipping.productsName}, " + L[resultShipping.errorMessage].ToString();
-			orderStatusEnum = OrderStatusEnum.Pending;
+			orderStatusEnum = CheckoutOrderEnum.Pending;
 			return;
 		}
 		else
@@ -641,11 +615,11 @@ else
 			"<br/>" +
 			backToMainPageAlertMessage);
 
-			orderStatusEnum = OrderStatusEnum.Commpleted;
+			orderStatusEnum = CheckoutOrderEnum.Commpleted;
 		}
 		else
 		{
-			orderStatusEnum = OrderStatusEnum.Pending;
+			orderStatusEnum = CheckoutOrderEnum.Pending;
 		}
 	}
 
@@ -656,7 +630,7 @@ else
 		{
 				DeliveryAddressId = selectedAddressId,
 				PaymentMethodId = selectedPaymentId,
-				StatusId = 1, // in database 1 = Order Pending
+				StatusId = (int)OrderStatusEnum.Eingegangen, // in database 1 = Order Eingegangen
 				OrderItems = cartService.CartItems.Select(item => new OrderItems
 				{
 					ProductId = item.ProductId,

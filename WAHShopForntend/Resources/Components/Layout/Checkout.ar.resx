@@ -183,9 +183,6 @@
   <data name="HaveCode" xml:space="preserve">
     <value>هل لديك رمز خصم?</value>
   </data>
-  <data name="InputBirthdate" xml:space="preserve">
-    <value>ادخل مواليدك</value>
-  </data>
   <data name="InputEmail" xml:space="preserve">
     <value>ادخل بريدك الاكتروني</value>
   </data>

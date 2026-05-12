@@ -1,0 +1,14 @@
+﻿@inject IStringLocalizer<WAHShopForntend.Components.Layout.HeroSection> L
+<div class="heroSection">
+    <h1 class="heroSectionH1">@L["HeroTitle"]</h1>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("initScrollObserver", ".heroSectionH1");
+        }
+    }
+}
