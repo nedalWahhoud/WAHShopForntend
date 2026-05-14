@@ -232,6 +232,7 @@ else
 				foreach (var p in productsLocal)
 				{
 					p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
+					excludeProductsIds.Add(p.Id);
 				}
 
 				allProducts.AddRange(productsLocal);
