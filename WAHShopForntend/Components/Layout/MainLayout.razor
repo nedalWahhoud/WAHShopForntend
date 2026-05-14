@@ -49,6 +49,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        // Check user authentication status and update the authentication state accordingly
+        _ = CheckUserStatusAsync();
 		// starten get alle categories, damit bei categoryNav schneller geladen wird
         categoryService.taskCatyrories = categoryService.GetAllCategoriesAsync();
 
@@ -60,8 +62,6 @@
     {
         if (firstRender)
         {
-			// Check user authentication status and update the authentication state accordingly
-			await CheckUserStatusAsync();
             // Check for cookie consent
             hasAccepted = await cookieService.HasAcceptedAsync();
             // überprüfe ob Benutzer schon die Cookie Banner angabe gegeben hat
