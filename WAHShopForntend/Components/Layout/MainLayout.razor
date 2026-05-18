@@ -10,21 +10,37 @@
 <div id="app" class="page">
     <main class="mainContent">
         <article class="content px-4">
-            @Body
-            @* cookie benner *@
-            @if (!hasAccepted && shouldShow)
-            {
-                <div class="cookieBanner">
-                    <span>@L["CookieMessage"]</span>
-                    <div class="buttonGroup @((CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar") ? "rtl" : "ltr")">
-                        <button class="btn btn-primary me-2" @onclick="Accept">@L["Yes"]</button>
-                        <button class="btn btn-secondary" @onclick="Decline">@L["No"]</button>
+            <ErrorBoundary @ref="errorBoundary">
+                <ChildContent>
+                    @Body
+                    @* cookie benner *@
+                    @if (!hasAccepted && shouldShow)
+                    {
+                        <div class="cookieBanner">
+                            <span>@L["CookieMessage"]</span>
+                            <div class="buttonGroup @((CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar") ? "rtl" : "ltr")">
+                                <button class="btn btn-primary me-2" @onclick="Accept">@L["Yes"]</button>
+                                <button class="btn btn-secondary" @onclick="Decline">@L["No"]</button>
+                            </div>
+                        </div>
+                    }
+                    <div @onclick="OnOpenWhatsApp" class="whatsappIcon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
                     </div>
-                </div>
-            }
-            <div @onclick="OnOpenWhatsApp" class="whatsappIcon">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-            </div>
+                </ChildContent>
+                <ErrorContent>
+                    @* Automatischer Reload nach Fehler, um Einfrieren zu verhindern*@
+                    @{
+                        TriggerAutomaticReload();
+                    }
+                    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+                        <div class="spinner-border text-danger" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <h5 class="mt-3 text-muted fw-light">Ein Fehler ist aufgetreten. Versuche es erneut...</h5>
+                    </div>
+                </ErrorContent>
+            </ErrorBoundary>
         </article>
     </main>
 </div>
@@ -46,6 +62,7 @@
     NavigationManager.Uri.Contains("confirmemail");
     private bool hasAccepted;
     private bool shouldShow = false;
+    private ErrorBoundary? errorBoundary;
 
     protected override async Task OnInitializedAsync()
     {
@@ -117,5 +134,11 @@
                 }
             }
         }
+    }
+    // error
+    private void TriggerAutomaticReload()
+    {
+        // forceLoad: true zwingt den Browser zu einer vollständigen Aktualisierung, um ein Einfrieren des Inhalts zu verhindern.
+        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
     }
 }
