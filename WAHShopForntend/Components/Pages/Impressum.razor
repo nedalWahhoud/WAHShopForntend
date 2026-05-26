@@ -1,7 +1,7 @@
 ﻿@page "/impressum"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Impressum> L
-<div class="mainContainer">
+<div class="mainDiv">
 	<h1>@L["impressum"]</h1>
 	<p>@(ProjectInfo?.Value?.Name?.Replace(",", "\n") ?? "ProjectInfo ist null")</p>
 	<p style="white-space: pre-line;  line-height: 0.8;">

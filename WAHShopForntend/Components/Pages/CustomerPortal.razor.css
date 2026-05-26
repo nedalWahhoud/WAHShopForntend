@@ -1,5 +1,5 @@
-﻿.main {
-    height: 100vh;
+﻿.mainDiv {
+    margin-top: calc(var(--header-height, 96px) + var(--categoryNav-height, 53px) + 10px);
 }
 
 .loginContainer {

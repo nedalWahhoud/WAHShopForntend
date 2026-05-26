@@ -1,5 +1,5 @@
-﻿.mainContainer {
-    width: 100%;
+﻿.mainDiv {
+    margin-top: calc(var(--header-height, 96px) + var(--categoryNav-height, 53px) + 10px);
 }
 .profileCard {
     display:flex;

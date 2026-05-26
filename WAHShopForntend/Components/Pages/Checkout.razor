@@ -10,294 +10,295 @@
 }
 else
 {
-	<div class="mainContainer">
-
-		@if (cartService.CartItems.Count == 0 || orderStatusEnum == CheckoutOrderEnum.Processing)
-		{
-			<div class="backToMainPage">
-				@if (orderStatusEnum == CheckoutOrderEnum.Commpleted)
-				{
-					<p>@backToMainPageMessage</p>
-				}
-				else if (orderStatusEnum == CheckoutOrderEnum.Processing)
-				{
-					<div class="d-flex align-items-center">
-						<div class="spinner-border text-primary me-2" role="status">
-							<span class="visually-hidden">Loading...</span>
+	<div class="mainDiv">
+		<div class="mainContainer">
+			@if (cartService.CartItems.Count == 0 || orderStatusEnum == CheckoutOrderEnum.Processing)
+			{
+				<div class="backToMainPage">
+					@if (orderStatusEnum == CheckoutOrderEnum.Commpleted)
+					{
+						<p>@backToMainPageMessage</p>
+					}
+					else if (orderStatusEnum == CheckoutOrderEnum.Processing)
+					{
+						<div class="d-flex align-items-center">
+							<div class="spinner-border text-primary me-2" role="status">
+								<span class="visually-hidden">Loading...</span>
+							</div>
 						</div>
-					</div>
-				}
-				@if (orderStatusEnum != CheckoutOrderEnum.Processing)
-				{
-					<button @onclick="OnMainPage" class="btn">@L["BackToHomeButton"]</button>
-				}
-			</div>
-		}
-		else
-		{
-			<div class="address">
-				<h4>@L["DeliveryTitle"]</h4>
+					}
+					@if (orderStatusEnum != CheckoutOrderEnum.Processing)
+					{
+						<button @onclick="OnMainPage" class="btn">@L["BackToHomeButton"]</button>
+					}
+				</div>
+			}
+			else
+			{
+				<div class="address">
+					<h4>@L["DeliveryTitle"]</h4>
 
-				@if (addressService.DownloadedAddresses.Count > 0)
-				{
-					<div class="addressRadioDiv">
-						<InputRadioGroup @bind-Value="selectedAddressId" class="addressRadio">
-							@foreach (var address in addressService.DownloadedAddresses)
-							{
-								<div class="addressOption" @ondblclick="() => OndblclickUpdateAddress(address)">
-									<label>
-										<InputRadio Value="@address.Id" />
-										@address.FirstName @address.LastName - @address.Street, @address.ZipCode @address.City
-									</label>
-									<button type="button" class="btn deleteButton" @onclick="() => DeleteAddress(address.Id)">
-										@L["DeleteButton"]
-									</button>
-								</div>
-							}
-						</InputRadioGroup>
-					</div>
-				}
-				<p @onclick="OnAddressForm" class="pShowAddressForm">@L["AddNewAddress"]</p>
-
-			</div>
-			<div class="payment">
-				<h4>@L["PaymentTitle"]</h4>
-				<div class="paymentMethodOption">
-					<EditForm Model="@this">
-						<InputRadioGroup Value="@selectedPaymentId" ValueChanged="@((int val) => OnPaymentChanged(val))" ValueExpression="() => selectedPaymentId">
-							@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
-							{
-								if (orderService.DownloadedPaymentMethods[i].Id == 1 || orderService.DownloadedPaymentMethods[i].Id == 2 ||
-					orderService.DownloadedPaymentMethods[i].Id == 5)
+					@if (addressService.DownloadedAddresses.Count > 0)
+					{
+						<div class="addressRadioDiv">
+							<InputRadioGroup @bind-Value="selectedAddressId" class="addressRadio">
+								@foreach (var address in addressService.DownloadedAddresses)
 								{
-									var paymentMethod = orderService.DownloadedPaymentMethods[i];
-									<label>
-										<InputRadio Value="@paymentMethod.Id" />
-										@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? paymentMethod.Description_ar : paymentMethod.Description_de)
-									</label>
+									<div class="addressOption" @ondblclick="() => OndblclickUpdateAddress(address)">
+										<label>
+											<InputRadio Value="@address.Id" />
+											@address.FirstName @address.LastName - @address.Street, @address.ZipCode @address.City
+										</label>
+										<button type="button" class="btn deleteButton" @onclick="() => DeleteAddress(address.Id)">
+											@L["DeleteButton"]
+										</button>
+									</div>
 								}
-							}
-							@if (selectedPaymentId == 2)
-							{
-								<p class="alert alert-primary mt-3 mb-3" role="alert">
-									@L["OurDeliveryServiceNote"]
-								</p>
-								<a href="/ourdeliveryservice" target="_blank">@L["OurDeliveryServiceInformation"]</a>
-							}
-							<label>
-								@L["PaymentNote"]
-							</label>
-						</InputRadioGroup>
-					</EditForm>
-					@* Discount Code *@
-					<div class="mb-3">
-						<label>@L["HaveCode"]</label>
-						<div class="input-group d-flex gap-2 mb-1">
-							<InputText id="discountCode" class="form-control" @bind-Value="discountCode.Code" />
-							<button type="button" class="btn btn-primary" @onclick="OnCode">
-								@if(IsDiscountCodeLoading)
+							</InputRadioGroup>
+						</div>
+					}
+					<p @onclick="OnAddressForm" class="pShowAddressForm">@L["AddNewAddress"]</p>
+
+				</div>
+				<div class="payment">
+					<h4>@L["PaymentTitle"]</h4>
+					<div class="paymentMethodOption">
+						<EditForm Model="@this">
+							<InputRadioGroup Value="@selectedPaymentId" ValueChanged="@((int val) => OnPaymentChanged(val))" ValueExpression="() => selectedPaymentId">
+								@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
 								{
-									<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+									if (orderService.DownloadedPaymentMethods[i].Id == 1 || orderService.DownloadedPaymentMethods[i].Id == 2 ||
+									orderService.DownloadedPaymentMethods[i].Id == 5)
+									{
+										var paymentMethod = orderService.DownloadedPaymentMethods[i];
+										<label>
+											<InputRadio Value="@paymentMethod.Id" />
+											@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? paymentMethod.Description_ar : paymentMethod.Description_de)
+										</label>
+									}
+								}
+								@if (selectedPaymentId == 2)
+								{
+									<p class="alert alert-primary mt-3 mb-3" role="alert">
+										@L["OurDeliveryServiceNote"]
+									</p>
+									<a href="/ourdeliveryservice" target="_blank">@L["OurDeliveryServiceInformation"]</a>
+								}
+								<label>
+									@L["PaymentNote"]
+								</label>
+							</InputRadioGroup>
+						</EditForm>
+						@* Discount Code *@
+						<div class="mb-3">
+							<label>@L["HaveCode"]</label>
+							<div class="input-group d-flex gap-2 mb-1">
+								<InputText id="discountCode" class="form-control" @bind-Value="discountCode.Code" />
+								<button type="button" class="btn btn-primary" @onclick="OnCode">
+									@if (IsDiscountCodeLoading)
+									{
+										<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+									}
+									else
+									{
+										@L["EnterCode"]
+									}
+								</button>
+							</div>
+							@{
+								string message = null!;
+								if (discountCode.Message != null && !string.IsNullOrEmpty(discountCode.Message))
+								{
+									message = discountCode.Message;
+								}
+								else if (discountCategory.Message != null && !string.IsNullOrEmpty(discountCategory.Message))
+								{
+									message = discountCategory.Message;
+								}
+
+								double DiscountPercentageText = 0;
+								char? valueSymbol = null;
+								if (discountCode.DiscountAmount != 0)
+								{
+									DiscountPercentageText = discountCode.DiscountAmount;
+									valueSymbol = discountCode.DiscountType == DiscountType.Percentage ? '%' : '€';
+								}
+								else if (discountCategory.DiscountAmount != 0)
+								{
+									DiscountPercentageText = discountCategory.DiscountAmount;
+									valueSymbol = discountCategory.DiscountType == DiscountType.Percentage ? '%' : '€';
 								}
 								else
 								{
-									@L["EnterCode"]
+									DiscountPercentageText = 0;
 								}
-							</button>
+
+								<label class="mt-2 text-success">@L["DiscountValue"]: @DiscountPercentageText @valueSymbol</label>
+								<label class="mt-2 text-danger">@message</label>
+							}
 						</div>
-						@{
-							string message = null!;
-							if (discountCode.Message != null && !string.IsNullOrEmpty(discountCode.Message))
-							{
-								message = discountCode.Message;
-							}
-							else if (discountCategory.Message != null && !string.IsNullOrEmpty(discountCategory.Message))
-							{
-								message = discountCategory.Message;
-							}
-
-							double DiscountPercentageText = 0;
-							char? valueSymbol = null;
-							if (discountCode.DiscountAmount != 0)
-							{
-								DiscountPercentageText = discountCode.DiscountAmount;
-								valueSymbol = discountCode.DiscountType == DiscountType.Percentage ? '%' : '€';
-							}
-							else if (discountCategory.DiscountAmount != 0)
-							{
-								DiscountPercentageText = discountCategory.DiscountAmount;
-								valueSymbol = discountCategory.DiscountType == DiscountType.Percentage ? '%' : '€';
-							}
-							else
-							{
-								DiscountPercentageText = 0;
-							}
-
-							<label class="mt-2 text-success">@L["DiscountValue"]: @DiscountPercentageText @valueSymbol</label>
-							<label class="mt-2 text-danger">@message</label>
-						}
 					</div>
 				</div>
-			</div>
-			@* shipping *@
-			@if (selectedPaymentId == 5)
-			{
-				<div class="shipping">
-					<h4>@L["ShippingMethod"]:</h4>
-					<div class="shippingProvider">
-						<InputRadioGroup @bind-Value="@order.ShippingProviderId">
-							@foreach (ShippingProvider item in orderService.DownloadedShippingProviders)
-							{
-								if (item.Id == 1)
+				@* shipping *@
+				@if (selectedPaymentId == 5)
+				{
+					<div class="shipping">
+						<h4>@L["ShippingMethod"]:</h4>
+						<div class="shippingProvider">
+							<InputRadioGroup @bind-Value="@order.ShippingProviderId">
+								@foreach (ShippingProvider item in orderService.DownloadedShippingProviders)
 								{
-									<label>
-										<InputRadio Value="@item.Id" />
-										@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? item.Name_ar : item.Name_de)
-									</label>
+									if (item.Id == 1)
+									{
+										<label>
+											<InputRadio Value="@item.Id" />
+											@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? item.Name_ar : item.Name_de)
+										</label>
+									}
 								}
-							}
-						</InputRadioGroup>
+							</InputRadioGroup>
+						</div>
+						<label>@L["ShippingCosts"]:<span style="font-weight:bold;">&nbsp;@((order.ShippingProviders?.PublicShippingCost ?? 0).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span></label>
 					</div>
-					<label>@L["ShippingCosts"]:<span style="font-weight:bold;">&nbsp;@((order.ShippingProviders?.PublicShippingCost ?? 0).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span></label>
+				}
+				@* placeOrder *@
+				<div class="placeOrder">
+					@L["Items"]: @cartService.GetTotalQuantity()
+					<span>
+						@if (discountCode != null && discountCode.Id > 0)
+						{
+							var result = GetFinalPriceWithDiscount();
+							<span class="text-success">@L["YouSave"] @result.discountValue.ToString("C", new System.Globalization.CultureInfo("de-DE")) </span>
+						}
+						else if (discountCategory != null && discountCategory.Id > 0 && discountCategory.CategoriesId > 0)
+						{
+							var result = GetFinalPriceWithDiscountCategory();
+							<span class="text-success">@L["YouSave"] @result.discountValue.ToString("C", new System.Globalization.CultureInfo("de-DE")) </span>
+						}
+						else
+						{
+							GetFinalPrice();
+						}
+					</span>
+					@{
+						double totalPrice = 0;
+						if (order.ShippingProviders != null && order.ShippingProviderId > 0)
+						{
+							<span>@L["ShippingCosts"]: @order.ShippingProviders?.PublicShippingCost.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
+							totalPrice = order.TotalPrice + order.ShippingProviders?.PublicShippingCost ?? 0;
+						}
+						else
+							totalPrice = order.TotalPrice;
+					}
+					<span><strong>@L["TotalPrice"]:</strong> @totalPrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
+					<span>@L["Tax"]</span>
+
+					<InputTextArea class="form-control" @bind-Value="order.Notes " placeholder="@L["AddNotePlaceholder"]" />
+					<div class="placeOrderB">
+						<div class="form-check">
+							<InputCheckbox id="agbCheck" @bind-Value="agbAkzeptiert" class="form-check-input" required />
+							<label class="form-check-label" for="agbCheck">
+								<a href="/agb" target="_blank">@L["Agb"]</a> und die <a href="/rightOfWithdrawal" target="_blank">@L["RightOfWithdrawal"]</a> @L["AgbAccept"]
+							</label>
+						</div>
+						<AuthorizeView>
+							<Authorized Context="auth">
+								<button class="btn btnPay" type="button" @onclick="OnPay">@L["BuyButton"]</button>
+							</Authorized>
+							<NotAuthorized Context="auth">
+
+								<button type="button" @onclick="OnEinloggen" class="btn btnEinloggen">@L["LoginButton"]</button>
+
+								<EditForm Model="@user" OnValidSubmit="OnPay">
+									<DataAnnotationsValidator />
+									<div class="form-group mb-1">
+										<InputText @bind-Value="user.UserName" placeholder="@L["inputUsername"]" class="form-control" />
+										<ValidationMessage For="@(() => user.UserName)" />
+									</div>
+
+									<div class="form-group mb-1">
+										<InputText @bind-Value="user.Email" placeholder="@L["InputEmail"]" class="form-control" />
+										<ValidationMessage For="@(() => user.Email)" />
+									</div>
+									<button type="submit" class="btn btnPay mt-2">@L["BuyWithoutLoginButton"]</button>
+								</EditForm>
+
+							</NotAuthorized>
+						</AuthorizeView>
+
+					</div>
+				</div>
+
+			}
+			@* Message Wahrung Bereich *@
+			@if (MessageWarning != null)
+			{
+				<div class="messageWarning">
+					<i class="bi bi-exclamation-triangle-fill"></i>
+					<p>
+						@MessageWarning
+					</p>
 				</div>
 			}
-			@* placeOrder *@
-			<div class="placeOrder">
-				@L["Items"]: @cartService.GetTotalQuantity()
-				<span>
-					@if (discountCode != null && discountCode.Id > 0)
-					{
-						var result = GetFinalPriceWithDiscount();
-						<span class="text-success">@L["YouSave"] @result.discountValue.ToString("C", new System.Globalization.CultureInfo("de-DE")) </span>
-					}
-					else if(discountCategory != null && discountCategory.Id > 0 && discountCategory.CategoriesId > 0)
-					{
-						var result = GetFinalPriceWithDiscountCategory();
-						<span class="text-success">@L["YouSave"] @result.discountValue.ToString("C", new System.Globalization.CultureInfo("de-DE")) </span>
-					}
-					else
-					{
-						GetFinalPrice();
-					}
-				</span>
-				@{
-					double totalPrice = 0;
-					if (order.ShippingProviders != null && order.ShippingProviderId > 0)
-					{
-						<span>@L["ShippingCosts"]: @order.ShippingProviders?.PublicShippingCost.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
-						totalPrice = order.TotalPrice + order.ShippingProviders?.PublicShippingCost ?? 0;
-					}
-					else
-						totalPrice = order.TotalPrice;
-				}
-				<span><strong>@L["TotalPrice"]:</strong> @totalPrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))</span>
-				<span>@L["Tax"]</span>
+		</div>
+		@* address *@
+		@if (IsAddAddressMode || IsUpdateAddressMode)
+		{
 
-				<InputTextArea class="form-control" @bind-Value="order.Notes " placeholder="@L["AddNotePlaceholder"]" />
-				<div class="placeOrderB">
-					<div class="form-check">
-						<InputCheckbox id="agbCheck" @bind-Value="agbAkzeptiert" class="form-check-input" required />
-						<label class="form-check-label" for="agbCheck">
-							<a href="/agb" target="_blank">@L["Agb"]</a> und die <a href="/rightOfWithdrawal" target="_blank">@L["RightOfWithdrawal"]</a> @L["AgbAccept"]
-						</label>
-					</div>
-					<AuthorizeView>
-						<Authorized Context="auth">
-							<button class="btn btnPay" type="button" @onclick="OnPay">@L["BuyButton"]</button>
-						</Authorized>
-						<NotAuthorized Context="auth">
+			Address address = IsAddAddressMode ? newAddress : updateAddress;
 
-							<button type="button" @onclick="OnEinloggen" class="btn btnEinloggen">@L["LoginButton"]</button>
-
-							<EditForm Model="@user" OnValidSubmit="OnPay">
-								<DataAnnotationsValidator />
-								<div class="form-group mb-1">
-									<InputText @bind-Value="user.UserName" placeholder="@L["inputUsername"]" class="form-control" />
-									<ValidationMessage For="@(() => user.UserName)" />
-								</div>
-
-								<div class="form-group mb-1">
-									<InputText @bind-Value="user.Email" placeholder="@L["InputEmail"]" class="form-control" />
-									<ValidationMessage For="@(() => user.Email)" />
-								</div>
-								<button type="submit" class="btn btnPay mt-2">@L["BuyWithoutLoginButton"]</button>
-							</EditForm>
-
-						</NotAuthorized>
-					</AuthorizeView>
-
+			<div class="overlay">
+				<div class="addressForm">
+					<h3>@L["AddressFormTitle"]</h3>
+					<EditForm Model="@address" OnValidSubmit="HandleAddressSubmit">
+						<DataAnnotationsValidator />
+						<div class="form-group">
+							<ValidationMessage style="color:red;" For="@(() => address.FirstName)" />
+							<label>@L["FirstName"]</label>
+							<InputText class="form-control" @bind-Value="address.FirstName" />
+						</div>
+						<div class="form-group">
+							<ValidationMessage style="color:red;" For="@(() => address.LastName)" />
+							<label>@L["LastName"]</label>
+							<InputText class="form-control" @bind-Value="address.LastName" />
+						</div>
+						<div class="form-group">
+							<ValidationMessage style="color:red;" For="@(() => address.Phone)" />
+							<label>@L["Phone"]</label>
+							<InputText class="form-control" @bind-Value="address.Phone" />
+						</div>
+						<div class="form-group">
+							<ValidationMessage style="color:red;" For="@(() => address.Street)" />
+							<label>@L["Street"]</label>
+							<InputText class="form-control" @bind-Value="address.Street" />
+						</div>
+						<div class="form-group">
+							<ValidationMessage style="color:red;" For="@(() => address.ZipCode)" />
+							<label>@L["ZipCode"]</label>
+							<InputText class="form-control" @bind-Value="address.ZipCode" />
+						</div>
+						<div class="form-group">
+							<ValidationMessage style="color:red;" For="@(() => address.City)" />
+							<label>@L["City"]</label>
+							<InputText class="form-control" @bind-Value="address.City" />
+						</div>
+						<div class="form-group">
+							<label>@L["Country"]</label>
+							<InputText class="form-control" @bind-Value="address.Country" readonly />
+						</div>
+						<div class="addressBtn">
+							<button type="submit" class="btn addAddressB"> @(IsAddAddressMode ? L["AddAddressButton"] : L["UpdateAddressButton"])</button>
+							<button type="button" class="btn addProductCancelB" @onclick="CancelAddAddressForm">@L["CancelButton"]</button>
+						</div>
+					</EditForm>
 				</div>
 			</div>
-
-		}
-		@* Message Wahrung Bereich *@
-		@if (MessageWarning != null)
-		{
-			<div class="messageWarning">
-				<i class="bi bi-exclamation-triangle-fill"></i>
-				<p>
-					@MessageWarning
-				</p>
-			</div>
+			if (IsAddAddressMode)
+				newAddress = address;
+			else
+				updateAddress = address;
 		}
 	</div>
-	@* address *@
-	@if (IsAddAddressMode || IsUpdateAddressMode)
-	{
-
-		Address address = IsAddAddressMode ? newAddress : updateAddress;
-
-		<div class="overlay">
-			<div class="addressForm">
-				<h3>@L["AddressFormTitle"]</h3>
-				<EditForm Model="@address" OnValidSubmit="HandleAddressSubmit">
-					<DataAnnotationsValidator />
-					<div class="form-group">
-						<ValidationMessage style="color:red;" For="@(() => address.FirstName)" />
-						<label>@L["FirstName"]</label>
-						<InputText class="form-control" @bind-Value="address.FirstName" />
-					</div>
-					<div class="form-group">
-						<ValidationMessage style="color:red;" For="@(() => address.LastName)" />
-						<label>@L["LastName"]</label>
-						<InputText class="form-control" @bind-Value="address.LastName" />
-					</div>
-					<div class="form-group">
-						<ValidationMessage style="color:red;" For="@(() => address.Phone)" />
-						<label>@L["Phone"]</label>
-						<InputText class="form-control" @bind-Value="address.Phone" />
-					</div>
-					<div class="form-group">
-						<ValidationMessage style="color:red;" For="@(() => address.Street)" />
-						<label>@L["Street"]</label>
-						<InputText class="form-control" @bind-Value="address.Street" />
-					</div>
-					<div class="form-group">
-						<ValidationMessage style="color:red;" For="@(() => address.ZipCode)" />
-						<label>@L["ZipCode"]</label>
-						<InputText class="form-control" @bind-Value="address.ZipCode" />
-					</div>
-					<div class="form-group">
-						<ValidationMessage style="color:red;" For="@(() => address.City)" />
-						<label>@L["City"]</label>
-						<InputText class="form-control" @bind-Value="address.City" />
-					</div>
-					<div class="form-group">
-						<label>@L["Country"]</label>
-						<InputText class="form-control" @bind-Value="address.Country" readonly />
-					</div>
-					<div class="addressBtn">
-						<button type="submit" class="btn addAddressB"> @(IsAddAddressMode ? L["AddAddressButton"] : L["UpdateAddressButton"])</button>
-						<button type="button" class="btn addProductCancelB" @onclick="CancelAddAddressForm">@L["CancelButton"]</button>
-					</div>
-				</EditForm>
-			</div>
-		</div>
-		if (IsAddAddressMode)
-			newAddress = address;
-		else
-			updateAddress = address;
-	}
 }
 @code {
 	private string MessageWarning = null!;

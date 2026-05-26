@@ -1,5 +1,4 @@
 ﻿@implements IDisposable
-
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.CategoryNav> L
 <div class="categoryNav">
     @if (!string.IsNullOrEmpty(activeDropdownId))
@@ -189,6 +188,14 @@
 
         NavigationManager.LocationChanged += HandleLocationChanged;
     }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // get die Höhe der header
+            await JS.InvokeVoidAsync("getElementHeight", ".categoryNav", "--categoryNav-height");
+        }
+    }
     private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
     {
 		// Extrahiere die Kategorie-ID aus der URL und aktualisiere currentCategoryId entsprechend
@@ -280,5 +287,4 @@
     {
         NavigationManager.LocationChanged -= HandleLocationChanged;
     }
-}
 }

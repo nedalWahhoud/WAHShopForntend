@@ -32,51 +32,51 @@
 
 @if (IsLoaded)
 {
-	<div class="mainContainer">
-		<h3 class="@(CategoryId == -1 ? "text-danger" : "text-dark")">
-			<strong>
-				@(CategoryId != -1 
-										?System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-										? category?.Name_ar ?? ""
-										: category?.Name_de ?? ""
-								: L["OnOffer"])
-			</strong>
-		</h3>
-		<div class="productItems">
-			@foreach (var product in products)
-			{
-				<div class="cardProduct">
-					<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
-					<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
-					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
-				</div>
-			}
-		</div>
-		<div class="moreLoadContainer">
-			@if (products.Count > 0)
-			{
-				<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || categoryService._getItems.AllItemsLoaded)">
-					@if (IsOrdersLoading)
-					{
-						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-						<span class="ms-2">@L["LoadingButton"]</span>
-					}
-					else if (!categoryService._getItems.AllItemsLoaded)
-					{
-						<span>@L["LoadMore"]</span>
-					}
-					@if (categoryService._getItems.AllItemsLoaded)
-					{
-						<span>@L["AllItemsLoaded"]</span>
-					}
-				</button>
-			}
-			else
-			{
-				<span class="@(CategoryId != -1 ? "NoItemsFound" : "NoOffersFound")">@(CategoryId != -1 ? L["NoItemsFound"] : L["NoOffersFound"])</span>
-			}
+	<div class="mainDiv">
+			<h3 class="@(CategoryId == -1 ? "text-danger" : "text-dark")">
+				<strong>
+					@(CategoryId != -1
+									? System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+									? category?.Name_ar ?? ""
+									: category?.Name_de ?? ""
+									: L["OnOffer"])
+				</strong>
+			</h3>
+			<div class="productItems">
+				@foreach (var product in products)
+				{
+					<div class="cardProduct">
+						<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
+						<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+					</div>
+				}
+			</div>
+			<div class="moreLoadContainer">
+				@if (products.Count > 0)
+				{
+					<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || categoryService._getItems.AllItemsLoaded)">
+						@if (IsOrdersLoading)
+						{
+							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+							<span class="ms-2">@L["LoadingButton"]</span>
+						}
+						else if (!categoryService._getItems.AllItemsLoaded)
+						{
+							<span>@L["LoadMore"]</span>
+						}
+						@if (categoryService._getItems.AllItemsLoaded)
+						{
+							<span>@L["AllItemsLoaded"]</span>
+						}
+					</button>
+				}
+				else
+				{
+					<span class="@(CategoryId != -1 ? "NoItemsFound" : "NoOffersFound")">@(CategoryId != -1 ? L["NoItemsFound"] : L["NoOffersFound"])</span>
+				}
 
-		</div>
+			</div>
 	</div>
 }
 @code {

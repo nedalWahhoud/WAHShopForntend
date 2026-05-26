@@ -9,141 +9,141 @@
 }
 else
 {
+	<div class="mainDiv">
+		@if (product == null)
+		{
+			<div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+				<div class="card border-0 shadow-sm rounded-4 text-center px-3 py-3" style="max-width: 400px;">
 
-	@if (product == null)
-	{
-		<div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
-			<div class="card border-0 shadow-sm rounded-4 text-center px-3 py-3" style="max-width: 400px;">
+					<div class="mb-3">
+						<i class="bi bi-clock-history fs-1" style="color: #5bc0f8;"></i>
+					</div>
 
-				<div class="mb-3">
-					<i class="bi bi-clock-history fs-1" style="color: #5bc0f8;"></i>
+					<h5 class="mb-2">
+						@L["OutStock"]
+					</h5>
+
+					<p class="mb-0 fw-bold fs-2" style="color: #5bc0f8;">
+						@L["AvailableSoon"]
+					</p>
+
 				</div>
-
-				<h5 class="mb-2">
-					@L["OutStock"]
-				</h5>
-
-				<p class="mb-0 fw-bold fs-2" style="color: #5bc0f8;">
-					@L["AvailableSoon"]
-				</p>
-
 			</div>
-		</div>
-	}
-	else
-	{
+		}
+		else
+		{
 
 
-		@* SEO *@
-		var imageUrl = productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? null!);
-		var productName = isArabic ? product?.Name_ar : product?.Name_de;
-		var productDescription = isArabic ? product?.Description_ar : product?.Description_de;
-		var availability = (product?.Quantity > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock");
-		var productUrl = NavigationManager.Uri;
+			@* SEO *@
+			var imageUrl = productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? null!);
+			var productName = isArabic ? product?.Name_ar : product?.Name_de;
+			var productDescription = isArabic ? product?.Description_ar : product?.Description_de;
+			var availability = (product?.Quantity > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock");
+			var productUrl = NavigationManager.Uri;
 
-		<HeadContent>
-			<PageTitle>
-				@(isArabic ? product?.Name_ar : product?.Name_de)
-			</PageTitle>
-			<meta name="description" content="@(isArabic ? product?.Description_ar : product?.Description_de)" />
-			<meta name="keywords" content="@(isArabic ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
+			<HeadContent>
+				<PageTitle>
+					@(isArabic ? product?.Name_ar : product?.Name_de)
+				</PageTitle>
+				<meta name="description" content="@(isArabic ? product?.Description_ar : product?.Description_de)" />
+				<meta name="keywords" content="@(isArabic ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
 			: product?.Name_de + ", Syriana Leutkirch, Syriana Supermarkt, arabische Supermarkt, Lebensmittel, arabische Lebensmittel, arabisches Laden, arabisches Laden in Leutkirhc")" />
 
-			<!-- Structured Data -->
-			<script type="application/ld+json">
-				@((MarkupString)$@"{{
-		            ""@context"": ""https://schema.org"",
-		            ""@type"": ""Product"",
-		            ""name"": ""{productName}"",
-		            ""description"": ""{productDescription}"",
-		            ""image"": ""{imageUrl}"",
-		            ""offers"": {{
-							""@type"": ""Offer"",
-							""url"": ""{NavigationManager.Uri}"",
-							""priceCurrency"": ""EUR"",
-							""price"": ""{(product?.SalePrice ?? 0):0.00}"",
-							""availability"": ""{availability}"",
-							""itemCondition"": ""https://schema.org/NewCondition""
+				<!-- Structured Data -->
+				<script type="application/ld+json">
+					@((MarkupString)$@"{{
+				""@context"": ""https://schema.org"",
+				""@type"": ""Product"",
+				""name"": ""{productName}"",
+				""description"": ""{productDescription}"",
+				""image"": ""{imageUrl}"",
+				""offers"": {{
+						""@type"": ""Offer"",
+						""url"": ""{NavigationManager.Uri}"",
+						""priceCurrency"": ""EUR"",
+						""price"": ""{(product?.SalePrice ?? 0):0.00}"",
+						""availability"": ""{availability}"",
+						""itemCondition"": ""https://schema.org/NewCondition""
 
-						}}
 					}}
-				   }}"))
-			</script>
-		</HeadContent>
-		@**@
-		<div class="productDetails">
-			<div class="ImageSection">
-				<img class="zoomableImage" @onclick="OpenImage" src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())" alt="@(product?.Name_de ?? "Produkt Name")" />
-				@if (ShowFullImage)
+				}}
+			   }}"))
+				</script>
+			</HeadContent>
+			@**@
+			<div class="productDetails">
+				<div class="ImageSection">
+					<img class="zoomableImage" @onclick="OpenImage" src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())" alt="@(product?.Name_de ?? "Produkt Name")" />
+					@if (ShowFullImage)
+					{
+						<div loading="lazy" class="modalOverlay" @onclick="CloseImage">
+							<img class="modalImage"
+								 src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())"
+								 alt="Image of Product"
+							@onclick:stopPropagation />
+						</div>
+					}
+				</div>
+				<div class="InfoSection">
+					<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
+
+					<h2 class="productTitle">
+						@(isArabic ? product?.Name_ar : product?.Name_de)
+					</h2>
+					<p class="productDescription">
+						@(isArabic ? product?.Description_ar : product?.Description_de)
+					</p>
+					<div class="productPrice"> <WAHShopForntend.Components.Layout.PriceLayout ProductId="product?.Id ?? 0" /> </div>
+					@if (product?.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
+					{
+						<select @key="product.Id" class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
+							<option value="0">
+								@(isArabic ? product.ProductGroup.GroupName_ar : product.ProductGroup.GroupName_de)
+							</option>
+							@foreach (var groupProduct in groupProducts)
+							{
+								<option value="@groupProduct.Id">
+									@(isArabic ? groupProduct.Name_ar : groupProduct.Name_de)
+								</option>
+							}
+						</select>
+					}
+					<div class="DivQuantity">
+						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+					</div>
+					<p class="text-secondary fw-semibold">
+						@if (product.IsShippable)
+						{
+							<i class="bi bi-box-fill text-warning"> </i> @(" " + L["IsShippable"])
+						}
+						else
+						{
+							<i class="bi bi-slash-circle-fill text-warning"></i> @(" " + L["IsNotShippable"])
+						}
+					</p>
+				</div>
+			</div>
+		}
+		@* random categorys *@
+		@for (int x = 0; x < mainProductByCategory.Count; x++)
+		{
+			// category
+			var category = mainProductByCategory[x].Category;
+			<WAHShopForntend.Components.Layout.CategoryLinkIndex category="category" />
+			<div class="mainProductsCard">
+				@for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
 				{
-					<div loading="lazy" class="modalOverlay" @onclick="CloseImage">
-						<img class="modalImage"
-						src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())"
-						alt="Image of Product"
-						@onclick:stopPropagation />
+					// product
+					var product = mainProductByCategory[x].Products[i];
+					<div class="productsCard">
+						<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
+						<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 					</div>
 				}
 			</div>
-			<div class="InfoSection">
-				<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
-
-				<h2 class="productTitle">
-					@(isArabic? product?.Name_ar: product?.Name_de)
-				</h2>
-				<p class="productDescription">
-					@(isArabic? product?.Description_ar: product?.Description_de)
-				</p>
-				<div class="productPrice"> <WAHShopForntend.Components.Layout.PriceLayout ProductId="product?.Id ?? 0" /> </div>
-				@if (product?.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
-				{
-					<select @key="product.Id" class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
-						<option value="0">
-							@(isArabic? product.ProductGroup.GroupName_ar: product.ProductGroup.GroupName_de)
-						</option>
-						@foreach (var groupProduct in groupProducts)
-						{
-							<option value="@groupProduct.Id">
-								@(isArabic? groupProduct.Name_ar : groupProduct.Name_de)
-							</option>
-						}
-					</select>
-				}
-				<div class="DivQuantity">
-					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
-				</div>
-				<p class="text-secondary fw-semibold">
-					@if (product.IsShippable)
-					{
-						<i class="bi bi-box-fill text-warning"> </i> @(" " + L["IsShippable"])
-					}
-					else
-					{
-						<i class="bi bi-slash-circle-fill text-warning"></i> @(" " + L["IsNotShippable"])
-					}
-				</p>
-			</div>
-		</div>
-	}
-	@* random categorys *@
-	@for (int x = 0; x < mainProductByCategory.Count; x++)
-	{
-		// category
-		var category = mainProductByCategory[x].Category;
-		<WAHShopForntend.Components.Layout.CategoryLinkIndex category="category" />
-		<div class="mainProductsCard">
-			@for (int i = 0; i < mainProductByCategory[x].Products.Count; i++)
-			{
-				// product
-				var product = mainProductByCategory[x].Products[i];
-				<div class="productsCard">
-					<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
-					<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
-					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
-				</div>
-			}
-		</div>
-	}
-
+		}
+	</div>
 }
 @code {
 	[Parameter]

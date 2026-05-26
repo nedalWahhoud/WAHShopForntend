@@ -11,7 +11,8 @@
 }
 .categoryNav {
     position: fixed;
-    top: 6rem; /* header height */
+    top: var(--header-height, 96px); /* header height */
+    margin-top: 0;
     z-index: 9980; /* weinger als Header um immer unter Header zu bleiben */
     width: 100%;
     display: flex;

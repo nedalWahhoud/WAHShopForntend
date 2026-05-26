@@ -1,6 +1,6 @@
-﻿.mainContainer {
-    width: 100%;
-    margin-bottom: 50px;
+﻿.mainDiv {
+    margin-top: calc(var(--header-height, 96px) + var(--categoryNav-height, 53px) + 10px);
+    margin-bottom: 10px;
 }
 .iconCircle {
     width: 35px;
@@ -12,12 +12,10 @@
     justify-content: center;
     color: #6c757d;
 }
-
 .balanceCard {
     border-radius: 15px;
     background: linear-gradient(to bottom right, #ffffff, #fcfcfc);
 }
-
 .bg-danger-soft {
     background-color: #fee2e2;
     font-size: 0.75rem;

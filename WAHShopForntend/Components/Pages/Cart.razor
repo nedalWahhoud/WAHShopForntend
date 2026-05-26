@@ -10,58 +10,61 @@
 }
 else
 {
-
-	@if (cartService.CartItems.Count == 0)
-	{
-		<div class="emptyCart">
-			<p>@L["CartEmptyMessage"]</p>
-			<button class="btn btn-primary" @onclick="OnBackToShop">@L["BackToShopButton"]</button>
-		</div>
-	}
-	else
-	{
-		<h3>@L["CartTitle"]</h3>
-		<div class="cartContainer">
-			<div class="cart">
-				@for (int i = 0; i < cartService.CartItems.Count; i++)
-				{
-					var item = cartService.CartItems[i];
-					if (item.Product != null)
+	<div class="mainDiv">
+		@if (cartService.CartItems.Count == 0)
+		{
+			<div class="emptyCart">
+				<p>@L["CartEmptyMessage"]</p>
+				<button class="btn btn-primary" @onclick="OnBackToShop">@L["BackToShopButton"]</button>
+			</div>
+		}
+		else
+		{
+			<h3>@L["CartTitle"]</h3>
+			<div class="cartContainer">
+				<div class="cart">
+					@for (int i = 0; i < cartService.CartItems.Count; i++)
 					{
-						<div class="cartItem">
-							<img @onclick="() => OnProduct(item.ProductId)" width="160" height="160" src="@productImagesService.GetProductImageUrl(item.Product.ProductImages.FirstOrDefault(i => i.IsMain)!)" alt="@item.Product.Name_de" />
-							<div class="cartItemDetails">
-								<h4>@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-											? item.Product.Name_ar
-											:item.Product.Name_de )</h4>
-								<p>
-									@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-										    ? item.Product.Description_ar
-											: item.Product.Description_de)
-								</p>
-								<div class="PriceDiv">@L["PriceLabel"] <WAHShopForntend.Components.Layout.PriceLayout ProductId="@item.ProductId" />&nbsp;&nbsp;&nbsp;@L["TotalLabel"]<span style="font-weight:bold; ">&nbsp;@(cartService.GetTotalPriceOfProduct(item.ProductId).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span> </div>
-								<div class="quantityInput">
-									<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@item.ProductId" IsCartLayout="true" OnQuantityChanged="HandleQuantityChanged" />
+						var item = cartService.CartItems[i];
+						if (item.Product != null)
+						{
+							<div class="cartItem">
+								<img @onclick="() => OnProduct(item.ProductId)" width="160" height="160" src="@productImagesService.GetProductImageUrl(item.Product.ProductImages.FirstOrDefault(i => i.IsMain)!)" alt="@item.Product.Name_de" />
+								<div class="cartItemDetails">
+									<h4>
+										@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+																	? item.Product.Name_ar
+																	: item.Product.Name_de)
+									</h4>
+									<p>
+										@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+																	? item.Product.Description_ar
+																	: item.Product.Description_de)
+									</p>
+									<div class="PriceDiv">@L["PriceLabel"] <WAHShopForntend.Components.Layout.PriceLayout ProductId="@item.ProductId" />&nbsp;&nbsp;&nbsp;@L["TotalLabel"]<span style="font-weight:bold; ">&nbsp;@(cartService.GetTotalPriceOfProduct(item.ProductId).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span> </div>
+									<div class="quantityInput">
+										<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@item.ProductId" IsCartLayout="true" OnQuantityChanged="HandleQuantityChanged" />
+									</div>
 								</div>
 							</div>
-						</div>
+						}
+						else
+						{
+							<div class="cartItem">
+								<p>@L["ProductNotFound"] (ID: @item.ProductId)</p>
+							</div>
+						}
 					}
-					else
-					{
-						<div class="cartItem">
-							<p>@L["ProductNotFound"] (ID: @item.ProductId)</p>
-						</div>
-					}
-				}
-				<div class="TotalPrice">
-					<p>@L["TotalPrice"] (@cartService.GetTotalQuantity() @L["Article"]): <span style="font-weight:bold; ">@cartService.GetTotalPrice().ToString("C", new System.Globalization.CultureInfo("de-DE"))</span></p>
+					<div class="TotalPrice">
+						<p>@L["TotalPrice"] (@cartService.GetTotalQuantity() @L["Article"]): <span style="font-weight:bold; ">@cartService.GetTotalPrice().ToString("C", new System.Globalization.CultureInfo("de-DE"))</span></p>
+					</div>
+				</div>
+				<div class="kasse">
+					<button class="btn btn-primary" @onclick="OnCheckout">@L["CheckoutButton"]</button>
 				</div>
 			</div>
-			<div class="kasse">
-				<button class="btn btn-primary" @onclick="OnCheckout">@L["CheckoutButton"]</button>
-			</div>
-		</div>
-	}
+		}
+	</div>
 }
 @code {
 	private bool IsLoaded = false;

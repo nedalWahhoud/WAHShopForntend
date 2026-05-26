@@ -19,8 +19,6 @@ html, body {
     padding: 0;
 }
     
-
-
 /* Loading*/
 .lodingContainer {
     top: 0;
@@ -51,8 +49,8 @@ html, body {
 /* product */
 .mainProductsCard {
     display: flex;
-    flex-wrap: nowrap; /* لا تلتف العناصر */
-    overflow-x: auto; /* يسمح بالتمرير الأفقي */
+    flex-wrap: nowrap; /* Die Elemente nicht einrahmen */
+    overflow-x: auto;
     overflow-y: hidden;
     gap: 16px;
     padding: 20px;

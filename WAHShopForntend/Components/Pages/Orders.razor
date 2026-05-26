@@ -10,7 +10,7 @@
 
     bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
     var culture = new System.Globalization.CultureInfo("de-DE");
-    <div class="mainContainer">
+    <div class="mainDiv">
         <h3>@L["MyOrders"]</h3>
         @if (@orderService.DownloadedOrders.Count <= 0)
         {

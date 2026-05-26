@@ -1,7 +1,7 @@
-﻿.mainContainer {
+﻿.mainDiv {
     display: flex;
     flex-direction: column;
-    margin: 20px auto;
+    margin-top: calc(var(--header-height, 96px) + var(--categoryNav-height, 53px) + 10px);
 }
 h2 {
     margin-top: 20px;

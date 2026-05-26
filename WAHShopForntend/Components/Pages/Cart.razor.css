@@ -1,4 +1,7 @@
-﻿/* cart leer */
+﻿.mainDiv {
+    margin-top: calc(var(--header-height, 96px) + var(--categoryNav-height, 53px) + 10px);
+}
+/* cart leer */
 .emptyCart {
     display: flex;
     flex-direction: column;

@@ -1,5 +1,5 @@
-﻿.mainContainer {
-    margin-top: 70px;
+﻿.mainDiv {
+    margin-top: calc(var(--header-height, 96px) + var(--categoryNav-height, 53px) + 10px);
 }
 .orderContainer {
     max-width: 900px;

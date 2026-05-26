@@ -12,10 +12,11 @@
     z-index: 9999;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
+    padding:0;
 }
 
     .header.hidden {
-        transform: translateY(-100%); /* سحب الهيدر خارج الشاشة للأعلى */
+        transform: translateY(-100%); /* Ziehen Sie die Kopfzeile vom Bildschirmrand nach oben. */
     }
 
 /* vermeiden die Header bewegen von rechts nach links*/

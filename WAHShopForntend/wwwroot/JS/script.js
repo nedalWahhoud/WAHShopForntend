@@ -1,4 +1,14 @@
-﻿// scroll
+﻿// get height of element and store it in css variable
+window.getElementHeight = (elementSelector, cssVariableName) => {
+    const element = document.querySelector(elementSelector);
+    if (element) {
+        const rect = element.getBoundingClientRect();
+        const height = rect.height;
+        // Die Höhe wird automatisch in der übergebenen Variable gespeichert.
+        document.documentElement.style.setProperty(cssVariableName, height + 'px');
+    }
+};
+// scroll
 window.scrollHelper = {
     onScrollEnd: function (dotnetObj) {
         let isLoading = false; // 🚫 Verhindert Wiederholung
@@ -32,8 +42,8 @@ window.scrollHelper = {
 };
 // confirm
 window.showConfirm = function (message) {
-        return confirm(message);
-}
+    return confirm(message);
+};
 // langauge cocikes fixd
 window.blazorCulture = {
     set: function (value) {
@@ -58,7 +68,6 @@ window.blazorCulture = {
         }
         return null;
     }
-
 };
 // Cookie Consent 
 window.cookieHelper = {
@@ -179,7 +188,6 @@ window.shareProduct = async (title, url) => {
                 console.warn("Share/Copy failed:", error);
             }
 };
-
 // Vollbildmodus aktivieren
 window.openNativeFullscreen = function (elementId) {
     var elem = document.getElementById(elementId);
@@ -219,25 +227,26 @@ window.closeFullscreen = function () {
 };
 // header verschwenden und categoryNav ganz top verscheben
 window.addEventListener('scroll', function () {
-            const header = document.querySelector('.header');
-            const nav = document.querySelector('.categoryNav');
+    const header = document.querySelector('.header');
+    const nav = document.querySelector('.categoryNav');
 
-            if (!header || !nav) return;
+    if (!header || !nav) return;
 
-            const scrollTop = window.scrollY;
-            const lastScrollTop = sessionStorage.getItem('lastScrollTop') || 0;
+    const headerHeight = header.offsetHeight;
+    const scrollTop = window.scrollY;
+    const lastScrollTop = sessionStorage.getItem('lastScrollTop') || 0;
 
-            if (scrollTop > lastScrollTop && scrollTop > 60) {
-                header.classList.add('hidden');
-                nav.classList.add('stick-to-top');
-            }
-            else {
-                header.classList.remove('hidden');
-                nav.classList.remove('stick-to-top');
-            }
+    if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+        header.classList.add('hidden');
+        nav.classList.add('stick-to-top');
+    }
+    else {
+        header.classList.remove('hidden');
+        nav.classList.remove('stick-to-top');
+    }
 
-            sessionStorage.setItem('lastScrollTop', scrollTop);
-        });
+    sessionStorage.setItem('lastScrollTop', scrollTop);
+});
 // Verbindung wiederherstellen
 Blazor.start({
     circuit: {
@@ -278,7 +287,7 @@ window.addEventListener('focus', async () => {
         console.log("Reconnection attempt failed, but Blazor will keep trying...");
     }
 });
-/* card transform */
+// card transform 
 window.initScrollObserver = (className) => {
     const cards = document.querySelectorAll(className);
     const observer = new IntersectionObserver((entries) => {

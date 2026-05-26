@@ -4,7 +4,6 @@
     background-color: var(--mainBackgroundColor);
     min-height: 100dvh;
     flex: 1;
-    padding-top: calc(7rem + 3rem); /* header height und categoryNav height */
 }
 
 html, body {
@@ -117,9 +116,6 @@ html[dir="rtl"] .whatsappIcon {
             gap: 0.5rem;
             order: 2;
         }
-    .page {
-        padding-top: calc(6rem + 7rem); /* header height und categoryNav height */
-    }
 }
 
 #blazor-error-ui {

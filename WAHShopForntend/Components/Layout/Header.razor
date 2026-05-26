@@ -3,7 +3,6 @@
 @using Microsoft.AspNetCore.Localization;
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Header> L
 
-
 <header class="header ltr-section">
     <div class="containerLeft">
         <ProjektLogo />
@@ -84,9 +83,6 @@
                         <li><a class="dropdown-item dropdownItem" @onclick="Login">@L["Login"]</a></li>
                     </NotAuthorized>
                 </AuthorizeView>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item dropdownItem" href="/privacyPolicy">@L["PrivacyPolicy"]</a></li>
-
             </ul>
         </div>
     </div>
@@ -98,6 +94,15 @@
     {
         // event handler for cart changes
         cartService.OnChange += HandleCartChange;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // get die Höhe der header
+            await JS.InvokeVoidAsync("getElementHeight", ".header", "--header-height");
+        }
     }
     private void HandleCartChange()
     {

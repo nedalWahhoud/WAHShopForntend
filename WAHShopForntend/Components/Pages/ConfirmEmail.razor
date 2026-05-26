@@ -13,12 +13,14 @@
 }
 else
 {
-   <h3>@activateRequest.StatusMessage</h3>
+    <div class="mainDiv">
+        <h3>@activateRequest.StatusMessage</h3>
 
-   @if (activateRequest.IsActivated)
-   {
-    <button class="btn btn-primary" @onclick="GoToLogin">@L["GoToLogin"]</button>
-   }
+        @if (activateRequest.IsActivated)
+        {
+            <button class="btn btn-primary" @onclick="GoToLogin">@L["GoToLogin"]</button>
+        }
+    </div>
 }
 
 @code {

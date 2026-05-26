@@ -1,4 +1,7 @@
-﻿/* ======== MAIN CHECKOUT STYLING ======== */
+﻿.mainDiv {
+    margin-top: calc(var(--header-height, 96px) + var(--categoryNav-height, 53px) + 10px);
+}
+/* ======== MAIN CHECKOUT STYLING ======== */
 .mainContainer {
     display: flex;
     flex-direction: column;
@@ -11,6 +14,7 @@
     max-width: 600px;
     margin: 20px auto;
     box-sizing: border-box;
+    margin-top: calc(var(--header-height, 96px) + var(--categoryNav-height, 53px) + 10px);
 }
 /* ======== Message  ======== */
 .messageWarning {
