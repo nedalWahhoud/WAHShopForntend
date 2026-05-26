@@ -29,7 +29,9 @@
     transition: transform 0.3s ease-in-out;
 }
     .categoryNav.stick-to-top {
-        transform: translateY(-6rem);
+        top: 0;
+        z-index: 10000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .categoryNav::-webkit-scrollbar {
@@ -138,7 +140,7 @@
     }
 
         .categoryNav.stick-to-top {
-            transform: translateY(-4.5rem);
+            top:0;
         }
 
     .categoryNav a, .dropdown button {
@@ -155,7 +157,8 @@
     .dropdownMenu {
         display: none;
         position: fixed;
-        top: 11.5rem;
+        /* unter header und CategoryNav platzieren */
+        top: calc(var(--header-height, 96px) + var(--categoryNav-height, 53px));
         left: 0;
         right: 0;
         margin: auto;
@@ -167,8 +170,12 @@
         box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         z-index: 10000;
         flex-direction: column;
-        touch-action: pan-y; 
+        touch-action: pan-y;
         -webkit-overflow-scrolling: touch;
+    }
+    /* add platzposition von dropdownMenu nach höhe der CategorNav, weil wenn stick-to-top aktiv ist dann der Header ist verschwendt und muss nur höhe der CategoryNav nehmen */
+    .categoryNav.stick-to-top .dropdownMenu {
+        top: var(--categoryNav-height, 53px) !important; 
     }
     .dropdown.active .dropdownMenu {
         display: flex !important;

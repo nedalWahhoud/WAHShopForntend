@@ -5,180 +5,192 @@
     {
         <div class="backdrop" @onclick='() => ToggleDropdown(null!)'></div>
     }
-        @* foodstuffs *@
-        <div class="dropdown @(activeDropdownId == "foodstuffs" ? "active" : "")">
-            <button class="dropdownButton" @onclick='() => ToggleDropdown("foodstuffs")'>▼ @L["foodstuffs"]</button>
-            <div class="dropdownMenu">
-                @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+    @* foodstuffs *@
+    <div class="dropdown @(activeDropdownId == "foodstuffs" ? "active" : "")">
+        <button class="dropdownButton" @onclick='() => ToggleDropdown("foodstuffs")'>▼ @L["foodstuffs"]</button>
+        <div class="dropdownMenu">
+            @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+            {
+                @SkeletonRows
+            }
+            else
+            {
+                var foodstuffsArray = GetFoodstuffs();
+                if (foodstuffsArray != null)
                 {
-                   <ul class="column">
-                        <li><div class="skeleton-text" style="width: 100px;">...</div></li>
-                   </ul>
-                }
-                else
-                {
-                    var foodstuffsArray = GetFoodstuffs();
-                    if (foodstuffsArray != null)
+                    for (int i = 0; i < foodstuffsArray.Count; i += 5)
                     {
-                        for (int i = 0; i < foodstuffsArray.Count; i += 5)
-                        {
-                            <ul class="column">
-                                @for (int j = i; j < i + 5 && j < foodstuffsArray.Count; j++)
-                                {
-                                    var category = foodstuffsArray[j];
-
-                                    <li @onclick="() => OnCategory(category.Id)"
-                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                        @(isArabic ? category.Name_ar : category.Name_de)
-                                    </li>
-                                }
-                            </ul>
-                        }
-
-                    }
-                }
-            </div>
-        </div>
-        @* drinks *@
-        <div class="dropdown @(activeDropdownId == "drinks" ? "active" : "")">
-            <button class="dropdownButton" @onclick='() => ToggleDropdown("drinks")'>▼ @L["drinks"]</button>
-            <div class="dropdownMenu">
-                @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
-                {
-                    <div class="skeleton-loader"></div>
-                }
-                else
-                {
-                    var drinksArray = GetDrinks();
-                    if (drinksArray != null)
-                    {
-                        for (int i = 0; i < drinksArray.Count; i += 5)
-                        {
-                            <ul class="column">
-                                @for (int j = i; j < i + 5 && j < drinksArray.Count; j++)
-                                {
-                                    var category = drinksArray[j];
-                                    <li @onclick="() => OnCategory(category.Id)"
-                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                        @(isArabic ? category.Name_ar : category.Name_de)
-                                    </li>
-                                }
-                            </ul>
-                        }
-
-                    }
-                }
-            </div>
-        </div>
-        @* SweetsSnacks *@
-        <div class="dropdown @(activeDropdownId == "sweetsSnacks" ? "active" : "")">
-            <button class="dropdownButton" @onclick='() => ToggleDropdown("sweetsSnacks")'>▼ @L["SweetsSnacks"]</button>
-            <div class="dropdownMenu">
-                @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
-                {
-                    <div class="skeleton-loader"></div>
-                }
-                else
-                {
-                    var SweetsSnacksArray = GetSweetsSnacks();
-                    if (SweetsSnacksArray != null)
-                    {
-                        for (int i = 0; i < SweetsSnacksArray.Count; i += 5)
-                        {
-                            <ul class="column">
-                                @for (int j = i; j < i + 5 && j < SweetsSnacksArray.Count; j++)
-                                {
-                                    var category = SweetsSnacksArray[j];
-                                    <li @onclick="() => OnCategory(category.Id)"
-                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                        @(isArabic ? category.Name_ar : category.Name_de)
-                                    </li>
-                                }
-                            </ul>
-                        }
-                    }
-                }
-            </div>
-        </div>
-        @* Fleische *@
-        <div class="dropdown @(activeDropdownId == "meats" ? "active" : "")">
-            <button class="dropdownButton" @onclick='() => ToggleDropdown("meats")'>▼ @L["Meats"]</button>
-            <div class="dropdownMenu">
-                @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
-                {
-                    <div class="skeleton-loader"></div>
-                }
-                else
-                {
-                        var Mates = GetMeats();
-                        if (Mates != null)
-                        {
-                            for (int i = 0; i < Mates.Count; i += 5)
+                        <ul class="column">
+                            @for (int j = i; j < i + 5 && j < foodstuffsArray.Count; j++)
                             {
-                                <ul class="column">
-                                    @for (int j = i; j < i + 5 && j < Mates.Count; j++)
-                                    {
-                                        var category = Mates[j];
-                                        <li @onclick="() => OnCategory(category.Id)"
-                                        class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
-                                            @(isArabic ? category.Name_ar : category.Name_de)
-                                        </li>
-                                    }
-                                </ul>
+                                var category = foodstuffsArray[j];
+
+                                <li @onclick="() => OnCategory(category.Id)"
+                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                    @(isArabic ? category.Name_ar : category.Name_de)
+                                </li>
                             }
-                        }
+                        </ul>
+                    }
+
                 }
-            </div>
+            }
         </div>
+    </div>
+    @* drinks *@
+    <div class="dropdown @(activeDropdownId == "drinks" ? "active" : "")">
+        <button class="dropdownButton" @onclick='() => ToggleDropdown("drinks")'>▼ @L["drinks"]</button>
+        <div class="dropdownMenu">
+            @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+            {
+                @SkeletonRows
+            }
+            else
+            {
+                var drinksArray = GetDrinks();
+                if (drinksArray != null)
+                {
+                    for (int i = 0; i < drinksArray.Count; i += 5)
+                    {
+                        <ul class="column">
+                            @for (int j = i; j < i + 5 && j < drinksArray.Count; j++)
+                            {
+                                var category = drinksArray[j];
+                                <li @onclick="() => OnCategory(category.Id)"
+                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                    @(isArabic ? category.Name_ar : category.Name_de)
+                                </li>
+                            }
+                        </ul>
+                    }
+
+                }
+            }
+        </div>
+    </div>
+    @* SweetsSnacks *@
+    <div class="dropdown @(activeDropdownId == "sweetsSnacks" ? "active" : "")">
+        <button class="dropdownButton" @onclick='() => ToggleDropdown("sweetsSnacks")'>▼ @L["SweetsSnacks"]</button>
+        <div class="dropdownMenu">
+            @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+            {
+                @SkeletonRows
+            }
+            else
+            {
+                var SweetsSnacksArray = GetSweetsSnacks();
+                if (SweetsSnacksArray != null)
+                {
+                    for (int i = 0; i < SweetsSnacksArray.Count; i += 5)
+                    {
+                        <ul class="column">
+                            @for (int j = i; j < i + 5 && j < SweetsSnacksArray.Count; j++)
+                            {
+                                var category = SweetsSnacksArray[j];
+                                <li @onclick="() => OnCategory(category.Id)"
+                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                    @(isArabic ? category.Name_ar : category.Name_de)
+                                </li>
+                            }
+                        </ul>
+                    }
+                }
+            }
+        </div>
+    </div>
+    @* Fleische *@
+    <div class="dropdown @(activeDropdownId == "meats" ? "active" : "")">
+        <button class="dropdownButton" @onclick='() => ToggleDropdown("meats")'>▼ @L["Meats"]</button>
+        <div class="dropdownMenu">
+            @if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+            {
+                @SkeletonRows
+            }
+            else
+            {
+                var Mates = GetMeats();
+                if (Mates != null)
+                {
+                    for (int i = 0; i < Mates.Count; i += 5)
+                    {
+                        <ul class="column">
+                            @for (int j = i; j < i + 5 && j < Mates.Count; j++)
+                            {
+                                var category = Mates[j];
+                                <li @onclick="() => OnCategory(category.Id)"
+                                    class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
+                                    @(isArabic ? category.Name_ar : category.Name_de)
+                                </li>
+                            }
+                        </ul>
+                    }
+                }
+            }
+        </div>
+    </div>
+    @* ohne dropdown *@
+    @{
         @* Household *@
-        @{
         var householdCategory = GetHousehold();
-        if (householdCategory != null)
+        if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+        {
+            @InlineSkeleton(L["Household"])
+        }
+        else if (householdCategory != null)
         {
             <a @onclick="() => OnCategory(householdCategory.Id)"
                class="categoryLink @(householdCategory.Id == currentCategoryId ? "selected" : "")">
-                @(isArabic? householdCategory.Name_ar : householdCategory.Name_de)
+                @(isArabic ? householdCategory.Name_ar : householdCategory.Name_de)
             </a>
-        }
-        else if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
-        {
-            <a class="categoryLink skeleton-text-link">@L["Household"]</a>
         }
         @* Dates *@
         var DatesCategory = GetDates();
-        if (DatesCategory != null)
+        if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+        {
+            @InlineSkeleton(L["Dates"])
+        }
+        else if(DatesCategory != null)
         {
             <a @onclick="() => OnCategory(DatesCategory.Id)"
-            class="categoryLink @(DatesCategory.Id == currentCategoryId ? "selected" : "")">
-                @(isArabic? DatesCategory.Name_ar: DatesCategory.Name_de)
+               class="categoryLink @(DatesCategory.Id == currentCategoryId ? "selected" : "")">
+                @(isArabic ? DatesCategory.Name_ar : DatesCategory.Name_de)
             </a>
-        }
-        else if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
-        {
-            <a class="categoryLink skeleton-text-link">@L["Dates"]</a>
         }
         @* Other *@
         var otherCategory = GetOther();
-        if (otherCategory != null)
+        if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
+        {
+            @InlineSkeleton(L["Other"])
+        }
+        else if(otherCategory != null)
         {
             <a @onclick="() => OnCategory(otherCategory.Id)"
-            class="categoryLink @(otherCategory.Id == currentCategoryId ? "selected" : "")">
-                @(isArabic? otherCategory.Name_ar : otherCategory.Name_de)
+               class="categoryLink @(otherCategory.Id == currentCategoryId ? "selected" : "")">
+                @(isArabic ? otherCategory.Name_ar : otherCategory.Name_de)
             </a>
         }
-        else if (categoryService.DownloadedCategories == null || categoryService.DownloadedCategories.Count == 0)
-        {
-            <a class="categoryLink skeleton-text-link">@L["Other"]</a>
-        }
-        }
-        @* Im Angebot *@
-        <a @onclick="() => OnCategory(-1)"
-           class="categoryLinkOnOffer @(currentCategoryId == -1 ? "selected" : "")">
-            @L["OnOffer"]
-        </a>
+    }
+    @* Im Angebot *@
+    <a @onclick="() => OnCategory(-1)"
+       class="categoryLinkOnOffer @(currentCategoryId == -1 ? "selected" : "")">
+        @L["OnOffer"]
+    </a>
 </div>
 @code {
-
+    private RenderFragment SkeletonRows => @<ul class="column skeleton-loading-wrapper">
+    <li><div class="skeleton-text" style="width: 110px;"></div></li>
+    <li><div class="skeleton-text" style="width: 85px;"></div></li>
+    <li><div class="skeleton-text" style="width: 100px;"></div></li>
+    <li><div class="skeleton-text" style="width: 70px;"></div></li>
+    </ul>;
+    private RenderFragment<string> InlineSkeleton => text => @<text>
+        <a class="categoryLink" style="pointer-events: none; cursor: default; display: inline-block;">
+            @* استخدام span مع تحويل لون النص ليكون شفافاً ليظهر الوميض الرمادي فقط *@
+            <span class="skeleton-text" style="width: 110px; color: transparent !important; display: inline-block;">
+                @text
+            </span>
+        </a>
+    </text>;
     private int currentCategoryId = 0;
     private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
     protected override async Task OnInitializedAsync()

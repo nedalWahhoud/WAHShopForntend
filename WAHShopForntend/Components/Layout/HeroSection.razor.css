@@ -4,10 +4,8 @@
     left: 0;
     right: 0;
     height: 100vh;
-    background-image: url('/ProjectImages/HeroSection.png');
     background-size: cover;
     background-position: center;
-    z-index: 1;
     display: flex;
     justify-content: center;
     text-align:center;

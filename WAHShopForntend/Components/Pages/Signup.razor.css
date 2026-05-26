@@ -21,13 +21,13 @@
         margin-top: 15px;
     }
 /* Title */
-.signupContainer .signupForm h2 {
+.signupForm h2 {
     cursor: pointer;
     color: #007bff;
     transition: color 0.2s ease-in-out;
 }
 
-.signupContainer .signupForm h2:hover {
+ .signupForm h2:hover {
     color: #0056b3;
 }
     .signupForm button {
