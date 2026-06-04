@@ -6,6 +6,7 @@
     align-items: flex-start;
     gap: 30px;
     margin: 0 auto;
+    overflow: hidden;
     /**/
     opacity: 0;
     transform: translateY(60px);

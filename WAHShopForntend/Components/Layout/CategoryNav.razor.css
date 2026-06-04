@@ -8,6 +8,7 @@
     border-radius: 4px;
     display: block; /* لكي يأخذ مساحة السطر */
     margin: 5px auto;
+    transition: margin-top 0.25s ease-in-out;s
 }
 .categoryNav {
     position: fixed;
@@ -26,7 +27,9 @@
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */
 
-    transition: transform 0.3s ease-in-out;
+    /* Flüssige Animation */
+    transition: top 0.3s ease-in-out;
+    will-change: top;
 }
     .categoryNav.stick-to-top {
         top: 0;

@@ -70,8 +70,8 @@
                 @L["Account"]
             </button>
             <ul class="dropdown-menu dropdownMenu rtl-right" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item dropdownItem" @onclick="@(() => NavigationManager.NavigateTo("/", true))">@L["Home"]</a></li>
-                <li><a class="dropdown-item dropdownItem" @onclick="@(() => NavigationManager.NavigateTo("/webshop", true))">@L["OurProducts"]</a></li>
+                <li><a class="dropdown-item dropdownItem" @onclick="@(() => navigationManager.NavigateTo("/", true))">@L["Home"]</a></li>
+                <li><a class="dropdown-item dropdownItem" @onclick="@(() => navigationManager.NavigateTo("/webshop", true))">@L["OurProducts"]</a></li>
                 <AuthorizeView>
                     <Authorized>
                         <li><a class="dropdown-item dropdownItem" href="/profile">@L["MyProfile"]</a></li>
@@ -115,19 +115,19 @@
         if (user.Identity?.IsAuthenticated == true)
         {
             await authService!.Logout();
-            NavigationManager.NavigateTo("/", true);
+            navigationManager.NavigateTo("/", true);
         }
     }
     private void Login()
     {
-        var fullUri = NavigationManager.Uri;
-        var baseUri = NavigationManager.BaseUri;
+        var fullUri = navigationManager.Uri;
+        var baseUri = navigationManager.BaseUri;
         string currentPath = fullUri.Replace(baseUri, "/");
-        NavigationManager.NavigateTo($"/login?returnUrl={currentPath}");
+        navigationManager.NavigateTo($"/login?returnUrl={currentPath}");
     }
     private void NavigateToCart()
     {
-        NavigationManager.NavigateTo("/cart", false);
+        navigationManager.NavigateTo("/cart", false);
     }
     // search
     private List<Product> searchProducts = new();
@@ -191,14 +191,14 @@
     }
     private void OnSelectedProduct(int productId, string searchText)
     {
-        NavigationManager.NavigateTo($"/searchProducts/{productId}/{searchText}", true);
+        navigationManager.NavigateTo($"/searchProducts/{productId}/{searchText}", true);
     }
     // language selection
     private async Task SetLanguage(string culture)
     {
         await cookieService.SetLanguageAsync(culture, true);
         // page reload to apply new culture
-        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+        navigationManager.NavigateTo(navigationManager.Uri, forceLoad: true);
     }
     public void Dispose()
     {

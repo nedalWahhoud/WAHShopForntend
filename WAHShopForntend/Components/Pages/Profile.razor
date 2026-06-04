@@ -194,7 +194,7 @@ else
         {
             _ = JS.InvokeVoidAsync("window.alert", result.Message);
             await authService!.Logout();
-            NavigationManager.NavigateTo("/", true);
+            navigationManager.NavigateTo("/", true);
         }
         else
         {

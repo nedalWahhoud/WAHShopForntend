@@ -126,7 +126,7 @@ else
 		if (string.IsNullOrEmpty(token))
 		{
             // Nicht angemeldet und kein token in url → Weiterleitung zur Anmeldeseite
-            NavigationManager.NavigateTo("/customerLogin");
+			navigationManager.NavigateTo("/customerLogin");
             return;
         }
 
@@ -135,7 +135,7 @@ else
 
         if (customerIdFromToken == null)
         {
-            NavigationManager.NavigateTo("/customerPortal");
+			navigationManager.NavigateTo("/customerPortal");
             return;
         }
 

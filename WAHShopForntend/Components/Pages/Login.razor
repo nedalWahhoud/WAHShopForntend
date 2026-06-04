@@ -84,7 +84,7 @@
         loginModel.SignupProvider = "Manual";
         var isLogged = await authService!.Login(loginModel, null!);
         if (isLogged.Result == true)
-            NavigationManager!.NavigateTo(returnUrl ?? "/",true);
+            navigationManager!.NavigateTo(returnUrl ?? "/", true);
         else
         {
             _ = JS.InvokeVoidAsync("window.alert", isLogged.Message);
@@ -93,14 +93,14 @@
     }
     private void OnProjectInfo()
     {
-        NavigationManager.NavigateTo("/", false);
+        navigationManager.NavigateTo("/", false);
     }
     private void GoogleSingup()
     {
         isGoogleLoading = true;
         string currenApiUrl = AppConfig.Value.ApiBaseUrl;
 
-        NavigationManager.NavigateTo($"{AppConfig.Value.GoogleApiUrl}?rememberMe={loginModel.RememberMe}", true);
+        navigationManager.NavigateTo($"{AppConfig.Value.GoogleApiUrl}?rememberMe={loginModel.RememberMe}", true);
 
         isGoogleLoading = false;
     }

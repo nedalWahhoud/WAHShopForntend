@@ -38,7 +38,6 @@
     </div>
 </div>
 
-
 @code {
 
     private CustomerLoginDto customerLoginDto = new();
@@ -58,7 +57,7 @@
 		{
             await JS.InvokeVoidAsync("localStorage.setItem", "jwtCustomerToken", result.Message);
 
-			NavigationManager.NavigateTo("/customerDashboard");
+            navigationManager.NavigateTo("/customerDashboard");
 		}
 		else
 		{
@@ -70,6 +69,6 @@
 
     private void OnProjectInfo()
     {
-        NavigationManager.NavigateTo("/");
+        navigationManager.NavigateTo("/");
     }
 }

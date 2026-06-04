@@ -356,10 +356,10 @@ else
 	// einloggen
 	private void OnEinloggen()
 	{
-		var fullUri = NavigationManager.Uri;
-		var baseUri = NavigationManager.BaseUri;
+		var fullUri = navigationManager.Uri;
+		var baseUri = navigationManager.BaseUri;
 		string currentPath = fullUri.Replace(baseUri, "/");
-		NavigationManager.NavigateTo($"/login?returnUrl={currentPath}");
+		navigationManager.NavigateTo($"/login?returnUrl={currentPath}");
 	}
 	// Gust Order
 	private void OnAddressForm()
@@ -665,7 +665,7 @@ else
 	// ti main page
 	private void OnMainPage()
 	{
-		NavigationManager.NavigateTo("/",true);
+		navigationManager.NavigateTo("/", true);
 	}
 	// Discount Code and discount Category
 	private DiscountCodes discountCode = new();

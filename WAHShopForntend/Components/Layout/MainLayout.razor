@@ -56,10 +56,10 @@
     <a class="dismiss">🗙</a>
 </div>
 @code{
-    private bool HeaderHidden => NavigationManager.Uri.Contains("login") || 
-    NavigationManager.Uri.Contains("signup") || 
-    NavigationManager.Uri.Contains("forgotpassword") ||
-    NavigationManager.Uri.Contains("confirmemail");
+    private bool HeaderHidden => navigationManager.Uri.Contains("login") ||
+    navigationManager.Uri.Contains("signup") ||
+    navigationManager.Uri.Contains("forgotpassword") ||
+    navigationManager.Uri.Contains("confirmemail");
     private bool hasAccepted;
     private bool shouldShow = false;
     private ErrorBoundary? errorBoundary;
@@ -139,6 +139,6 @@
     private void TriggerAutomaticReload()
     {
         // forceLoad: true zwingt den Browser zu einer vollständigen Aktualisierung, um ein Einfrieren des Inhalts zu verhindern.
-        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+        navigationManager.NavigateTo(navigationManager.Uri, forceLoad: true);
     }
 }

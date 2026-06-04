@@ -198,7 +198,7 @@
 		// wenn die Kategorien noch nicht geladen sind, warten bis sie geladen sind, die await ist klug genug, um weißen ob schon geladen sind oder nicht, daher bruchen kein if
         await categoryService.taskCatyrories;
 
-        NavigationManager.LocationChanged += HandleLocationChanged;
+        navigationManager.LocationChanged += HandleLocationChanged;
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -211,7 +211,7 @@
     private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
     {
 		// Extrahiere die Kategorie-ID aus der URL und aktualisiere currentCategoryId entsprechend
-        var uri = new Uri(NavigationManager.Uri);
+        var uri = new Uri(navigationManager.Uri);
         var segments = uri.Segments;
 
         if (segments.Length > 2 && segments[1].TrimEnd('/') == "ProductsByCategory")
@@ -233,7 +233,7 @@
   
     private void OnCategory(int categoryId)
     {
-        NavigationManager.NavigateTo($"/ProductsByCategory/{categoryId.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+        navigationManager.NavigateTo($"/ProductsByCategory/{categoryId.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
     }
     // 
     private List<Categories> GetFoodstuffs()
@@ -297,6 +297,6 @@
     }
     public void Dispose()
     {
-        NavigationManager.LocationChanged -= HandleLocationChanged;
+        navigationManager.LocationChanged -= HandleLocationChanged;
     }
 }

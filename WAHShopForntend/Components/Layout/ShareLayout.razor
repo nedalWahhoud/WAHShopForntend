@@ -12,7 +12,7 @@
    
     private async Task ShareProduct(Product product)
     {
-        var productUrl = $"{NavigationManager.BaseUri}ProductPage/{product.Id}";
+        var productUrl = $"{navigationManager.BaseUri}ProductPage/{product.Id}";
 
         await JS.InvokeVoidAsync("shareProduct", product.Name_de, productUrl);
     }

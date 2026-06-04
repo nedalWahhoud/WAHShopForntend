@@ -93,10 +93,10 @@ else
 	{
 		if (cartService.CartItems.Count > 0)
 		{
-			var fullUri = NavigationManager.Uri;
-			var baseUri = NavigationManager.BaseUri;
+			var fullUri = navigationManager.Uri;
+			var baseUri = navigationManager.BaseUri;
 			string currentPath = fullUri.Replace(baseUri, "/");
-			NavigationManager.NavigateTo($"/checkout?returnUrl={currentPath}");
+			navigationManager.NavigateTo($"/checkout?returnUrl={currentPath}");
 		}
 		else
 		{
@@ -106,11 +106,11 @@ else
 	// emptyCart
 	private void OnBackToShop()
 	{
-		NavigationManager.NavigateTo("/");
+		navigationManager.NavigateTo("/");
 	}
 	// On Product Click
 	private void OnProduct(int ProductId)
 	{
-		NavigationManager.NavigateTo($"/ProductPage/{ProductId}");
+		navigationManager.NavigateTo($"/ProductPage/{ProductId}");
 	}
 }

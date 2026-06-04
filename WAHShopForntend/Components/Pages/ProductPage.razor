@@ -39,7 +39,7 @@ else
 			var productName = isArabic ? product?.Name_ar : product?.Name_de;
 			var productDescription = isArabic ? product?.Description_ar : product?.Description_de;
 			var availability = (product?.Quantity > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock");
-			var productUrl = NavigationManager.Uri;
+			var productUrl = navigationManager.Uri;
 
 			<HeadContent>
 				<PageTitle>
@@ -59,7 +59,7 @@ else
 				""image"": ""{imageUrl}"",
 				""offers"": {{
 						""@type"": ""Offer"",
-						""url"": ""{NavigationManager.Uri}"",
+					 ""url"": ""{navigationManager.Uri}"",
 						""priceCurrency"": ""EUR"",
 						""price"": ""{(product?.SalePrice ?? 0):0.00}"",
 						""availability"": ""{availability}"",
@@ -324,7 +324,7 @@ else
 	// On Product Click
 	private void OnProduct(int ProductId)
 	{
-		NavigationManager.NavigateTo($"/ProductPage/{ProductId}");
+		navigationManager.NavigateTo($"/ProductPage/{ProductId}");
 	}
 	// groupProducts
 	private async Task LoadGroupProducts(int groupId)
@@ -370,7 +370,7 @@ else
 	{
 		if (int.TryParse(e.Value?.ToString(), out int selectedGroupId) && selectedGroupId > 0)
 		{
-			NavigationManager.NavigateTo($"/ProductPage/{selectedGroupId}");
+			navigationManager.NavigateTo($"/ProductPage/{selectedGroupId}");
 		}
 	}
 	// Scroll

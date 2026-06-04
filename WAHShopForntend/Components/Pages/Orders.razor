@@ -217,12 +217,12 @@
     // On Product Click
     private void OnProduct(int ProductId)
     {
-        NavigationManager.NavigateTo($"/ProductPage/{ProductId}");
+        navigationManager.NavigateTo($"/ProductPage/{ProductId}");
     }
     // empty orders
     private void OnBackToShop()
     {
-        NavigationManager.NavigateTo("/");
+        navigationManager.NavigateTo("/");
     }
     // status
     private async Task ToggleDropdown(Order order)
