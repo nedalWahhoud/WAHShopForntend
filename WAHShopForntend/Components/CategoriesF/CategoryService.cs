@@ -11,11 +11,14 @@ namespace WAHShopForntend.Components.CategoriesF
         private readonly HttpClient _http = http;
         private readonly ProductService _productService = productService;
         private readonly IMemoryCache _cache = cache;
+        private const int CacheAbsoluteExpiration = 60;
+        private const int CacheSlidingExpiration = 10;
+        private const CacheItemPriority CachePriority = CacheItemPriority.High;
+        private const string DACCachKey = "DownloadedAllCategories";
 
         // zentrale taskCateories, damit die Kategorien nur einmal heruntergeladen werden, wenn mehrere Komponenten gleichzeitig auf die Kategorien zugreifen
         public Task taskCatyrories = Task.CompletedTask;
         public List<Categories> DownloadedCategories { get; private set; } = [];
-        private const string DACCachKey = "DownloadedAllCategories";
         // Async
         public async Task<List<Categories>> GetAllCategoriesAsync()
         {
@@ -189,7 +192,7 @@ namespace WAHShopForntend.Components.CategoriesF
             // add zu cach, wenn CacheKey != null
             if (CacheKey != null)
             {
-                AddToCategoriesToCache(CacheKey, 10, 2, CacheItemPriority.High, DownloadedCategories);
+                AddToCategoriesToCache(CacheKey, DownloadedCategories);
             }
         }
         public void AddCategoriesToLocal(Categories category)
@@ -213,13 +216,13 @@ namespace WAHShopForntend.Components.CategoriesF
             return categories;
         }
         // chache
-        private void AddToCategoriesToCache(string CacheKey,int Minutes,int Expiration, CacheItemPriority Priority,List<Categories> CategoriesList)
+        private void AddToCategoriesToCache(string CacheKey,List<Categories> CategoriesList)
         {
             _cache.Set(CacheKey, CategoriesList, new MemoryCacheEntryOptions
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(Minutes),
-                SlidingExpiration = TimeSpan.FromMinutes(Expiration),
-                Priority = Priority
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(CacheAbsoluteExpiration),
+                SlidingExpiration = TimeSpan.FromMinutes(CacheSlidingExpiration),
+                Priority = CachePriority
             });
         }
         private List<Categories> GetCategoriesFromCache(string CacheKey)

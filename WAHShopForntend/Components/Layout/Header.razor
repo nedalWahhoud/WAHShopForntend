@@ -25,9 +25,7 @@
                             <li @onclick="() => OnSelectedProduct(product.Id,searchText)">
                                 <img src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" loading="lazy" />
                                 <strong>
-                                    @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" 
-                                                                                                            ?product.Name_ar
-                                                                                                            : product.Name_de) </strong>
+                                    @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"  ?product.Name_ar : product.Name_de) </strong>
                             </li>
                         }
                     </ul>

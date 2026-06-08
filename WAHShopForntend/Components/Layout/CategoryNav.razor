@@ -185,7 +185,7 @@
     </ul>;
     private RenderFragment<string> InlineSkeleton => text => @<text>
         <a class="categoryLink" style="pointer-events: none; cursor: default; display: inline-block;">
-            @* استخدام span مع تحويل لون النص ليكون شفافاً ليظهر الوميض الرمادي فقط *@
+            @* Blinken wenn die data noch nicht da *@
             <span class="skeleton-text" style="width: 110px; color: transparent !important; display: inline-block;">
                 @text
             </span>
