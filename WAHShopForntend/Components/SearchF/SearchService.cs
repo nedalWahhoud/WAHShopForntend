@@ -41,7 +41,7 @@ namespace WAHShopForntend.Components.SearchF
                     // not active exclusion
                     products = products.Where(p => p.Category != null && p.Category.IsAktiv).ToList();
                     // add the product to the local list
-                    _productService.AddProductToLocal(products);
+                    await _productService.AddProductToLocal(products);
                     return products;
                 }
                 return [];

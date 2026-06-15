@@ -62,64 +62,45 @@ namespace WAHShopForntend.Components.CategoriesF
                 return null!;
             }
         }
-        public GetItems<Product> _getItems = new() { PageSize = 10 };
-        public async Task<GetItems<Product>> GetProductsByCategoryIdAsync(int categoryId, int? pageSize = null,bool? AllItemsLoaded = null, List<int>? excludeProductsIds = null)
+        public async Task<GetItems<Product>> GetProductsByCategoryIdAsync(int categoryId, int UserId,GetItems<Product> getItem, List<int>? excludeProductsIds = null)
         {
             // -1 is for OnOffer
 
-            /* die Ausschluss von category if inaktiv wird in der getCategories gemacht */
+            if (getItem.AllItemsLoaded)
+                return getItem!;
 
-            // define the page size
-            if (pageSize.HasValue && pageSize.Value > 0)
+            getItem.UserId = UserId;
+
+            if(excludeProductsIds != null && excludeProductsIds.Count > 0)
             {
-                _getItems.PageSize = pageSize.Value;
-            }
-            // ignore the AllItemsLoaded get random
-            if (AllItemsLoaded.HasValue)
-            {
-                _getItems.AllItemsLoaded = AllItemsLoaded.Value;
+                getItem.ExcludeProductsIds = excludeProductsIds;
             }
 
-
-            if (_getItems.AllItemsLoaded)
-                return _getItems!;
             try
             {
-
-                String queryString = string.Empty;
-                if (excludeProductsIds != null && excludeProductsIds.Count != 0)
-                {
-                    queryString = "&";
-                    queryString += string.Join("&", excludeProductsIds.Select(id => $"excludeProductsIds={id}"));
-
-                }
-                queryString = $"?PageSize={_getItems.PageSize}" + queryString;
-
-                var response = await _http.GetAsync($"api/Categories/getProductsByCategoryId/{categoryId.ToString(CultureInfo.InvariantCulture)}{queryString}");
-
+                var response = await _http.PostAsJsonAsync($"api/Categories/getProductsByCategoryId/{categoryId.ToString(CultureInfo.InvariantCulture)}",getItem);
 
                 if (!response.IsSuccessStatusCode)
-                    return _getItems;
+                    return getItem;
 
-                _getItems = await response.Content.ReadFromJsonAsync<GetItems<Product>>() ?? new GetItems<Product>();
-
+                getItem = await response.Content.ReadFromJsonAsync<GetItems<Product>>() ?? new GetItems<Product>();
 
                 // add the product to the local list
-                _productService.AddProductToLocal(_getItems.Items);
+                await _productService.AddProductToLocal(getItem.Items);
 
-                if (_getItems.AllItemsLoaded == true)
+                if (getItem.AllItemsLoaded == true)
                 {
-                    return _getItems;
+                    return getItem;
                 }
                 else
                 {
-                    _getItems.CurrentPage++;
-                    return _getItems;
+                    getItem.CurrentPage++;
+                    return getItem;
                 }
             }
             catch
             {
-                return _getItems;
+                return getItem;
             }
         }
         // loacl

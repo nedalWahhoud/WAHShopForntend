@@ -1,0 +1,128 @@
+﻿@page "/favorite"
+@namespace WAHShopForntend.Components.Layout
+@inject IStringLocalizer<WAHShopForntend.Components.Layout.FavoritePage> L
+
+<div class="mainDiv">
+	@if (IsMainLoading)
+	{
+		<WAHShopForntend.Components.Layout.Loading />
+	}
+	else 
+	{
+		@if (favoriteService.DownloadedFavoriteProducts.Items.Count > 0)
+		{
+			<div class="productItems">
+				@for (int i = 0; i < favoriteService.DownloadedFavoriteProducts.Items.Count; i++)
+				{
+					var product = favoriteService.DownloadedFavoriteProducts.Items[i];
+					<div class="cardProduct">
+						<WAHShopForntend.Components.Layout.TopProductsCard Product="product" />
+						<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+					</div>
+				}
+			</div>
+			<div class="moreLoadContainer">
+				<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || favoriteService.DownloadedFavoriteProducts.AllItemsLoaded)">
+					@if (IsOrdersLoading)
+					{
+						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						<span class="ms-2">@L["LoadingButton"]</span>
+					}
+					else if (!favoriteService.DownloadedFavoriteProducts.AllItemsLoaded)
+					{
+						<span>@L["LoadMore"]</span>
+					}
+					@if (favoriteService.DownloadedFavoriteProducts.AllItemsLoaded)
+					{
+						<span>@L["AllItemsLoaded"]</span>
+					}
+				</button>
+			</div>
+		}
+		else
+		{
+			<div class="d-flex flex-column align-items-center justify-content-center text-center p-5 ">
+				<div class="mb-3 text-muted" style="font-size: 3rem;">
+					❤️
+				</div>
+
+				<h5 class="text-secondary fw-bold mb-2">
+					@L["FavoritesEmpty"]
+				</h5>
+
+				<p class="text-muted small mb-0">
+					@L["AddFavirute"]
+				</p>
+			</div>
+		}
+	}
+</div>
+@code {
+
+	private bool IsMainLoading = false;
+	private User user = new User();
+	List<int> productIds = new();
+	protected override async Task OnParametersSetAsync()
+	{
+		IsMainLoading = true;
+		await MoreProductsload();
+		IsMainLoading = false;
+	}
+
+	private bool IsOrdersLoading = false;
+	private async Task OnMoreLoad()
+	{
+		if (IsOrdersLoading)
+			return;
+
+		IsOrdersLoading = true;
+		await MoreProductsload();
+		StateHasChanged();
+		IsOrdersLoading = false;
+	}
+
+	private async Task MoreProductsload()
+	{
+		user = await authService.GetUser(); 
+		if (user.Id > 0)
+		{
+			var result = await favoriteService.GetFavoritesProductsAsync(user.Id);
+			if (!result.Result)
+			{
+				Console.WriteLine(result.Message);
+			}
+		}
+		else
+		{
+			if (favoriteService.DownloadedFavoriteProducts.AllItemsLoaded)
+				return;
+
+			productIds = await favoriteService.GetFavoritesFromLocalStorage();
+			if (productIds.Count > 0)
+			{
+				var pagedIds = productIds
+				.Skip(favoriteService.DownloadedFavoriteProducts.CurrentPage * favoriteService.DownloadedFavoriteProducts.PageSize)
+				.Take(favoriteService.DownloadedFavoriteProducts.PageSize)
+				.ToList();
+
+				var loadedCount = (favoriteService.DownloadedFavoriteProducts.CurrentPage * favoriteService.DownloadedFavoriteProducts.PageSize) + pagedIds.Count;
+				if (productIds.Count == loadedCount)
+					favoriteService.DownloadedFavoriteProducts.AllItemsLoaded = true;
+
+				favoriteService.DownloadedFavoriteProducts.CurrentPage++;
+
+				var products = await productService.GetProductByIdsAsync(pagedIds);
+				if (products != null && products.Count > 0)
+				{
+
+					foreach (Product product in products)
+					{
+						product.IsFavorite = true;
+						favoriteService.AddToLocalList(product);
+					}
+				}
+			}
+		}
+	}
+}

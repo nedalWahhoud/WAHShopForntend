@@ -5,11 +5,7 @@
 
 @if (activateRequest.IsLoading)
 {
-    <div class="d-flex justify-content-center align-items-center" style="height:100px;">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">@L["Loading"]</span>
-        </div>
-    </div>
+    <WAHShopForntend.Components.Layout.Loading />
 }
 else
 {
@@ -24,11 +20,11 @@ else
 }
 
 @code {
-	private ActivateRequest activateRequest { get; set; } = new ActivateRequest();
+    private ActivateRequest activateRequest { get; set; } = new ActivateRequest();
 
     protected override async Task OnInitializedAsync()
     {
-		activateRequest.IsLoading = true;
+        activateRequest.IsLoading = true;
         var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
         var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
 
@@ -42,7 +38,7 @@ else
             return;
         }
 
-		 activateRequest = new ActivateRequest
+        activateRequest = new ActivateRequest
 			{
 				UserId = userId,
 				Token = token
@@ -53,16 +49,27 @@ else
         {
             activateRequest.StatusMessage = L["ConfirmationSuccessful"];
             activateRequest.IsActivated = true;
+
+            // sync locale Favorite
+            if (int.TryParse(activateRequest.UserId, out int userIdAsInt))
+            {
+                await favoriteService.SyncFavoritesAfterLogin(userIdAsInt);
+            }
+            else
+            {
+                Console.WriteLine("SyncFavoritesAfterLogin Fehler: UserId ist keine gültige Zahl.");
+            }
+
         }
         else
         {
             activateRequest.StatusMessage = result.Message!;
             activateRequest.IsActivated = false;
         }
-		activateRequest.IsLoading = false;
+        activateRequest.IsLoading = false;
     }
-	private void GoToLogin()
-	{
+    private void GoToLogin()
+    {
 		NavManager.NavigateTo("/login");
 	}
 }

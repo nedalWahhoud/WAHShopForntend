@@ -22,14 +22,14 @@ namespace WAHShopForntend.Resources.Components.Layout {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CategoryNav {
+    public class FavoritePage {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CategoryNav() {
+        internal FavoritePage() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WAHShopForntend.Resources.Components.Layout {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.CategoryNav", typeof(CategoryNav).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WAHShopForntend.Resources.Components.Layout.FavoritePage", typeof(FavoritePage).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,47 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Dates ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add items to your favorites list now! Simply select the heart icon next to the item that interests you. ähnelt.
         /// </summary>
-        public static string Dates {
+        public static string AddFavirute {
             get {
-                return ResourceManager.GetString("Dates", resourceCulture);
+                return ResourceManager.GetString("AddFavirute", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Drinks ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die All loaded ähnelt.
         /// </summary>
-        public static string drinks {
+        public static string AllItemsLoaded {
             get {
-                return ResourceManager.GetString("drinks", resourceCulture);
+                return ResourceManager.GetString("AllItemsLoaded", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Foodstuffs ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your favorites list is empty. ähnelt.
         /// </summary>
-        public static string foodstuffs {
+        public static string FavoritesEmpty {
             get {
-                return ResourceManager.GetString("foodstuffs", resourceCulture);
+                return ResourceManager.GetString("FavoritesEmpty", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Frozen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Loading... ähnelt.
         /// </summary>
-        public static string Frozen {
+        public static string LoadingButton {
             get {
-                return ResourceManager.GetString("Frozen", resourceCulture);
+                return ResourceManager.GetString("LoadingButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Household ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Load more ähnelt.
         /// </summary>
-        public static string Household {
+        public static string LoadMore {
             get {
-                return ResourceManager.GetString("Household", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Meats ähnelt.
-        /// </summary>
-        public static string Meats {
-            get {
-                return ResourceManager.GetString("Meats", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die No products found. ähnelt.
-        /// </summary>
-        public static string NoProductsFound {
-            get {
-                return ResourceManager.GetString("NoProductsFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die On Offer ähnelt.
-        /// </summary>
-        public static string OnOffer {
-            get {
-                return ResourceManager.GetString("OnOffer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Other ähnelt.
-        /// </summary>
-        public static string Other {
-            get {
-                return ResourceManager.GetString("Other", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Sweets and snacks ähnelt.
-        /// </summary>
-        public static string SweetsSnacks {
-            get {
-                return ResourceManager.GetString("SweetsSnacks", resourceCulture);
+                return ResourceManager.GetString("LoadMore", resourceCulture);
             }
         }
     }

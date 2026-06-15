@@ -1,25 +1,26 @@
 ﻿<div class="PriceDiv">
-    @{
+    @if (product != null)
+    {
         var discount = product.ProductDiscount;
         bool isDiscountValid = discount != null &&
         discount.DiscountedPrice > 0 &&
         DateTime.Today >= discount.StartDate.Date &&
         DateTime.Today <= discount.EndDate.Date;
-    }
-    @if (isDiscountValid)
-    {
-        <p class="oldPrice">
-            @product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
-        </p>
-        <p class="newPrice">
-            @(product.ProductDiscount?.DiscountedPrice.ToString("C", new System.Globalization.CultureInfo("de-DE")) ?? "Fehler")
-        </p>
-    }
-    else
-    {
-        <p class="normalPrice">
-            @product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
-        </p>
+        @if (isDiscountValid)
+        {
+            <p class="oldPrice">
+                @product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
+            </p>
+            <p class="newPrice">
+                @(product.ProductDiscount?.DiscountedPrice.ToString("C", new System.Globalization.CultureInfo("de-DE")) ?? "Fehler")
+            </p>
+        }
+        else
+        {
+            <p class="normalPrice">
+                @product.SalePrice.ToString("C", new System.Globalization.CultureInfo("de-DE"))
+            </p>
+        }
     }
 </div>
 
@@ -30,6 +31,8 @@
     private Product product = null!;
     protected override async Task OnInitializedAsync()
     {
-        product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdAsync(ProductId);
+        int userId = (await authService.GetUser()).Id;
+
+        product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdAsync(ProductId, userId);
     }
 }

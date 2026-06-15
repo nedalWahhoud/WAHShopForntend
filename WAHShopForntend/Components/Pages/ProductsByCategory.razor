@@ -8,10 +8,10 @@
 	<!-- Page Title -->
 	<PageTitle>
 		@(category != null ? 
-						System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
-						? category.Name_de
-						: category.Name_ar
-						: L["OnOffer"])
+																System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
+																? category.Name_de
+																: category.Name_ar
+																: L["OnOffer"])
 	</PageTitle>
 
 	<!-- Meta Description -->
@@ -29,81 +29,94 @@
                       :  $"{category.Name_ar}, مواد غذائية, منتجات سورية, تسوق أونلاين"
 	    : L["OnOffer"])" />
 </HeadContent>
+<div class="mainDiv">
+	@if (IsMainLoading)
+	{
+		<WAHShopForntend.Components.Layout.Loading />
+	}
+	else
+	{
+		<h3 class="@(CategoryId == -1 ? "text-danger" : "text-dark")">
+			<strong>
+				@(CategoryId != -1
+																							? System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+																							? category?.Name_ar ?? ""
+																							: category?.Name_de ?? ""
+																							: L["OnOffer"])
+			</strong>
+		</h3>
+		<div class="productItems">
+			@foreach (var product in products)
+			{
+				<div class="cardProduct">
+					<WAHShopForntend.Components.Layout.TopProductsCard Product="product" />
+					<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+					<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+				</div>
+			}
+		</div>
+		<div class="moreLoadContainer">
+			@if (products.Count > 0)
+			{
+				<button type="submit" class="btn btn-primary" @onclick="() => MoreProductsload(true)" disabled="@(IsProcessing || getItems.AllItemsLoaded)">
+					@if (IsProcessing)
+					{
+						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						<span class="ms-2">@L["LoadingButton"]</span>
+					}
+					else if (!getItems.AllItemsLoaded)
+					{
+						<span>@L["LoadMore"]</span>
+					}
+					@if (getItems.AllItemsLoaded)
+					{
+						<span>@L["AllItemsLoaded"]</span>
+					}
+				</button>
+			}
+			else
+			{
+				<span class="@(CategoryId != -1 ? "NoItemsFound" : "NoOffersFound")">@(CategoryId != -1 ? L["NoItemsFound"] : L["NoOffersFound"])</span>
+			}
+		</div>
+	}
+</div>
 
-@if (IsLoaded)
-{
-	<div class="mainDiv">
-			<h3 class="@(CategoryId == -1 ? "text-danger" : "text-dark")">
-				<strong>
-					@(CategoryId != -1
-									? System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-									? category?.Name_ar ?? ""
-									: category?.Name_de ?? ""
-									: L["OnOffer"])
-				</strong>
-			</h3>
-			<div class="productItems">
-				@foreach (var product in products)
-				{
-					<div class="cardProduct">
-						<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
-						<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
-						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
-					</div>
-				}
-			</div>
-			<div class="moreLoadContainer">
-				@if (products.Count > 0)
-				{
-					<button type="submit" class="btn btn-primary" @onclick="OnMoreLoad" disabled="@(IsOrdersLoading || categoryService._getItems.AllItemsLoaded)">
-						@if (IsOrdersLoading)
-						{
-							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-							<span class="ms-2">@L["LoadingButton"]</span>
-						}
-						else if (!categoryService._getItems.AllItemsLoaded)
-						{
-							<span>@L["LoadMore"]</span>
-						}
-						@if (categoryService._getItems.AllItemsLoaded)
-						{
-							<span>@L["AllItemsLoaded"]</span>
-						}
-					</button>
-				}
-				else
-				{
-					<span class="@(CategoryId != -1 ? "NoItemsFound" : "NoOffersFound")">@(CategoryId != -1 ? L["NoItemsFound"] : L["NoOffersFound"])</span>
-				}
-
-			</div>
-	</div>
-}
 @code {
 	[Parameter] public int CategoryId { get; set; }
-	private bool IsLoaded = true;
+	private bool IsMainLoading = false;
 	private List<Product> products = new();
 	private Categories category = new();
 	private List<int>? excludeProductsIds = new();
-
+	private User user = new User();
+	private GetItems<Product> getItems = new();
 	protected override async Task OnParametersSetAsync()
 	{
-		IsLoaded = false;
-		categoryService._getItems = new();
+		IsMainLoading = true;
+		getItems = new() { PageSize = 6, Includes = ProductIncludes.ProductImages | ProductIncludes.Category };
 		excludeProductsIds = new();
 		products.Clear();
 		category = categoryService.GetCategoryByIdLocal(CategoryId) ?? await categoryService.GetCategoryByIdAsync(CategoryId);
 		await MoreProductsload(false);
-	
-		IsLoaded = true;
+
+		IsMainLoading = false;
 	}
+
+	// OnMoreLoad
+	private bool IsProcessing = false;
 	private async Task MoreProductsload(bool IfOnMoreProductsLoad)
 	{
+		if (IsProcessing)
+			return;
+		IsProcessing = true;
+
+		user = await authService.GetUser();
+
 		// -1 is for OnOffer
 		if (!IfOnMoreProductsLoad)
 		{
 			// check if product local exist To relieve pressure on the server
-			var productsLocal =  categoryService.GetProductByCategoryIdLocal(CategoryId);
+			var productsLocal = categoryService.GetProductByCategoryIdLocal(CategoryId);
 
 			if (productsLocal != null && productsLocal.Count > 0)
 			{
@@ -117,40 +130,33 @@
 			}
 		}
 		// from Server
-		var productsServer = await categoryService.GetProductsByCategoryIdAsync(CategoryId, 7, null, excludeProductsIds);
-		if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
+		getItems = await categoryService.GetProductsByCategoryIdAsync(CategoryId, user.Id, getItems, excludeProductsIds);
+		if (getItems != null && getItems.Items != null && getItems.Items.Count > 0)
 		{
 			// initialize CartItem for each product
-			foreach (var p in productsServer.Items)
+			foreach (var p in getItems.Items)
 			{
 				p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
 				excludeProductsIds!.Add(p.Id);
 			}
 
-			products.AddRange(productsServer.Items);
-
+			products.AddRange(getItems.Items);
+			//  items reinigen, damit nicht mit http request geschickt wird, da die item groß ist
+			getItems.Items.Clear();
 
 			// add to local Products list
-			_ = Task.Run(() =>
+			_ = Task.Run(async () =>
 			{
-				productService.AddProductToLocal(products);
+				await productService.AddProductToLocal(products);
 			});
 		}
-	}
-	// OnMoreLoad
-	private bool IsOrdersLoading = false;
-	private async Task OnMoreLoad()
-	{
-		if (IsOrdersLoading)
-			return;
-
-		IsOrdersLoading = true;
-		await MoreProductsload(true);
-		IsOrdersLoading = false;
+		IsProcessing = false;
 	}
 	// On Product Click
 	private void OnProduct(int ProductId)
 	{
 		navigationManager.NavigateTo($"/ProductPage/{ProductId}");
 	}
+
+
 }

@@ -5,14 +5,14 @@
 </div>
 
 @code {
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
         var query = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
         LoginModel loginModel = new();
         if (query.TryGetValue("token", out var tokenValues) && !StringValues.IsNullOrEmpty(tokenValues))
         {
-			string token = tokenValues.ToString(); // sichere Token-Wert extrahieren
+            string token = tokenValues.ToString(); // sichere Token-Wert extrahieren
 
             // get rememberMe value from query parameters
             bool rememberMe = false;
@@ -24,7 +24,15 @@
             loginModel.Token = token;
             var result = authService!.GoogleLogin(loginModel);
             if (result.Result == true)
+            {
+                
+                int UserId = (await authService.GetUser()).Id;
+              
+                // sync locale Favorite
+                await favoriteService.SyncFavoritesAfterLogin(UserId);
+
                 navigationManager!.NavigateTo("/", true);
+            }
             else
             {
                 _ = JS.InvokeVoidAsync("window.alert", result.Message);

@@ -1,9 +1,7 @@
 ﻿using WAHShopForntend.Components.Models;
 using Microsoft.JSInterop;
 using System.Text.Json;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using WAHShopForntend.Components.ProductsF;
-using WAHShopForntend.Components.CategoriesF;
 
 namespace WAHShopForntend.Components.Cart
 {
@@ -136,12 +134,12 @@ namespace WAHShopForntend.Components.Cart
             SaveCart(); 
             NotifyStateChanged();
         }
-       
+
         private void SaveCart()
         {
-            // save the cart items to local storage or a database
-            _ = _js.InvokeVoidAsync("localStorage.setItem", "cart",JsonSerializer.Serialize(CartItems));
+            _ = _js.InvokeVoidAsync("localStorage.setItem", "cart", JsonSerializer.Serialize(CartItems));
         }
+
         //
         public int GetTotalQuantity()
         {
@@ -188,7 +186,7 @@ namespace WAHShopForntend.Components.Cart
         }
         public async Task<ValidationResult> LoadCartProductsAsync()
         {
-            List<int> idsUnlocalProducts = new List<int>();
+            List<int> idsUnlocalProducts = [];
             for (int i = 0; i < CartItems.Count; ++i)
             {
                 if (CartItems[i].Product == null)

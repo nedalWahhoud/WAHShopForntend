@@ -138,9 +138,6 @@
   <data name="PriceLabel" xml:space="preserve">
     <value>Preis:</value>
   </data>
-  <data name="ProductNotFound" xml:space="preserve">
-    <value>Produkt nicht gefunden</value>
-  </data>
   <data name="TotalLabel" xml:space="preserve">
     <value>Summe:</value>
   </data>

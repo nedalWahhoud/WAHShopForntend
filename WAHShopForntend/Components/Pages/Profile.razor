@@ -88,18 +88,18 @@ else
                                     <p>@L["DeleteAccountConfirm"]</p>
                                     <InputText id="oldPassword1" @bind-Value="updateProfile.OldPassword" class="form-control" type="password" placeholder=@L["Password"] />
                                     <div class="deleteConfirmB">
-                                      <button type="submit" class="btn btn-danger">
+                                        <button type="submit" class="btn btn-danger">
                                             @if (IsLoading)
                                             {
                                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                                 <span class="ms-2">@L["Loading"]</span>
                                             }
                                             else
-											{
+                                            {
                                                 <span> @L["Delete"]</span>
-											}
-                                      </button>
-                                      <button class="btn btn-secondary" @onclick="CancelChanges">@L["Cancel"]</button>
+                                            }
+                                        </button>
+                                        <button class="btn btn-secondary" @onclick="CancelChanges">@L["Cancel"]</button>
                                     </div>
                                 </EditForm>
                             </div>
@@ -121,15 +121,12 @@ else
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         //
-        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        string? userIdString = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (int.TryParse(userIdString, out int userId))
-        {
-            updateProfile.UserId = userId; // Assuming UserId is int
-        }
+        User user = await authService.GetUser();
+     
+            updateProfile.UserId = user.Id; // Assuming UserId is int
+        
 
-        string SignupProvider = user.FindFirst(c => c.Type == "SignupProvider")?.Value!;
+        string SignupProvider = user.SignupProvider;
         if (SignupProvider == "Google")
         {
             updateProfile.IsProviderLogin = true;

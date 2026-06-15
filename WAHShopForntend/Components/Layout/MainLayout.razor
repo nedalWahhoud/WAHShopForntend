@@ -68,7 +68,7 @@
     {
         // Check user authentication status and update the authentication state accordingly
         _ = CheckUserStatusAsync();
-		// starten get alle categories, damit bei categoryNav schneller geladen wird
+        // starten get alle categories, damit bei categoryNav schneller geladen wird
         categoryService.taskCatyrories = categoryService.GetAllCategoriesAsync();
 
         // Initialize the cartService to get the saved cart
@@ -96,7 +96,7 @@
     private async Task Decline()
     {
         await cookieService.SetConsentAsync(false);
-		// verschwinde Banner
+        // verschwinde Banner
         hasAccepted = true;
         StateHasChanged();
     }
@@ -113,25 +113,21 @@
         var localUser = authState.User;
         if (localUser.Identity != null && localUser.Identity.IsAuthenticated)
         {
-            var userIdStr = localUser.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value!;
-            if (int.TryParse(userIdStr, out int userIdInt))
+            int userId = (await authService.GetUser()).Id;
+            LoginModel loginModel = await authService.GetItemsUsersAsync(userId);
+            if (loginModel == null)
             {
-                LoginModel loginModel = await authService.GetItemsUsersAsync(userIdInt);
-
-                if (loginModel == null)
-                {
-                    await authService.Logout();
-                    return;
-                }
-                else
-                {
-                    // Benachrichtige den Anbieter des Authentifizierungsstatus über den neuen Authentifizierungsstatus.
-                    (AuthStateProvider as CustomAuthStateProvider)?.NotifyUserAuthentication(loginModel.Token);
-                    // aktualisieren Sie den Token im Local Storage, wenn nicht sessionToken ist
-                    string sessionToken = await (AuthStateProvider as CustomAuthStateProvider)?.SessionStorageGet("authToken")!;
-                    if (sessionToken == null)
-                        (AuthStateProvider as CustomAuthStateProvider)?.LocalstorageSet("authToken", loginModel.Token);
-                }
+                await authService.Logout();
+                return;
+            }
+            else
+            {
+                // Benachrichtige den Anbieter des Authentifizierungsstatus über den neuen Authentifizierungsstatus.
+                (AuthStateProvider as CustomAuthStateProvider)?.NotifyUserAuthentication(loginModel.Token);
+                // aktualisieren Sie den Token im Local Storage, wenn nicht sessionToken ist
+                string sessionToken = await (AuthStateProvider as CustomAuthStateProvider)?.SessionStorageGet("authToken")!;
+                if (sessionToken == null)
+                    (AuthStateProvider as CustomAuthStateProvider)?.LocalstorageSet("authToken", loginModel.Token);
             }
         }
     }

@@ -68,7 +68,7 @@ else
 								@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
 								{
 									if (orderService.DownloadedPaymentMethods[i].Id == 1 || orderService.DownloadedPaymentMethods[i].Id == 2 ||
-									orderService.DownloadedPaymentMethods[i].Id == 5)
+							orderService.DownloadedPaymentMethods[i].Id == 5)
 									{
 										var paymentMethod = orderService.DownloadedPaymentMethods[i];
 										<label>
@@ -312,8 +312,7 @@ else
 		var user = authState.User;
 		if (user.Identity?.IsAuthenticated == true)
 		{
-			string userId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value!;
-			int IntuserId = int.Parse(userId);
+			int IntuserId = (await authService.GetUser()).Id;
 			// set user id to user object
 			this.user.Id = IntuserId;
 			this.user.BirthDate = user.FindFirst(c => c.Type == ClaimTypes.DateOfBirth)?.Value!;

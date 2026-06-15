@@ -6,34 +6,34 @@
 @implements IDisposable
 
 <HeadContent>
-        <!-- Page Title -->
-        <PageTitle>
-            @(isArabic ? ProjectInfo.Value.NameArabic : ProjectInfo.Value.Name)
-        </PageTitle>
+    <!-- Page Title -->
+    <PageTitle>
+        @(isArabic ? ProjectInfo.Value.NameArabic : ProjectInfo.Value.Name)
+    </PageTitle>
 
-        <!-- Meta Description -->
-        <meta name="description" content="@(!isArabic
+    <!-- Meta Description -->
+    <meta name="description" content="@(!isArabic
         ? "Entdecken Sie die besten arabischen Produkte online: Lebensmittel, Süßigkeiten, Gewürze und Getränke mit schneller Lieferung."
         : "اكتشف أفضل المنتجات العربية والسورية عبر الإنترنت: مواد غذائية، حلويات، توابل ومشروبات مع توصيل سريع.")" />
 
-        <!-- Meta Keywords -->
-        <meta name="keywords" content="@(!isArabic
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="@(!isArabic
         ? "arabisches Laden, arabische Lebensmittel, syrische Produkte, Lebensmittel online"
         : "متجر عربي, مواد غذائية, حلويات, توابل, متجر سوري, تسوق أونلاين")" />
 
-    </HeadContent>
+</HeadContent>
 @if (IsLoading)
-    {
-        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
-            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <h5 class="mt-3 text-muted fw-light">@L["Loading"]</h5>
+{
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
         </div>
-        return;
-    }
+        <h5 class="mt-3 text-muted fw-light">@L["Loading"]</h5>
+    </div>
+    return;
+}
 
-    @* carsousel images *@
+@* carsousel images *@
 <div class="mainDiv">
     @if (carouselImagesService.DownloadedCarouselImage.Count > 0)
     {
@@ -58,7 +58,7 @@
                 {
                     // product
                     <div class="productsCard" @key="product.Id">
-                        <WAHShopForntend.Components.Layout.ShareLayout product="@product" />
+                        <WAHShopForntend.Components.Layout.TopProductsCard product="@product" />
                         <WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
                         <WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
                     </div>
@@ -76,10 +76,15 @@
     private List<Categories> allCategories = new();
     private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
     private readonly Random random = new();
-
-    protected override async Task OnInitializedAsync()
+    private User user = new User();
+    protected override async Task OnParametersSetAsync()
     {
         IsLoading = true;
+
+        user = await authService.GetUser();
+             
+
+        getItems = new() { PageSize = 6, Includes = ProductIncludes.ProductImages | ProductIncludes.Category };
 
         // get carousel images
         await carouselImagesService.GetAllCarouselAsync();
@@ -140,22 +145,22 @@
                 Recommended.Products.AddRange(productsLocal);
             }
             // get products server
-            var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, 5, false, excludeProductsIds);
-            if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
+            getItems = await categoryService.GetProductsByCategoryIdAsync(category.Id, user.Id, getItems!, excludeProductsIds);
+            if (getItems != null && getItems.Items != null && getItems.Items.Count > 0)
             {
                 // initialize CartItem for each product
-                foreach (var p in productsServer.Items)
+                foreach (var p in getItems.Items)
                 {
                     p.InitializeCartItem(cartService.GetQuantityOfProduct(p.Id));
                     excludeProductsIds!.Add(p.Id);
                 }
 
-                Recommended.Products.AddRange(productsServer.Items);
-
+                Recommended.Products.AddRange(getItems.Items);
+                //  items reinigen, damit nicht mit http request geschickt wird, da die item groß ist
+                getItems.Items.Clear();
             }
-            else if (productsServer != null && productsServer.AllItemsLoaded)
+            else if (getItems != null && getItems.AllItemsLoaded)
             {
-
             }
         }
         // initialize to mainProductByCategory
@@ -200,7 +205,7 @@
             }
 
             // get products server
-            var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, 5, false, excludeProductsIds);
+            var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, user.Id, getItems, excludeProductsIds);
             if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
             {
                 // initialize CartItem for each product
@@ -241,7 +246,7 @@
             allProducts.AddRange(productsLocal);
         }
         // get products server
-        var productsServer = await categoryService.GetProductsByCategoryIdAsync(categoryId, 10, false, excludeProductsIds);
+        var productsServer = await categoryService.GetProductsByCategoryIdAsync(categoryId, user.Id, getItems, excludeProductsIds);
         if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
         {
             // initialize CartItem for each product
@@ -254,7 +259,7 @@
             allProducts.AddRange(productsServer.Items);
 
             // add to local Products list
-            productService.AddProductToLocal(productsServer.Items);
+            await productService.AddProductToLocal(productsServer.Items);
         }
 
         // add to mainProductByCategory

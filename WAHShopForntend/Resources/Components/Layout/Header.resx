@@ -144,4 +144,10 @@
   <data name="ProductSearch" xml:space="preserve">
     <value>Search product...</value>
   </data>
+  <data name="NoProductsFound" xml:space="preserve">
+    <value>No Products found</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
 </root>

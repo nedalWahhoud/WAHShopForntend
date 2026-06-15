@@ -123,4 +123,7 @@
   <data name="NoStock" xml:space="preserve">
     <value>Nicht genügend Lagerbestand</value>
   </data>
+  <data name="ProductNotFound" xml:space="preserve">
+    <value>Produkt nicht gefunden</value>
+  </data>
 </root>

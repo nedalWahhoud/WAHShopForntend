@@ -1,11 +1,15 @@
 ﻿using WAHShopForntend.Components.Cart;
+using WAHShopForntend.Components.FavoriteF;
+using WAHShopForntend.Components.Login;
 using WAHShopForntend.Components.Models;
 
 namespace WAHShopForntend.Components.ProductsF
 {
-    public class ProductService(HttpClient http)
+    public class ProductService(HttpClient http,AuthService authService, FavoriteService favoriteService)
     {
         private readonly HttpClient _http = http;
+        private readonly AuthService _authService = authService;
+        private readonly FavoriteService _favoriteService = favoriteService;
         public  List<Product> DownloadedProduct { get;  set; } = [];
         public async Task<List<Product>> GetProductByIdsAsync(List<int> productIds)
         {
@@ -19,7 +23,7 @@ namespace WAHShopForntend.Components.ProductsF
                 if (products != null)
                 {
                     // add the product to the local list
-                    AddProductToLocal(products);
+                    await AddProductToLocal(products);
                     return products;
                 }
                 return null!;
@@ -29,11 +33,11 @@ namespace WAHShopForntend.Components.ProductsF
                 return null!;
             }
         }
-        public async Task<Product> GetProductByIdAsync(int productId)
+        public async Task<Product> GetProductByIdAsync(int productId, int userId = 0)
         {
             try
             {
-                var response = await _http.GetAsync($"api/Products/getProductById/{productId}?onlyInStock={true}");
+                var response = await _http.GetAsync($"api/Products/getProductById/{productId}?onlyInStock={true}&userId={userId}");
 
                 if (!response.IsSuccessStatusCode)
                     return null!;
@@ -41,8 +45,8 @@ namespace WAHShopForntend.Components.ProductsF
                 if (product != null)
                 {
                     // add the product to the local list
-                    AddProductToLocal(product!);
-                   
+                    await AddProductToLocal(product!);
+
                     return product!;
                 }
                 return null!;
@@ -53,26 +57,35 @@ namespace WAHShopForntend.Components.ProductsF
             }
         }
         // local
-        public void AddProductToLocal(List<Product> products)
+        public async Task AddProductToLocal(List<Product> products)
         {
-            if (products.Count > 0 && DownloadedProduct.Count == 0)
-            {
-                DownloadedProduct.AddRange(products);
-                return;
-            }
+            // check if eingeloggen
+            int UserId = (await authService.GetUser()).Id;
 
             foreach (var product in products)
             {
                 if (!DownloadedProduct.Any(p => p.Id == product.Id))
                 {
+                    // wenn nicht eingeloggen dann, gucken wir ob in LocalStorage Favorite für diese Produkt gibt es
+                    if(UserId == 0)
+                    {
+                        product.IsFavorite = await _favoriteService.IsFavoriteInLocalStorage(product.Id);
+                    }
                     DownloadedProduct.Add(product);
                 }
             }
         }
-        public void AddProductToLocal(Product product)
+        public async Task AddProductToLocal(Product product)
         {
+            // check if eingeloggen
+            int UserId = (await authService.GetUser()).Id;
+
             if (!DownloadedProduct.Any(p => p.Id == product.Id))
             {
+                if (UserId == 0)
+                {
+                    product.IsFavorite = await _favoriteService.IsFavoriteInLocalStorage(product.Id);
+                }
                 DownloadedProduct.Add(product);
             }
         }

@@ -2,13 +2,16 @@
 {
     using System.Net.Http;
     using System.Net.Http.Json;
+    using System.Security.Claims;
     using Microsoft.AspNetCore.Components.Authorization;
+    using WAHShopForntend.Components.FavoriteF;
     using WAHShopForntend.Components.Models;
 
-    public class AuthService(HttpClient http, AuthenticationStateProvider authStateProvider)
+    public class AuthService(HttpClient http, AuthenticationStateProvider authStateProvider, FavoriteService favoriteService)
     {
         private readonly HttpClient _http = http;
         private readonly AuthenticationStateProvider _authStateProvider = authStateProvider;
+        private readonly FavoriteService _favoriteService = favoriteService;
 
         public async Task<ValidationResult> Signup(SignupModel signupModel)
         {
@@ -16,12 +19,15 @@
             {
                 var response = await _http.PostAsJsonAsync("api/Users/signup", signupModel);
 
-                if (!response.IsSuccessStatusCode)
+                var result = await response.Content.ReadFromJsonAsync<ValidationResult>();
+
+                if (!response.IsSuccessStatusCode || result == null || !result.Result)
                 {
-                    return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Registrierung fehlgeschlagen" };
+                    return result ?? new ValidationResult { Result = false, Message = "Registrierung fehlgeschlagen" };
                 }
 
-                return await response.Content.ReadFromJsonAsync<ValidationResult>() ?? new ValidationResult { Result = false, Message = "Registrierung fehlgeschlagen" };
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -68,6 +74,8 @@
             if (_authStateProvider is CustomAuthStateProvider customAuthStateProvider)
             {
                 await customAuthStateProvider.NotifyUserLogout();
+                // remove Favorite from localStorage
+                await _favoriteService.ClearLocalStorage();
             }
             _http!.DefaultRequestHeaders.Authorization = null;
         }
@@ -189,6 +197,26 @@
             {
                 return new ValidationResult { Result = false, Message = ex.Message };
             }
+        }
+        public async Task<User> GetUser()
+        {
+            User userModel = new();
+
+            var authState = await _authStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.Identity != null && user.Identity.IsAuthenticated)
+            {
+                var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier) ?? user.FindFirst("sub");
+
+                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+                {
+                    userModel.Id = userId;
+                }
+                userModel.SignupProvider = user.FindFirst(c => c.Type == "SignupProvider")?.Value!;
+            }
+
+            return userModel; 
         }
         // google login
         public ValidationResult GoogleLogin(LoginModel loginModel)

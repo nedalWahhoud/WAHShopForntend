@@ -1,0 +1,110 @@
+﻿@inject IStringLocalizer<WAHShopForntend.Components.Layout.TopProductsCard> L
+
+<div class="topProductCardDiv">
+	<button class="topProductCardBtn" @onclick="() => ShareProduct(product)">
+		<i class="bi bi-box-arrow-up"></i>
+	</button>
+
+	<button class="topProductCardBtn favoriteBtn" @onclick="() => ToggleFavorite(product)">
+		<i class="@(product.IsFavorite ? "bi bi-heart-fill text-danger" : "bi bi-heart")"></i>
+	</button>
+</div>
+
+@code {
+	[Parameter]
+	public Product product { get; set; } = new Product();
+	private User user = new User();
+	protected override async Task OnInitializedAsync()
+	{
+		user = await authService.GetUser();
+	}
+	
+	private async Task ShareProduct(Product product)
+	{
+		var productUrl = $"{navigationManager.BaseUri}ProductPage/{product.Id}";
+
+		await JS.InvokeVoidAsync("shareProduct", product.Name_de, productUrl);
+	}
+	private async Task ToggleFavorite(Product product)
+	{
+
+		await favoriteService.GetFavoritesFromLocalStorage();
+		product.IsFavorite = !product.IsFavorite;
+		ValidationResult result = new ValidationResult();
+		if (product.IsFavorite)
+		{
+
+			UserFavorite userFavorite = new UserFavorite
+				{
+					UserId = user.Id,
+					ProductId = product.Id
+				};
+
+			if (user.Id > 0)
+			{
+				result = await favoriteService.Add(userFavorite);
+				if (result.Result)
+				{
+					var product1 = productService.GetProductByIdLocal(product.Id) ?? await productService.GetProductByIdAsync(product.Id);
+					if (product != null)
+					{
+						product.IsFavorite = true;
+						favoriteService.AddToLocalList(product);
+					}
+				}
+			}
+			else
+			{
+				result = await favoriteService.AddLocalStorage(product.Id);
+				if (result.Result)
+				{
+					favoriteService.AddToLocalList(product);
+				}
+			}
+		}
+		// remove
+		else
+		{
+			if (user.Id > 0)
+			{
+				result = await favoriteService.Delete(user.Id, product.Id);
+				if (result.Result)
+				{
+					// update die Favorite Status in Locale ProductsList
+					if (productService.DownloadedProduct != null)
+					{
+						var product1 = productService.DownloadedProduct
+							.FirstOrDefault(p => p.Id == product.Id);
+						if (product1 != null)
+						{
+							product1.IsFavorite = false;
+						}
+					}
+				}
+			}
+			else
+			{
+				result = await favoriteService.RemoveLocalStorage(product.Id);
+				if (result.Result)
+				{
+					// update die Favorite Status in Locale ProductsList
+					if (productService.DownloadedProduct != null)
+					{
+						var product1 = productService.DownloadedProduct
+							.FirstOrDefault(p => p.Id == product.Id);
+						if (product1 != null)
+						{
+							product1.IsFavorite = false;
+						}
+					}
+				}
+			}
+		}
+
+		if (!result.Result)
+		{
+			product!.IsFavorite = !product.IsFavorite;
+			return;
+		}
+	}
+}

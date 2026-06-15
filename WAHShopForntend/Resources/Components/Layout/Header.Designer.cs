@@ -70,6 +70,15 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Favorites ähnelt.
+        /// </summary>
+        public static string Favorites {
+            get {
+                return ResourceManager.GetString("Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
         /// </summary>
         public static string Home {
@@ -111,6 +120,15 @@ namespace WAHShopForntend.Resources.Components.Layout {
         public static string MyProfile {
             get {
                 return ResourceManager.GetString("MyProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No Products found ähnelt.
+        /// </summary>
+        public static string NoProductsFound {
+            get {
+                return ResourceManager.GetString("NoProductsFound", resourceCulture);
             }
         }
         

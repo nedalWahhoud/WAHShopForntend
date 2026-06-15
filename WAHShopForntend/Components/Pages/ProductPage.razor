@@ -30,10 +30,8 @@ else
 				</div>
 			</div>
 		}
-		else
+		else 
 		{
-
-
 			@* SEO *@
 			var imageUrl = productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? null!);
 			var productName = isArabic ? product?.Name_ar : product?.Name_de;
@@ -78,14 +76,14 @@ else
 					{
 						<div loading="lazy" class="modalOverlay" @onclick="CloseImage">
 							<img class="modalImage"
-								 src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())"
-								 alt="Image of Product"
+							src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())"
+							alt="Image of Product"
 							@onclick:stopPropagation />
 						</div>
 					}
 				</div>
 				<div class="InfoSection">
-					<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
+					<WAHShopForntend.Components.Layout.TopProductsCard Product="product" />
 
 					<h2 class="productTitle">
 						@(isArabic ? product?.Name_ar : product?.Name_de)
@@ -109,10 +107,10 @@ else
 						</select>
 					}
 					<div class="DivQuantity">
-						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@(product?.Id ?? 0)" />
 					</div>
 					<p class="text-secondary fw-semibold">
-						@if (product.IsShippable)
+						@if (product?.IsShippable ?? false)
 						{
 							<i class="bi bi-box-fill text-warning"> </i> @(" " + L["IsShippable"])
 						}
@@ -136,7 +134,7 @@ else
 					// product
 					var product = mainProductByCategory[x].Products[i];
 					<div class="productsCard">
-						<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
+						<WAHShopForntend.Components.Layout.TopProductsCard Product="product" />
 						<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
 						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 					</div>
@@ -160,10 +158,14 @@ else
 	private Random random = new();
 	// product by caegory for products card
 	private List<ProductByCategory> mainProductByCategory = new();
-
+	private User user = new User();
+	private GetItems<Product> getItems = new() { PageSize = 5, Includes = ProductIncludes.ProductImages | ProductIncludes.Category };
 	protected override async Task OnParametersSetAsync()
 	{
 		isLoading = true;
+
+		user = await authService.GetUser();
+
 		excludeProductsIdsGroupProducts = new();
 		excludeCategoriesIds = new();
 		allCategories = new();
@@ -171,12 +173,12 @@ else
 		groupProducts = new();
 		// get product by id
 		product = productService.GetProductByIdLocal(ProductId)
-					?? await productService.GetProductByIdAsync(ProductId);
+					?? await productService.GetProductByIdAsync(ProductId, user.Id);
 		if (product != null)
 		{
 			product.InitializeCartItem(cartService.GetQuantityOfProduct(product.Id));
 			// add to local product list if not already present
-			productService.AddProductToLocal(product);
+			await productService.AddProductToLocal(product);
 			// add category id to exclude list
 			excludeCategoriesIds.Add(product?.CategoryId ?? 0);
 
@@ -239,7 +241,7 @@ else
 
 			}
 			// get products server
-			var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, 5, false, excludeProductsIds);
+			var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, user.Id, getItems, excludeProductsIds);
 			if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
 			{
 				// initialize CartItem for each product
@@ -251,7 +253,7 @@ else
 				allProducts.AddRange(productsServer.Items);
 
 				// add to local Products list
-				productService.AddProductToLocal(productsServer.Items);
+				await productService.AddProductToLocal(productsServer.Items);
 			}
 			// add to main list
 			if (allProducts.Count > 0)
@@ -287,7 +289,7 @@ else
 			}
 
 			// get products server
-			var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id,5,false, excludeProductsIds);
+			var productsServer = await categoryService.GetProductsByCategoryIdAsync(category.Id, user.Id, getItems, excludeProductsIds);
 			if (productsServer != null && productsServer.Items != null && productsServer.Items.Count > 0)
 			{
 				// initialize CartItem for each product
@@ -305,7 +307,7 @@ else
 					mainProductByCategory.Insert(currentIndex, new ProductByCategory() { Category = category, Products = productsServer.Items });
 
 				// add to local Products list
-				productService.AddProductToLocal(productsServer.Items);
+				await productService.AddProductToLocal(productsServer.Items);
 			}
 			else if (productsServer != null && productsServer.AllItemsLoaded)
 			{
@@ -359,7 +361,7 @@ else
 				groupProduct.ProductGroup ??= await productGroupService.GetGroupProductByIdAsync(groupProduct.ProductGroupID ?? 0);
 			}
 
-			productService.AddProductToLocal(groupProductsServer);
+			await productService.AddProductToLocal(groupProductsServer);
 
 			// add to groupProducts of page
 			this.groupProducts!.AddRange(groupProductsServer);

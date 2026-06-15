@@ -1,15 +1,15 @@
 ﻿@if (product != null)
 {
-   <img @onclick="() => OnProduct(product.Id)" src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" loading="lazy" alt="@product.Name_de" />
-   <div @onclick="() => OnProduct(product.Id)" class="textCard">
-     <a>
-        @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-         ? product.Name_ar
-         : product.Name_de)
-     </a>
-	<PriceLayout ProductId="ProductId" />
+    <img @onclick="() => OnProduct(product.Id)" src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" loading="lazy" alt="@product.Name_de" />
+    <div @onclick="() => OnProduct(product.Id)" class="textCard">
+        <a>
+            @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                 ? product.Name_ar
+                 : product.Name_de)
+        </a>
+        <PriceLayout ProductId="ProductId" />
 
-   </div>
+    </div>
 }
 @code {
     [Parameter]
@@ -18,7 +18,8 @@
     private Product product = null!;
     protected override async Task OnInitializedAsync()
     {
-        product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdAsync(ProductId);
+        int userId = (await authService.GetUser()).Id;
+        product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdAsync(ProductId,userId);
     }
 
     // On Product Click

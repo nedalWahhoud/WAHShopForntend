@@ -1,0 +1,38 @@
+﻿.topProductCardDiv {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom:2px;
+}
+
+.topProductCardBtn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    font-size: 20px;
+}
+.topProductCardBtn:hover {
+}
+
+    .topProductCardBtn:hover i.bi-box-arrow-up {
+        color: #0d6efd; 
+    }
+
+    .topProductCardBtn:hover i.bi-heart {
+        color: #dc3545; 
+    }
+
+    .topProductCardBtn i.bi-heart-fill {
+        color: #dc3545;
+    }
+
+@media (max-width: 768px) {
+    .topProductCardDiv[dir="rtl"] {
+        justify-content: flex-end;
+    }
+
+    .topProductCardDiv[dir="rtl"] {
+        justify-content: flex-start;
+    }
+}

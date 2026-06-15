@@ -180,15 +180,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        if (user.Identity?.IsAuthenticated == true)
-        {
-            var userIdString = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if (int.TryParse(userIdString, out int userId))
-                UserId = userId;
-        }
+       
+        UserId = (await authService.GetUser()).Id;
         // load orders
         if (UserId > 0)
             await orderService.GetOrdersAsync(UserId);

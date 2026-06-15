@@ -53,6 +53,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CustomerPortal.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Components\Layout\FavoritePage.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FavoritePage.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Components\Layout\Footer.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -133,15 +138,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SearchProducts.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Components\Layout\ShareLayout.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ShareLayout.resx</DependentUpon>
-    </Compile>
     <Compile Update="Resources\Components\Layout\Signup.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Signup.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Components\Layout\TopProductsCard.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TopProductsCard.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -180,6 +185,10 @@
     <EmbeddedResource Update="Resources\Components\Layout\CustomerPortal.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CustomerPortal.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Layout\FavoritePage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FavoritePage.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Components\Layout\Footer.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -245,13 +254,16 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SearchProducts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Components\Layout\ShareLayout.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ShareLayout.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Components\Layout\Signup.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Signup.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Layout\TopProductsCard.de.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Layout\TopProductsCard.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TopProductsCard.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

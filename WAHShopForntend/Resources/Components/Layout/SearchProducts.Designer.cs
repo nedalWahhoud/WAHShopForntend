@@ -77,5 +77,14 @@ namespace WAHShopForntend.Resources.Components.Layout {
                 return ResourceManager.GetString("NoStock", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Product not found ähnelt.
+        /// </summary>
+        public static string ProductNotFound {
+            get {
+                return ResourceManager.GetString("ProductNotFound", resourceCulture);
+            }
+        }
     }
 }

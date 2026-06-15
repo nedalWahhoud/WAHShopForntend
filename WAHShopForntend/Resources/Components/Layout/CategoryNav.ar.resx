@@ -135,6 +135,9 @@
   <data name="Meats" xml:space="preserve">
     <value>اللحوم</value>
   </data>
+  <data name="NoProductsFound" xml:space="preserve">
+    <value>لم يتم العثور على أي منتجات.</value>
+  </data>
   <data name="OnOffer" xml:space="preserve">
     <value>العروض</value>
   </data>

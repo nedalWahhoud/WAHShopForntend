@@ -32,7 +32,7 @@
                 }
                 else if (!string.IsNullOrWhiteSpace(searchText))
                 {
-                    <p class="searchDropdown">Keine Produkte gefunden.</p>
+                    <p class="searchDropdown">@L["NoProductsFound"]</p>
                 }
             }
         </div>
@@ -81,6 +81,8 @@
                         <li><a class="dropdown-item dropdownItem" @onclick="Login">@L["Login"]</a></li>
                     </NotAuthorized>
                 </AuthorizeView>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item dropdownItem" @onclick="@(() => navigationManager.NavigateTo("/favorite"))">@L["Favorites"]</a></li>
             </ul>
         </div>
     </div>

@@ -16,14 +16,9 @@ else
 			<div class="productItems">
 				@for (int i = 0; i < searchedProducts.Count;i++)
 				{
-					// product
 					var product = searchedProducts[i];
-					// cart product, bind with productId,quantity and product, the in OnInititalized configured.
-					/*var cartItem = searchedProducts[i].CartItem;
-					cartItem.Product = cartItem.Product ?? product;*/
-
 					<div class="cardProduct">
-						<WAHShopForntend.Components.Layout.ShareLayout Product="product" />
+						<WAHShopForntend.Components.Layout.TopProductsCard Product="product" />
 						<WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
 						<WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
 					</div>
@@ -32,7 +27,7 @@ else
 		}
 		else
 		{
-			<p>Keine Produkte gefunden.</p>
+			<p>@L["ProductNotFound"]</p>
 		}
 	</div>
 }
@@ -69,7 +64,7 @@ else
 			// add to local product list
 			if (searchedResults != null && searchedResults.Count > 0)
 			{
-				productService.AddProductToLocal(searchedResults);
+				await productService.AddProductToLocal(searchedResults);
 			}
 		}
 

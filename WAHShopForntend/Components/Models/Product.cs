@@ -28,7 +28,10 @@ namespace WAHShopForntend.Components.Models
         public bool IsShippable { get; set; }
         public ProductDiscounts? ProductDiscount { get; set; }
         //
+        [JsonIgnore]
         public CartItem CartItem { get; set; } = null!;
+        public bool IsFavorite { get; set; } = false;
+
         public void InitializeCartItem(int quantity)
         {
             CartItem = new CartItem

@@ -144,4 +144,10 @@
   <data name="ProductSearch" xml:space="preserve">
     <value>البحث عن منتج...</value>
   </data>
+  <data name="NoProductsFound" xml:space="preserve">
+    <value>لم يتم لعثور على منتجات</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>المفضلة</value>
+  </data>
 </root>

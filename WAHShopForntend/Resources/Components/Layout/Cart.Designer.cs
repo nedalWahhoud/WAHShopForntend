@@ -124,15 +124,6 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Product not found ähnelt.
-        /// </summary>
-        public static string ProductNotFound {
-            get {
-                return ResourceManager.GetString("ProductNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Total: ähnelt.
         /// </summary>
         public static string TotalLabel {

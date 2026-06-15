@@ -18,6 +18,7 @@ using WAHShopForntend.Components.CustomersF;
 using WAHShopForntend.Components.TransactionsCustomersF;
 using WAHShopForntend.Components.DebtF;
 using Microsoft.AspNetCore.Localization;
+using WAHShopForntend.Components.FavoriteF;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -104,6 +105,8 @@ builder.Services.AddScoped<CustomersService>();
 builder.Services.AddScoped<TransactionsCustomersService>();
 // DebtCustomers service
 builder.Services.AddScoped<DebtService>();
+// favorite service
+builder.Services.AddScoped<FavoriteService>();
 
 // Sprachen
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
