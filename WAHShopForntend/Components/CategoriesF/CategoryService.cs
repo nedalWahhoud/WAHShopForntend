@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Globalization;
+using WAHShopForntend.Components.Login;
 using WAHShopForntend.Components.Models;
 using WAHShopForntend.Components.ProductsF;
 
@@ -27,11 +28,13 @@ namespace WAHShopForntend.Components.CategoriesF
                 return DownloadedCategories;
             try
             {
-                var response = await _http.GetAsync($"api/Categories/getCategories");
+
+                GetItems<Categories> getItems = new() { IsAdmin = false };
+                var response = await _http.PostAsJsonAsync($"api/Categories/getCategories",getItems);
                 if (!response.IsSuccessStatusCode)
                     return [];
 
-                var getItems = await response.Content.ReadFromJsonAsync<GetItems<Categories>>();
+                getItems = await response.Content.ReadFromJsonAsync<GetItems<Categories>>() ?? new();
                 // get now only the active categories
                 var categories = FilterIsAktiv(getItems?.Items ?? []);
 
@@ -78,7 +81,9 @@ namespace WAHShopForntend.Components.CategoriesF
 
             try
             {
-                var response = await _http.PostAsJsonAsync($"api/Categories/getProductsByCategoryId/{categoryId.ToString(CultureInfo.InvariantCulture)}",getItem);
+                getItem.Filter = new() { Type = GetItemFilterType.Category, Id = categoryId };
+
+                var response = await _http.PostAsJsonAsync($"api/Categories/getProductsByCategoryId",getItem);
 
                 if (!response.IsSuccessStatusCode)
                     return getItem;

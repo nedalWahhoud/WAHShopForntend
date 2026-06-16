@@ -214,6 +214,7 @@
                     userModel.Id = userId;
                 }
                 userModel.SignupProvider = user.FindFirst(c => c.Type == "SignupProvider")?.Value!;
+                userModel.Role = (user.FindFirst(ClaimTypes.Role)?.Value ?? user.FindFirst("role")?.Value ?? "Guest").ToLower();
             }
 
             return userModel; 
