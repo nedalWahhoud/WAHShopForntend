@@ -178,7 +178,7 @@ window.shareProduct = async (title, url) => {
                 }
                 else if (navigator.clipboard && window.isSecureContext) {
                     await navigator.clipboard.writeText(url);
-                    console.log("تم نسخ الرابط بنجاح!");
+                    console.log("Der Link wurde erfolgreich kopiert!");
                 }
                 else {
                     throw new Error("Clipboard API غير مدعوم أو الموقع غير آمن (HTTPS).");

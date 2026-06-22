@@ -2,19 +2,18 @@
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.ProductPage> L
 @implements IDisposable
-
-@if (isLoading)
-{
-
-}
-else
-{
-	<div class="mainDiv">
+@inherits ProjectComponentBase
+<div class="mainDiv">
+	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
+	{
+		<WAHShopForntend.Components.Layout.Loading />
+	}
+	else
+	{
 		@if (product == null)
 		{
 			<div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
 				<div class="card border-0 shadow-sm rounded-4 text-center px-3 py-3" style="max-width: 400px;">
-
 					<div class="mb-3">
 						<i class="bi bi-clock-history fs-1" style="color: #5bc0f8;"></i>
 					</div>
@@ -22,50 +21,48 @@ else
 					<h5 class="mb-2">
 						@L["OutStock"]
 					</h5>
-
 					<p class="mb-0 fw-bold fs-2" style="color: #5bc0f8;">
 						@L["AvailableSoon"]
 					</p>
-
 				</div>
 			</div>
 		}
-		else 
+		else
 		{
 			@* SEO *@
 			var imageUrl = productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? null!);
-			var productName = isArabic ? product?.Name_ar : product?.Name_de;
-			var productDescription = isArabic ? product?.Description_ar : product?.Description_de;
+			var productName = IsArabic ? product?.Name_ar : product?.Name_de;
+			var productDescription = IsArabic ? product?.Description_ar : product?.Description_de;
 			var availability = (product?.Quantity > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock");
 			var productUrl = navigationManager.Uri;
 
 			<HeadContent>
 				<PageTitle>
-					@(isArabic ? product?.Name_ar : product?.Name_de)
+					@(IsArabic ? product?.Name_ar : product?.Name_de)
 				</PageTitle>
-				<meta name="description" content="@(isArabic ? product?.Description_ar : product?.Description_de)" />
-				<meta name="keywords" content="@(isArabic ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
+				<meta name="description" content="@(IsArabic ? product?.Description_ar : product?.Description_de)" />
+				<meta name="keywords" content="@(IsArabic ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
 			: product?.Name_de + ", Syriana Leutkirch, Syriana Supermarkt, arabische Supermarkt, Lebensmittel, arabische Lebensmittel, arabisches Laden, arabisches Laden in Leutkirhc")" />
 
 				<!-- Structured Data -->
 				<script type="application/ld+json">
 					@((MarkupString)$@"{{
-				""@context"": ""https://schema.org"",
-				""@type"": ""Product"",
-				""name"": ""{productName}"",
-				""description"": ""{productDescription}"",
-				""image"": ""{imageUrl}"",
-				""offers"": {{
-						""@type"": ""Offer"",
-					 ""url"": ""{navigationManager.Uri}"",
-						""priceCurrency"": ""EUR"",
-						""price"": ""{(product?.SalePrice ?? 0):0.00}"",
-						""availability"": ""{availability}"",
-						""itemCondition"": ""https://schema.org/NewCondition""
+			 ""@context"": ""https://schema.org"",
+			 ""@type"": ""Product"",
+			 ""name"": ""{productName}"",
+			 ""description"": ""{productDescription}"",
+			 ""image"": ""{imageUrl}"",
+			 ""offers"": {{
+					 ""@type"": ""Offer"",
+				  ""url"": ""{navigationManager.Uri}"",
+					 ""priceCurrency"": ""EUR"",
+					 ""price"": ""{(product?.SalePrice ?? 0):0.00}"",
+					 ""availability"": ""{availability}"",
+					 ""itemCondition"": ""https://schema.org/NewCondition""
 
-					}}
-				}}
-			   }}"))
+				 }}
+			 }}
+			}}"))
 				</script>
 			</HeadContent>
 			@**@
@@ -76,8 +73,8 @@ else
 					{
 						<div loading="lazy" class="modalOverlay" @onclick="CloseImage">
 							<img class="modalImage"
-							src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())"
-							alt="Image of Product"
+								 src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())"
+								 alt="Image of Product"
 							@onclick:stopPropagation />
 						</div>
 					}
@@ -86,22 +83,22 @@ else
 					<WAHShopForntend.Components.Layout.TopProductsCard Product="product" />
 
 					<h2 class="productTitle">
-						@(isArabic ? product?.Name_ar : product?.Name_de)
+						@(IsArabic ? product?.Name_ar : product?.Name_de)
 					</h2>
 					<p class="productDescription">
-						@(isArabic ? product?.Description_ar : product?.Description_de)
+						@(IsArabic ? product?.Description_ar : product?.Description_de)
 					</p>
 					<div class="productPrice"> <WAHShopForntend.Components.Layout.PriceLayout ProductId="product?.Id ?? 0" /> </div>
 					@if (product?.ProductGroup != null && groupProducts != null && groupProducts.Count > 0)
 					{
 						<select @key="product.Id" class="form-select" style="max-width:400px;" @onchange="OnGroupChanged">
 							<option value="0">
-								@(isArabic ? product.ProductGroup.GroupName_ar : product.ProductGroup.GroupName_de)
+								@(IsArabic ? product.ProductGroup.GroupName_ar : product.ProductGroup.GroupName_de)
 							</option>
 							@foreach (var groupProduct in groupProducts)
 							{
 								<option value="@groupProduct.Id">
-									@(isArabic ? groupProduct.Name_ar : groupProduct.Name_de)
+									@(IsArabic ? groupProduct.Name_ar : groupProduct.Name_de)
 								</option>
 							}
 						</select>
@@ -141,15 +138,14 @@ else
 				}
 			</div>
 		}
-	</div>
-}
+	}
+</div>
+
 @code {
 	[Parameter]
 	public int ProductId { get; set; }
 	private Product? product;
 	private List<Product>? groupProducts = new ();
-	private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
-	private bool isLoading = true;
 	// to exclude categories already loaded in the main product list
 	private List<int> excludeCategoriesIds = new();
 	private List<int> excludeProductsIdsGroupProducts = new();
@@ -160,12 +156,15 @@ else
 	private List<ProductByCategory> mainProductByCategory = new();
 	private User user = new User();
 	private GetItems<Product> getItems = new() { PageSize = 5, Includes = ProductIncludes.ProductImages | ProductIncludes.Category };
+
+	protected async override Task OnInitializedAsync()
+    {
+		user = await authService.GetUser();
+        IsRendered.Initialized = true;
+    }
+
 	protected override async Task OnParametersSetAsync()
 	{
-		isLoading = true;
-
-		user = await authService.GetUser();
-
 		excludeProductsIdsGroupProducts = new();
 		excludeCategoriesIds = new();
 		allCategories = new();
@@ -193,7 +192,7 @@ else
 		// get all categories
 		allCategories = categoryService.GetAllCategoriesLocal()	?? await categoryService.GetAllCategoriesAsync();
 
-		isLoading = false;
+		IsRendered.ParametersSet = true;
 		StateHasChanged();
 	}
 	private DotNetObjectReference<ProductPage>? objRef;
@@ -207,6 +206,7 @@ else
 			await Task.Delay(100);
 			// Setzen Sie das Objekt von donNet in JavaScript und die ID:checkScrollEnd und rufen Sie die Funktion checkScrollEnd aus JavaScript ab.
 			await JS.InvokeVoidAsync("scrollHelper.onScrollEnd", objRef);
+			IsRendered.AfterRender = true;
 			StateHasChanged();
 		}
 	}

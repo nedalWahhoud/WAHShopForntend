@@ -1,5 +1,6 @@
 ﻿@page "/impressum"
 @namespace WAHShopForntend.Components.Layout
+@inherits ProjectComponentBase
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Impressum> L
 <div class="mainDiv">
 	<h1>@L["impressum"]</h1>
@@ -22,9 +23,7 @@
 	<p>IONOS</p>
 	<h1>@L["developer"]</h1>
 	<p>
-		@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-				? DeveloperInfo.Value.NameArabic
-				: DeveloperInfo.Value.Name)
+		@(IsArabic ? DeveloperInfo.Value.NameArabic : DeveloperInfo.Value.Name)
 	</p>
 	<p>@L["Tel"] <span style="direction:ltr; unicode-bidi:isolate; display:inline-block;">@DeveloperInfo.Value.Telefonnummer</span></p>
 	<p>@L["email"] @DeveloperInfo.Value.Email</p>

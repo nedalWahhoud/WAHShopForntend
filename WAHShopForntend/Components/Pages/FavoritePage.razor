@@ -1,9 +1,9 @@
 ﻿@page "/favorite"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.FavoritePage> L
-
+@inherits ProjectComponentBase
 <div class="mainDiv">
-	@if (IsMainLoading)
+	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
 	{
 		<WAHShopForntend.Components.Layout.Loading />
 	}
@@ -60,14 +60,16 @@
 </div>
 @code {
 
-	private bool IsMainLoading = false;
 	private User user = new User();
 	List<int> productIds = new();
 	protected override async Task OnParametersSetAsync()
 	{
-		IsMainLoading = true;
 		await MoreProductsload();
-		IsMainLoading = false;
+
+		// afterRender und Initialized true, weil wir nutzen die Funktionen hier nicht
+		IsRendered.AfterRender = true;
+		IsRendered.ParametersSet = true;
+		IsRendered.Initialized = true;
 	}
 
 	private bool IsOrdersLoading = false;

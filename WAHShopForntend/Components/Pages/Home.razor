@@ -1,35 +1,31 @@
 ﻿@page "/"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Home> L
+@inherits ProjectComponentBase
 
-@if (IsLoading)
-{
-	<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-		<div class="spinner-border text-primary" role="status">
-			<span class="visually-hidden">Loading...</span>
-		</div>
-	</div>
-	return;
-}
-@* Hero Section *@
-<WAHShopForntend.Components.Layout.HeroSection />
 @* Description Cards *@
 <div class="FeatureSectionContainer">
-
-	@foreach (var item in FeatureSections)
+	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
 	{
-		<WAHShopForntend.Components.Layout.FeatureSection model="item" />
+		<WAHShopForntend.Components.Layout.Loading />
+	}
+	else
+	{
+		@* Hero Section *@
+		<WAHShopForntend.Components.Layout.HeroSection />
+
+		@foreach (var item in FeatureSections)
+		{
+			<WAHShopForntend.Components.Layout.FeatureSection model="item" />
+		}
 	}
 </div>
 
 @code {
 	private List<WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel> FeatureSections = new List<WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel>();
 
-	private bool IsLoading = false;
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
-		IsLoading = true;
-
 		FeatureSections = new List<WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel>
 		{
 			new WAHShopForntend.Components.Layout.FeatureSection.FeatureSectionModel
@@ -145,13 +141,13 @@
 			ButtonHoverColor = "#991826"
 		},
 		};
-
 		// get carousel images
 		await carouselImagesService.GetAllCarouselAsync();
-
-		IsLoading = false;
+		// afterRender und Initialized true, weil wir nutzen die Funktionen hier nicht
+		IsRendered.AfterRender = true;
+		IsRendered.ParametersSet = true;
+		IsRendered.Initialized = true;
 	}
-
 	// carousel
 	private bool IsCarouselFullscreen = false;
 	private void HandleCarouselFullScreen(bool IsCarouselFullscreen1)

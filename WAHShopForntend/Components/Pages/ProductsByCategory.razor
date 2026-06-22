@@ -2,35 +2,27 @@
 @using System.Security.Claims
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.ProductsByCategory> L
-
+@inherits ProjectComponentBase
 
 <HeadContent>
 	<!-- Page Title -->
 	<PageTitle>
-		@(category != null ? 
-																System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
-																? category.Name_de
-																: category.Name_ar
-																: L["OnOffer"])
+		@(category != null ? !IsArabic ? category.Name_de : category.Name_ar : L["OnOffer"])
 	</PageTitle>
 
 	<!-- Meta Description -->
 	<meta name="description" content="@(category != null 
-      ? System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
-                      ? $"Entdecken Sie unsere Kategorie {category.Name_de}: hochwertige arabische Lebensmittel online kaufen."
-                      : $"اكتشف فئة {category.Name_ar}: أفضل المنتجات العربية والسورية للشراء عبر الإنترنت."
+      ? !IsArabic ? $"Entdecken Sie unsere Kategorie {category.Name_de}: hochwertige arabische Lebensmittel online kaufen." : $"اكتشف فئة {category.Name_ar}: أفضل المنتجات العربية والسورية للشراء عبر الإنترنت."
 	  :L["OnOffer"])" />
 
 
 	<!-- Meta Keywords -->
 	<meta name="keywords" content="@(category != null 
-        ?System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "de"
-                      ?  $"{category.Name_de}, arabische Lebensmittel, syrische Produkte"
-                      :  $"{category.Name_ar}, مواد غذائية, منتجات سورية, تسوق أونلاين"
+        ?!IsArabic ?  $"{category.Name_de}, arabische Lebensmittel, syrische Produkte" :  $"{category.Name_ar}, مواد غذائية, منتجات سورية, تسوق أونلاين"
 	    : L["OnOffer"])" />
 </HeadContent>
 <div class="mainDiv">
-	@if (IsMainLoading)
+	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
 	{
 		<WAHShopForntend.Components.Layout.Loading />
 	}
@@ -39,10 +31,7 @@
 		<h3 class="@(CategoryId == -1 ? "text-danger" : "text-dark")">
 			<strong>
 				@(CategoryId != -1
-																							? System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-																							? category?.Name_ar ?? ""
-																							: category?.Name_de ?? ""
-																							: L["OnOffer"])
+											? IsArabic? category?.Name_ar ?? "": category?.Name_de ?? "": L["OnOffer"])
 			</strong>
 		</h3>
 		<div class="productItems">
@@ -84,7 +73,6 @@
 
 @code {
 	[Parameter] public int CategoryId { get; set; }
-	private bool IsMainLoading = false;
 	private List<Product> products = new();
 	private Categories category = new();
 	private List<int>? excludeProductsIds = new();
@@ -92,14 +80,16 @@
 	private GetItems<Product> getItems = new();
 	protected override async Task OnParametersSetAsync()
 	{
-		IsMainLoading = true;
 		getItems = new() { PageSize = 6, Includes = ProductIncludes.ProductImages | ProductIncludes.Category };
 		excludeProductsIds = new();
 		products.Clear();
 		category = categoryService.GetCategoryByIdLocal(CategoryId) ?? await categoryService.GetCategoryByIdAsync(CategoryId);
 		await MoreProductsload(false);
 
-		IsMainLoading = false;
+		// afterRender und Initialized true, weil wir nutzen die Funktionen hier nicht
+		IsRendered.AfterRender = true;
+		IsRendered.ParametersSet = true;
+		IsRendered.Initialized = true;
 	}
 
 	// OnMoreLoad

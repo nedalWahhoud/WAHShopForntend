@@ -2,15 +2,16 @@
 @using System.Security.Claims
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Orders> L
+@inherits ProjectComponentBase
 
-
-
-@if (IsRendered)
-{
-
-    bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
-    var culture = new System.Globalization.CultureInfo("de-DE");
-    <div class="mainDiv">
+<div class="mainDiv">
+    @if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
+    {
+        <WAHShopForntend.Components.Layout.Loading />
+    }
+    else
+    {
+        var culture = new System.Globalization.CultureInfo("de-DE");
         <h3>@L["MyOrders"]</h3>
         @if (@orderService.DownloadedOrders.Count <= 0)
         {
@@ -33,15 +34,16 @@
                                 {
 
                                     <InputSelect id="status" Value="@order.StatusId"
-                                    ValueChanged="@((int val) => OnStatusChangedItem(order, val.ToString()))"
-                                    ValueExpression="() => order.StatusId"
-                                    class="form-select"
-                                    @onblur="() => OnDropdownBlur(order)"
-                                    disabled="@order.IsUpdatingStatus">
+                                                 ValueChanged="@((int val) => OnStatusChangedItem(order, val.ToString()))"
+                                                 ValueExpression="() => order.StatusId"
+                                                 class="form-select"
+                                                 @onblur="() => OnDropdownBlur(order)"
+                                                 disabled="@order.IsUpdatingStatus">
                                         @foreach (var status in PossibleStatuses)
                                         {
                                             <option value="@status.Id">
-                                                @(isArabic ? status.StatusPresent_ar : status.StatusPresent_de)</option>
+                                                @(IsArabic ? status.StatusPresent_ar : status.StatusPresent_de)
+                                            </option>
                                         }
                                     </InputSelect>
 
@@ -55,15 +57,16 @@
                                 else
                                 {
                                     <span class="status">
-                                        @(isArabic ? order.Status?.Status_ar : order.Status?.Status_de ?? L["Unknown"])
+                                        @(IsArabic ? order.Status?.Status_ar : order.Status?.Status_de ?? L["Unknown"])
                                     </span>
                                 }
                             </div>
                         </div>
                         <p>
                             <span>
-                                <strong>@L["PaymentMethod"]:</strong> @(isArabic
-                            ? order.PaymentMethod?.Description_ar : order.PaymentMethod?.Description_de ?? "Keine Angabe")</span>
+                                <strong>@L["PaymentMethod"]:</strong> @(IsArabic
+                    ? order.PaymentMethod?.Description_ar : order.PaymentMethod?.Description_de ?? "Keine Angabe")
+                            </span>
                             @if (order.Address is not null)
                             {
                                 <span><strong>@L["DeliveryAddress"]:</strong> @order.Address.Street, @order.Address.ZipCode, @order.Address.City</span>
@@ -81,7 +84,8 @@
                                 </span>
                                 <span>
                                     <strong>
-                                        @L["MoneySaved"] @(isArabic ? order.DiscountCategory.Category.Name_ar : order.DiscountCategory.Category.Name_de ?? "Keine Angabe")</strong>
+                                        @L["MoneySaved"] @(IsArabic ? order.DiscountCategory.Category.Name_ar : order.DiscountCategory.Category.Name_de ?? "Keine Angabe")
+                                    </strong>
                                     @GetDiscountedValue(order).ToString("C", culture)
                                 </span>
                             }
@@ -108,7 +112,7 @@
                             @* Endkosten *@
                             @{
                                 double totalPrice = 0;
-                                if(order.ShippingProviderId != null && order.ShippingProviderId > 0)
+                                if (order.ShippingProviderId != null && order.ShippingProviderId > 0)
                                 {
                                     <span>
                                         <strong>@L["ShippingCost"]</strong>
@@ -137,10 +141,11 @@
                                         <img @onclick="() => OnProduct(item.ProductId)" src="@productImagesService.GetProductImageUrl(mainImage!)" loading="lazy" alt="@item.Product?.Name_de" />
                                         <div class="orderItemsDetails">
                                             <h4>
-                                                @(isArabic? item.Product?.Name_ar : @item.Product?.Name_de)
+                                                @(IsArabic ? item.Product?.Name_ar : @item.Product?.Name_de)
                                             </h4>
                                             <p>
-                                                @(isArabic ?item.Product?.Description_ar : item.Product?.Description_de)</p>
+                                                @(IsArabic ? item.Product?.Description_ar : item.Product?.Description_de)
+                                            </p>
                                             <p>
                                                 @L["Price"]: @item.UnitPrice.ToString("C", culture)
                                                 &nbsp; | &nbsp;
@@ -165,28 +170,30 @@
                     {
                         <span>@L["LoadMore"]</span>
                     }
-                    else 
+                    else
                     {
                         <span>@L["AllLoaded"]</span>
                     }
                 </button>
             </div>
         }
-    </div>
-}
+    }
+</div>
+
 @code {
-    private bool IsRendered = false;
     private int UserId = 0;
 
     protected override async Task OnInitializedAsync()
     {
-       
         UserId = (await authService.GetUser()).Id;
         // load orders
         if (UserId > 0)
             await orderService.GetOrdersAsync(UserId);
 
-        IsRendered = true;
+        // afterRender und Initialized true, weil wir nutzen die Funktionen hier nicht
+        IsRendered.AfterRender = true;
+        IsRendered.ParametersSet = true;
+        IsRendered.Initialized = true;
     }
 
     // more load

@@ -133,7 +133,7 @@ namespace WAHShopForntend.Components.CookieF
                 return false;
             }
         }
-        public async Task<string> GetLanguageCookiesync()
+        public async Task<string> GetLanguageCookiesync1()
         {
             try
             {

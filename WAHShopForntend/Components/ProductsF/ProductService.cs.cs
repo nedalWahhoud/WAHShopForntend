@@ -60,7 +60,7 @@ namespace WAHShopForntend.Components.ProductsF
         public async Task AddProductToLocal(List<Product> products)
         {
             // check if eingeloggen
-            int UserId = (await authService.GetUser()).Id;
+            int UserId = (await _authService.GetUser()).Id;
 
             foreach (var product in products)
             {
@@ -78,7 +78,7 @@ namespace WAHShopForntend.Components.ProductsF
         public async Task AddProductToLocal(Product product)
         {
             // check if eingeloggen
-            int UserId = (await authService.GetUser()).Id;
+            int UserId = (await _authService.GetUser()).Id;
 
             if (!DownloadedProduct.Any(p => p.Id == product.Id))
             {

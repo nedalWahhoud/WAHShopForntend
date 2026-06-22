@@ -1,4 +1,4 @@
-﻿@inject NavigationManager NavigationManager
+﻿@inject NavigationManager navigationManager
 <HeadContent>
     @* Open Graph-Tags zum Teilen*@
     <meta property="og:title" content="@Title" />
@@ -6,7 +6,7 @@
     <meta property="og:image" content="@ImageUrl" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="@NavigationManager.Uri" />
+    <meta property="og:url" content="@navigationManager.Uri" />
     <meta property="og:type" content="product" />
     @* Twitter-Karten-Tags *@
     <meta name="twitter:card" content="summary_large_image" />
@@ -34,7 +34,7 @@
         ImageUrl ??= "https://syriana-supermarkt.de/ProjectImages/SyrianaSupermarktLogoOhneText.png";
 
         var relativePath = ImageUrl;
-        var baseUri = NavigationManager.BaseUri.TrimEnd('/');  // https://localhost:7250 أو https://syriana-supermarkt.de
+        var baseUri = navigationManager.BaseUri.TrimEnd('/');  // https://localhost:7250 أو https://syriana-supermarkt.de
         var absoluteImageUrl = $"{baseUri}/{relativePath.TrimStart('/')}";
 
 		ImageUrl = absoluteImageUrl;

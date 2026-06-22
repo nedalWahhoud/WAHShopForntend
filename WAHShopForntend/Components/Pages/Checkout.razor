@@ -3,14 +3,14 @@
 @implements IDisposable
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Checkout> L
-
-@if (!IsLoaded)
-{
-
-}
-else
-{
-	<div class="mainDiv">
+@inherits ProjectComponentBase
+<div class="mainDiv">
+	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
+	{
+		<WAHShopForntend.Components.Layout.Loading />
+	}
+	else
+	{
 		<div class="mainContainer">
 			@if (cartService.CartItems.Count == 0 || orderStatusEnum == CheckoutOrderEnum.Processing)
 			{
@@ -68,12 +68,12 @@ else
 								@for (int i = 0; i < orderService.DownloadedPaymentMethods.Count; i++)
 								{
 									if (orderService.DownloadedPaymentMethods[i].Id == 1 || orderService.DownloadedPaymentMethods[i].Id == 2 ||
-							orderService.DownloadedPaymentMethods[i].Id == 5)
+									orderService.DownloadedPaymentMethods[i].Id == 5)
 									{
 										var paymentMethod = orderService.DownloadedPaymentMethods[i];
 										<label>
 											<InputRadio Value="@paymentMethod.Id" />
-											@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? paymentMethod.Description_ar : paymentMethod.Description_de)
+											@(IsArabic ? paymentMethod.Description_ar : paymentMethod.Description_de)
 										</label>
 									}
 								}
@@ -152,7 +152,7 @@ else
 									{
 										<label>
 											<InputRadio Value="@item.Id" />
-											@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? item.Name_ar : item.Name_de)
+											@(IsArabic ? item.Name_ar : item.Name_de)
 										</label>
 									}
 								}
@@ -298,8 +298,9 @@ else
 			else
 				updateAddress = address;
 		}
-	</div>
-}
+	}
+</div>
+
 @code {
 	private string MessageWarning = null!;
 	private bool agbAkzeptiert = false;
@@ -330,8 +331,10 @@ else
 		await orderService.GetPaymentMethodsAsync();
 		// set default order status
 		orderStatusEnum = CheckoutOrderEnum.Pending;
+		// afterRender und ParameterSet true, weil wir nutzen die Funktionen hier nicht
+		IsRendered.ParametersSet = true;
+		IsRendered.Initialized = true;
 	}
-	private bool IsLoaded = false;
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		if (firstRender)
@@ -343,12 +346,12 @@ else
 				return;
 			}
 
-			IsLoaded = true;
 			// address default
 			if (addressService.DownloadedAddresses.Count > 0)
 			{
 				selectedAddressId = addressService.DownloadedAddresses[0].Id;
 			}
+			IsRendered.AfterRender = true;
 			StateHasChanged();
 		}
 	}

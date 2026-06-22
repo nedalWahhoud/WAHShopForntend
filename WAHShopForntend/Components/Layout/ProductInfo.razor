@@ -1,11 +1,10 @@
-﻿@if (product != null)
+﻿@inherits ProjectComponentBase
+@if (product != null)
 {
     <img @onclick="() => OnProduct(product.Id)" src="@productImagesService.GetProductImageUrl(product.ProductImages.FirstOrDefault(i => i.IsMain)!)" loading="lazy" alt="@product.Name_de" />
     <div @onclick="() => OnProduct(product.Id)" class="textCard">
         <a>
-            @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                 ? product.Name_ar
-                 : product.Name_de)
+            @(IsArabic ? product.Name_ar : product.Name_de)
         </a>
         <PriceLayout ProductId="ProductId" />
 

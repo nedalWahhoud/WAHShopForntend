@@ -1,20 +1,18 @@
-﻿@using System.IdentityModel.Tokens.Jwt;
+﻿@page "/customerDashboard"
+@using System.IdentityModel.Tokens.Jwt;
 @using System.Security.Claims;
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.CustomerDashboard> L
-@page "/customerDashboard"
+@inherits ProjectComponentBase
 
-
-@if (IsLoading)
+<div class="mainDiv">
+@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
 {
-	<div class="w-100 card-body text-center text-info">
-		Lädt...
-	</div>
+	<WAHShopForntend.Components.Layout.Loading />
 }
 else
 {
-
-	<div class="mainDiv">
+	
 		<div class="page-header mb-4">
 			<h1 class="customer-title">
 				<span class="text-muted fw-light">@L["AccountOf"]</span>
@@ -99,8 +97,8 @@ else
 				</p>
 			</div>
 		</div>
-	</div>
 }
+</div>
 
 @code {
 
@@ -111,11 +109,8 @@ else
 	private bool IsProcessing = false;
 	private Customers customer = new();
 	private DebtCustomers debtCustomers = null!;
-	private bool IsLoading = false;
 	protected override async Task OnInitializedAsync()
 	{
-		IsLoading = true;
-
 		// wenn über url message token
 		if (string.IsNullOrEmpty(token))
 		{
@@ -150,7 +145,12 @@ else
 		// initialize TransactionsCustomers list
 		transactionsCustomersService.GetItems = new GetItems<TransactionsCustomers> { Filter = new(){ Id = customerIdFromToken.Value,Type = GetItemFilterType.Custom }, PageSize = 10, };
         await OnMoreLoadTransactionsCustomers();
-		IsLoading = false;
+		
+
+		// afterRender und ParameterSet true, weil wir nutzen die Funktionen hier nicht
+		IsRendered.AfterRender = true;
+		IsRendered.ParametersSet = true;
+		IsRendered.Initialized = true;
     }
 
     private async Task OnMoreLoadTransactionsCustomers()

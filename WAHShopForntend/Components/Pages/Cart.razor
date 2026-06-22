@@ -1,16 +1,15 @@
 ﻿@page "/cart"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Cart> L
+@inherits ProjectComponentBase
+<div class="mainDiv">
+	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
+	{
+		<WAHShopForntend.Components.Layout.Loading />
+	}
+	else
+	{
 
-@if (!IsLoaded)
-{
-	<div class="lodingContainer">
-		<p>@L["Loading"]</p>
-	</div>
-}
-else
-{
-	<div class="mainDiv">
 		@if (cartService.CartItems.Count == 0)
 		{
 			<div class="emptyCart">
@@ -32,14 +31,10 @@ else
 								<img @onclick="() => OnProduct(item.ProductId)" width="160" height="160" src="@productImagesService.GetProductImageUrl(item.Product.ProductImages.FirstOrDefault(i => i.IsMain)!)" alt="@item.Product.Name_de" />
 								<div class="cartItemDetails">
 									<h4>
-										@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-																	? item.Product.Name_ar
-																	: item.Product.Name_de)
+										@(IsArabic ? item.Product.Name_ar : item.Product.Name_de)
 									</h4>
 									<p>
-										@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-																	? item.Product.Description_ar
-																	: item.Product.Description_de)
+										@(IsArabic ? item.Product.Description_ar : item.Product.Description_de)
 									</p>
 									<div class="PriceDiv">@L["PriceLabel"] <WAHShopForntend.Components.Layout.PriceLayout ProductId="@item.ProductId" />&nbsp;&nbsp;&nbsp;@L["TotalLabel"]<span style="font-weight:bold; ">&nbsp;@(cartService.GetTotalPriceOfProduct(item.ProductId).ToString("C", new System.Globalization.CultureInfo("de-DE")))</span> </div>
 									<div class="quantityInput">
@@ -64,10 +59,11 @@ else
 				</div>
 			</div>
 		}
-	</div>
-}
+	}
+</div>
+
 @code {
-	private bool IsLoaded = false;
+
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		if (firstRender)
@@ -75,11 +71,13 @@ else
 			var result = await cartService.LoadCartProductsAsync();
 			if (!result.Result)
 			{
-				_ = JS.InvokeVoidAsync("alert", result.Message);
-				return;
+				Console.WriteLine(result.Message);
 			}
 
-			IsLoaded = true;
+			// Initialized und ParameterSet true, weil wir nutzen die Funktionen hier nicht
+			IsRendered.AfterRender = true;
+			IsRendered.ParametersSet = true;
+			IsRendered.Initialized = true;
 			StateHasChanged();
 		}
 	}

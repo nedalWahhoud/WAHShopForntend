@@ -1,89 +1,84 @@
 ﻿@page "/webshop"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Index> L
-@inherits LayoutComponentBase
+@inherits ProjectComponentBase
 @using System.Globalization;
 @implements IDisposable
 
+<div class="mainDiv">
 <HeadContent>
     <!-- Page Title -->
     <PageTitle>
-        @(isArabic ? ProjectInfo.Value.NameArabic : ProjectInfo.Value.Name)
+        @(IsArabic ? ProjectInfo.Value.NameArabic : ProjectInfo.Value.Name)
     </PageTitle>
 
     <!-- Meta Description -->
-    <meta name="description" content="@(!isArabic
+    <meta name="description" content="@(!IsArabic
         ? "Entdecken Sie die besten arabischen Produkte online: Lebensmittel, Süßigkeiten, Gewürze und Getränke mit schneller Lieferung."
         : "اكتشف أفضل المنتجات العربية والسورية عبر الإنترنت: مواد غذائية، حلويات، توابل ومشروبات مع توصيل سريع.")" />
 
     <!-- Meta Keywords -->
-    <meta name="keywords" content="@(!isArabic
+    <meta name="keywords" content="@(!IsArabic
         ? "arabisches Laden, arabische Lebensmittel, syrische Produkte, Lebensmittel online"
         : "متجر عربي, مواد غذائية, حلويات, توابل, متجر سوري, تسوق أونلاين")" />
 
 </HeadContent>
-@if (IsLoading)
-{
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
-        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <h5 class="mt-3 text-muted fw-light">@L["Loading"]</h5>
-    </div>
-    return;
-}
-
-@* carsousel images *@
-<div class="mainDiv">
-    @if (carouselImagesService.DownloadedCarouselImage.Count > 0)
+    @if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
     {
-        @if (!IsCarouselFullscreen)
-        {
-            <WAHShopForntend.Components.Layout.CarouselLayout OnHandel="HandleCarouselFullScreen" />
-        }
-        else if (IsCarouselFullscreen)
-        {
-            <WAHShopForntend.Components.Layout.FullscreenCarousel OnHandel="HandleCarouselFullScreen" />
-        }
+        <WAHShopForntend.Components.Layout.Loading /> 
     }
-    @* Category Abschnitte *@
-    <div class="divCategory">
-        @foreach (var categoryGroup in mainProductByCategory)
-        {
-            // category
-            var category = categoryGroup.Category;
-            <WAHShopForntend.Components.Layout.CategoryLinkIndex category="category" />
-            <div class="mainProductsCard">
-                @foreach (var product in categoryGroup.Products)
+    else
+    {
+        @* carsousel images *@
+            @if (carouselImagesService.DownloadedCarouselImage.Count > 0)
+            {
+                @if (!IsCarouselFullscreen)
                 {
-                    // product
-                    <div class="productsCard" @key="product.Id">
-                        <WAHShopForntend.Components.Layout.TopProductsCard product="@product" />
-                        <WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
-                        <WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+                    <WAHShopForntend.Components.Layout.CarouselLayout OnHandel="HandleCarouselFullScreen" />
+                }
+                else if (IsCarouselFullscreen)
+                {
+                    <WAHShopForntend.Components.Layout.FullscreenCarousel OnHandel="HandleCarouselFullScreen" />
+                }
+            }
+            @* Category Abschnitte *@
+            <div class="divCategory">
+                @foreach (var categoryGroup in mainProductByCategory)
+                {
+                    // category
+                    var category = categoryGroup.Category;
+                    <WAHShopForntend.Components.Layout.CategoryLinkIndex category="category" />
+                    <div class="mainProductsCard">
+                        @foreach (var product in categoryGroup.Products)
+                        {
+                        // product
+                            <div class="productsCard" @key="product.Id">
+                                <WAHShopForntend.Components.Layout.TopProductsCard product="@product" />
+                                <WAHShopForntend.Components.Layout.ProductInfo ProductId="@product.Id" />
+                                <WAHShopForntend.Components.Layout.AddDecresaseCard ProductId="@product.Id" />
+                            </div>
+                        }
                     </div>
                 }
             </div>
-        }
-    </div>
+    }
 </div>
+
 @code{
     private GetItems<Product> getItems = new();
     private List<ProductByCategory> mainProductByCategory = new();
-    private bool IsLoading = false;
     // to exclude categories already loaded in the main product list
     private List<int> excludeCategoriesIds = new();
     private List<Categories> allCategories = new();
-    private bool isArabic = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
     private readonly Random random = new();
     private User user = new User();
+    protected async override Task OnInitializedAsync()
+    {
+        user = await authService.GetUser();
+        IsRendered.Initialized = true;
+    }
     protected override async Task OnParametersSetAsync()
     {
-        IsLoading = true;
-
-        user = await authService.GetUser();
-             
-
         getItems = new() { PageSize = 6, Includes = ProductIncludes.ProductImages | ProductIncludes.Category };
 
         // get carousel images
@@ -99,7 +94,7 @@
         // Diese Kategorien beim nächsten Ladevorgang ausschließen
         excludeCategoriesIds.AddRange(categories.Select(s => s.Id));
 
-        IsLoading = false;
+        IsRendered.ParametersSet = true;
     }
     private DotNetObjectReference<Index>? objRef;
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -122,7 +117,9 @@
             {
                 Console.WriteLine(ex.Message);
             }
+
         }
+            IsRendered.AfterRender = true;
     }
     // recommended
     public async Task LoadProductsRecommended(List<Categories> categories)
@@ -167,8 +164,8 @@
         Categories categoryRecommended = new Categories()
             {
                 Id = 0,
-                Name_de = !isArabic ? L["RecommendedForYou"] : string.Empty,
-                Name_ar = isArabic ? L["RecommendedForYou"] : string.Empty
+                Name_de = !IsArabic ? L["RecommendedForYou"] : string.Empty,
+                Name_ar = IsArabic ? L["RecommendedForYou"] : string.Empty
 
             };
         if (Recommended.Products.Count == 0)

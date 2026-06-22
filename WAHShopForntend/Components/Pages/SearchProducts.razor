@@ -2,19 +2,19 @@
 @page "/searchProducts/{productId:int}/{searchText}"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.SearchProducts> L
-@if (Isloading)
-{
-	<div class="lodingContainer">
-		<p>wird geladen... </p>
-	</div>
-}
-else
-{
-	<div class="mainDiv">
+@inherits ProjectComponentBase
+
+<div class="mainDiv">
+	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
+	{
+		<WAHShopForntend.Components.Layout.Loading />
+	}
+	else
+	{
 		@if (searchedProducts.Count > 0)
 		{
 			<div class="productItems">
-				@for (int i = 0; i < searchedProducts.Count;i++)
+				@for (int i = 0; i < searchedProducts.Count; i++)
 				{
 					var product = searchedProducts[i];
 					<div class="cardProduct">
@@ -29,20 +29,18 @@ else
 		{
 			<p>@L["ProductNotFound"]</p>
 		}
-	</div>
-}
+	}
+</div>
+
 @code {
 	[Parameter]
 	public int productId { get; set; }
 	[Parameter]
 	public string? searchText { get; set; } = string.Empty;	
-
 	private List<Product> searchedProducts = new();
-	private bool Isloading = true;
 
 	protected override async Task OnParametersSetAsync()
 	{
-		Isloading = true;
 		searchedProducts = new();
 		// get on clicked item
 		var product = productService.GetProductByIdLocal(productId)
@@ -78,7 +76,11 @@ else
 		
 			searchedProducts.InsertRange(searchedProducts.Count,searchedResults);
 		}
-		Isloading = false;
+		
+		// afterRender und Initialized true, weil wir nutzen die Funktionen hier nicht
+		IsRendered.AfterRender = true;
+		IsRendered.ParametersSet = true;
+		IsRendered.Initialized = true;
 	}
 	// On Product Click
 	private void OnProduct(int ProductId)

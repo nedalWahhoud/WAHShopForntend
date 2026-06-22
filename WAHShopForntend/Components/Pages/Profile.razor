@@ -3,16 +3,14 @@
 @using System.Security.Claims;
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Profile> L
-
-@if (!IsRending)
-{
-    <div class="lodingContainer">
-        <p>@L["Loading"]</p>
-    </div>
-}
-else
-{
-    <div class="mainDiv">
+@inherits ProjectComponentBase
+<div class="mainDiv">
+    @if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
+    {
+        <WAHShopForntend.Components.Layout.Loading />
+    }
+    else
+    {
         <AuthorizeView>
             <Authorized Context="authContext">
                 <div class="profileCard">
@@ -25,10 +23,12 @@ else
                             <strong>@L["Email"]: @authContext.User.FindFirst(ClaimTypes.Email)?.Value</strong>
                         </p>
                         <p>
-                            <strong>@L["BirthDate"]: @(authContext.User.FindFirst(ClaimTypes.DateOfBirth)?.Value == "0" 
-                                ? "--- ---" 
-                                : authContext.User.FindFirst(ClaimTypes.DateOfBirth)?.Value 
-                                ?? "--- ---")</strong>
+                            <strong>
+                                @L["BirthDate"]: @(authContext.User.FindFirst(ClaimTypes.DateOfBirth)?.Value == "0"
+                            ? "--- ---"
+                            : authContext.User.FindFirst(ClaimTypes.DateOfBirth)?.Value
+                            ?? "--- ---")
+                            </strong>
                         </p>
                         <p>
                             <strong>@L["Password"]: </strong>
@@ -80,7 +80,7 @@ else
                             <button class="btn btnProfile" @onclick="() => isEditing = true">@L["EditProfile"]</button>
                         }
 
-                        @if(IsDeleteing)
+                        @if (IsDeleteing)
                         {
                             <div class="deleteConfirm">
                                 <EditForm Model="@updateProfile" OnValidSubmit="@DeleteConfirmed">
@@ -108,23 +108,20 @@ else
                         {
                             <button class="btn btn-danger" @onclick="DeleteAccount">@L["AccountDeleteB"]</button>
                         }
-
                     </div>
                 </div>
             </Authorized>
         </AuthorizeView>
-    </div>
-}
+    }
+</div>
+
 @code {
 
-    private bool IsRending = false;
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnParametersSetAsync()
     {
         //
         User user = await authService.GetUser();
-     
-            updateProfile.UserId = user.Id; // Assuming UserId is int
-        
+        updateProfile.UserId = user.Id; // Assuming UserId is int
 
         string SignupProvider = user.SignupProvider;
         if (SignupProvider == "Google")
@@ -136,12 +133,12 @@ else
             updateProfile.IsProviderLogin = false;
         }
 
-        if (firstRender)
-        {
-            IsRending = true;
-            StateHasChanged();
-        }
+        // afterRender und Initialized true, weil wir nutzen die Funktionen hier nicht
+        IsRendered.AfterRender = true;
+        IsRendered.ParametersSet = true;
+        IsRendered.Initialized = true;
     }
+    
     private UpdateProfile updateProfile = new UpdateProfile();
     private bool isEditing = false;
     private bool IsLoading = false;
