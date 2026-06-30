@@ -7,7 +7,11 @@
         <p>@((MarkupString)model.Text)</p>
         @if (!string.IsNullOrEmpty(model.ButtonLink))
         {
-            <a class="cardBtn" style="--btn-bg-color: @model.ButtonColor; --btn-text-color: @model.ButtonTextColor; --btn-hover-bg-color: @model.ButtonHoverColor;" href="@model.ButtonLink">@model.ButtonText</a>
+            var btnStyle = $"--btn-bg-color: {model.ButtonColor}; --btn-text-color: {model.ButtonTextColor}; --btn-hover-bg-color: {model.ButtonHoverColor};";
+
+            <a class="cardBtn" style="@btnStyle" @onclick="() => OnHref(model.ButtonLink,model.Id)">
+                @model.ButtonText
+            </a>
         }
     </div>
 </div>
@@ -29,6 +33,26 @@
             }
         }
     }
+
+    private async Task OnHref(string link, int Id)
+    {
+        string categoryName = string.Empty;
+        string slug = string.Empty;
+        if (Id > 0)
+        {
+            var category = categoryService.GetCategoryByIdLocal(Id) ?? await categoryService.GetCategoryByIdAsync(Id);
+            if (category != null)
+            {
+                categoryName = IsArabic ? category.Name_ar! : category.Name_de!;
+                slug = GenerateSlug(categoryName!);
+
+                link = $"{link}/{slug}/{Id}";
+            }
+        }
+
+        navigationManager.NavigateTo(link);
+    }
+
     public class FeatureSectionModel
     {
         public string Title { get; set; } = string.Empty;
@@ -36,8 +60,9 @@
         public string Text { get; set; } = string.Empty;
         public int ImgOrder { get; set; } = 1;
         public int TextOrder { get; set; } = 2;
-		public string TextH1Color { get; set; } = string.Empty;
+        public string TextH1Color { get; set; } = string.Empty;
         public string ButtonLink { get; set; } = string.Empty;
+        public int Id = 0;
         public string ButtonText { get; set; } = string.Empty;
 		public string ButtonColor { get; set; } = string.Empty;
 		public string ButtonTextColor { get; set; } = string.Empty;

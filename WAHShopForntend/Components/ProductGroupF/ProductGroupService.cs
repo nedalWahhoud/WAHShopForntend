@@ -1,5 +1,4 @@
 ﻿using WAHShopForntend.Components.Models;
-using static System.Net.WebRequestMethods;
 
 namespace WAHShopForntend.Components.ProductGroupF
 {

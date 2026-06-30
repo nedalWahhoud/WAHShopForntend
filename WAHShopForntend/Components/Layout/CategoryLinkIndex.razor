@@ -1,13 +1,38 @@
 ﻿@inherits ProjectComponentBase
 <div class="category" @key="category.Id">
-    <a href="@(category.Id != 0 ? $"/ProductsByCategory/{category.Id}" : "javascript:void(0)")"
-       class="categoryLinkIndex @(category.Id == -1 ? " text-danger" : (category.Id != 0 ? "" : "pe-none"))">
+    <a @onclick="() => OnHref()"
+    class="categoryLinkIndex @(category.Id == -1 ? " text-danger" : (category.Id != 0 ? "" : "pe-none"))">
         <i class="bi bi-grid-fill"></i>
         <span>@(IsArabic ? category.Name_ar : category.Name_de)</span>
     </a>
 </div>
 
 @code {
-	[Parameter]
-	public Categories category { get; set; } = new ();
+    [Parameter]
+    public Categories category { get; set; } = new ();
+
+
+    private void OnHref()
+    {
+        if (category.Id != 0)
+        {
+            string categoryName = string.Empty;
+            string slug = string.Empty;
+            string link = "/ProductsByCategory";
+            if (category != null)
+            {
+                categoryName = IsArabic ? category.Name_ar! : category.Name_de!;
+                slug = GenerateSlug(categoryName!);
+
+                link = $"{link}/{slug}/{category.Id}";
+            }
+
+            navigationManager.NavigateTo(link);
+        }
+        else
+        {
+
+        }
+    }
+
 }

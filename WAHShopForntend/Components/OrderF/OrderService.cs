@@ -1,8 +1,6 @@
-﻿using WAHShopForntend.Components.Cart;
-using WAHShopForntend.Components.CategoriesF;
+﻿using WAHShopForntend.Components.CategoriesF;
 using WAHShopForntend.Components.Models;
 using WAHShopForntend.Components.ProductsF;
-using static System.Net.WebRequestMethods;
 namespace WAHShopForntend.Components.OrderF
 {
     public class OrderService(HttpClient http, ProductService productService, CategoryService categoryService)

@@ -1,8 +1,8 @@
-﻿@page "/ProductsByCategory/{CategoryId:int}"
+﻿@page "/ProductsByCategory/{CategorySlug}/{CategoryId:int}"
+@page "/ProductsByCategory/{CategoryId:int}"
 @using System.Security.Claims
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.ProductsByCategory> L
-@inherits ProjectComponentBase
 
 <HeadContent>
 	<!-- Page Title -->
@@ -30,8 +30,7 @@
 	{
 		<h3 class="@(CategoryId == -1 ? "text-danger" : "text-dark")">
 			<strong>
-				@(CategoryId != -1
-											? IsArabic? category?.Name_ar ?? "": category?.Name_de ?? "": L["OnOffer"])
+				@(CategoryId != -1 ? IsArabic? category?.Name_ar ?? "": category?.Name_de ?? "": L["OnOffer"])
 			</strong>
 		</h3>
 		<div class="productItems">
@@ -73,6 +72,9 @@
 
 @code {
 	[Parameter] public int CategoryId { get; set; }
+	[Parameter]
+	public string? CategorySlug { get; set; }
+
 	private List<Product> products = new();
 	private Categories category = new();
 	private List<int>? excludeProductsIds = new();
@@ -80,6 +82,7 @@
 	private GetItems<Product> getItems = new();
 	protected override async Task OnParametersSetAsync()
 	{
+		IsRendered.ParametersSet = false;
 		getItems = new() { PageSize = 6, Includes = ProductIncludes.ProductImages | ProductIncludes.Category };
 		excludeProductsIds = new();
 		products.Clear();
@@ -142,11 +145,7 @@
 		}
 		IsProcessing = false;
 	}
-	// On Product Click
-	private void OnProduct(int ProductId)
-	{
-		navigationManager.NavigateTo($"/ProductPage/{ProductId}");
-	}
+	
 
 
 }

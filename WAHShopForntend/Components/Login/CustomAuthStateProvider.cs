@@ -2,7 +2,6 @@
 using Microsoft.JSInterop;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using WAHShopForntend.Components.Models;
 
 namespace WAHShopForntend.Components.Login
 {

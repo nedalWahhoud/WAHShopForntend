@@ -26,7 +26,7 @@
                             {
                                 var category = foodstuffsArray[j];
 
-                                <li @onclick="() => OnCategory(category.Id)"
+                                <li @onclick="() => OnCategory(category)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
                                     @(IsArabic ? category.Name_ar : category.Name_de)
                                 </li>
@@ -57,7 +57,7 @@
                             @for (int j = i; j < i + 5 && j < drinksArray.Count; j++)
                             {
                                 var category = drinksArray[j];
-                                <li @onclick="() => OnCategory(category.Id)"
+                                <li @onclick="() => OnCategory(category)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
                                     @(IsArabic ? category.Name_ar : category.Name_de)
                                 </li>
@@ -88,7 +88,7 @@
                             @for (int j = i; j < i + 5 && j < SweetsSnacksArray.Count; j++)
                             {
                                 var category = SweetsSnacksArray[j];
-                                <li @onclick="() => OnCategory(category.Id)"
+                                <li @onclick="() => OnCategory(category)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
                                     @(IsArabic ? category.Name_ar : category.Name_de)
                                 </li>
@@ -118,7 +118,7 @@
                             @for (int j = i; j < i + 5 && j < Mates.Count; j++)
                             {
                                 var category = Mates[j];
-                                <li @onclick="() => OnCategory(category.Id)"
+                                <li @onclick="() => OnCategory(category)"
                                     class="categoryLink @(category.Id == currentCategoryId ? "selected" : "")">
                                     @(IsArabic ? category.Name_ar : category.Name_de)
                                 </li>
@@ -139,7 +139,7 @@
         }
         else if (householdCategory != null)
         {
-            <a @onclick="() => OnCategory(householdCategory.Id)"
+            <a @onclick="() => OnCategory(householdCategory)"
                class="categoryLink @(householdCategory.Id == currentCategoryId ? "selected" : "")">
                 @(IsArabic ? householdCategory.Name_ar : householdCategory.Name_de)
             </a>
@@ -152,7 +152,7 @@
         }
         else if(DatesCategory != null)
         {
-            <a @onclick="() => OnCategory(DatesCategory.Id)"
+            <a @onclick="() => OnCategory(DatesCategory)"
                class="categoryLink @(DatesCategory.Id == currentCategoryId ? "selected" : "")">
                 @(IsArabic ? DatesCategory.Name_ar : DatesCategory.Name_de)
             </a>
@@ -165,14 +165,14 @@
         }
         else if(otherCategory != null)
         {
-            <a @onclick="() => OnCategory(otherCategory.Id)"
+            <a @onclick="() => OnCategory(otherCategory)"
                class="categoryLink @(otherCategory.Id == currentCategoryId ? "selected" : "")">
                 @(IsArabic ? otherCategory.Name_ar : otherCategory.Name_de)
             </a>
         }
     }
     @* Im Angebot *@
-    <a @onclick="() => OnCategory(-1)"
+    <a @onclick='() => OnCategory(new() { Id = -1, Name_ar = "العروض" ,Name_de="Im Angebot"})'
        class="categoryLinkOnOffer @(currentCategoryId == -1 ? "selected" : "")">
         @L["OnOffer"]
     </a>
@@ -231,9 +231,12 @@
         StateHasChanged(); 
     }
   
-    private void OnCategory(int categoryId)
+    private void OnCategory(Categories category)
     {
-        navigationManager.NavigateTo($"/ProductsByCategory/{categoryId.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+        var categoryName = IsArabic ? category.Name_ar : category.Name_de;
+        var slug = GenerateSlug(categoryName!);
+
+        navigationManager.NavigateTo($"/ProductsByCategory/{slug}/{category.Id}");
     }
     // 
     private List<Categories> GetFoodstuffs()

@@ -1,14 +1,22 @@
 ﻿@inject IStringLocalizer<WAHShopForntend.Components.Layout.HeroSection> L
 <div class="heroSection">
     <h1 class="heroSectionH1">@L["HeroTitle"]</h1>
+    <img src="/ProjectImages/HeroSection.png" style="display:none;" @onload="OnImageLoaded" />
 </div>
 
 @code {
+
+    [Parameter] public EventCallback OnImageLoadedCallback { get; set; }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await JS.InvokeVoidAsync("initScrollObserver", ".heroSectionH1");
         }
+    }
+
+    private async Task OnImageLoaded()
+    {
+        await OnImageLoadedCallback.InvokeAsync();
     }
 }

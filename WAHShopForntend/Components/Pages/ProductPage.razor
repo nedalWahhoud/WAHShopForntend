@@ -1,8 +1,9 @@
-﻿@page "/ProductPage/{ProductId:int}"
+﻿@page "/ProductPage/{ProductSlug}/{ProductId:int}"
+@page "/ProductPage/{ProductId:int}"
+
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.ProductPage> L
 @implements IDisposable
-@inherits ProjectComponentBase
 <div class="mainDiv">
 	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
 	{
@@ -73,8 +74,8 @@
 					{
 						<div loading="lazy" class="modalOverlay" @onclick="CloseImage">
 							<img class="modalImage"
-								 src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())"
-								 alt="Image of Product"
+							src="@productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? new())"
+							alt="Image of Product"
 							@onclick:stopPropagation />
 						</div>
 					}
@@ -144,6 +145,9 @@
 @code {
 	[Parameter]
 	public int ProductId { get; set; }
+	[Parameter]
+	public string? ProductSlug { get; set; }
+
 	private Product? product;
 	private List<Product>? groupProducts = new ();
 	// to exclude categories already loaded in the main product list
@@ -158,10 +162,10 @@
 	private GetItems<Product> getItems = new() { PageSize = 5, Includes = ProductIncludes.ProductImages | ProductIncludes.Category };
 
 	protected async override Task OnInitializedAsync()
-    {
+	{
 		user = await authService.GetUser();
-        IsRendered.Initialized = true;
-    }
+		IsRendered.Initialized = true;
+	}
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -184,6 +188,10 @@
 			// get group products if exists
 			if (product != null && product.ProductGroupID.HasValue && product.ProductGroupID.Value > 0)
 			{
+				if (product.ProductGroup == null)
+				{
+					product.ProductGroup = await productGroupService.GetGroupProductByIdAsync(product.ProductGroupID.Value);
+				}
 				await LoadGroupProducts(product.ProductGroupID.Value);
 			}
 		}
@@ -323,11 +331,6 @@
 
 	void OpenImage() => ShowFullImage = true;
 	void CloseImage() => ShowFullImage = false;
-	// On Product Click
-	private void OnProduct(int ProductId)
-	{
-		navigationManager.NavigateTo($"/ProductPage/{ProductId}");
-	}
 	// groupProducts
 	private async Task LoadGroupProducts(int groupId)
 	{
@@ -393,8 +396,7 @@
 			{
 				// get recommended products
 				List<Categories> categories = await categoryService.GetRandomCategories(1, excludeCategoriesIds, random);
-				// Diese Kategorien beim nächsten Ladevorgang ausschließen
-				excludeCategoriesIds.AddRange(categories.Select(s => s.Id));
+				
 				// load random products
 				await LoadRandomProductsByCategory(categories);
 			}

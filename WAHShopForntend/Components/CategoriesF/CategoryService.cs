@@ -1,7 +1,4 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Globalization;
-using WAHShopForntend.Components.Login;
 using WAHShopForntend.Components.Models;
 using WAHShopForntend.Components.ProductsF;
 

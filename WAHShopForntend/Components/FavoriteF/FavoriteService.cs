@@ -2,7 +2,6 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using WAHShopForntend.Components.Models;
-using WAHShopForntend.Components.ProductsF;
 
 namespace WAHShopForntend.Components.FavoriteF
 {

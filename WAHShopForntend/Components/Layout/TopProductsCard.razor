@@ -21,7 +21,10 @@
 	
 	private async Task ShareProduct(Product product)
 	{
-		var productUrl = $"{navigationManager.BaseUri}ProductPage/{product.Id}";
+		var productName = IsArabic ? product.Name_ar : product.Name_de;
+        var slug = GenerateSlug(productName!);
+
+		var productUrl = $"{navigationManager.BaseUri}ProductPage/{slug}/{product.Id}";
 
 		await JS.InvokeVoidAsync("shareProduct", product.Name_de, productUrl);
 	}

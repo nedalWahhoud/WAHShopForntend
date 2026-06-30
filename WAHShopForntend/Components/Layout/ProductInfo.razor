@@ -24,6 +24,9 @@
     // On Product Click
     private void OnProduct(int ProductId)
     {
-        navigationManager.NavigateTo($"/ProductPage/{ProductId}");
+        var productName = IsArabic ? product.Name_ar : product.Name_de;
+        var slug = GenerateSlug(productName!);
+
+        navigationManager.NavigateTo($"/ProductPage/{slug}/{product.Id}");
     }
 }

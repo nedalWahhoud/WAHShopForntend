@@ -1,7 +1,6 @@
 ﻿@page "/webshop"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Index> L
-@inherits ProjectComponentBase
 @using System.Globalization;
 @implements IDisposable
 
@@ -11,7 +10,6 @@
     <PageTitle>
         @(IsArabic ? ProjectInfo.Value.NameArabic : ProjectInfo.Value.Name)
     </PageTitle>
-
     <!-- Meta Description -->
     <meta name="description" content="@(!IsArabic
         ? "Entdecken Sie die besten arabischen Produkte online: Lebensmittel, Süßigkeiten, Gewürze und Getränke mit schneller Lieferung."

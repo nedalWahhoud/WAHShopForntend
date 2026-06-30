@@ -1,5 +1,4 @@
-﻿using WAHShopForntend.Components.Cart;
-using WAHShopForntend.Components.FavoriteF;
+﻿using WAHShopForntend.Components.FavoriteF;
 using WAHShopForntend.Components.Login;
 using WAHShopForntend.Components.Models;
 

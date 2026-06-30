@@ -1,24 +1,23 @@
 ﻿@page "/"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Home> L
-@inherits ProjectComponentBase
 
 @* Description Cards *@
 <div class="FeatureSectionContainer">
-	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
+	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender || !IsImageLoaded)
 	{
 		<WAHShopForntend.Components.Layout.Loading />
 	}
-	else
-	{
+	
+		<div class="@(IsImageLoaded ? "" : "invisible-hero")">
 		@* Hero Section *@
-		<WAHShopForntend.Components.Layout.HeroSection />
+		<WAHShopForntend.Components.Layout.HeroSection OnImageLoadedCallback="HandleImageLoaded" />
 
 		@foreach (var item in FeatureSections)
 		{
 			<WAHShopForntend.Components.Layout.FeatureSection model="item" />
 		}
-	}
+		</div>
 </div>
 
 @code {
@@ -36,7 +35,8 @@
 			ImgOrder = 1,
 			TextOrder = 2,
 			TextH1Color = "#A07855",
-			ButtonLink = "/ProductsByCategory/9",
+			ButtonLink = "/ProductsByCategory",
+			Id = 9,
 			ButtonText =  L["DescriptionCardButton"],
 			ButtonColor = "#A07855",
 			ButtonTextColor = "#ffffff",
@@ -50,7 +50,8 @@
 			ImgOrder = 2,
 			TextOrder = 1,
 			TextH1Color = "#5D0000",
-			ButtonLink = "/ProductsByCategory/9",
+			ButtonLink = "/ProductsByCategory",
+			Id =36,
 			ButtonText =  L["DescriptionCardButton1"],
 			ButtonColor = "#8B0000",
 			ButtonTextColor = "#ffffff",
@@ -78,7 +79,8 @@
 			ImgOrder = 1,
 			TextOrder = 2,
 			TextH1Color = "#6F8E3A",
-			ButtonLink = "/ProductsByCategory/14",
+			ButtonLink = "/ProductsByCategory",
+			Id =14,
 			ButtonText =  L["DescriptionCardButton4"],
 			ButtonColor = "#5C742F",
 			ButtonTextColor = "#ffffff",
@@ -92,7 +94,8 @@
 			ImgOrder = 2,
 			TextOrder = 1,
 			TextH1Color = "#5E7D2C",
-			ButtonLink = "/ProductsByCategory/38",
+			ButtonLink = "/ProductsByCategory",
+			Id =38,
 			ButtonText =  L["DescriptionCardButton5"],
 			ButtonColor = "#8FAF45",
 			ButtonTextColor = "#ffffff",
@@ -106,7 +109,8 @@
 			ImgOrder = 1,
 			TextOrder = 2,
 			TextH1Color = "#A9151C",
-			ButtonLink = "/ProductsByCategory/33",
+			ButtonLink = "/ProductsByCategory",
+			Id =33,
 			ButtonText =  L["DescriptionCardButton6"],
 			ButtonColor = "#D62828",
 			ButtonTextColor = "#ffffff",
@@ -120,7 +124,8 @@
 			ImgOrder = 2,
 			TextOrder = 1,
 			TextH1Color = "#C89B3C",
-			ButtonLink = "/ProductsByCategory/33",
+			ButtonLink = "/ProductsByCategory",
+			Id = 33,
 			ButtonText =  L["DescriptionCardButton7"],
 			ButtonColor = "#9E6C1E",
 			ButtonTextColor = "#ffffff",
@@ -150,8 +155,14 @@
 	}
 	// carousel
 	private bool IsCarouselFullscreen = false;
+	private bool IsImageLoaded { get; set; } = false;
 	private void HandleCarouselFullScreen(bool IsCarouselFullscreen1)
 	{
 		IsCarouselFullscreen = IsCarouselFullscreen1;
+	}
+	private void HandleImageLoaded()
+	{
+		IsImageLoaded = true;
+		StateHasChanged(); 
 	}
 }

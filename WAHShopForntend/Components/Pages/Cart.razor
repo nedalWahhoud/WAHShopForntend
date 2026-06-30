@@ -1,7 +1,6 @@
 ﻿@page "/cart"
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.Cart> L
-@inherits ProjectComponentBase
 <div class="mainDiv">
 	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
 	{
@@ -107,8 +106,13 @@
 		navigationManager.NavigateTo("/");
 	}
 	// On Product Click
-	private void OnProduct(int ProductId)
+	private async Task OnProduct(int ProductId)
 	{
-		navigationManager.NavigateTo($"/ProductPage/{ProductId}");
+		var product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdAsync(ProductId);
+
+		var productName = IsArabic ? product.Name_ar : product.Name_de;
+		var slug = GenerateSlug(productName!);
+
+		navigationManager.NavigateTo($"/ProductPage/{slug}/{product.Id}");
 	}
 }

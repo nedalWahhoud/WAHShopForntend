@@ -1,5 +1,4 @@
-﻿using static System.Net.WebRequestMethods;
-using WAHShopForntend.Components.Models;
+﻿using WAHShopForntend.Components.Models;
 
 namespace WAHShopForntend.Components.TransactionsCustomersF
 {
