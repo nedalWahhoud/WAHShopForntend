@@ -90,10 +90,8 @@ else
 			</div>
 		<div class="mt-4 p-3 border-start border-4 border-info bg-light rounded shadow-sm">
 			<div class="d-flex align-items-center">
-				<i class="bi bi-info-circle-fill text-info me-3 fs-4"></i>
-				<p class="mb-0 text-dark fw-medium">
-					@L["AccountNotice"]
-				</p>
+				<i class="bi bi-info-circle-fill text-info fs-4 @(IsArabic ? "ms-3" : "me-3")"></i>
+				<p class="mb-0 text-dark fw-medium">@L["AccountNotice"]</p>
 			</div>
 		</div>
 }
