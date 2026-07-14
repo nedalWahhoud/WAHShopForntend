@@ -8,7 +8,7 @@
 <HeadContent>
     <!-- Page Title -->
     <PageTitle>
-        @(IsArabic ? ProjectInfo.Value.NameArabic : ProjectInfo.Value.Name)
+            @(IsArabic ? "سيريانا سوبر ماركت في لويتكرش" : "Syriana Supermarkt In Leutkirch")
     </PageTitle>
     <!-- Meta Description -->
     <meta name="description" content="@(!IsArabic
@@ -87,7 +87,7 @@
         // get on offer products
         await LoadOnOfferProducts(-1);
         // get recommended products
-        List<Categories> categories = await categoryService.GetRandomCategories(2, excludeCategoriesIds, random);
+        List<Categories> categories = await categoryService.GetRandomCategories(2, excludeCategoriesIds);
         await LoadProductsRecommended(categories);
         // Diese Kategorien beim nächsten Ladevorgang ausschließen
         excludeCategoriesIds.AddRange(categories.Select(s => s.Id));
@@ -278,7 +278,7 @@
             if (allCategories.Count >= 1)
             {
                 // get recommended products
-                List<Categories> categories = await categoryService.GetRandomCategories(1, excludeCategoriesIds, random);
+                List<Categories> categories = await categoryService.GetRandomCategories(1, excludeCategoriesIds);
                 // Diese Kategorien beim nächsten Ladevorgang ausschließen
                 excludeCategoriesIds.AddRange(categories.Select(s => s.Id));
                 // load random products

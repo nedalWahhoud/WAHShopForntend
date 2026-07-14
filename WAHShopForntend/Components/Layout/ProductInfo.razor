@@ -15,7 +15,7 @@
     public int ProductId { get; set; }
 
     private Product product = null!;
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         int userId = (await authService.GetUser()).Id;
         product = productService.GetProductByIdLocal(ProductId) ?? await productService.GetProductByIdAsync(ProductId,userId);

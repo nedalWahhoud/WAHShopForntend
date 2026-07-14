@@ -61,15 +61,6 @@ namespace WAHShopForntend.Resources.Components.Layout {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die If there are any errors, please contact us directly. ähnelt.
-        /// </summary>
-        public static string AccountNotice {
-            get {
-                return ResourceManager.GetString("AccountNotice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Account of ähnelt.
         /// </summary>
         public static string AccountOf {
@@ -138,6 +129,15 @@ namespace WAHShopForntend.Resources.Components.Layout {
         public static string Notes {
             get {
                 return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If there are any errors, please contact us directly. ähnelt.
+        /// </summary>
+        public static string Notice {
+            get {
+                return ResourceManager.GetString("Notice", resourceCulture);
             }
         }
         

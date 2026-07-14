@@ -8,8 +8,8 @@
 	{
 		<WAHShopForntend.Components.Layout.Loading />
 	}
-	
-		<div class="@(IsImageLoaded ? "" : "invisible-hero")">
+
+	<div class="@(IsImageLoaded ? "" : "invisible-hero")">
 		@* Hero Section *@
 		<WAHShopForntend.Components.Layout.HeroSection OnImageLoadedCallback="HandleImageLoaded" />
 
@@ -17,7 +17,7 @@
 		{
 			<WAHShopForntend.Components.Layout.FeatureSection model="item" />
 		}
-		</div>
+	</div>
 </div>
 
 @code {

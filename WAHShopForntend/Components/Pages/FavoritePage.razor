@@ -2,6 +2,22 @@
 @namespace WAHShopForntend.Components.Layout
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.FavoritePage> L
 <div class="mainDiv">
+
+	<HeadContent>
+		<!-- Page Title -->
+		<PageTitle>
+			@L["Favorites"]
+		</PageTitle>
+
+		<meta name="description" content="@(!IsArabic
+		? "Ihre persönlichen Favoriten. Speichern Sie Ihre arabischen Lieblingsprodukte und bestellen Sie sie jederzeit schnell."
+		: "منتجاتك المفضلة في مكان واحد. احفظ موادك الغذائية العربية المفضلة وتسوقها بسهولة في أي وقت.")" />
+
+		<meta name="keywords" content="@(!IsArabic
+		? "Favoriten, arabische Lebensmittel, Wunschliste, syrische Produkte, Online Shop"
+		: "المفضلة, قائمة الأمنيات, منتجات عربية, مواد غذائية, تسوق أونلاين")" />
+	</HeadContent>
+
 	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
 	{
 		<WAHShopForntend.Components.Layout.Loading />

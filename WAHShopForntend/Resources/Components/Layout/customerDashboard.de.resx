@@ -147,7 +147,7 @@
   <data name="TransactionType" xml:space="preserve">
     <value>Tr-Type</value>
   </data>
-  <data name="AccountNotice" xml:space="preserve">
+  <data name="Notice" xml:space="preserve">
     <value>Sollten Fehler auftreten, kontaktieren Sie uns bitte umgehend.</value>
   </data>
 </root>

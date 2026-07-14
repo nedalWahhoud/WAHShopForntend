@@ -123,6 +123,9 @@
   <data name="AllItemsLoaded" xml:space="preserve">
     <value>All loaded</value>
   </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
   <data name="FavoritesEmpty" xml:space="preserve">
     <value>Your favorites list is empty.</value>
   </data>

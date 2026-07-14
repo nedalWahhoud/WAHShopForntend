@@ -9,5 +9,7 @@
         public string CarouselImagesproxy { get; set; } = string.Empty;
         public string WebRequestProductImagePath { get; set; } = string.Empty;
         public string GoogleApiUrl { get; set; } = string.Empty;
+        public string Version { get; set; } = string.Empty;
+
     }
 }

@@ -15,7 +15,7 @@ else
 		<div class="page-header mb-4">
 			<h1 class="customer-title">
 				<span class="text-muted fw-light">@L["AccountOf"]</span>
-				<span class="d-block d-sm-inline-block fw-bold text-dark">@(customer?.Name_de ?? "Fehler")</span>
+				<span class="d-block d-sm-inline-block fw-bold text-dark">@(IsArabic ? customer.Name_ar : customer?.Name_de ?? "Fehler")</span>
 			</h1>
 			<div class="titleUnderline"></div>
 		</div>
@@ -91,7 +91,7 @@ else
 		<div class="mt-4 p-3 border-start border-4 border-info bg-light rounded shadow-sm">
 			<div class="d-flex align-items-center">
 				<i class="bi bi-info-circle-fill text-info fs-4 @(IsArabic ? "ms-3" : "me-3")"></i>
-				<p class="mb-0 text-dark fw-medium">@L["AccountNotice"]</p>
+				<p class="mb-0 text-dark fw-medium">@L["Notice"]</p>
 			</div>
 		</div>
 }

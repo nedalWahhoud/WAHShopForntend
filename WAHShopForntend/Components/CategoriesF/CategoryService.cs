@@ -186,16 +186,26 @@ namespace WAHShopForntend.Components.CategoriesF
             }
         }
         //
-        public async Task<List<Categories>> GetRandomCategories(int count, List<int> excludeCategoriesIds, Random random)
+        public async Task<List<Categories>> GetRandomCategories(int count, List<int> excludeCategoriesIds)
         {
-            List<Categories> categories = (GetAllCategoriesLocal() ?? await GetAllCategoriesAsync())
-                .Where(c => !excludeCategoriesIds.Contains(c.Id))
+            var allCategories = GetAllCategoriesLocal() ?? await GetAllCategoriesAsync();
+
+            if (allCategories == null || allCategories.Count == 0)
+            {
+                return [];
+            }
+
+            var filteredCategories = allCategories
+                .Where(c => !excludeCategoriesIds.Contains(c.Id));
+
+            List<Categories> categories = filteredCategories
                 .GroupBy(c => c.Id)
                 .Select(g => g.First())
-                .OrderBy(c => random.Next())
+                .OrderBy(c => Random.Shared.Next())
                 .Take(count)
                 .ToList();
-            
+
+           
             return categories;
         }
         // chache

@@ -1,8 +1,7 @@
 ﻿@using System.Globalization;
 @using Microsoft.AspNetCore.Localization;
 <!DOCTYPE html>
-<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName"
-dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "ltr")">
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName" dir="@(IsArabic ? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,11 +12,11 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
     <link rel="alternate" href="https://syriana-supermarkt.de" hreflang="x-default" />
 
     @*  *@
-    <meta name="description" content="@(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? " اكتشف أفضل المنتجات العربية والسورية عبر الإنترنت. مواد غذائية، توابل، حلويات ومشروبات من سوريا والعالم العربي مع توصيل سريع." 
+    <meta name="description" content="@(IsArabic ? " اكتشف أفضل المنتجات العربية والسورية عبر الإنترنت. مواد غذائية، توابل، حلويات ومشروبات من سوريا والعالم العربي مع توصيل سريع." 
     : "Entdecken Sie die besten arabischen und syrischen Produkte online. Lebensmittel, Gewürze, Süßigkeiten und Getränke aus Syrien und der arabischen Welt mit schneller Lieferung.")">
-    <meta name="keywords" content="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "منتجات عربية, منتجات سورية, سوريا, توابل, حلويات, متجر إلكتروني, تسوق أونلاين"
+    <meta name="keywords" content="@(IsArabic ? "منتجات عربية, منتجات سورية, سوريا, توابل, حلويات, متجر إلكتروني, تسوق أونلاين"
     :"arabische Produkte, syrische Lebensmittel, Syrien, Gewürze, Süßigkeiten, Online-Shop, Lebensmittel online")">
-    <meta name="author" content="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "نضال وحود" : "Nedal Wahhoud")">
+    <meta name="author" content="@(IsArabic ? "نضال وحود" : "Nedal Wahhoud")">
     @* Open Graph für Soziale Medien *@
     @{
         string currentLang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
@@ -38,10 +37,10 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
     
     <link rel="stylesheet" href="/bootstrap/bootstrap.min.css" />
     <link rel="icon" type="image/png" href="/ProjectImages/SyrianaSupermarktLogoOhneText.png" />
-    <link rel="stylesheet" href="/app.css?v=@DateTime.Now.Ticks" />
-    <link rel="stylesheet" href="/WAHShopForntend.styles.css?v=@DateTime.Now.Ticks" />
+    <link rel="stylesheet" href="/app.css?v=@appConfig.Value.Version" />
+    <link rel="stylesheet" href="/WAHShopForntend.styles.css?v=@appConfig.Value.Version" />
 
-    <title>@(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? "سيريانا سوبر ماركت" : "Syriana Supermarkt")</title>
+    <title>@(IsArabic ? "سيريانا سوبر ماركت في لويتكرش" : "Syriana Supermarkt In Leutkirch")</title>
     <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 
@@ -56,7 +55,7 @@ dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "
     <Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" />
 
     <script src="_framework/blazor.server.js" autostart="false"></script>
-    <script src="JS/script.js" defer></script>
+    <script src="JS/script.js?v=@appConfig.Value.Version" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 
 

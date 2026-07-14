@@ -147,7 +147,7 @@
   <data name="TransactionType" xml:space="preserve">
     <value>نوع المعاملة</value>
   </data>
-  <data name="AccountNotice" xml:space="preserve">
+  <data name="Notice" xml:space="preserve">
     <value>في حال وجود أخطاء يرجى مراسلتنا فوراً.</value>
   </data>
 </root>

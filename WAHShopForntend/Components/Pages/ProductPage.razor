@@ -5,6 +5,42 @@
 @inject IStringLocalizer<WAHShopForntend.Components.Layout.ProductPage> L
 @implements IDisposable
 <div class="mainDiv">
+	@* SEO *@
+	@{
+		var imageUrl = productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? null!);
+		var productName = IsArabic ? product?.Name_ar : product?.Name_de;
+		var productDescription = IsArabic ? product?.Description_ar : product?.Description_de;
+		var availability = (product?.Quantity > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock");
+	}
+	<HeadContent>
+		<PageTitle>
+			@(IsArabic ? product?.Name_ar : product?.Name_de)
+		</PageTitle>
+		<meta name="description" content="@(IsArabic ? product?.Description_ar : product?.Description_de)" />
+		<meta name="keywords" content="@(IsArabic ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
+			: product?.Name_de + ", Syriana Leutkirch, Syriana Supermarkt, arabische Supermarkt, Lebensmittel, arabische Lebensmittel, arabisches Laden, arabisches Laden in Leutkirhc")" />
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+			@((MarkupString)$@"{{
+			 ""@context"": ""https://schema.org"",
+			 ""@type"": ""Product"",
+			 ""name"": ""{productName}"",
+			 ""description"": ""{productDescription}"",
+			 ""image"": ""{imageUrl}"",
+			 ""offers"": {{
+					 ""@type"": ""Offer"",
+				  ""url"": ""{navigationManager.Uri}"",
+					 ""priceCurrency"": ""EUR"",
+					 ""price"": ""{(product?.SalePrice ?? 0):0.00}"",
+					 ""availability"": ""{availability}"",
+					 ""itemCondition"": ""https://schema.org/NewCondition""
+
+				 }}
+			 }}
+			}}"))
+		</script>
+	</HeadContent>
 	@if (!IsRendered.Initialized || !IsRendered.ParametersSet || !IsRendered.AfterRender)
 	{
 		<WAHShopForntend.Components.Layout.Loading />
@@ -30,42 +66,6 @@
 		}
 		else
 		{
-			@* SEO *@
-			var imageUrl = productImagesService.GetProductImageUrl(product?.ProductImages.FirstOrDefault(i => i.IsMain) ?? null!);
-			var productName = IsArabic ? product?.Name_ar : product?.Name_de;
-			var productDescription = IsArabic ? product?.Description_ar : product?.Description_de;
-			var availability = (product?.Quantity > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock");
-			var productUrl = navigationManager.Uri;
-
-			<HeadContent>
-				<PageTitle>
-					@(IsArabic ? product?.Name_ar : product?.Name_de)
-				</PageTitle>
-				<meta name="description" content="@(IsArabic ? product?.Description_ar : product?.Description_de)" />
-				<meta name="keywords" content="@(IsArabic ? product?.Name_ar + ",لويتكرش, متجر سيريانا, محل عربي في ليوتكرش, متجر عربي, محل عربي, سوبر ماركت عربي, مواد غذائية"
-			: product?.Name_de + ", Syriana Leutkirch, Syriana Supermarkt, arabische Supermarkt, Lebensmittel, arabische Lebensmittel, arabisches Laden, arabisches Laden in Leutkirhc")" />
-
-				<!-- Structured Data -->
-				<script type="application/ld+json">
-					@((MarkupString)$@"{{
-			 ""@context"": ""https://schema.org"",
-			 ""@type"": ""Product"",
-			 ""name"": ""{productName}"",
-			 ""description"": ""{productDescription}"",
-			 ""image"": ""{imageUrl}"",
-			 ""offers"": {{
-					 ""@type"": ""Offer"",
-				  ""url"": ""{navigationManager.Uri}"",
-					 ""priceCurrency"": ""EUR"",
-					 ""price"": ""{(product?.SalePrice ?? 0):0.00}"",
-					 ""availability"": ""{availability}"",
-					 ""itemCondition"": ""https://schema.org/NewCondition""
-
-				 }}
-			 }}
-			}}"))
-				</script>
-			</HeadContent>
 			@**@
 			<div class="productDetails">
 				<div class="ImageSection">
@@ -183,7 +183,8 @@
 			// add to local product list if not already present
 			await productService.AddProductToLocal(product);
 			// add category id to exclude list
-			excludeCategoriesIds.Add(product?.CategoryId ?? 0);
+			if (product.CategoryId > 0)
+				excludeCategoriesIds.Add(product.CategoryId);
 
 			// get group products if exists
 			if (product != null && product.ProductGroupID.HasValue && product.ProductGroupID.Value > 0)
@@ -323,7 +324,7 @@
 			}
 
 			// add category id to exclude list
-			excludeCategoriesIds.Add(category.Id);
+			//excludeCategoriesIds.Add(category.Id);
 		}
 	}
 	// Image zoom 
@@ -395,10 +396,22 @@
 			if (allCategories.Count >= 1)
 			{
 				// get recommended products
-				List<Categories> categories = await categoryService.GetRandomCategories(1, excludeCategoriesIds, random);
+				List<Categories> categories = await categoryService.GetRandomCategories(1, excludeCategoriesIds);
 				
-				// load random products
-				await LoadRandomProductsByCategory(categories);
+				if (categories != null && categories.Count > 0)
+				{
+					// add zu excludeCategoriesIds
+					foreach (var cat in categories)
+					{
+						if (!excludeCategoriesIds.Contains(cat.Id))
+						{
+							excludeCategoriesIds.Add(cat.Id);
+						}
+					}
+
+					// 
+					await LoadRandomProductsByCategory(categories);
+				}
 			}
 
 			StateHasChanged();

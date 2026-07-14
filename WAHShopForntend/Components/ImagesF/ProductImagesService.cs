@@ -10,7 +10,7 @@ namespace WAHShopForntend.Components.ImagesF
 
         public string GetProductImageUrl(ProductImages productImages)
         {
-            string dbImageUrl = productImages.ImageUrl;
+            string dbImageUrl = productImages?.ImageUrl!;
             if (dbImageUrl != null)
             {
                 // ✅ Füge eine Zufallszahl hinzu, um Cash zu vermeiden.

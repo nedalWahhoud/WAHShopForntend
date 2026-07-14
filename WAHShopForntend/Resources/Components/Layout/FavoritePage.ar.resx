@@ -123,6 +123,9 @@
   <data name="AllItemsLoaded" xml:space="preserve">
     <value>تم تحميل كل العناصر</value>
   </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>المفضلة</value>
+  </data>
   <data name="FavoritesEmpty" xml:space="preserve">
     <value>قائمة مفضلاتك فارغة.</value>
   </data>

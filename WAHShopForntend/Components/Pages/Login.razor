@@ -98,9 +98,9 @@
     private void GoogleSingup()
     {
         isGoogleLoading = true;
-        string currenApiUrl = AppConfig.Value.ApiBaseUrl;
+        string currenApiUrl = appConfig.Value.ApiBaseUrl;
 
-        navigationManager.NavigateTo($"{AppConfig.Value.GoogleApiUrl}?rememberMe={loginModel.RememberMe}", true);
+        navigationManager.NavigateTo($"{appConfig.Value.GoogleApiUrl}?rememberMe={loginModel.RememberMe}", true);
 
         isGoogleLoading = false;
     }
