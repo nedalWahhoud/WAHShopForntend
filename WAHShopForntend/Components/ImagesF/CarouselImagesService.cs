@@ -50,14 +50,14 @@ namespace WAHShopForntend.Components.ImagesF
             }
         }
         // async
-        public async Task<List<CarouselImage>> GetAllCarouselAsync()
+        public async Task<List<CarouselImage>> GetActive()
         {
             if (DownloadedCarouselImage.Count > 0)
                 return DownloadedCarouselImage;
 
             try
             {
-                var response = await _http.GetAsync("api/Carousel/getAllCarouselImages");
+                var response = await _http.GetAsync("api/Carousel/getActive");
                 if (!response.IsSuccessStatusCode)
                 {
                     return [];

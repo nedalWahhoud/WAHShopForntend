@@ -147,7 +147,7 @@
 		},
 		};
 		// get carousel images
-		await carouselImagesService.GetAllCarouselAsync();
+		await carouselImagesService.GetActive();
 		// afterRender und Initialized true, weil wir nutzen die Funktionen hier nicht
 		IsRendered.AfterRender = true;
 		IsRendered.ParametersSet = true;

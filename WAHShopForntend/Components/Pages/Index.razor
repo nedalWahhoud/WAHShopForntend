@@ -80,7 +80,7 @@
         getItems = new() { PageSize = 6, Includes = ProductIncludes.ProductImages | ProductIncludes.Category };
 
         // get carousel images
-        await carouselImagesService.GetAllCarouselAsync();
+        await carouselImagesService.GetActive();
 
         // get all categories
         allCategories = categoryService.GetAllCategoriesLocal() ?? await categoryService.GetAllCategoriesAsync();
